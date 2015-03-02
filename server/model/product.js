@@ -2,7 +2,13 @@
 var mongoose = require('mongoose'),
     timestamps = require('mongoose-timestamp'),
     Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+    ObjectId = Schema.ObjectId,
+    Product2ClassificationGroup = require('./product-classification-group').Product2ClassificationGroup,
+    ProductAttributeValue = require('./product-attribute-value').ProductAttributeValue,
+    Price = require('./price').Price,
+    ContractedProduct = require('./contracted-product').ContractedProduct,
+    ProductRelation = require('./product-relation').ProductRelation,
+    ProductDocAssociation = require('./product-doc-association').ProductDocAssociation;
 
 /**
  * <p>Common Product with primitive types for fields and collections of ProductRelations, ContractedProducts, Prices, Product2ClassificationGroups, ProductAttributeValues and ProductDocAssociation
@@ -202,50 +208,33 @@ var ProductSchema = new Schema({
     /**
      * Set of {@link Product2ClassificationGroup}s.
      */
-    classificationGroupAssociations: [{
-        type: ObjectId,
-        ref: 'Product2ClassificationGroup'
-    }],
+    classificationGroupAssociations: [Product2ClassificationGroup],
 
     /**
      * Set of {@link ProductAttributeValue}s.
      */
-    attributeValues: [{
-        type: ObjectId,
-        ref: 'ProductAttributeValue'
-    }],
+    attributeValues: [ProductAttributeValue],
 
     /**
      * Set of {@link ContractedProduct}s. {@link ContractedProduct} links the product to a contract as part of it's assortment.
      */
-    contractedProducts: [{
-        type: ObjectId,
-        ref: 'ContractedProduct'
-    }],
+    contractedProducts: [ContractedProduct],
 
     /**
      * Set of {@link Price}s.
      */
-    prices: [{
-        type: ObjectId,
-        ref: 'Price'
-    }],
+    prices: [Price],
 
     /**
      * Set of {@link ProductRelation}s.
      */
-    productRelations: [{
-        type: ObjectId,
-        ref: 'ProductRelation'
-    }],
+    productRelations: [ProductRelation],
 
     /**
      * Set of {@link ProductDocAssociation}s.
      */
-    documents: [{
-        type: ObjectId,
-        ref: 'ProductDocAssociation'
-    }]
+    documents: [ProductDocAssociation]
+
 });
 
 /**

@@ -12,5 +12,10 @@
     "joi": "4.x.x",
     "mongoose": "^3.8.20",
     "mongoose-timestamp": "^0.4.0"
+  },
+  "author": {
+    "name": "gaurav gupta",
+    "email": "gaurav_bng@hotmail.com",
+    "website": "www.cronj.com"
   }
 }

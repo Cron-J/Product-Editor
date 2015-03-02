@@ -1,4 +1,4 @@
-CSV Generator
+Product Editor
 ========================
 
 ### Install an app

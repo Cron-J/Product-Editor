@@ -1,7 +1,6 @@
 var Joi = require('joi'),
     Boom = require('boom'),
-    Product = require('../model/product').Product,
-    Product2ClassificationGroup = require('./product-classification-group');
+    Product = require('../model/product').Product;
 
 exports.createProduct = {
     handler: function(request, reply) {

@@ -1,17 +1,5 @@
-// dependencies
-var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamp'),
-  Schema = mongoose.Schema,
-  ObjectId = Schema.ObjectId;
 
-/**
- * <p>Product's price for defined contract (contractId), validFromQuantity, currency (currencyId), valid range (validFrom - validTo) and priceType (priceType)</p>
- *
- * The <code>netPrice</code> field defines price value.
- *
- * @author Alexander Pyrkh
- */
-var PriceSchema = new Schema({
+var price = {
   /**
    * Price belongs to the <code>product</code>
    */
@@ -100,27 +88,9 @@ var PriceSchema = new Schema({
   /**
    * Is preferred.
    */
-  isPreferred : {type: Boolean, required: true},
+  isPreferred : {type: Boolean, required: true}
 
-  /**
-   * User name who has created the Price.
-   */
-  createdBy : {type: String},
-
-  /**
-   * User name who has changed the Price last time.
-   */
-  updatedBy : {type: String}
-});
-
-/**
- * Date when the Price was created.
- * Date when the Price was changed last time.
- */
-PriceSchema.plugin(timestamps);
-
-// export
-price = mongoose.model('Price', PriceSchema);
+};
 
 /** export schema */
 module.exports = {

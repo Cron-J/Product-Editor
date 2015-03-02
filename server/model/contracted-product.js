@@ -1,34 +1,10 @@
-// dependencies
-var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamp'),
-  Schema = mongoose.Schema,
-  ObjectId = Schema.ObjectId;
 
-/**
- * Defines contract specific information for Product. It is used to assign a product to a contract.
- *
- * @author Alexander Pyrkh
- */
-var ContractedProductSchema = new Schema({
-  /**
-   * Product.
-    */
-  productId : {type: String},
+var contractedProduct = {
   
   /**
    * Identifier(contractId) of Contract.
    */
   contractId : {type: String},
-
-  /**
-   * Identifier(statusId) of contracted product Status.
-   */
-  statusId : {type: String},
-  
-  /**
-   *  External product ID. Useful when external products are mapped to jCatalog using a different set of ids.
-   */
-  extProductId : {type: String},
 
   /**
    * Alternative customer specific product identifier.
@@ -145,27 +121,8 @@ var ContractedProductSchema = new Schema({
    * Discount. It defines what price discount applies to products in the contracted
    * catalog.
    */
-  discount : {type: Number},
-
-  /**
-   * User name who has created the ContractedProduct.
-   */
-  createdBy : {type: String},
-
-  /**
-   * User name who has changed the ContractedProduct last time.
-   */
-  updatedBy : {type: String}
-});
-
-/**
- * Date when the ContractedProduct was created.
- * Date when the ContractedProduct was changed last time.
- */
-ContractedProductSchema.plugin(timestamps);
-
-// export
-var contractedProduct = mongoose.model('ContractedProduct', ContractedProductSchema);
+  discount : {type: Number}
+};
 
 /** export schema */
 module.exports = {

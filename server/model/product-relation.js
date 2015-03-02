@@ -1,20 +1,5 @@
-// dependencies
-var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamp'),
-  Schema = mongoose.Schema,
-  ObjectId = Schema.ObjectId;
 
-/**
- * Defines relation between two products.
- *
- * @author Alexander Pyrkh
- */
-var ProductRelationSchema = new Schema({
-
-  /**
-   * This product has relation to product in catalog {@link #relatedCatalogId} and has identifier {@link #relatedProductId}
-   */
-  productId : {type: String},
+var productRelation = {
 
   /**
    * Identifier of related product.
@@ -29,7 +14,7 @@ var ProductRelationSchema = new Schema({
   /**
    * Identifier of related product.
    */
-  relatedTenantId : {type: ObjectId},
+  relatedTenantId : {type: String},
 
   /**
    * Translated descriptions of ProductRelation.
@@ -131,27 +116,9 @@ var ProductRelationSchema = new Schema({
    * Is used to decide whether corresponding related product
    * should be selected by default within a kit/configurable product.
    */
-  isDefaultSelected : {type: Boolean},
+  isDefaultSelected : {type: Boolean}
 
-  /**
-   * User name who has created the ProductRelation.
-   */
-  createdBy : {type: String},
-
-  /**
-   * User name who has changed the ProductRelation last time.
-   */
-  updatedBy : {type: String}
-});
-
-/**
- * Date when the ProductRelation was created.
- * Date when the ProductRelation was changed last time.
- */
-ProductRelationSchema.plugin(timestamps);
-
-// export
-var productRelation = mongoose.model('ProductRelation', ProductRelationSchema);
+};
 
 /** export schema */
 module.exports = {
