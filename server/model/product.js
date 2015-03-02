@@ -2,7 +2,6 @@
 var mongoose = require('mongoose'),
     timestamps = require('mongoose-timestamp'),
     Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId,
     Product2ClassificationGroup = require('./product-classification-group').Product2ClassificationGroup,
     ProductAttributeValue = require('./product-attribute-value').ProductAttributeValue,
     Price = require('./price').Price,
@@ -250,6 +249,14 @@ ProductSchema.statics.createProduct = function(product, callback) {
 
 ProductSchema.statics.searchProduct = function(query, callback) {
     this.find(query, callback);
+};
+
+ProductSchema.statics.getProductById = function(id, callback) {
+    this.findOne({'_id': id}, callback);
+};
+
+ProductSchema.statics.updateProduct = function(id, product, callback) {
+    this.update({'_id': id}, product, callback);
 };
 
 // export
