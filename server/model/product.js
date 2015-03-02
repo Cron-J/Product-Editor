@@ -248,17 +248,8 @@ ProductSchema.statics.createProduct = function(product, callback) {
     this.create(product, callback);
 };
 
-ProductSchema.statics.findProductsByProductId = function(ProductId, callback) {
-    this.find({
-        productId: ProductId
-    }, callback);
-};
-
-ProductSchema.statics.findProductsByProductIdAndClassiGrpAss = function(ProductId, classificationGroupAssociations, callback) {
-    this.find({
-        productId: ProductId,
-        classificationGroupAssociations: classificationGroupAssociations
-    }, callback);
+ProductSchema.statics.searchProduct = function(query, callback) {
+    this.find(query, callback);
 };
 
 // export
