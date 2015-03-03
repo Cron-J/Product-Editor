@@ -1,20 +1,23 @@
 {
-  "name": "Hapi-Mongoose-Angular",
+  "name": "classification-attribute",
   "description": "",
   "version": "0.0.0",
   "homepage": "",
   "license": "",
   "private": true,
   "dependencies": {
-    "angular": "~1.3.13",
-    "angular-cookies": "~1.3.13",
-    "ui-bootstrap": "~0.12.0",
-    "angular-sanitize": "~1.3.13",
-    "bootstrap": "~3.3.1",
-    "jquery": "~2.1.3",
-    "angular-resource": "~1.3.13",
-    "ng-file-upload": "~3.0.4",
-    "ng-file-upload-shim": "~3.0.4",
-    "angular-route": "~1.3.13"
+    "angular": "~1.2.x",
+    "angular-loader": "~1.2.x",
+    "angular-mocks": "~1.2.x",
+    "angular-resource": "~1.2.x",
+    "angular-route": "~1.2.x",
+    "angular-dragdrop": "~1.0.8",
+    "angularjs-dropdown-multiselect": "~1.5.2",
+    "angular-bootstrap": "~0.12.0",
+    "html5-boilerplate": "~4.3.0",
+    "ng-file-upload": "~1.6.12",
+    "angular-growl": "~0.4.0",
+    "angular-sanitize": "~1.2.x",
+    "angular-block-ui": "~0.1.2"
   }
 }

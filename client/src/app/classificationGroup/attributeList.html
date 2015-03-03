@@ -1,0 +1,164 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><b>Attributes</b></h3>
+	</div>
+	<div class="panel-body" block-ui="attributeBlock">
+		<ul class="list-group" ng-show="(classificationGroup.classGrp2Attributes.length==0 || classificationGroup.classGrp2Attributes.length==undefined) && (parentAttributesList.length == 0 || parentAttributesList.length == undefined)">
+			<li class="list-group-item">0 attributes added</li>
+		</ul>
+		<div  class="row" ng-show="classificationGroup.classGrp2Attributes.length > 0 || parentAttributesList.length > 0">
+		<table class="table table-stripped custom-table">
+		  <thead class="active">
+		  	<th style="width: 40%;">Attribute</th>
+		  	<th style="width: 12%;">Sort No</th>
+		  	<th style="width: 15%;">Group ID</th>	  	
+		  	<th style="width: 20%;">Actions</th>
+		  </thead>
+		  <tbody>
+		  	<tr ng-repeat="parent_atrribute in parentAttributesList">
+			  	<td class="custom-row">{{parent_atrribute.attributeId}}
+			  	<span class="tree-name" ng-show="parent_atrribute.description">,  
+			  	{{parent_atrribute.description}}</span></td>
+			  	<td class="custom-row">{{parent_atrribute.sortNo}}</td>
+			  	<td class="custom-row">{{parent_atrribute.grpId}}</td>
+			  	<td style="width: 23%;"></td>
+		  	</tr>
+		  	<tr ng-repeat="attribute in classificationGroup.classGrp2Attributes">
+		  		<td class="custom-row">
+			  		<a class="node-link" data-toggle="modal" data-target="#confirmationDailogBox" ng-click="redirectToAttribute(attribute.attributeRef._id)"><span ng-show="rowNo != $index">{{attribute.attributeRef.attributeId}}<span ng-show="attribute.attributeRef.desc">, {{attribute.attributeRef.desc}}</span>
+			  		<span ng-show="attDesc">{{attDesc[$index]}}</span>
+			  		</span></a>
+			  		<span ng-show="rowNo == $index">
+				  		<ng-form name="rowForm3">
+				  			<input type="text" ng-model="attribute.attributeRef" 
+				  			typeahead="result as result.attributeId+result.comma + (result.desc | limitTo:10)  for result in searchAttributeList($viewValue)" typeahead-wait-ms="1000" class="form-control grid-control" 
+				  			ng-blur="checkAttributeId(attribute.attributeRef)" required/>
+				  			<button  
+					  			class="btn btn-primary btn-xs pull-right grid-search-btn" 
+					  			ng-click="searchAttribute($index, attribute)">
+					  			<span class="glyphicon glyphicon-search"></span>
+					  		</button>
+				  		</ng-form>
+				  	</span>
+			  	</td>
+		  		<td class="custom-row">
+			  		<span ng-show="rowNo != $index">{{attribute.sortNo}}</span>
+			  		<span ng-show="rowNo == $index">
+				  		<ng-form name="rowForm1">
+				  			<input type="text" class="form-control" 
+				  			name="sortNo" ng-model="attribute.sortNo" 
+				  			ng-pattern="/^(0|[1-9][0-9]*)$/" required />
+				  		</ng-form>
+				  	</span>
+			  	</td>
+			  	<td class="custom-row">
+			  		<span ng-show="rowNo != $index">{{attribute.grpId}}</span>
+			  		<span ng-show="rowNo == $index">
+			  			<ng-form name="rowForm2">
+			  				<input type="text" class="form-control" 
+			  				name="groupId" ng-model="attribute.grpId" 
+			  				ng-pattern="/^[a-zA-Z0-9_-\s]+$/" required/>
+			  			</ng-form>
+			  		</span>
+			  	</td>
+			  	
+			  	<td style="width: 23%;">
+			  		<button  type="button" class="btn btn-primary btn-xs" ng-click="addAttribute(attribute, $index, (rowForm1.$valid && rowForm2.$valid 
+			  		&& rowForm3.$valid))" ng-show="rowNo == $index">Save</button>
+			  		<button class="btn btn-primary btn-xs" ng-show="rowNo == $index" ng-click="cancelUpdate(attribute, $index)">Cancel</button>
+			  		<button type="button" class="btn btn-primary btn-xs" ng-click="resetParentPage();edit_attribute(attribute, $index)" ng-show="rowNo != $index">Edit</button>
+			  		<button ng-if="page!='view'" type="button" class="btn btn-primary btn-xs" ng-click="delete_attribute($index)" ng-show="rowNo != $index">Delete</button>
+			  	</td>
+		  	</tr>
+		  </tbody>
+		</table>
+	</div>
+	<button type="button" ng-show="btnAttribute" class="btn btn-primary" ng-click="add_attributes($index)">+ Add Attribute</button>
+</div>
+
+<!-- Attribute search Modal -->
+<div class="modal fade col-sm-offset-1" id="attributeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">
+					Search for Attribute
+				</h4>
+			</div>
+
+			<div class="modal-body" style="overflow: auto;">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12" ng-controller="attributeSearchCtrl" >
+						<div class="col-sm-10">
+							<div class="row">
+								<div class="col-sm-3">
+									<label >Attribute ID</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.attributeId" />
+								</div>
+								<div class="col-sm-3">
+									<label >Description</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.description" />
+								</div>
+								<div class="col-sm-3">
+									<label >Type</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.type" />
+								</div>
+								<div class="form-button-group search-buttons col-sm-3">
+									<button class="btn btn-primary btn-sm" ng-click="search();setShowList()"><span class="glyphicon glyphicon-search"></span></button>
+									<button class="btn btn-primary btn-sm" ng-click="reset_search()">Clear</button>
+								</div>
+							</div>		
+						</div>
+						<div class="col-sm-12" ng-show="searchVar.value == true">
+							<div ng-show="searchResult.length > 0 && showList">
+								<table class="table table-bordered table-hover custom-table form-panel">
+								  <thead class="active">
+								  	<!-- <th style="width: 10%" class="text-center">S.No</th> -->
+								  	<th style="width: 25%">Attribute ID</th>
+								  	<th style="width: 15%">Type</th>
+								  	<th style="width: 60%">Description</th>
+								  </thead>
+								  <tbody>
+								  	<tr ng-repeat="result in pagedItems[currentPage]">
+									  	<!-- <td class="row-hover custom-row" ng-click="getAttributeDetails(result)" data-dismiss="modal">{{$index+1}}
+									  	</td> -->
+									  	<td class="row-hover custom-row" ng-click="getAttributeDetails(result)" data-dismiss="modal">{{result.attributeId}}</td>
+									  	<td class="row-hover custom-row" ng-click="getAttributeDetails(result)" data-dismiss="modal">{{result.types[0].typeName}}</td>
+									  	<td class="row-hover custom-row" ng-click="getAttributeDetails(result)" data-dismiss="modal">{{result.descriptions.descShort[0].description}}</td>
+								  	</tr>
+								  </tbody>
+								</table>
+								<div class="pagination table-pagination pull-right">
+									<ul>
+										<li ng-class="{disabled: currentPage == 0}">
+											<a href ng-click="prevPage()">« Prev</a>
+										</li>
+										<li ng-repeat="n in range(pagedItems.length)" ng-class="{active: n == currentPage}"ng-click="setPage()">
+										<a href ng-show="n >= min && n < max" ng-bind="n + 1">1</a>
+										</li>
+										<li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+											<a href ng-click="nextPage()">Next »</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div ng-show="searchResult.length == 0 && showList">
+								<div class="col-sm-8 col-sm-offset-4"> 
+									There are 0 search results found.
+								</div>
+							</div>	
+						</div>			
+					</div>
+				</div>		
+			</div>
+			<div class="modal-footer">	
+				<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

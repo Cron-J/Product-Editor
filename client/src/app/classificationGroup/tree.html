@@ -1,0 +1,67 @@
+<!-- Tree structure -->
+<div class="col-sm-12" ng-init="tree_data()">
+	<div ui-tree class="well">
+	  <ol ui-tree-nodes="" ng-model="tree">
+	    <li ng-repeat="item in tree" ui-tree-node>
+	      <div ui-tree-handle class="tree-name">
+	        <h4><span class="glyphicon glyphicon-tree-deciduous"></span>
+	        <a href class="node-link" ng-click="classificationGroup_page(classificationGroup.classificationRef.classificationId)">{{classificationGroup.classificationRef.classificationId}}
+	        </a></h4>
+	      </div>
+	      <ol ui-tree-nodes="" ng-model="item.parent">
+	  	     <li ng-repeat="subItem in item.parent" ui-tree-node>
+	          <div ui-tree-handle class="tree-node tree-node-content">
+	           <img src="../../assets/img/node.png" class="left-handle" alt="some_text">
+	          <a class="btn btn-default btn-xs tree-button" nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-plus': collapsed, 'glyphicon-minus': !collapsed}"></span></a>
+	            <span class="node-name">
+	            	<a class="node-link" ng-click="selectNode(subItem.parent_id, true);">
+		            	<span>{{subItem.parentId}}</span>
+		            	<span class="tree-name" ng-show="subItem.description != ' ' && subItem.description != '' && subItem.description != undefined">, {{subItem.description | limitTo: 20}}		
+		            	</span>
+		            	<span ng-show="subItem.description.length > 20">. . .</span>
+	            	</a>
+	            </span>
+	          </div>
+	          <ol ng-if="subItem.child.length" ui-tree-nodes="subItem.parentId.collapsed" ng-model="subItem.child" ng-class="{hidden: collapsed}">
+			        <li ng-repeat="child in subItem.child" ui-tree-node>
+			          <div ui-tree-handle class="tree-node tree-node-content tree-child-button">
+			          <img src="../../assets/img/handle.png" class="branch" alt="some_text" ng-hide="item.parent.indexOf(subItem) == item.parent.length - 1">
+			          <img src="../../assets/img/node.png" class="left-handle" alt="some_text">
+			          <a class="btn btn-default btn-xs tree-button " nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-plus': collapsed, 'glyphicon-minus': !collapsed}"></span></a>
+			            <span class="node-name">
+			            	<a class="node-link" ng-click="selectNode(child.child_id, false, false, subItem.parent_id, false, true)">{{child.childId}}
+			            		<span class="tree-name" ng-show="child.description != ' ' && child.description != '' && child.description != undefined">
+			            		, {{child.description | limitTo:20}}
+			            			<span ng-show="child.description.length > 20"> . . .
+			            			</span>
+			            		</span>
+			            	</a>
+			            </span>
+			          </div>
+			          <ol ng-if="child.subchild.length" ui-tree-nodes="child.subchild" ng-model="child.subchild" ng-class="{hidden: collapsed}">
+					        <li ng-repeat="subchild in child.subchild" ui-tree-node>
+					          <div ui-tree-handle class="tree-node tree-node-content tree-child-button">
+					          <img src="../../assets/img/handle.png" ng-hide="item.parent.indexOf(subItem) == item.parent.length - 1" class="branch leaf-handle-parent" alt="some_text">
+					          <img src="../../assets/img/handle.png" ng-hide="subItem.child.indexOf(child) == subItem.child.length - 1" class="branch leaf-handle-child" ng-class="{'leaf-handle-child-last' : item.parent.indexOf(subItem) == item.parent.length - 1}" alt="some_text">
+					          <img src="../../assets/img/node.png" class="left-handle leaf-node" ng-class="{'leaf-node-last' : item.parent.indexOf(subItem) == item.parent.length - 1}" alt="some_text">
+					          <a class="btn btn-default btn-xs tree-button " nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-plus': collapsed, 'glyphicon-minus': !collapsed}"></span></a>
+					            <span class="node-name">
+					            	<a class="node-link" ng-click="selectNode(subchild.child_id, false, false, child.child_id, true)">
+					            		{{subchild.childId}}
+					            		<span class="tree-name" ng-show="subchild.description != ' ' && subchild.description != '' && subchild.description != undefined">
+					            		, {{subchild.description | limitTo:20}} 
+					            			<span ng-show="subchild.description.length > 20"> . . .</span>
+					            		</span>
+					            	</a>
+					            </span>
+					          </div>
+					        </li>
+					      </ol>
+			        </li>
+			      </ol>
+	        </li>
+	      </ol>
+	    </li>
+	  </ol>
+	</div>
+</div>

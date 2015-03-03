@@ -1,0 +1,221 @@
+<div class="row" ng-show="! changeView.classificationGroupShow" ng-controller="classificationCtrl" ng-init="init_page()">
+
+	<!-- Header Name-->
+	<div class="row">
+		<div class="col-sm-3">
+			<h3 ng-if="page=='new'">New Classification</h3> 
+			<h3 ng-if="page=='view'">Classification Details</h3>
+			<h3 ng-if="page=='edit'">Edit Classification</h3>
+		</div>
+	</div>
+
+	<div class="row form-panel">
+		<form class="form-horizontal" name="classificationForm" novalidate>
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Classification ID </label>
+					<span ng-show="classificationForm.classificationId.$error.required" class="help-inline" style="color:red"> *</span>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" class="form-control customized-form-control2" name="classificationId" ng-readonly="page=='view' || page=='edit'" ng-model="classification.classificationId" ng-pattern="/^[a-zA-Z0-9_-]+$/" required maxlength="30"/>
+					<div class="has-error" ng-show="classificationForm.classificationId.$invalid">
+						<span ng-show="classificationForm.classificationId.$error.pattern" class="help-block">Classification id won't allow special character(s)</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- New Field -->
+			<div class="row col-sm-12 select-group">
+				<div class="col-sm-2">
+					<label class="control-label">Tenant</label>
+					<span ng-show="classificationForm.tenantRef.$error.required" class="help-inline" style="color:red"> *</span>
+				</div>
+				<div class="col-sm-3 select-group">
+					<div class="row col-md-11 col-sm-11">
+						<input class="form-control" ng-readonly="page=='view'"
+						name="tenantRef" maxlength="100"
+						ng-model="classification.tenantRef" 
+						typeahead="result as result.name+result.comma + (result.desc | limitTo:10) for result in searchTenantList($viewValue)" typeahead-wait-ms="1000" required/>
+					</div>
+					<div class="col-sm-1" ng-hide="page==='view'">
+						<button class="btn btn-primary btn-xs" 
+				  			ng-click="searchTenantName()">
+				  			<span class="glyphicon glyphicon-search"></span>
+				  	</button>
+				  	<div ng-include="'app/tenant/tenant.html'"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Short Description</label>
+				</div>
+				<div class="col-sm-6">
+					<div class="col-sm-1 pull-right">
+						<button type="button" ng-hide="page=='view'" class="btn btn-default btn-xs group-btn" ng-click="add_desc(classification.descriptions.descShort)"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+					<div ng-repeat="sd in classification.descriptions.descShort" class="descriprion-view">
+						<div class="col-sm-3">
+							<select class="form-control" name="sd" 
+								ng-model="sd.language" ng-disabled="page=='view'" 
+								ng-options = "l.iso as l.iso for l in languageList" 
+								ng-change="changeLanguage(classification.descriptions.descShort, $index)">
+							</select>
+						</div>
+						<div class="col-sm-7">
+							<ng-form name="shortdescriptionForm">
+								<textarea type="text" class="form-control"
+								name="descShort" ng-model="sd.description"
+								ng-pattern="/^[a-zA-Z0-9_-\s]+$/" maxlength="200" ng-readonly="page=='view'" ng-blur="delete_desc(classification.descriptions.descShort, $index)">
+								</textarea>
+								<div class="has-error" ng-show="shortdescriptionForm.descShort.$invalid">
+									<span ng-show="shortdescriptionForm.descShort.$error.pattern" class="help-block">Short description won't allow special character(s)</span>
+								</div>
+							</ng-form>	
+						</div>
+						<div class="col-sm-1">
+							<button type="button" ng-hide="page=='view'" class="btn btn-default btn-xs" ng-click="remove_desc(classification.descriptions.descShort, $index)"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Long Description</label>
+				</div>
+				<div class="col-sm-6">
+					<div class="col-sm-1 pull-right">
+						<button type="button" ng-hide="page=='view'" class="btn btn-default btn-xs group-btn" ng-click="add_desc(classification.descriptions.descLong)"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+					<div ng-repeat="sd in classification.descriptions.descLong" class="descriprion-view descriprion-view2">
+						<div class="col-sm-3">
+							<select class="form-control" name="sd" 
+								ng-model="sd.language" ng-disabled="page=='view'" 
+								ng-options = "l.iso as l.iso for l in languageList" 
+								ng-change="changeLanguage(classification.descriptions.descLong, $index)">
+							</select>
+						</div>
+						<div class="col-sm-7">
+							<ng-form name="longdescriptionForm">
+								<textarea type="text" class="form-control"
+								name="longDescription" ng-model="sd.description" ng-readonly="page=='view'" ng-pattern="/^[a-zA-Z0-9_-\s]+$/" maxlength="500" rows="3" ng-blur="delete_desc(classification.descriptions.descLong, $index)">
+								</textarea>
+								<div class="has-error" ng-show="longdescriptionForm.longDescription.$invalid">
+									<span ng-show="longdescriptionForm.longDescription.$error.pattern" class="help-block">Long description won't allow special character(s)</span>
+								</div>
+							</ng-form>
+						</div>
+						<div class="col-sm-1">
+							<button type="button" ng-hide="page=='view'" class="btn btn-default btn-xs" ng-click="remove_desc(classification.descriptions.descLong, $index)"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Version No</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" ng-readonly="page=='view'" ng-model="classification.versionNo" class="form-control customized-form-control2" maxlength="10">
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Type</label>
+				</div>
+				<div class="col-sm-2">
+					<select class="form-control" name="type" ng-model="classification.type" ng-disabled="page=='view'">
+						<option value="">Select</option> 
+						<option value="UNSPC">UNSPC</option>
+						<option value="eClass">eClass</option>
+						<option value="Proprietary">Proprietary</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Order No</label>
+				</div>
+				<div class="col-sm-3">
+					<input type="number" class="form-control customized-form-control2" name="orderNo" ng-model="classification.orderNo" ng-readonly="page=='view'">
+					<div class="has-error" ng-show="classificationForm.orderNo.$invalid">
+						<span ng-show="classificationForm.orderNo.$invalid" class="help-block">Order number will allow only numbers</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Document 1</label>
+				</div>
+				<div class="col-sm-5">
+					<input type="url" class="form-control col-sm-6" name="documentUrl1" ng-model="classification.documentUrl1" value="true" ng-readonly="page=='view'" ng-pattern="">
+					<div class="has-error" ng-show="classificationForm.documentUrl1.$invalid">
+						<span class="help-block">Provide valid url for document 1</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Document 2</label>
+				</div>
+				<div class="col-sm-5">
+					<input type="url" class="form-control col-sm-6" name="documentUrl2" ng-model="classification.documentUrl2" value="true" ng-readonly="page=='view'">
+					<div class="has-error" ng-show="classificationForm.documentUrl2.$invalid">
+						<span class="help-block">Provide valid url for document 2</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Document 3</label>
+				</div>
+				<div class="col-sm-5">
+					<input type="url" class="form-control col-sm-6" name="documentUrl3" ng-model="classification.documentUrl3" value="true" ng-readonly="page=='view'">
+					<div class="has-error" ng-show="classificationForm.documentUrl3.$invalid">
+						<span class="help-block">Provide valid url for document 3</span>
+					</div>
+				</div>
+			</div>
+			<div ng-show="page=='view' || page == 'edit'">
+				<div ng-include="'app/partials/_auditInfo.html'"></div>
+			</div>
+			
+			
+			<!-- Submit and reset button-->
+			<div class="row col-sm-8 col-sm-offset-2 ">
+				<div class="form-button-group">
+					<button class="btn btn-primary"  ng-show="page=='new'" ng-click="submit(classification)">Save</button>
+					<button class="btn btn-primary"  ng-show="page=='new'" ng-click="reset()">Reset</button>
+					<button class="btn btn-primary" ng-show="page=='view'" ng-click="edit_classification(classification._id)">Edit</button>
+					<button class="btn btn-primary" ng-show="page==='edit'" ng-click="update_classification(classification,classification._id)">Update</button>
+					<button class="btn btn-primary" ng-show="page==='view'" ng-click="cancel_view()">Cancel</button>
+					<button class="btn btn-primary" ng-show="page==='edit' || page==='new'" data-toggle="modal" data-target="#classificationConfirmationDailogBox"
+					>Cancel</button>
+					<button class="btn btn-primary" ng-click="classificationGroup_page(classification._id, classification.classificationId)" ng-show="page=='edit' || page=='view'">Edit Classification Groups</button>
+				</div>
+			</div>
+			<div ng-include="'app/partials/_classificationConfirmationDialog.html'"></div>
+		</form>
+	</div>
+</div>	
+<div ng-if="changeView.classificationGroupShow" ng-include="'app/classificationGroup/classificationGroup.html'"></div>
+<script type="text/ng-template" id="alert.html">
+	<div class="modal-body">
+		<p>Please enter valid and required datas</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click="cancel()">Ok</button>
+	</div>
+</script>

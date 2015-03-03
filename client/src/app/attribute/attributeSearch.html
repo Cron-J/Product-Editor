@@ -1,0 +1,135 @@
+<div class="row" ng-controller="attributeSearchCtrl">
+	<!-- Header Name-->
+	<div ng-show="! changeView.attributeShow">
+		<div class="row col-sm-12">
+			<div class="col-sm-7">
+				<h1>Attributes</h1>
+				<h3>Search Attribute</h3>
+			</div>
+		</div>
+		<div class="row col-sm-12">
+			<div class="col-sm-1 col-sm-offset-11">
+				<button class="btn btn-primary pull-right" ng-click="new_page()">Add New</button>
+			</div>
+		</div>
+		<!-- New Field -->
+		<div class="row col-sm-12 form-group">
+			<div class="col-sm-2">
+				<label class="control-label">Attribute ID</label>
+			</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" name="attributeId" ng-model="searchQuery.attributeId">
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Description</label>
+			</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" name="description" ng-model="searchQuery.description">
+			</div>
+		</div>
+
+		<!-- New Field -->
+		<div class="row col-sm-12">
+			<div class="col-sm-2">
+				<label class="control-label">Ext Attribute ID</label>
+			</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" name="extAttributeId" ng-model="searchQuery.extAttributeId">
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Section</label>
+			</div>
+			<div class="col-sm-3">
+				<div class="row col-md-11 col-sm-11">
+					<input class="form-control" 
+					name="section_id" maxlength="100"
+					ng-model="searchQuery.sectionRef" 
+					typeahead="result as result.attributeSectionId+ result.comma + (result.desc | limitTo:10) for result in searchSectionList($viewValue)" typeahead-wait-ms="1000"/>
+				</div>
+				<div class="col-sm-1">
+					<button class="btn btn-primary btn-xs" 
+			  			ng-click="searchsectionId()">
+			  			<span class="glyphicon glyphicon-search"></span>
+			  	</button>
+			  	<div ng-include="'app/attribute/sectionSearch.html'"></div>
+				</div>
+			</div>	
+		</div>
+
+		<!-- Submit and reset button-->
+		<div class="row col-sm-12 form-group">
+			<br><br>
+			<div class="col-sm-2 col-sm-offset-10">
+				<button class="btn btn-primary" ng-click="search()">Search</button>
+				<button class="btn btn-primary pull-right" ng-click="reset_search()">Reset</button>
+			</div>
+		</div>
+		<div class="row col-sm-12" ng-show="searchResult.length==0">
+				<h3>Found {{searchResult.length}} entry</h3>
+		</div>
+
+		<div class="row col-sm-12" ng-show="filteredItems.length > 0">
+			<b>Found {{filteredItems.length}} entries</b>
+			<table class="table table-stripped custom-table">
+				<tbody>
+					<tr>
+						<th style="width: 10%;">#</th>
+						<th style="width: 15%;" style="width: 14%;">Attribute Id</th>
+						<th style="width: 15%;">Ext Attribute Id</th>
+						<th style="width: 35%;">Description</th>
+						<th style="width: 15%;">Type</th>
+						<th style="width: 10%;"></th>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr class="hoverptr" ng-repeat="attribute in pagedItems[currentPage]">
+						<td>{{$index+1}}</td>
+						<td ng-click="edit_attribute(attribute._id)">{{attribute.attributeId}}</td>
+						<td ng-click="edit_attribute(attribute._id)">{{attribute.extAttributeId}}</td>
+						<td class="custom-row" ng-click="edit_attribute(attribute._id)">{{attribute.descriptions.descShort[0].description}}</td>
+						<td ng-click="edit_attribute(attribute._id)">{{attribute.types[0].typeName}}</td>
+						<td>
+						<button type="button" ng-click="delete_one(attribute._id,$index)" class="btn btn-primary">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<td colspan="6">
+						<div class="pagination pull-right">
+							<ul>{{searchResultLength}}
+							
+								<li ng-class="{disabled: currentPage == 0}">
+									<a href ng-click="prevPage()">« Prev</a>
+								</li>
+								<li ng-repeat="n in range(pagedItems.length)" ng-class="{active: n == currentPage}"ng-click="setPage()">
+								<a href ng-show="n >= min && n < max" ng-bind="n + 1">1</a>
+								</li>
+								<li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+									<a href ng-click="nextPage()">Next »</a>
+								</li>
+							</ul>
+						</div>
+					</td>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+	<div ng-if="changeView.attributeShow || changeView.attributeEdit" ng-include="'app/attribute/attribute.html'" ></div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+	<div class="modal-body">
+		<p>Are you sure you want to delete ?</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click="ok()">OK</button>
+		<button class="btn btn-default" ng-click="cancel()">Cancel</button>
+	</div>
+</script>
+<script type="text/ng-template" id="alert.html">
+	<div class="modal-body">
+		<p>Please fill some entry for search ?</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click="cancel()">Ok</button>
+	</div>
+</script>  

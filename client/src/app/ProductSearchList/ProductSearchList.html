@@ -1,0 +1,107 @@
+<div class="row" ng-controller="ProductSearchCtrl">
+	<!-- Header Name-->
+	
+	<div class="row col-sm-12">
+		<div class="col-sm-7">
+			<h1>Product Editor</h1>
+			<h3 class="m-b-50">Search Product Section</h3>
+		</div>
+	</div>
+	<!-- <div class="row col-sm-12">
+		<div class="col-sm-1 col-sm-offset-11">
+			<button class="btn btn-primary pull-right" ng-click="new_page()">Add New</button>
+		</div>
+	</div> -->
+
+	<!-- New Field -->
+	<div class="row col-sm-12 form-group ">
+		<div class="col-sm-2">
+			<label class="control-label">Product ID</label>
+		</div>
+		<div class="col-sm-3">
+			<input type="text" class="form-control" name="attributeSectionId" ng-model="searchData.productId">
+		</div>
+		<div class="col-sm-2 col-sm-offset-2">
+			<label class="control-label">Class Group ID</label>
+		</div>
+		<div class="col-sm-3">
+			<input type="text" class="form-control" name="name" ng-model="searchData.classificationGroupId">
+		</div>
+	</div>
+
+	<!-- New Field -->
+	<!-- <div class="row col-sm-12 form-group">
+		<div class="col-sm-2">
+			<label class="control-label">Description</label>
+		</div>
+		<div class="col-sm-3">
+			<input type="text" class="form-control" name="description" ng-model="searchQuery.description">
+		</div>
+	</div> -->
+
+	<!-- Submit and reset button-->
+	<div class="row col-sm-12">
+		<div class="col-sm-2 col-sm-offset-10 form-group m-b-20">
+			<button class="btn btn-primary" ng-click="searchProduct(searchData)">Search</button>
+			<button class="btn btn-primary pull-right" ng-click="reset_search()">Reset</button>
+		</div>
+	</div>
+
+	<!-- <div class="row col-sm-12" ng-show="searchResult.length==0">
+			<h3>Found {{searchResult.length}} entry</h3>
+	</div>
+ -->
+	<div class="row col-sm-12">
+		<!-- <b>Found {{filteredItems.length}} entries</b> -->
+		<table class="table table-stripped custom-table">
+			<tbody>
+				<tr>
+					<th>Catalog</th>
+					<th>Product-ID</th>
+					<th>Supplier</th>
+					<th>Name</th>
+					<th>UoM</th>
+					<th>Man.Product ID</th>
+					<th>Status</th>
+<!-- 					<th></th>
+ -->				</tr>
+			</tbody>
+			<tbody>
+			<tr class="hoverptr" ng-repeat="tdata in tabledata">
+				<td ng-click="editproduct(productSection._id)">{{tdata.catalogId}}</td>
+				<td ng-click="editproduct(productSection._id)">{{tdata.productId}}</td>
+				<td ng-click="editproduct(productSection._id)">{{tdata.supplierId}}</td>
+				<td ng-click="editproduct(productSection._id)">{{tdata.mfgProductName}}</td>
+				<td ng-click="editproduct(productSection._id)">{{tdata.unitOfMeasureId}}</td>
+				<td ng-click="editproduct(productSection._id)">{{tdata.mfgProductId}}</td>
+				<td ng-click="editproduct(productSection._id)">Status</td>
+<!-- 				<td><button class="btn btn-primary">View</button></td>
+ -->			</tr>
+			</tbody>
+		<tfoot>
+			<td colspan="7">
+				<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+			</td>
+		
+	</div>
+	 
+
+
+	 
+		<!-- // <script type="text/ng-template" id="myModalContent.html"> -->
+			<!-- // <div class="modal-body"> -->
+				<!-- // <p>Are you sure you want to delete ?</p> -->
+			<!-- // </div> -->
+			<!-- // <div class="modal-footer"> -->
+				<!-- // <button class="btn btn-default" ng-click="ok()">OK</button> -->
+				<!-- // <button class="btn btn-default" ng-click="cancel()">Cancel</button> -->
+			<!-- // </div> -->
+		<!-- // </script> -->
+		<!-- // <script type="text/ng-template" id="alert.html"> -->
+			<!-- // <div class="modal-body"> -->
+				<!-- // <p>Please fill some entry for search ?</p> -->
+			<!-- // </div> -->
+			<!-- // <div class="modal-footer"> -->
+				<!-- // <button class="btn btn-default" ng-click="cancel()">Ok</button> -->
+			<!-- // </div> -->
+		<!-- // </script>  		 -->

@@ -1,0 +1,79 @@
+<!-- classification search Modal -->
+<div class="modal fade col-sm-offset-1" id="sectionPopupModal" 
+ tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title" id="myModalLabel">Search for Section</h4>
+			</div>
+
+			<div class="modal-body" style="overflow: auto;">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12" ng-controller="attributeSectionSearchCtrl" >
+						<div class="col-sm-10">
+							<div class="row">
+								<div class="col-sm-3">
+									<label >Section ID</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.attributeSectionId" />
+								</div>
+								<div class="col-sm-3">
+									<label >Description</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.description" />
+								</div>
+								<div class="form-button-group search-buttons col-sm-3">
+									<button class="btn btn-primary btn-sm" ng-click="search();setSectionList()"><span class="glyphicon glyphicon-search"></span></button>
+									<button class="btn btn-primary btn-sm" ng-click="reset_search()">Clear</button>
+								</div>
+							</div>		
+						</div>
+						<div class="col-sm-12" ng-show="searchVar.value == true">
+							<div ng-show="searchResult.length > 0 && setSectionsList">
+								<table class="table table-bordered table-hover custom-table form-panel">
+								  <thead class="active">
+								  	<!-- <th style="width: 10%" class="text-center">S.No</th> -->
+								  	<th style="width: 25%">Section ID</th>
+								  	<th style="width: 60%">Description</th>
+								  </thead>
+								  <tbody>
+								  	<tr ng-repeat="result in pagedItems[currentPage]">
+									  	<!-- <td class="row-hover custom-row" ng-click="getSectionInfo(result)" data-dismiss="modal">{{$index+1}}
+									  	</td> -->
+									  	<td class="row-hover custom-row" ng-click="getSectionInfo(result)" data-dismiss="modal">{{result.attributeSectionId}}</td>
+									  	<td class="row-hover custom-row" ng-click="getSectionInfo(result)" data-dismiss="modal">{{result.descriptions[0].description}}</td>
+								  	</tr>
+								  </tbody>
+								</table>
+								<div class="pagination table-pagination pull-right">
+									<ul>
+										<li ng-class="{disabled: currentPage == 0}">
+											<a href ng-click="prevPage()">« Prev</a>
+										</li>
+										<li ng-repeat="n in range(pagedItems.length)" ng-class="{active: n == currentPage}"ng-click="setPage()">
+										<a href ng-show="n >= min && n < max" ng-bind="n + 1">1</a>
+										</li>
+										<li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+											<a href ng-click="nextPage()">Next »</a>
+										</li>
+									</ul>
+								</div>
+							</div>	
+							<div ng-show="searchResult.length == 0 && setSectionsList">
+								<div class="col-sm-8 col-sm-offset-4"> 
+									There are 0 search results found.
+								</div>
+							</div>	
+						</div>			
+					</div>
+				</div>		
+			</div>
+			
+			<div class="modal-footer">	
+				<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

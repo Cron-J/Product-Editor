@@ -1,0 +1,193 @@
+<div class="col-sm-5">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><b>Attribute Value Options</b></h3>
+		</div>
+		<div class="panel-body">
+			<ul class="list-group" ng-show="attribute.valueOptions.length == 0 || attribute.valueOptions.length == undefined">
+				<li class="list-group-item">0 attribute value options added</li>		
+			</ul>
+			<div ng-show="attribute.valueOptions.length > 0 " class="row">
+				<table class="table table-stripped custom-table" >
+				  <thead class="active">
+				  	<th style="width:20%;">Value</th>
+				  	<th style="width:35%;">Description</th>
+				  	<th style="width:20%;">Is Default</th>
+				  	<th style="width:25%;">Actions</th>
+				  </thead>
+				  <tbody>
+				  	<tr ng-repeat="avo in attribute.valueOptions">
+					  	<td class="custom-row">{{avo.value}}</td>
+					  	<td class="custom-row">{{avo.descriptions[0].description}}</td>
+					  	<td>{{avo.isDefault}}</td>
+					  	<td>
+						  	<button  ng-if="page!='view'" type="button" class="btn btn-primary btn-xs" data-toggle="modal" ng-click="editValueOption(avo, $index)" style="position: relative;bottom: 6px;">Edit
+								</button>
+								<button  ng-if="page!='view'" type="button" class="btn btn-primary btn-xs" data-toggle="modal" ng-click="deleteValueOption($index)" style="position: relative;bottom: 6px;margin-right:4px;">Delete
+								</button>
+								<button  ng-if="page=='view'" type="button" class="btn btn-primary  btn-xs" data-toggle="modal" ng-click="editValueOption(avo)" style="position: relative;bottom: 6px;">View
+								</button>
+					  	</td>
+				  	</tr>
+				  </tbody>
+				</table>
+			</div>
+		<!-- Button trigger modal -->
+			<button class="btn btn-primary" ng-show="page=='new' || page=='edit'"  data-toggle="modal" ng-click="initModal();newAttributeValueOption()"data-target="#attributeValueOptionModal">
+			+ Add Attribute Value Option
+			</button>
+		</div>
+	</div>
+	<!-- Contact Modal -->
+	<div class="modal fade col-sm-offset-1" id="attributeValueOptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" ng-init="initModal()">
+			<div class="modal-content">
+				<ng-form name="attributeModalForm">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 ng-show="value_page=='new'" class="modal-title" id="myModalLabel">New Attribute Value Option</h4>
+						<h4 ng-show="page=='view' || value_page==='view'" class="modal-title" id="myModalLabel">Attribute Value Option Details</h4>
+						<h4 ng-show="value_page==='edit'" class="modal-title" id="myModalLabel">Edit Attribute Value Option</h4>
+					</div>
+
+					<div class="modal-body" style="overflow: auto;">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="col-sm-10">
+									<div class="form-group">
+										<label class="col-md-4 control-label">Value<span ng-show="newValueOption.value === undefined || newValueOption.value ===''" class="help-inline" style="color:red"> *</span></label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="value" ng-model="newValueOption.value" ng-readonly="page=='view'" maxlength="255" ng-change="setBtnValid(newValueOption.value)">
+										</div>
+									</div>
+									<!-- Text input-->
+									<div class="form-group">
+										<label class="col-md-4 control-label">Descriptions</label>  
+										<div class="col-md-8">
+											<div class="col-sm-1 pull-right">
+												<button type="button" ng-hide="page=='view' || attribute.isMultiLanguage != true" class="btn btn-default btn-xs group-btn" ng-click="add_desc(newValueOption.descriptions)"><span class="glyphicon glyphicon-plus"></span></button>
+											</div>
+											<div ng-repeat="sd in newValueOption.descriptions" class="descriprion-view descriprion-view2">
+												<div class="col-sm-3">
+													<select class="form-control" name="sd" 
+														ng-model="sd.language" ng-disabled="page=='view' || attribute.isMultiLanguage != true" 
+														ng-options = "l.iso as l.iso for l in languageList" 
+														ng-change="changeLanguage(newValueOption.descriptions, $index)">
+													</select>
+												</div>
+												<div class="col-sm-7">
+													<ng-form name="modaldescriptionForm">
+														<textarea type="text" class="form-control" 
+														name="valuedescription" ng-model="sd.description" ng-change="checkValid(modaldescriptionForm.valuedescription.$error.pattern, value)" 
+														ng-pattern="/^[a-zA-Z0-9_-\s]+$/" maxlength="500" ng-readonly="page=='view'" rows="3" 
+														ng-blur="delete_desc(newValueOption.descriptions, $index)">
+														</textarea>
+														<div class="has-error" ng-show="modaldescriptionForm.valuedescription.$invalid">
+															<span ng-show="modaldescriptionForm.valuedescription.$error.pattern" class="help-block">Description won't allow special character(s)</span>
+														</div>
+													</ng-form>
+												</div>
+												<div class="col-sm-1">
+													<button type="button" ng-hide="page=='view' || attribute.isMultiLanguage != true" class="btn btn-default btn-xs" ng-click="remove_desc(newValueOption.descriptions, $index)"><span class="glyphicon glyphicon-remove"></span></button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Text input-->
+									<div class="form-group">
+										<label class="col-md-4 control-label">Return Value</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="returnValue" ng-model="newValueOption.returnValue" ng-readonly="page=='view'"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label">Order No</label>
+										<div class="col-md-4">
+											<input type="number" class="form-control" name="orderNo" ng-model="newValueOption.orderNo" ng-readonly="page=='view'"/>
+											<div class="has-error" ng-show="attributeModalForm.orderNo.$invalid">
+												<span class="help-block">
+													Order no will take numbers only
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label">Is Default</label>
+										<div class="col-md-8">
+											<input type="checkbox" ng-show="page=='view'" name="grpId" ng-model="newValueOption.isDefault" disabled/>
+											<input type="checkbox" ng-hide="page=='view'" name="grpId" value="false" ng-model="newValueOption.isDefault"/>
+										</div>
+									</div>
+									<div class="row select-group">
+										<label class="col-md-4 control-label">Currency</label>
+										<div class="col-md-6 col-sm-6">
+											<div class="select-group" ng-show="page !='view'"
+									    multi-select 
+									    input-model="currencyCode"
+									    output-model="newValueOption.currency"
+									    button-label="code"         
+									    item-label="code" 
+									    tick-property="ticked" 
+									    selection-mode="single"
+									    helper-elements="filter reset"
+									    is-disabled = "page == 'view'"
+									    max-height="200px"
+											>
+											</div>
+											<div ng-show="page =='view'">
+												<input type="text" name="currencyinput" class="form-control customized-form-control2" ng-model="newValueOption.currency[0].code" disabled />
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label">Surcharge Factor</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="surchargeFactor" ng-model="newValueOption.surchargeFactor" ng-readonly="page=='view'" ng-pattern="/^\d+\.?\d{0,2}$/"/>
+											<div class="has-error" ng-show="attributeModalForm.surchargeFactor.$invalid">
+												<span class="help-block" ng-show="attributeModalForm.surchargeFactor.$error.pattern">
+													Surcharge Factor will take decimal numbers with precision 2
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label">Surcharge Amount</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="surchargeAmount" ng-model="newValueOption.surchargeAmount" ng-readonly="page=='view'"  ng-pattern="/^\d+\.?\d{0,2}$/"/>
+											<div class="has-error" ng-show="attributeModalForm.surchargeAmount.$invalid" ng-show="attributeModalForm.surchargeAmount.$error.pattern">
+												<span class="help-block">
+													Surcharge Amount will take decimal numbers with precision 2
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-4 control-label">Image Url</label>
+										<div class="col-md-8">
+											<input type="url" class="form-control col-md-8" name="imageUrl" ng-model="newValueOption.imageUrl" ng-readonly="page=='view'"/>
+											<div class="has-error" ng-show="attributeModalForm.imageUrl.$invalid">
+												<span class="help-block">
+													Provide valid url
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				</ng-form>
+				<div class="modal-footer">
+					<button ng-if="value_page==='new'" ng-show="newValueOption.value === undefined || newValueOption.value ==='' || attributeModalForm.$invalid" type="button" class="btn btn-primary" ng-click="addAttributeValueOption(newValueOption, false)" >Add</button>
+					<button ng-if="value_page==='edit'" ng-show="newValueOption.value === undefined || newValueOption.value ==='' || attributeModalForm.$invalid" type="button" class="btn btn-primary" ng-click="addAttributeValueOption(newValueOption, true, false)">Update</button>
+					<button ng-if="value_page==='new'" ng-show="attributeModalForm.$valid 
+					&& newValueOption.value" type="button" data-dismiss="modal" class="btn btn-primary" ng-click="addAttributeValueOption(newValueOption, flase, true)" >Add</button>
+					<button ng-if="value_page==='edit'" ng-show="attributeModalForm.$valid 
+					&& newValueOption.value" type="button" class="btn btn-primary" ng-click="addAttributeValueOption(newValueOption, true, true)" data-dismiss="modal" >Update</button>
+					<button ng-if="value_page==='edit' || value_page==='new'" type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearData();resetCurrencyField()">Cancel</button>
+					<button ng-if="value_page==='view'" type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>

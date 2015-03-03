@@ -1,101 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="app">
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
-  <title>Hapi-Mongoose-Angular</title>
-  <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <!-- style sheets -->
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/additional.css">
-  <link rel="stylesheet" href="css/bootstrap-jc-v8-theme.css">
-  <link rel="stylesheet" href="css/custom.css">
-  <link rel="stylesheet" href="css/growl.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PIM</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+  <link rel="stylesheet" href="less/css/bootstrap.css">
+  <link rel="stylesheet" href="less/css/bootstrap-jc-v8-theme.css">
+  <link rel="stylesheet" href="less/css/additional.css">
+  <link rel="stylesheet" href="less/css/animate.css">
+  <link rel="stylesheet" href="less/css/growl.css">
+  <link rel="stylesheet" href="less/css/jquery-ui.css"/>
+  <link rel="stylesheet" href="less/css/app.css"/>
+  <link rel="stylesheet" href="less/css/angular-ui-tree.min.css">
+  <link rel="stylesheet" href="less/css/angular-multi-select.css"/>
+  <link rel="stylesheet" href="less/css/xeditable.css"/>
+  <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css">
 </head>
-<body>
-	<div class="navbar navbar-default navbar-main-menu"><!-- main nav -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">
-        <img src="img/jc-logo-rgb.svg" style="height: 1.5em; margin-top: -.25em; margin-bottom: -.25em;">
-      </a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle active" data-toggle="dropdown">Import <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Execute Import</a></li>        
-            <li><a href="#">Mapping Editor</a></li>
-          </ul>
-        </li> 
-        <li><a href="#">Edit</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Validate <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Execute Business Rules</a></li>
-          </ul>
-        </li> 
-        <li><a href="#">Export</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Martin Hallmann <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Account</a></li>
-            <li><a href="#">Log Off</a></li>
-            <li class="divider"></li>
-            <li class="dropdown-header">Language</li>
-            <li class="active"><a href="#">English</a></li>
-            <li><a href="#">Deutsch</a></li>
-          </ul>
-        </li> 
-        <li class="dropdown">
-          <a href="#" class="icon-nav-item dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>  <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-header">Business Rules</li>
-            <li><a href="#">Business Rules Editor</a></li>
-            <li class="dropdown-header">Security</li>
-            <li><a href="#">Users</a></li>
-            <li><a href="#">Roles</a></li>
-          </ul>
-        </li> 
-      </ul>
-      <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-      </form>
-    </div><!--/.nav-collapse -->
-  </div><!-- /main nav -->
-  <div growl></div>
-	<div data-ng-view></div>
 
-  <!-- library files -->
-	<script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
-	<script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.min.js"></script> 
-	<script src="bower_components/ng-file-upload/angular-file-upload.min.js"></script>
+<body ng-controller="mainCtrl">
+  <div ng-include="'app/partials/_header.html'"></div>
+  <div ng-view class="container"></div>
+
+</body>
+<footer></footer>
+  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="bower_components/ng-file-upload/angular-file-upload-shim.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script> 
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!--   <script src="bower_components/angular-animate.js"></script> -->
+  <script src="bower_components/angular-growl/build/angular-growl.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>  
+  <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+  <script src="less/js/lodash.js"></script>
+  <script src="bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"></script>
+  <script src="less/js/angular-ui-tree.js"></script>
+  <script src="less/js/bootstrap.js"></script>
+  <script src="less/js/respond.js"></script>
+    <script src="less/js/xeditable.js"></script>
+  <script src="less/js/jquery.multiple.select.js"></script>
+  <script src="less/js/angular-multi-select.js"></script>
+  <script src="less/js/ngModelOptions.js"></script>
+  <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+  <script src="app/app.js"></script>
+  <script src="less/js/upload.js"></script>
+
+  <!-- ProductSearchListCtrl -->
+  <script src="app/ProductSearchList/ProductSearchListCtrl.js"></script>
   
-  <!-- js files -->
-  <script src="lib/lodash.js"></script>
-  <script src="lib/bootstrap.js"></script>
-  <script type="text/javascript" src="lib/growl.js"></script>
-	<script src="app/app.js"></script>
-  <script src="app/factory/staticFactory.js"></script>
-  <script src="app/controllers/mainCtrl.js"></script>
-  <script src="lib/jszip.js"></script>
-  <script src="lib/xls.js"></script>
-  <script src="lib/xls-reader.js"></script>
-  <script src="lib/xlsx.js"></script>
-  <script src="lib/xlsx-reader.js"></script>
+  <!-- Product Edit Controller -->
+
+  <script src="app/EditProduct/editproductCtrl.js"></script>
+
+
+ <!--  // <script src="app/attributeSection/attributeSectionService.js"></script>
+  // <script src="app/attribute/attributeService.js"></script>
+  // <script src="app/classification/classificationService.js"></script>
+  // <script src="app/classificationGroup/classificationGroupService.js"></script> -->
+  <!-- <script src="app/tenant/tenantService.js"></script>
+  //  <script src="app/status/statusService.js"></script>
+  // <script src="app/attributeSection/attributeSectionCtrl.js"></script>
+  // <script src="app/attributeSection/attributeSectionSearchCtrl.js"></script>
+  // <script src="app/attribute/attributeSearchCtrl.js"></script>
+  // <script src="app/attribute/attributeCtrl.js"></script>
+  // <script src="app/classification/classificationSearchCtrl.js"></script>
+  // <script src="app/classification/classificationCtrl.js"></script>
+  // <script src="app/classificationGroup/classificationGroupCtrl.js"></script>
+  // <script src="app/classificationGroup/classificationGroupSearchCtrl.js"></script>
+  // <script src="app/tenant/tenantSearchCtrl.js"></script> -->
+  <script src="common/controller/mainCtrl.js"></script>
 </html>
+

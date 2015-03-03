@@ -1,0 +1,174 @@
+.pagination ul>li{display:inline;}
+.pagination ul>li>a,.pagination ul>li>span{float:left;padding:0 14px;line-height:38px;text-decoration:none;background-color:#ffffff;border:1px solid #dddddd;border-left-width:0;}
+.pagination ul>li>a:hover,.pagination ul>.active>a,.pagination ul>.active>span{background-color:#f5f5f5;}
+.pagination ul>.active>a,.pagination ul>.active>span{color:#999999;cursor:default;}
+.pagination ul>.disabled>span,.pagination ul>.disabled>a,.pagination ul>.disabled>a:hover{color:#999999;background-color:transparent;cursor:default;}
+.pagination ul>li:first-child>a,.pagination ul>li:first-child>span{border-left-width:1px;-webkit-border-radius:3px 0 0 3px;-moz-border-radius:3px 0 0 3px;border-radius:3px 0 0 3px;}
+.pagination ul>li:last-child>a,.pagination ul>li:last-child>span{-webkit-border-radius:0 3px 3px 0;-moz-border-radius:0 3px 3px 0;border-radius:0 3px 3px 0;}
+.pagination-centered{text-align:center;}
+.pagination-right{text-align:right;}
+.hoverptr:hover{
+   cursor: pointer;
+   background: #f3f3f3;
+ }
+ /****************** Customized *****************/
+ .form-panel{
+ 	margin-top: 30px;
+ }
+ .form-button-group{
+ 	margin-top:15px;
+ }
+ .customized-form-control1 {
+ 	width: 270px;
+ }
+ .customized-form-control2 {
+ 	width: 240px;
+ }
+ .customized-form-control3 {
+ 	width: 120px;
+ }
+  .customized-form-control4 {
+ 	width: 300px;
+ }
+ .checkbox-label {
+ 	width: 130px;
+ }
+ .audit-info{
+ 	font-size: 17px;
+	font-weight: 600;
+ }
+ .select-group{
+ 	margin-bottom: 15px;
+ }
+ .group-btn {
+ 	margin: 1px;
+ }
+/********** Table ******************/
+.custom-table {
+	table-layout: fixed;
+}
+.custom-row {
+	overflow: hidden; 
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/***********************************/
+
+ /********** tree structure ************/
+ .tree-child-button {
+ 	margin-left: 30px;
+ }
+ .tree-button {
+ 	font-size: 6px;
+ 	margin-top: 22px;
+	margin-left: -8px;
+ }
+
+ .tree-branch {
+ 	background-image: url("../img/branch.png");
+ }
+ .left-handle{
+ 		margin-top: -5px;
+ }
+ .node-name{
+ 	top:10px;
+ 	position: relative;
+ }
+ .branch{
+ 	margin-left: -32px;
+	margin-right: 3px;
+	margin-top: -2px;
+ }
+ .leaf-node{
+ 	margin-left: 19px;
+ }
+ .leaf-node-last{
+ 	margin-left: 33px;
+ }
+ .leaf-handle-child{
+ 	margin-left: -14px;
+	margin-right: -17px;
+ }
+ .leaf-handle-child-last {
+ 		margin-left: -2px;
+		margin-right: -32px;
+ }
+ .leaf-handle-parent{
+	margin-left: -34px;
+	margin-right: 17px;
+ }
+ .node-link, .node-link a:hover {
+ 	color: #333;
+	text-decoration: none;
+	cursor: pointer;
+ }
+ .tree-name{
+ 	margin-left:-4px;
+ }
+
+ /*******************************************/
+ .search-attributes{
+ 	font-size: 13px;
+ }
+ .search{
+ 	overflow: hidden;
+ }
+ .search-buttons{
+ 	margin-bottom: 20px;
+ 	margin-top: 25px;
+ }
+ .table-pagination{
+ 	margin:0;
+ }
+ .descriprion-view {
+ 	padding-bottom: 60px;
+	margin-left: -17px;
+	margin-top: 2px;
+ }
+ .descriprion-row {
+ 	margin-top:-26px;
+ }
+ .descriprion-view2 {
+ 	padding-bottom: 79px;
+ }
+.descriprion-view3{
+ 	padding-bottom: 98px;
+ }
+ .row-hover:hover {
+ 	cursor: pointer;
+ }
+ .multi-select-input {
+ 		margin-left: 15px;
+ }
+ .audit-info-text {
+ 		margin-top: 6px;
+ }
+ .grid-control {
+ 	 width: 88%;
+ }
+ .grid-search-btn {
+ 	margin-top: -33px;
+ }
+ .panel-row-space {
+ 		margin-bottom: 10px;
+ }
+ .panel-shift{
+ 	margin-left: 36px;
+ }
+
+
+
+ .m-b-50{
+ 	margin-bottom:50px;
+ }
+
+
+ .m-b-20{
+ 	margin-bottom:20px;
+ }
+
+
+.m-t-25{
+	margin-top:25px;
+}

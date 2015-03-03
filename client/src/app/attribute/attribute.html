@@ -1,0 +1,366 @@
+<div class="row" ng-controller="attributeCtrl" ng-init="init_page()">
+
+	<!-- Header Name-->
+	<div class="row">
+		<div class="col-sm-3">
+			<h3 ng-if="page=='new'">New Attribute</h3> 
+			<h3 ng-if="page=='view'">Attribute Details</h3>
+			<h3 ng-if="page=='edit'">Edit Attribute</h3>
+		</div>
+	</div>
+
+	<div class="row form-panel">
+		<form class="form-horizontal" name="attributeForm" novalidate>
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Attribute ID
+						<span ng-show="attributeForm.attributeId.$error.required" class="help-inline" style="color:red"> *</span>
+					</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" class="form-control customized-form-control2" name="attributeId" ng-readonly="page=='view' || page=='edit'" ng-model="attribute.attributeId" ng-pattern="/^[a-zA-Z0-9_-]+$/" required maxlength="50"/>
+					<div class="has-error" ng-show="attributeForm.attributeId.$invalid">
+						<span ng-show="attributeForm.attributeId.$error.pattern" class="help-block">Attribute id won't allow special character(s)</span>
+					</div>
+				</div>
+			</div>
+	
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Description</label>
+				</div>
+				<div class="col-sm-6">
+					<div class="col-sm-1 pull-right">
+						<button type="button" ng-hide="page=='view'" class="btn btn-default btn-xs group-btn" ng-click="add_desc(attribute.descriptions.descShort)"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+					<div ng-repeat="sd in attribute.descriptions.descShort" class="descriprion-view">
+						<div class="col-sm-3">
+							<select class="form-control" name="sd" 
+								ng-model="sd.language" ng-disabled="page=='view'"
+								ng-options = "l.iso as l.iso for l in languageList" 
+								ng-change="changeLanguage(attribute.descriptions.descShort, $index)">
+							</select>
+						</div>
+						<div class="col-sm-7">
+						 	<ng-form name="descriptionForm">
+								<textarea type="text" class="form-control" 
+								name="description"  ng-model="sd.description" 
+								ng-pattern="/^[a-zA-Z0-9_-\s]+$/" maxlength="200" 
+								ng-readonly="page=='view'" ng-blur="delete_desc(attribute.descriptions.descShort, $index)">
+								</textarea>
+								<div class="has-error" ng-show="descriptionForm.description.$invalid">
+									<span ng-show="descriptionForm.description.$error.pattern" class="help-block">Description won't allow special character(s)</span>
+								</div>
+							</ng-form>
+						</div>
+						<div class="col-sm-1">
+							<button type="button" ng-hide="page=='view'" class="btn btn-default btn-xs" ng-click="remove_desc(attribute.descriptions.descShort, $index)"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Long Description</label>
+				</div>
+				<div class="col-sm-6">
+					<div class="col-sm-1 pull-right">
+						<button type="button" ng-hide="page=='view'" class="btn btn-default btn-xs group-btn" ng-click="add_desc(attribute.descriptions.descLong)"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+					<div ng-repeat="sd in attribute.descriptions.descLong" class="descriprion-view descriprion-view2">
+						<div class="col-sm-3">
+							<select class="form-control" name="sd" 
+								ng-model="sd.language" ng-disabled="page==='view'"
+								ng-options = "l.iso as l.iso for l in languageList" 
+								ng-change="changeLanguage(attribute.descriptions.descLong, $index)">
+							</select>
+						</div>
+						<div class="col-sm-7">
+							<ng-form name="longdescriptionForm">
+								<textarea type="text" class="form-control" 
+								name="longDescription" ng-model="sd.description" ng-readonly="page=='view'" ng-pattern="/^[a-zA-Z0-9_-\s]+$/" maxlength="500" rows="3" ng-blur="delete_desc(attribute.descriptions.descLong, $index)">
+								</textarea>
+								<div class="has-error" ng-show="longdescriptionForm.longDescription.$invalid">
+									<span ng-show="longdescriptionForm.longDescription.$error.pattern" class="help-block">Long description won't allow special character(s)</span>
+								</div>
+							</ng-form>
+						</div>
+						<div class="col-sm-1">
+							<button type="button" ng-hide="page=='view'" class="btn btn-default btn-xs" ng-click="remove_desc(attribute.descriptions.descLong, $index)"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Ext Attribute ID</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" class="form-control customized-form-control2" name="extAttributeId" ng-readonly="page=='view'" ng-model="attribute.extAttributeId" ng-pattern="/^[a-zA-Z0-9_-]+$/" maxlength="100">
+					<div class="has-error" ng-show="attributeForm.extAttributeId.$invalid">
+						<span ng-show="attributeForm.extAttributeId.$error.pattern" class="help-block">Attribute id won't allow special character</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- New Field -->
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Ext Default Name</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" class="form-control customized-form-control2" name="extDefaultName" ng-readonly="page=='view'" ng-model="attribute.extDefaultName" ng-pattern="/^[a-zA-Z0-9_-\s]+$/" maxlength="50">
+					<div class="has-error" ng-show="attributeForm.extDefaultName.$invalid">
+						<span ng-show="attributeForm.extDefaultName.$error.pattern" class="help-block">Ext default name won't allow special character(s)</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- New Field -->
+			<div class="row col-sm-12 select-group">
+				<div class="col-sm-2">
+					<label class="control-label">Section</label>
+				</div>
+				<div class="col-sm-3" class="select-group">
+					<div class="row col-md-11 col-sm-11">
+						<input class="form-control" ng-readonly="page=='view'"
+						name="section_id" maxlength="100"
+						ng-model="attribute.sectionRef" 
+						typeahead="result as result.attributeSectionId+result.comma + (result.desc | limitTo:10) for result in searchSectionList($viewValue)" typeahead-wait-ms="1000" />
+					</div>
+					<div class="col-sm-1" ng-hide="page==='view'">
+						<button class="btn btn-primary btn-xs" 
+				  			ng-click="searchSection()">
+				  			<span class="glyphicon glyphicon-search"></span>
+				  	</button>
+				  	<div ng-include="'app/attribute/section.html'"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- New Field -->
+			<div class="row col-sm-12 select-group">
+				<div class="col-sm-2">
+					<label class="control-label">Unit of Measure</label>
+				</div>
+				<div class="col-sm-4" class="select-group">
+					<div class="select-group" ng-hide="page==='view'"
+					    multi-select 
+					    input-model="unitOfMeasures"
+					    output-model="attribute.unitOfMeasure"
+					    button-label="code"         
+					    item-label="name" 
+					    tick-property="ticked" 
+					    selection-mode="single"
+					    helper-elements="reset filter"
+					    is-disabled = "page == 'view'"
+					    max-height="200px"
+					>
+					</div>
+					<div ng-show="page==='view'" class="form-group">
+						<input type="text" class="form-control multi-select-input customized-form-control2" name="" ng-model="attribute.unitOfMeasure[0].code" disabled />
+					</div>
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label">Order No</label>
+				</div>
+				<div class="col-sm-3">
+					<input type="number" class="form-control" name="orderNo1" ng-model="attribute.orderNo" ng-readonly="page=='view'">
+					<div class="has-error" ng-show="attributeForm.orderNo1.$invalid">
+						<span class="help-block">Order number will allow only numbers</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row col-sm-12 select-group">
+				<div class="col-sm-2">
+					<label class="control-label">Type
+						<span ng-hide="attribute.types[0].typeName" class="help-inline" style="color:red"> *</span>
+					</label>
+				</div>
+				<div class="col-sm-6">
+					<div ng-show="!attribute.isMultivalued && page != 'view'" 
+						class="select-group" 
+				    multi-select 
+				    input-model="typesDataDup"
+				    output-model="attribute.types"
+				    button-label="typeName"         
+				    item-label="typeName" 
+				    tick-property="ticked" 
+				    selection-mode="single"
+				    helper-elements="filter"
+				    is-disabled = "page == 'view'"
+					>
+					</div>
+					<div ng-show="!attribute.isMultivalued && page==='view'" class="form-group">
+						<input type="text" class="form-control multi-select-input customized-form-control2" name="" ng-model="attribute.types[0].typeName" disabled />
+					</div>
+					<div ng-show="attribute.isMultivalued" class="select-group"
+				    multi-select 
+				    input-model="typesDataDup"
+				    output-model="attribute.types"
+				    button-label="typeName"         
+				    item-label="typeName" 
+				    tick-property="ticked" 
+				    selection-mode="multiple"
+				    helper-elements="all none reset filter"
+				    is-disabled = "page === 'view'"
+					>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-lg-12 col-md-12" ng-hide="attribute.isMultivalued">
+				<div ng-show="attribute.types[0].id == 3 || attribute.types[0].id == 4">
+					<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+						<div class="col-sm-2">
+							<label class="control-label">Min Value</label>
+						</div>
+						<div class="col-sm-4 select-group">
+							<input type="number" class="form-control" name="minVal" ng-model="attribute.types[0].minValue" ng-readonly="page=='view'">
+							<div class="has-error" ng-show="attributeForm.minVal.$invalid">
+								<span class="help-block">Min value will allow only numbers</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+						<div class="col-sm-2">
+							<label class="control-label">Max Value</label>
+						</div>
+						<div class="col-sm-4 select-group">
+							<input type="number" class="form-control" name="maxVal" ng-model="attribute.types[0].maxValue" ng-readonly="page=='view'">
+							<div class="has-error" ng-show="attributeForm.maxVal.$invalid">
+								<span class="help-block">Max value will allow only numbers</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div ng-show="attribute.types[0].id == 5 || attribute.types[0].id == 6">
+					<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+						<div class="col-sm-2">
+							<label class="control-label">Min Length</label>
+						</div>
+						<div class="col-sm-4 select-group">
+							<input type="number" class="form-control" name="minLen" ng-model="attribute.types[0].minimumLength" ng-readonly="page=='view'">
+							<div class="has-error" ng-show="attributeForm.minLen.$invalid">
+								<span class="help-block">Min length will allow only numbers</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+						<div class="col-sm-2">
+							<label class="control-label">Max Length</label>
+						</div>
+						<div class="col-sm-4 select-group">
+							<input type="number" class="form-control" name="maxLen" ng-model="attribute.types[0].maximumLength" ng-readonly="page=='view'">
+							<div class="has-error" ng-show="attributeForm.maxLen.$invalid">
+								<span class="help-block">Max length will allow only numbers</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-show="attribute.types[0].id >= 4 && attribute.types[0].id <= 8">
+					<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+						<div class="col-sm-2">
+							<label class="control-label">Regular Expression</label>
+						</div>
+						<div class="col-sm-4 select-group">
+							<input type="text" class="form-control" name="reg" ng-model="attribute.types[0].regularExp" ng-readonly="page=='view'">
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label checkbox-label">Is Multi-valued</label>
+				</div>
+				<div class="col-sm-1 text-left">
+					<input type="checkbox" name="isMultivalued" ng-model="attribute.isMultivalued" ng-disabled="page =='view'" value="false" ng-change="resetMultivalued(attribute.isMultivalued)">
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label checkbox-label">Is Required</label>
+				</div>
+				<div class="col-sm-1 text-left">
+					<input type="checkbox" name="isRequired" ng-model="attribute.isRequired" ng-readonly="page=='view'" ng-disabled="page=='view'" value="false">
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label checkbox-label">Is Multi-language</label>
+				</div>
+				<div class="col-sm-1 text-left">
+					<input type="checkbox" name="isMultiLanguage" ng-model="attribute.isMultiLanguage" ng-readonly="page=='view'" ng-disabled="page=='view'" value="false">
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label checkbox-label">Is Variable</label>
+				</div>
+				<div class="col-sm-1 text-left">
+					<input class="col-sm-offset-1" type="checkbox" name="isVariable" ng-model="attribute.isVariable" ng-readonly="page=='view'"
+					ng-disabled="page=='view'" value="false">
+				</div>
+			</div>
+
+			<div class="row col-sm-12 form-group">
+				<div class="col-sm-2">
+					<label class="control-label checkbox-label">Is Readonly</label>
+				</div>
+				<div class="col-sm-1 text-left">
+					<input type="checkbox" name="isReadonly" ng-model="attribute.isReadonly" ng-readonly="page=='view'" ng-disabled="page=='view'" value="false">
+				</div>
+			</div>
+
+			<div class="row col-sm-12">
+				<div ng-include="'app/attribute/attributeValueOption.html'"></div>
+			</div>
+
+			
+		<div ng-show="page=='view' || page == 'edit'">
+			<div ng-include="'app/partials/_auditInfo.html'"></div>
+		</div>
+			
+			<!-- Submit and reset button-->
+			<div class="row col-sm-8 col-sm-offset-2">
+				<div class="form-button-group">
+					<button class="btn btn-primary"  ng-show="page=='new' && (attribute.types[0].typeName==undefined || attribute.types[0].typeName == '')" ng-click="type()">Save</button>
+					<button class="btn btn-primary"  ng-show="page=='new' && attribute.types[0].typeName" ng-click="submit(attribute)">Save</button>
+					<button class="btn btn-primary"  ng-show="page=='new'" ng-click="reset()">Reset</button>
+					<button class="btn btn-primary" ng-show="page=='view'" ng-click="edit_attribute(attribute._id)">Edit</button>
+					<button class="btn btn-primary" ng-show="page=='edit' && (attribute.types[0].typeName==undefined || attribute.types[0].typeName == '')" ng-click="type()">Update</button>
+					<button class="btn btn-primary" ng-show="page=='edit' && attribute.types[0].typeName" ng-click="update_attribute(attribute,attribute._id)">Update</button>
+					<button class="btn btn-primary" 
+					ng-show="(page==='edit' || page==='new')" data-toggle="modal" 
+					data-target="#confirmationDailogBox" ng-click="isCreateSubGroup(false)">Cancel</button>
+					<button class="btn btn-primary" ng-show="page==='view'"
+					ng-click="cancel_view()" >Cancel</button>
+				</div>
+			</div>
+			<div ng-include="'app/partials/_confirmationDialog.html'"></div>
+		</form>
+	</div>	
+</div>	
+<script type="text/ng-template" id="alert.html">
+	<div class="modal-body">
+		<p>Please enter valid and required datas</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click="cancel()">Ok</button>
+	</div>
+</script>

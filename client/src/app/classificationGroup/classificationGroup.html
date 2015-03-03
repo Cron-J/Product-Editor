@@ -1,0 +1,263 @@
+<div class="row" ng-controller="classificationGroupCtrl">
+
+	<!-- Header Name-->
+	<div class="row col-lg-12 col-md-12 col-sm-12">
+		<div class="col-lg-6 col-md-6 col-sm-6">
+			<h3 ng-show="isSubChild">Create Classification Group</h3> 
+			<h3 ng-show="(page=='edit' || page=='new') &&  isSubChild==false">Edit Classification Group</h3> 
+			<h3 ng-show="page=='view'">Classification Group Details</h3>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6">
+			<!-- New Field -->
+			<div ng-include="'app/classificationGroup/tree.html'"></div>
+			<div class="col-sm-12">
+				<div ng-include="'app/classificationGroup/attributeList.html'"></div>
+			</div>
+		</div>
+		<div class="row col-lg-6 col-md-6 col-sm-6">
+			<form class="form-horizontal row" name="classificationGroupForm" novalidate>
+			<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Classification</label>
+						<span ng-show="classificationGroupForm.classificationRef.$error.required" class="help-inline" style="color:red"> *</span>
+					</div>
+					<div class="col-sm-4" ng-init="prefill_page()">
+						<input type="hidden" class="form-control" name="classificationParent" ng-model="classificationGroup.classificationRef._id" disabled />
+						
+						<input type="text" class="form-control" name="classificationParent" value="{{classificationGroup.classificationRef.classificationId}}" disabled />
+					</div>
+				</div>
+				<!-- New Field -->
+				<div class="row select-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Parent</label>
+					</div>
+					<div class="col-sm-6">
+						<div class="col-sm-9 row">
+							<input class="form-control col-md-10 " 
+							name="parent_id" maxlength="100"
+							ng-model="classificationGroup.parentClassificationGrpRef" 
+							typeahead="result as result.classificationGroupId +result.comma + (result.desc | limitTo:10) for result in searchParentList($viewValue)" typeahead-wait-ms="1000" 
+							ng-disabled="parentField == true"/>
+						</div>
+						<div class="col-sm-3" ng-hide="parentField == true">
+							<button class="btn btn-primary btn-xs pull-left" 
+					  			ng-click="searchParentId()">
+					  			<span class="glyphicon glyphicon-search"></span>
+					  	</button>
+					  	<div ng-include="'app/classificationGroup/classificationIdSearch.html'"></div>
+						</div>
+					</div>
+				</div>
+				<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Classification Group Id<span ng-show="classificationGroupForm.classificationGroupId.$error.required" class="help-inline" style="color:red"> *</span></label>	
+					</div>
+					<div class="col-sm-6">
+						<input type="text" class="form-control customized-form-control1" name="classificationGroupId" ng-readonly="page=='view'" ng-model="classificationGroup.classificationGroupId"  ng-pattern="/^[a-zA-Z0-9_-]+$/" required maxlength="100" />
+						<div class="has-error" ng-show="classificationGroupForm.classificationGroupId.$invalid">
+							<span ng-show="classificationGroupForm.classificationGroupId.$error.pattern" class="help-block">Classification group id won't allow special character(s)</span>
+						</div>
+					</div>
+				</div>
+				<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Hierarchy Code</label>
+					</div>
+					<div class="col-sm-6">
+						<input type="text" class="form-control customized-form-control1" name="hierarchyCode" ng-readonly="page=='view'" ng-model="classificationGroup.hierarchyCode" maxlength="100">
+					</div>
+				</div>
+
+				<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Status<span ng-show="classificationGroupForm.status.$invalid" style="color:red"> *</span></label>
+					</div>
+					<div class="col-sm-4">
+						<select class="form-control" name="status" ng-model="classificationGroup.status"  required>
+							<option value="">Select status</option>      
+							<option ng-repeat="status in statusList" value="{{status.status}}">{{status.status}}</option>
+						</select>
+					</div>
+				</div>
+
+				<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1">
+						<label class="control-label custom-lable">Short Description</label>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4 descriprion-row">
+						<div class="col-sm-1 pull-right">
+							<button type="button" class="btn btn-default btn-xs group-btn" ng-click="add_desc(classificationGroup.descriptions.descShort)"><span class="glyphicon glyphicon-plus"></span></button>
+						</div>
+						<div ng-repeat="sd in classificationGroup.descriptions.descShort" class="descriprion-view">
+							<div class="col-sm-3">
+								<select class="form-control" name="sd" ng-model="sd.language" 
+								ng-options = "l.iso as l.iso for l in languageList" 
+								ng-change="changeLanguage(classificationGroup.descriptions.descShort, $index)">
+								</select>
+							</div>
+							<div class="col-sm-7">
+								<ng-form name="shortdescriptionForm">
+									<textarea type="text" class="form-control" 
+									name="descShort"  ng-model="sd.description" 
+									ng-pattern="/^[a-zA-Z0-9_-\s]+$/" maxlength="200" 
+									ng-blur="delete_desc(classificationGroup.descriptions.descShort, $index)">
+									</textarea>
+									<div class="has-error" ng-show="shortdescriptionForm.descShort.$invalid">
+										<span ng-show="shortdescriptionForm.descShort.$error.pattern" class="help-block">Short description won't allow special character(s)</span>
+									</div>
+								</ng-form>
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-default btn-xs" ng-click="remove_desc(classificationGroup.descriptions.descShort, $index)"><span class="glyphicon glyphicon-remove"></span></button>
+							</div>
+						</div>
+					</div>			
+				</div>
+				<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-1">
+						<label class="control-label custom-lable">Long Description</label>
+					</div>
+					<div class="col-sm-8 col-sm-offset-4 descriprion-row">
+						<div class="col-sm-1 pull-right">
+							<button type="button" class="btn btn-default btn-xs group-btn" ng-click="add_desc(classificationGroup.descriptions.descLong)"><span class="glyphicon glyphicon-plus"></span></button>
+						</div>
+						<div ng-repeat="ld in classificationGroup.descriptions.descLong" class="descriprion-view descriprion-view3">
+							<div class="col-sm-3">
+								<select class="form-control" name="sd" 
+								ng-model="ld.language" 
+								ng-options = "l.iso as l.iso for l in languageList" 
+								ng-change="changeLanguage(classificationGroup.descriptions.descLong, $index)">
+								</select>
+							</div>
+							<div class="col-sm-7">
+								<ng-form name="longdescriptionForm">
+									<textarea type="text" class="form-control" 
+									name="descLong"  ng-model="ld.description" 
+									ng-pattern="/^[a-zA-Z0-9_-\s]+$/" maxlength="500" 
+									rows="4" ng-blur="delete_desc(classificationGroup.descriptions.descLong, $index)">
+									</textarea>
+									<div class="has-error" ng-show="longdescriptionForm.descLong.$invalid">
+										<span ng-show="longdescriptionForm.descLong.$error.pattern" class="help-block">Long description won't allow special character(s)</span>
+									</div>
+								</ng-form>
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-default btn-xs" ng-click="remove_desc(classificationGroup.descriptions.descLong, $index)"><span class="glyphicon glyphicon-remove"></span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Order No</label>
+					</div>
+					<div class="col-sm-6">
+						<input type="number" class="form-control" name="orderNo" ng-readonly="page=='view'" ng-model="classificationGroup.orderNo">
+						<div class="has-error" ng-show="classificationGroupForm.orderNo.$invalid">
+							<span ng-show="classificationGroupForm.orderNo.$invalid" class="help-block">Order number will allow only numbers</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Document 1</label>
+					</div>
+					<div class="col-sm-7">
+						<input type="url" class="form-control col-sm-8" name="documentUrl1" ng-model="classificationGroup.documentUrl1" ng-readonly="page=='view'">
+						<div class="has-error" ng-show="classificationGroupForm.documentUrl1.$invalid">
+							<span class="help-block">Provide valid url for document 1</span>
+						</div>
+					</div>
+				</div>
+				<!-- New Field -->	
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Document 2</label>
+					</div>
+					<div class="col-sm-7">
+						<input type="url" class="form-control col-sm-8" name="documentUrl2" ng-model="classificationGroup.documentUrl2" ng-readonly="page=='view'">
+						<div class="has-error" ng-show="classificationGroupForm.documentUrl2.$invalid">
+							<span class="help-block">Provide valid url for document 2</span>
+						</div>
+					</div>
+				</div>
+				<!-- New Field -->
+				<div class="form-group">
+					<div class="col-sm-3 col-sm-offset-1">
+						<label class="control-label">Document 3</label>
+					</div>
+					<div class="col-sm-7">
+						<input type="url" class="form-control col-sm-8" name="documentUrl3" ng-model="classificationGroup.documentUrl3" ng-readonly="page=='view'">
+						<div class="has-error" ng-show="classificationGroupForm.documentUrl3.$invalid">
+							<span class="help-block">Provide valid url for document 3</span>
+						</div>
+					</div>
+				</div>
+				<div ng-hide="isSubChild">
+					<!-- New Field -->
+					<div class="col-md-12 col-sm-12">
+						<div>
+							<hr>
+						</div>
+					</div>
+					<div class="panel-shift col-sm-10">
+						<div class="panel panel-default">
+						  <div class="panel-heading">
+						    <h3 class="panel-title"><b>Audit Info</b></h3>
+						  </div>
+						  <div class="panel-body">
+							  <div class="row panel-row-space">
+							    <div class="col-sm-3">
+										<div>Created </div>
+									</div>
+									<div class="col-sm-9">
+										<div>{{classificationGroup.timestamp.createdBy}}/{{classificationGroup.timestamp.createdOn  |  date:'dd.MM.yy h:mma'}}</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-3">
+										<div>Updated</div>
+									</div>
+									<div class="col-sm-9">
+										<div>{{classificationGroup.timestamp.updatedBy}}/{{classificationGroup.timestamp.updatedOn  |  date:'dd.MM.yy h:mma'}}</div>
+										</div>
+									</div>
+							  </div>
+							</div>
+						</div>
+				</div>
+					
+				<!-- Submit and reset button-->
+				<div class="col-sm-12">
+					<div class="text-center form-button-group">
+						<button class="btn btn-primary"  ng-show="page=='new'" ng-click="submit(classificationGroup, classificationGroup.classificationRef.classificationId)">Save</button>
+						<button class="btn btn-primary"  ng-show="btnCreate" data-toggle="modal" data-target="#confirmationDailogBox" ng-click="isCreateSubGroup(true, classificationGroup)">Create Sub-group</button>
+						<button class="btn btn-primary" ng-show="page=='view'" ng-click="edit_classificationGroup(classificationGroup._id)">Edit</button>
+						<button class="btn btn-primary" ng-show="page=='view' || page=='new'" data-toggle="modal" data-target="#confirmationDailogBox" ng-click="isCreateSubGroup(false)">Cancel</button>
+						<button class="btn btn-primary" ng-show="page=='edit'" ng-click="update_classificationGroup(classificationGroup,classificationGroup._id)">Update</button>
+						<button class="btn btn-primary" ng-show="page=='edit'" ng-click="classificationGroup_view(classificationGroup._id)">Cancel</button>
+					</div>
+				</div>
+				<div ng-include="'app/partials/_confirmationDialog.html'"></div>
+			</form>
+
+		</div>
+	</div>
+</div>
+<footer></footer>
+
+

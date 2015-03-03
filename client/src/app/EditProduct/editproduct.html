@@ -1,0 +1,273 @@
+<div class="row" ng-controller="EditProductCtrl">
+	<!-- Header Name-->
+	<div class="row col-sm-12">
+		<div class="col-sm-7">
+			<h1>Product Editor</h1>
+			<h3 class="m-b-50">Search Product Section</h3>
+		</div>
+	</div>
+	
+	<div class="row col-sm-12">
+		<tabset justified="true">
+		    <tab id="masterdata" heading="Master Data">
+
+			    <div class="row m-t-25">
+			    	
+			    	<div class="col-sm-12">
+			    		<div class="form-group">
+				          <label class="col-sm-2 control-label">Product ID</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control" >
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >ext. Product ID</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control" >
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >GTIN/EAN</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label">Keywords</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >Supplier*</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >Product catalog*</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >Status*</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >Valid</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >Manufacturer Name</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >Manufacturer </label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-2 control-label" >MfgProduct ID</label>
+				          <div class="col-sm-5">
+				            <input type="text" class="form-control">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          	<label class="col-sm-2 control-label">Unit of measure</label>
+				          	<div class="col-sm-5">
+				            	<select name="account" class="form-control m-b">
+				            	  	<option value=""></option>
+									<option value="2P">kilobyte</option>
+									<option value="4L">megabyte</option>
+									<option value="A86">gigahertz</option>
+									<option value="A99">A99</option>
+									<option value="AD">byte</option>
+									<option value="AMH">ampere hour</option>
+									<option value="AMP">ampere</option>
+									<option value="ANN">year</option>
+									<option value="B10">B10</option>
+									<option value="BAR">bar</option>
+									<option value="C26">millisecond</option>
+									<option value="C31">milliwatt</option>
+									<option value="C62">piece</option>
+									<option value="CEL">degrees Celsius</option>
+									<option value="CMK">square centimeter</option>
+									<option value="CMQ">cubic centimeter</option>
+									<option value="CMT">centimeter</option>
+									<option value="DAY">day</option>
+									<option value="DD">degrees</option>
+									<option value="EA">each</option>
+									<option value="GB">gigabyte</option>
+									<option value="GM">GM</option>
+									<option value="GRM">gramms</option>
+									<option value="HTZ">hertz</option>
+									<option value="HUR">hour</option>
+									<option value="KEL">kelvin</option>
+									<option value="KGM">kilogramm</option>
+									<option value="KTM">kilometer</option>
+									<option value="KVT">kilovolt</option>
+									<option value="KWH">kilowatt hours</option>
+									<option value="KWT">kilowatt</option>
+									<option value="LTR">Litre</option>
+									<option value="MAW">megawatt</option>
+									<option value="MGM">milligramms</option>
+									<option value="MIN">minutes</option>
+									<option value="MLT">milliliter</option>
+									<option value="MMT">millimeters</option>
+									<option value="MON">month</option>
+									<option value="MTR">meter</option>
+									<option value="MTS">MTS</option>
+									<option value="P1">percent</option>
+									<option value="PCE" selected="selected">piece</option>
+									<option value="PK">PK</option>
+									<option value="PR">pair</option>
+									<option value="SEC">second</option>
+									<option value="ST">ST</option>
+									<option value="WEE">week</option>
+									<option value="WTT">watt</option>
+									<option value="ZOL">Zoll</option>
+				            	</select>
+				          	</div>
+				        </div>
+
+				        <div class="form-group">
+				          	<label class="col-sm-2 control-label">Sales Unit</label>
+				          	<div class="col-sm-5">
+				          	  	<select name="account" class="form-control m-b">
+				          	  	  	<option value=""></option>
+									<option value="2P">kilobyte</option>
+									<option value="4L">megabyte</option>
+									<option value="A86">gigahertz</option>
+									<option value="A99">A99</option>
+									<option value="AD">byte</option>
+									<option value="AMH">ampere hour</option>
+									<option value="AMP">ampere</option>
+									<option value="ANN">year</option>
+									<option value="B10">B10</option>
+									<option value="BAR">bar</option>
+									<option value="C26">millisecond</option>
+									<option value="C31">milliwatt</option>
+									<option value="C62">piece</option>
+									<option value="CEL">degrees Celsius</option>
+									<option value="CMK">square centimeter</option>
+									<option value="CMQ">cubic centimeter</option>
+									<option value="CMT">centimeter</option>
+									<option value="DAY">day</option>
+									<option value="DD">degrees</option>
+									<option value="EA">each</option>
+									<option value="GB">gigabyte</option>
+									<option value="GM">GM</option>
+									<option value="GRM">gramms</option>
+									<option value="HTZ">hertz</option>
+									<option value="HUR">hour</option>
+									<option value="KEL">kelvin</option>
+									<option value="KGM">kilogramm</option>
+									<option value="KTM">kilometer</option>
+									<option value="KVT">kilovolt</option>
+									<option value="KWH">kilowatt hours</option>
+									<option value="KWT">kilowatt</option>
+									<option value="LTR">Litre</option>
+									<option value="MAW">megawatt</option>
+									<option value="MGM">milligramms</option>
+									<option value="MIN">minutes</option>
+									<option value="MLT">milliliter</option>
+									<option value="MMT">millimeters</option>
+									<option value="MON">month</option>
+									<option value="MTR">meter</option>
+									<option value="MTS">MTS</option>
+									<option value="P1">percent</option>
+									<option value="PCE" selected="selected">piece</option>
+									<option value="PK">PK</option>
+									<option value="PR">pair</option>
+									<option value="SEC">second</option>
+									<option value="ST">ST</option>
+									<option value="WEE">week</option>
+									<option value="WTT">watt</option>
+									<option value="ZOL">Zoll</option>
+				          	  	</select>
+				          	</div>
+				        </div>
+			    	</div>
+			    </div>
+
+			    <div class="row col-sm-8 col-sm-offset-2 ">
+					<div class="form-button-group">
+						<button class="btn btn-primary" ng-click="update_classification(classification,classification._id)">Update</button>
+						<button class="btn btn-primary" ng-click="cancel_view()">Cancel</button>
+						
+					</div>
+				</div>
+			    		
+		    	
+		    </tab>
+
+		    <tab id="classification" heading="Classification">
+
+		    </tab>
+
+		    <tab heading="Attributes">
+
+		    </tab>
+
+		    <tab heading="Document">
+
+		    </tab>
+
+		    <tab heading="Price">
+
+		    </tab>
+
+		    <tab heading="Assortment">
+
+		    </tab>
+
+		    <tab heading="Relation">
+
+		    </tab>
+
+		</tabset>
+
+		<div ng-include="'app/partials/_auditInfo.html'">
+		
+	</div>
+	
+
+
+
+
+
+	<!-- <div class="row col-sm-12 form-group ">
+		<div class="col-sm-2">
+			<label class="control-label">Product ID</label>
+		</div>
+		<div class="col-sm-3">
+			<input type="text" class="form-control" name="attributeSectionId" ng-model="searchData.productId">
+		</div>
+		<div class="col-sm-2 col-sm-offset-2">
+			<label class="control-label">Class Group ID</label>
+		</div>
+		<div class="col-sm-3">
+			<input type="text" class="form-control" name="name" ng-model="searchData.classificationGroupId">
+		</div>
+	</div> -->
+
+</div>
