@@ -1,11 +1,5 @@
 var price = {
-    /**
-     * Price belongs to the <code>product</code>
-     */
-    productId: {
-        type: String
-    },
-
+   
     /**
      * Identifier of Contract.
      */

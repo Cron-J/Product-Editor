@@ -8,6 +8,13 @@ var productRelation = {
     }],
 
     /**
+     * Identifier of related product.
+     */
+    relatedCatalogId: {
+        type: String
+    },
+
+    /**
      * Translated descriptions of ProductRelation.
      * key is languageId, value is description for language
      */
