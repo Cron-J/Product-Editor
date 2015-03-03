@@ -3,23 +3,9 @@ var productRelation = {
     /**
      * Identifier of related product.
      */
-    relatedProductId: {
+    relatedProductId: [{
         type: String
-    },
-
-    /**
-     * Identifier of related product.
-     */
-    relatedCatalogId: {
-        type: String
-    },
-
-    /**
-     * Identifier of related product.
-     */
-    relatedTenantId: {
-        type: String
-    },
+    }],
 
     /**
      * Translated descriptions of ProductRelation.
