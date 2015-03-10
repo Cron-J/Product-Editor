@@ -4,7 +4,21 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
 	function($scope,$rootScope, $http, $location,
 		growl, $modal, $routeParams, blockUI){
 
+		// $scope.tempvar =true;
 
+
+		// $scope.showhide = function (){
+
+		//  $scope.tempvar =false;
+		// }
+
+
+ 
+ 		$scope.showeditor = function (id){
+ 			$location.path("/edit-product/" + id);
+ 		}
+		
+		
         $scope.maxSize = 5;
         
 
@@ -33,19 +47,39 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
     }
 
 
-    $scope.editproduct = function(productdata){
+    // $scope.getproduct = function(id){
 
-    	$location.path('/edit-product');
-    }
+    // 	getProductDataFactory.getProduct(id);
+
+	   // $http.get('/getProduct/' + id)
+	   // .success(function (status,data){
+
+				// 	console.log(data);
+				// 	$location.path('/edit-product');
+				// });
+
+	    	
+	   //  }
+
+	$scope.updateitem = function(editproduct){
 
 
+			$http.put('/updateProduct/'+editproduct._id ,editproduct)
+			.success(function (status,data){
+				console.log(data);
+			});
+
+		}
+
+
+		// $scope.fetchProductData = function(){
+
+		// 	$scope.editproduct = getProductDataFactory.getlocalData();
+			
+		// }
 
 
 }]);
-
-
-
-  	
 
 
 

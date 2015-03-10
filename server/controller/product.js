@@ -66,7 +66,6 @@ exports.getProductById = {
                 else{
                     return reply(result);
                 }
-
             } else reply(Boom.forbidden(err));
         });
      }

@@ -11,3 +11,4 @@ exports.endpoints = [
     { method: 'GET', path: '/getProduct/{id}', config: Product.getProductById },
     { method: 'PUT', path: '/updateProduct/{id}', config: Product.updateProduct }
 ];
+
