@@ -172,3 +172,8 @@
 .m-t-25{
 	margin-top:25px;
 }
+
+.inactive {
+    border: none;
+    background-color: #fff;
+}

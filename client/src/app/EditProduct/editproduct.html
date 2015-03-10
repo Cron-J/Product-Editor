@@ -1,100 +1,129 @@
+
 <div class="row" ng-controller="EditProductCtrl">
 	<!-- Header Name-->
 	<div class="row col-sm-12">
-		<div class="col-sm-7">
+		<div class="col-sm-7 m-b-50">
 			<h1>Product Editor</h1>
-			<h3 class="m-b-50">Search Product Section</h3>
-		</div>
+<!-- 			<h3 class="m-b-50">Search Product Section</h3>
+ -->		</div>
 	</div>
 	
 	<div class="row col-sm-12">
 		<tabset justified="true">
-		    <tab id="masterdata" heading="Master Data">
+		    <tab heading="Master Data">
 
 			    <div class="row m-t-25">
 			    	
-			    	<div class="col-sm-12">
+			    	<div class="col-sm-6">
 			    		<div class="form-group">
-				          <label class="col-sm-2 control-label">Product ID</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control" >
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >ext. Product ID</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control" >
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >GTIN/EAN</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-2 control-label">Keywords</label>
+				          <label class="col-sm-4 control-label">Product ID</label>
 				          <div class="col-sm-8">
-				            <input type="text" class="form-control">
+				            <input type="text" class="form-control" ng-model="editproduct.productId">
 				          </div>
 				        </div>
 
 				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >Supplier*</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control">
+				          <label class="col-sm-4 control-label" >ext. Product ID</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.extProductId">
+				          </div>
+				        </div>
+				    </div>
+
+				    <div class="col-sm-6">
+			    		<div class="form-group">
+				          <label class="col-sm-4 control-label">Created on/by</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.createdAt" ng-disabled="true">
 				          </div>
 				        </div>
 
 				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >Product catalog*</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control">
+				          <label class="col-sm-4 control-label" >Changed on/by</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.updatedAt" ng-disabled="true">
+				          </div>
+				        </div>
+				    </div>
+
+				    <div class="col-sm-6">
+				        <div class="form-group">
+				          <label class="col-sm-4 control-label" >GTIN/EAN</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.ean">
 				          </div>
 				        </div>
 
 				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >Status*</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control">
+				          <label class="col-sm-4 control-label">Keywords</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.keywords">
 				          </div>
 				        </div>
 
 				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >Valid</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control">
+				          <label class="col-sm-4 control-label" >Supplier*</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.supplierId">
 				          </div>
 				        </div>
 
 				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >Manufacturer Name</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control">
+				          <label class="col-sm-4 control-label" >Product catalog*</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.catalogId">
 				          </div>
 				        </div>
 
 				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >Manufacturer </label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control">
+				          <label class="col-sm-4 control-label" >Status*</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.statusId">
 				          </div>
 				        </div>
 
 				        <div class="form-group">
-				          <label class="col-sm-2 control-label" >MfgProduct ID</label>
-				          <div class="col-sm-5">
-				            <input type="text" class="form-control">
+				          <label class="col-sm-4 control-label" >Valid From</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control date" id="dateFrom" placeholder="From" ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="editproduct.validFrom" is-open="opened.dateFrom" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+
 				          </div>
 				        </div>
 
 				        <div class="form-group">
-				          	<label class="col-sm-2 control-label">Unit of measure</label>
-				          	<div class="col-sm-5">
-				            	<select name="account" class="form-control m-b">
+				          <label class="col-sm-4 control-label" >Valid To</label>
+				          <div class="col-sm-8">
+							<input type="text" class="form-control date" id="dateTo"   placeholder="To" ng-click="open($event)"   class="form-control"
+							datepicker-popup="{{format}}" ng-model="editproduct.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom"
+							datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-4 control-label" >Manufacturer Name</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-4 control-label" >Manufacturer </label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.manufactererName">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-4 control-label" >MfgProduct ID</label>
+				          <div class="col-sm-8">
+				            <input type="text" class="form-control" ng-model="editproduct.mfgProductId">
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          	<label class="col-sm-4 control-label">Unit of measure</label>
+				          	<div class="col-sm-8">
+				            	<select name="account" class="form-control m-b" ng-model="editproduct.unitOfMeasureId">
 				            	  	<option value=""></option>
 									<option value="2P">kilobyte</option>
 									<option value="4L">megabyte</option>
@@ -150,9 +179,9 @@
 				        </div>
 
 				        <div class="form-group">
-				          	<label class="col-sm-2 control-label">Sales Unit</label>
-				          	<div class="col-sm-5">
-				          	  	<select name="account" class="form-control m-b">
+				          	<label class="col-sm-4 control-label">Sales Unit</label>
+				          	<div class="col-sm-8">
+				          	  	<select name="account" class="form-control m-b" ng-model="editproduct.salesUnitOfMeasureId">
 				          	  	  	<option value=""></option>
 									<option value="2P">kilobyte</option>
 									<option value="4L">megabyte</option>
@@ -210,44 +239,378 @@
 			    </div>
 
 			    <div class="row col-sm-8 col-sm-offset-2 ">
-					<div class="form-button-group">
-						<button class="btn btn-primary" ng-click="update_classification(classification,classification._id)">Update</button>
-						<button class="btn btn-primary" ng-click="cancel_view()">Cancel</button>
-						
+						<div class="form-button-group">
+							<button class="btn btn-primary" ng-click="updateitem(editproduct)">Update</button>
+							<button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+							
 					</div>
 				</div>
-			    		
-		    	
+
 		    </tab>
 
-		    <tab id="classification" heading="Classification">
+
+		    <tab heading="Classification">
+
+			    <div class=" m-t-25">
+
+					<table class="table table-stripped custom-table">
+						<tbody>
+							<tr>
+								<th><span id="selectall" ng-click="selectAllcBoxes()"><input type="checkbox" ></span> </th>
+								<th>Classification-ID</th>
+								<th>Classification Group ID</th>
+								<th>Order</th>
+								<th>Action</th>
+							</tr>
+
+
+
+							<tr  ng-repeat="tdata in editproduct.classificationGroupAssociations">
+								<td ><input type="checkbox" value="{{tdata._id}}" ng-checked="box.checked"
+									ng-model="box.checked"> </td>
+								<td>{{tdata._id}}</td>
+								<td ng-click="editGrp($index)" class="hoverptr">{{tdata.classificationId}}</td>
+								<td ng-click="editGrp($index)" class="hoverptr">{{tdata.classificationGroupId}}</td>
+								<td ng-click="editGrp($index)" class="hoverptr">{{tdata.orderNo}}</td>
+								<td ng-click="editGrp($index)" class="hoverptr"> <button class="btn btn-primary btn-xs">Edit</button> </td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<td colspan="5">
+								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+							</td>
+						</tfoot>
+					</table>
+				</div>
+
+
+
+
+				<div class="row ">
+					<div class="col-sm-4 " >
+						<button class="btn btn-primary" ng-click="assignGrp()">Assign New Group</button>
+						<button class="btn btn-primary">Delete Selected</button>
+					</div>
+				</div>
+
+
+
+				<!-- On clicking assign new group button -->
+
+				<div class="row m-t-25" ng-show="showvar">
+					<div class="col-sm-6" >
+						<div class="form-group">
+				          	<label class="col-sm-5 control-label" >Classification </label>
+				          	<div class="col-sm-7">
+				          		<input type="text" class="form-control" ng-model="createNew.classificationId">
+				          	</div>
+
+				        </div>
+
+						<div class="form-group">
+				          	<label class="col-sm-5 control-label">Classification Group</label>
+				          	<div class="col-sm-7">
+				            	<input type="text" class="form-control" ng-model="createNew.classificationGroupId">
+				          	</div>
+				        </div>
+
+				        <div class="form-group">
+				          	<div class="col-sm-offset-5  col-sm-1">
+								<button class="btn btn-primary" ng-click="newClsfnidGrp(createNew)">Assign</button>
+							</div>
+				        </div>
+
+					</div>
+
+				</div>
+
+				<!-- On clicking row -->
+	
+
+
+				<div class="row m-t-25" ng-show="editvar">
+
+					<div class="col-sm-6" >
+
+						<div class="form-group">
+				          	<label class="col-sm-4 control-label">Classification </label>
+				          	<div class="col-sm-8">
+				            	<input type="text" class="form-control" ng-model="editrow.classificationId" ng-disabled="true">
+				          	</div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-4 control-label">Classification Group</label>
+				          <div class="col-sm-8">
+				            <div class="row">
+				              <div class="col-md-6">
+				                <input type="text" class="form-control" ng-disabled="true" ng-model="editrow.classificationGroupId">
+				              </div>
+				              <div class="col-md-6">
+				                <input type="text" class="form-control" ng-disabled="true">
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          	<label class="col-sm-4 control-label">Order No.</label>
+				          	<div class="col-sm-8">
+				            	<input type="text" class="form-control" ng-model="editrow.orderNo">
+				          	</div>
+				        </div>
+
+
+				        <div class="form-group">
+				          	<div class="col-sm-offset-4  col-sm-1">
+								<button class="btn btn-primary" ng-click="updateitem(editproduct)">Save</button>
+							</div>
+				        </div>
+
+
+					</div>
+		        
+				</div>
 
 		    </tab>
 
 		    <tab heading="Attributes">
+		    	<div class=" m-t-25">
+					<!-- <b>Found {{filteredItems.length}} entries</b> -->
+					<table class="table table-stripped custom-table">
+						<tbody>
+							<tr>
+								<th>Attribute</th>
+								<th>Language</th>
+								<th>Value</th>
+								<th>Synchronized</th>
+								<th>Status</th>
+								<th>Classification</th>
+								<th>Group</th>
+								<th>Section </th>
+								<th>No.</th>
+								<th>Information</th>
+								<th>Help</th>
+							</tr>
 
+							<tr  class="hoverptr inactive"  ng-repeat="tdata in editproduct" >
+								{{tdata.product}}
+								<td ></td>
+								<td ></td>
+								<td ng-dblclick="startEditing(item);">
+									<span ng-hide="item.editing">hi</span>
+							        <div ng-show="item.editing">
+							              <input ng-model="item.name" ng-blur="doneEditing(item)" ng-focus="item == editedItem">
+							        </div>
+							    </td>
+								<td ></td>
+								<td ><input inline-edit type="text" value="supermasher" class="inactive"/></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ><input inline-edit type="text" value="supermasher" class="inactive"/></td>
+								<td ></td>
+								<td ></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<td colspan="11">
+								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+							</td>
+						</tfoot>
+					</table>
+				</div>
 		    </tab>
 
 		    <tab heading="Document">
+		    	<div class=" m-t-25">
+					<!-- <b>Found {{filteredItems.length}} entries</b> -->
+					<table class="table table-stripped custom-table">
+						<tbody>
+							<tr>
+								<th><input type="checkbox"> </th>
+								<th>URl</th>
+								<th>Language</th>
+								<th>Value</th>
+								<th>Synchronized</th>
+								<th>Status</th>
+								<th>Classification</th>
+								<th>Group</th>
+								<th>Section </th>
+								<th>No.</th>
+								<th>Information</th>
+								<th>Help</th>
+							</tr>
 
+							<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<td colspan="12">
+								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+							</td>
+						</tfoot>
+					</table>
+				</div>
 		    </tab>
 
 		    <tab heading="Price">
+		   		<div class=" m-t-25">
+					<!-- <b>Found {{filteredItems.length}} entries</b> -->
+					<table class="table table-stripped custom-table">
+						<tbody>
+							<tr>
+								<th><input type="checkbox"> </th>
+								<th>Contract</th>
+								<th>Info</th>
+								<th>Description</th>
+								<th>From Quantity</th>
+								<th>Price</th>
+								<th>Price Unit</th>
+								<th>Currency</th>
+								<th>Valid From</th>
+								<th>Valid To</th>
+								<th>Status</th>
+								<th>Type</th>
+								<th>UoM</th>
+								<th>Actions</th>
+							</tr>
 
+							<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<td colspan="12">
+								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+							</td>
+						</tfoot>
+					</table>
+				</div>
+	 
+				
 		    </tab>
 
 		    <tab heading="Assortment">
 
+	 			<div class=" m-t-25">
+					<!-- <b>Found {{filteredItems.length}} entries</b> -->
+					<table class="table table-stripped custom-table">
+						<tbody>
+							<tr>
+								<th><input type="checkbox"></th>
+								<th>Contract</th> 
+								<th>Info</th>
+								<th>Status</th>
+								<th>Ext Product Id</th>	 
+								<th>Ext Classification Id</th>	 
+								<th>Ext Classification Group Id</th>	 
+								<th>Ext Short description</th>
+								<th>Actions</th>
+							</tr>
+
+							<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<td colspan="12">
+								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+							</td>
+						</tfoot>
+					</table>
+				</div>
+																	
 		    </tab>
 
 		    <tab heading="Relation">
 
+		    	<div class=" m-t-25">
+					<!-- <b>Found {{filteredItems.length}} entries</b> -->
+					<table class="table table-stripped custom-table">
+						<tbody>
+							<tr>
+								<th><input type="checkbox"></th>
+								<th>Product ID/Description	 </th>
+								<th>Relation</th>
+								<th>Product ID</th>
+								<th>Description	</th>
+								<th>Status</th>
+								<th>Sync Type</th>
+								<th>Seq No</th>
+								<th>Quantity</th>
+								<th>Selection Group Id</th>
+								<th>Is Mandatory</th>
+								<th>Is Default Selected</th>
+								<th>Actions</th>
+							</tr>
+
+							<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+								<td ></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<td colspan="12">
+								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+							</td>
+						</tfoot>
+					</table>
+				</div>
+	 
+
 		    </tab>
-
 		</tabset>
-
-		<div ng-include="'app/partials/_auditInfo.html'">
 		
+		<div ng-include="'app/partials/_auditInfo.html'">
+
+				
+		
+
 	</div>
 	
 
@@ -256,14 +619,14 @@
 
 
 	<!-- <div class="row col-sm-12 form-group ">
-		<div class="col-sm-2">
-			<label class="control-label">Product ID</label>
+		<div class="col-sm-4">
+			<label class=8control-label">Product ID</label>
 		</div>
 		<div class="col-sm-3">
 			<input type="text" class="form-control" name="attributeSectionId" ng-model="searchData.productId">
 		</div>
-		<div class="col-sm-2 col-sm-offset-2">
-			<label class="control-label">Class Group ID</label>
+		<div class="col-sm-4 col-sm-offset-2">
+			<label class=8control-label">Class Group ID</label>
 		</div>
 		<div class="col-sm-3">
 			<input type="text" class="form-control" name="name" ng-model="searchData.classificationGroupId">

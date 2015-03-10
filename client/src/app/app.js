@@ -3,7 +3,7 @@
 var myApp = angular
 	.module('myApp',['ngRoute', 'ngResource', 'ui.bootstrap', 'ngSanitize', 
 		'angular-growl', 'ngDragDrop', 'angularjs-dropdown-multiselect', 
-		'ui.tree', 'multi-select', 'xeditable','blockUI'])
+		'ui.tree', 'multi-select', 'xeditable','blockUI','daterangepicker'])
 	.config(['$routeProvider', 'growlProvider', 'blockUIConfig', function($routeProvider, growlProvider, blockUIConfig) {
 		growlProvider.globalTimeToLive(3000);
 		growlProvider.globalEnableHtml(true);  
@@ -15,7 +15,7 @@ var myApp = angular
 				{templateUrl: 'app/ProductSearchList/ProductSearchList.html'}
 				)
 
-			.when('/edit-product',
+			.when('/edit-product/:id',
 				{templateUrl:'app/EditProduct/editproduct.html'}
 				)
 

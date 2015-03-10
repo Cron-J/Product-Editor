@@ -27,7 +27,8 @@ exports.getProductById = {
      handler: function(request, reply) {
         Product.getProductById(request.params.id, function(err, result) {
             if (!err) {
-                return reply(result);
+                if(result === null) reply("No Data Found");
+                else return reply(result);
             } else reply(Boom.forbidden(err));
         });
      }
