@@ -10,5 +10,9 @@ module.exports = {
         db: 'JCatlogProductEditor',
         username: '',
         password: ''
-    }
+    },
+    filePath: {
+        directory: "/../../upload",
+        subdirectory: "/supplier"    
+  }
 };
