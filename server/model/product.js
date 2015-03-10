@@ -40,14 +40,6 @@ var ProductSchema = new Schema({
     },
 
     /**
-     * Identifier of Product's Catalog this product is listed in.
-     */
-    catalogId: {
-        type: String,
-        index: true
-    },
-
-    /**
      * Identifier of the Supplier who own the product.
      */
     supplierId: {
