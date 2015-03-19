@@ -177,3 +177,35 @@
     border: none;
     background-color: #fff;
 }
+
+
+.form-control-static {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-bottom: 0;
+}
+
+
+.input-sm{
+   border: 1px solid #CCC;
+   border-radius: 4px;
+}
+
+.m-b-10{
+	 	margin-bottom:10px;
+}
+
+
+.check-box {
+  width: 4%;
+  
+}
+
+
+td{
+	text-align: center;
+}
+
+th{
+	text-align: center;
+}

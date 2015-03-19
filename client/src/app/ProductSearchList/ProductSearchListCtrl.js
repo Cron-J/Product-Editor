@@ -12,8 +12,6 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
 		//  $scope.tempvar =false;
 		// }
 
-
- 
  		$scope.showeditor = function (id){
  			$location.path("/edit-product/" + id);
  		}
@@ -77,6 +75,18 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
 		// 	$scope.editproduct = getProductDataFactory.getlocalData();
 			
 		// }
+
+
+
+
+// filtering
+
+
+	$scope.sortType     = 'name'; // set the default sort type
+  	$scope.sortReverse  = false;  // set the default sort order
+  	$scope.search  = '';     // set the default search/filter term
+
+
 
 
 }]);

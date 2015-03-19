@@ -40,6 +40,7 @@ exports.getProductById = {
 
                               fs.readFile(logo, function(err, show){
                                 if(err){
+                                  console.log(err);
                                 file.path = "image not found";
                                 callback();
                                 }

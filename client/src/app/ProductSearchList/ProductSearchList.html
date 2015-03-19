@@ -38,18 +38,45 @@
 		<table class="table table-stripped custom-table">
 			<tbody>
 				<tr>
-					<th>Catalog</th>
-					<th>Product-ID</th>
-					<th>Supplier</th>
-					<th>Name</th>
-					<th>UoM</th>
-					<th>Man.Product ID</th>
+<!-- 					<th>Catalog</th>
+
+ -->				<th>
+ 						<a  ng-click="sortType = 'productId'; sortReverse = !sortReverse">Product-ID
+							<span ng-show="sortType == 'productId' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortType == 'productId' && sortReverse" class="fa fa-caret-up"></span>
+						</a>
+					</th>
+
+					<th>
+						<a  ng-click="sortType = 'supplierId'; sortReverse = !sortReverse">Supplier
+							<span ng-show="sortType == 'supplierId' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortType == 'supplierId' && sortReverse" class="fa fa-caret-up"></span>
+						</a>
+					</th>
+					<th>
+						<a  ng-click="sortType = 'mfgProductName'; sortReverse = !sortReverse">Name
+							<span ng-show="sortType == 'mfgProductName' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortType == 'mfgProductName' && sortReverse" class="fa fa-caret-up"></span>
+						</a>
+					</th>
+					<th>
+						<a  ng-click="sortType = 'unitOfMeasureId'; sortReverse = !sortReverse">UoM
+							<span ng-show="sortType == 'unitOfMeasureId' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortType == 'unitOfMeasureId' && sortReverse" class="fa fa-caret-up"></span>
+						</a>
+					</th>
+					<th>
+						<a  ng-click="sortType = 'mfgProductId'; sortReverse = !sortReverse">Man.Product ID
+							<span ng-show="sortType == 'mfgProductId' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortType == 'mfgProductId' && sortReverse" class="fa fa-caret-up"></span>
+						</a>
+					</th>
 					<th>Status</th>
 				</tr>
 
-				<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
-					<td >{{tdata.catalogId}}</td>
-					<td >{{tdata.productId}}</td>
+				<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata | orderBy:sortType:sortReverse  | filter:strict" >
+<!-- 					<td >{{tdata.catalogId}}</td>
+ -->					<td >{{tdata.productId}}</td>
 					<td >{{tdata.supplierId}}</td>
 					<td >{{tdata.mfgProductName}}</td>
 					<td >{{tdata.unitOfMeasureId}}</td>
@@ -58,7 +85,7 @@
 				</tr>
 			</tbody>
 			<tfoot>
-				<td colspan="7">
+				<td colspan="6">
 					<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 				</td>
 			</tfoot>

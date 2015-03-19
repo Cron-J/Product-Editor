@@ -1,15 +1,35 @@
 
 <div class="row" ng-controller="EditProductCtrl">
 	<!-- Header Name-->
-	<div class="row col-sm-12">
-		<div class="col-sm-7 m-b-50">
-			<h1>Product Editor</h1>
-<!-- 			<h3 class="m-b-50">Search Product Section</h3>
- -->		</div>
-	</div>
+
+<span ng-show="previewvar">
 	
+
+
+	<div class="row col-sm-12" >
+		<div class="col-sm-7 m-b-20">
+			<h1>Product Editor</h1>
+			<!-- 			<h3 class="m-b-50">Search Product Section</h3>-->	
+		</div>
+	</div>
+	<div class="row col-sm-12">
+		<div class="col-sm-12 m-b-20">
+			
+			<h3> <img  style="width:50px;" ng-src="{{editproduct.documents[0].path}}"/> {{editproduct.mfgProductId}}</h3>
+
+			<button class="btn btn-primary pull-right" ng-click="showhidepreview()" >Preview</button>
+ 		</div>
+ 		<!-- <div class="col-sm-4">
+ 			
+ 		</div> -->
+	</div>
+			
+
 	<div class="row col-sm-12">
 		<tabset justified="true">
+
+			
+
 		    <tab heading="Master Data">
 
 			    <div class="row m-t-25">
@@ -252,27 +272,71 @@
 		    <tab heading="Classification">
 
 			    <div class=" m-t-25">
-
-					<table class="table table-stripped custom-table">
-						<tbody>
+					
+					<table class="table table-stripped  custom-table">
+						<tbody >
 							<tr>
-								<th><span id="selectall" ng-click="selectAllcBoxes()"><input type="checkbox" ></span> </th>
-								<th>Classification-ID</th>
-								<th>Classification Group ID</th>
-								<th>Order</th>
+								<th class="check-box"><span id="selectall" ng-click="selectAllcBoxes()"><input type="checkbox" ></span> </th>
+								<th>
+									<a  ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Classification-ID
+							            <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+
+
+								<th>
+									<a  ng-click="sortType = 'classificationGroupId'; sortReverse = !sortReverse">Classification Group ID
+							            <span ng-show="sortType =='classificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType =='classificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+
+
+								<th>
+									<a  ng-click="sortType = 'orderNo'; sortReverse = !sortReverse">Order
+							            <span ng-show="sortType =='orderNo' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType =='orderNo' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+
 								<th>Action</th>
+
+
 							</tr>
 
+							<tr>
+								<td></td>
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.classificationId">
+											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+											</button>
+									</div>
+								</td>
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.classificationGroupId">
+										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+									</div>
+								</td>
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.orderNo">
+											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+									</div>
+								</td>
+								<td></td>
+							</tr>
 
+							<tr  ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict" >
+								<td class="check-box"><input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked"
+									ng-model="tdata.checked" ng-click="itemToRemove($index)"> </td>
 
-							<tr  ng-repeat="tdata in editproduct.classificationGroupAssociations">
-								<td ><input type="checkbox" value="{{tdata._id}}" ng-checked="box.checked"
-									ng-model="box.checked"> </td>
-								<td>{{tdata._id}}</td>
-								<td ng-click="editGrp($index)" class="hoverptr">{{tdata.classificationId}}</td>
-								<td ng-click="editGrp($index)" class="hoverptr">{{tdata.classificationGroupId}}</td>
-								<td ng-click="editGrp($index)" class="hoverptr">{{tdata.orderNo}}</td>
-								<td ng-click="editGrp($index)" class="hoverptr"> <button class="btn btn-primary btn-xs">Edit</button> </td>
+								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationId}}</td>
+								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationGroupId}}</td>
+								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.orderNo}}</td>
+								<td  > <button class="btn btn-primary btn-xs" ng-click="editGrp(tdata)">Edit</button> </td>
 							</tr>
 						</tbody>
 						<tfoot>
@@ -289,7 +353,7 @@
 				<div class="row ">
 					<div class="col-sm-4 " >
 						<button class="btn btn-primary" ng-click="assignGrp()">Assign New Group</button>
-						<button class="btn btn-primary">Delete Selected</button>
+						<button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button>
 					</div>
 				</div>
 
@@ -298,30 +362,38 @@
 				<!-- On clicking assign new group button -->
 
 				<div class="row m-t-25" ng-show="showvar">
-					<div class="col-sm-6" >
-						<div class="form-group">
-				          	<label class="col-sm-5 control-label" >Classification </label>
-				          	<div class="col-sm-7">
-				          		<input type="text" class="form-control" ng-model="createNew.classificationId">
-				          	</div>
+					<form name="assignGrpForm" novalidate>
+						<div class="col-sm-6" >
+							<div class="form-group">
+					          	<label class="col-sm-5 control-label" >Classification </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" required>
+					          		<span style="color:red" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid"></span>
+					          		<span ng-show="assignGrpForm.classificationid.$error.required">Required field.</span>
 
-				        </div>
+					          	</div>
 
-						<div class="form-group">
-				          	<label class="col-sm-5 control-label">Classification Group</label>
-				          	<div class="col-sm-7">
-				            	<input type="text" class="form-control" ng-model="createNew.classificationGroupId">
-				          	</div>
-				        </div>
+					        </div>
 
-				        <div class="form-group">
-				          	<div class="col-sm-offset-5  col-sm-1">
-								<button class="btn btn-primary" ng-click="newClsfnidGrp(createNew)">Assign</button>
-							</div>
-				        </div>
+							<div class="form-group">
+					          	<label class="col-sm-5 control-label">Classification Group</label>
+					          	<div class="col-sm-7">
+					            	<input type="number" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" required>
+					            	<span style="color:red" ng-show="assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid"></span>
+					          		<span ng-show="assignGrpForm.cgId.$error.required">Required field.</span>
+					          	</div>
+					        </div>
 
-					</div>
+					        <div class="form-group">
+					          	<div class="col-sm-offset-5  col-sm-1">
+									<button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid ||  
+									
+									assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
+								</div>
+					        </div>
 
+						</div>
+					</form>
 				</div>
 
 				<!-- On clicking row -->
@@ -377,7 +449,7 @@
 		    <tab heading="Attributes">
 		    	<div class=" m-t-25">
 					<!-- <b>Found {{filteredItems.length}} entries</b> -->
-					<table class="table table-stripped custom-table">
+					<table class="table table-stripped  custom-table">
 						<tbody>
 							<tr>
 								<th>Attribute</th>
@@ -425,54 +497,170 @@
 		    <tab heading="Document">
 		    	<div class=" m-t-25">
 					<!-- <b>Found {{filteredItems.length}} entries</b> -->
-					<table class="table table-stripped custom-table">
+					<table class="table table-stripped  custom-table">
 						<tbody>
 							<tr>
-								<th><input type="checkbox"> </th>
+								<th class="check-box"><input id="selectall"  ng-click="selectAlldocCBoxes()" type="checkbox"> </th>
 								<th>URl</th>
+								<th>View Type</th>
 								<th>Language</th>
-								<th>Value</th>
-								<th>Synchronized</th>
-								<th>Status</th>
-								<th>Classification</th>
-								<th>Group</th>
-								<th>Section </th>
-								<th>No.</th>
-								<th>Information</th>
-								<th>Help</th>
+								<th>Description</th>
+								<th>Order No.</th>
+								<th>Action</th>
 							</tr>
 
-							<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
+							<tr>
+								<td></td>
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.classificationId">
+											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+											</button>
+									</div>
+								</td>
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.classificationGroupId">
+										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+									</div>
+								</td>
+
+								<td>
+									<div class="form-inline">
+										<select name="language" class="input-sm" ng-model="doc.languageId">
+											<option value="de">de</option>
+											<option value="en">en</option>
+											<option value="es">es</option>
+											<option value="fr">fr</option>
+											<option value="jp">jp</option>
+						            	</select>
+										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+									</div>
+								</td>
+
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.orderNo">
+											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+									</div>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+
+							<tr ng-click="editdoc(ddata)" class="hoverptr" ng-repeat="ddata in editproduct.documents track by $index ">
+
+								<td class="check-box" ><input type="checkbox" value="{{ddata._id}}" ng-checked="ddata.checked" ng-model="ddata.checked" ></td>
+								<td  class="hoverptr" >{{ddata.path}}</td>
+								<td  class="hoverptr" >{{ddata.documentViewTypeId}}</td>
+								<td  class="hoverptr" >{{ddata.languageId}}</td>
+								<td  class="hoverptr" >{{ddata.description}}</td>
+								<td  class="hoverptr" >{{ddata.orderNo}}</td>
+								<td  class="hoverptr" ><button class="btn btn-primary btn-xs">Edit</button></td>
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="12">
+							<td colspan="7">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
 					</table>
+				</div>
+
+
+				<div class="row ">
+					<div class="col-sm-4 m-b-20 " >
+						<button class="btn btn-primary" ng-click="createdoc()">New Document</button>
+						<button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
+					</div>
+				</div>
+
+				
+				<!-- Display this section on clicking new button -->
+				
+
+				<div class="row m-t-25 " ng-show="docvar" >
+					<form name="newdocform" novalidate>
+						<div class="col-sm-6" >
+							<div class="form-group">
+					          	<label class="col-sm-5 control-label"> URL </label>
+					          	<div class="col-sm-7">
+					          		<textarea type="text" name="url" class="form-control" ng-model="doc.path" required></textarea>
+					          		
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Language</label>
+					          	<div class="col-sm-7">
+					            	<select name="language" class="form-control m-b" ng-model="doc.languageId">
+										<option value="de">de</option>
+										<option value="en">en</option>
+										<option value="es">es</option>
+										<option value="fr">fr</option>
+										<option value="jp">jp</option>
+					            	</select>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">View Type</label>
+					          	<div class="col-sm-7">
+					            	<select name="type" class="form-control m-b" ng-model="doc.documentViewTypeId">
+					            	  	<option value="Atmosphere">Atmosphere</option>
+										<option value="BackView">BackView</option>
+										<option value="FrontView">FrontView</option>
+					            	</select>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Order No.</label>
+					          	<div class="col-sm-7">
+					            	<input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" required>
+					            	
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label" >Description </label>
+					          	<div class="col-sm-7">
+					          		<textarea type="text" name="classificationid" class="form-control" ng-model="doc.description" required></textarea>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Valid From</label>
+					          	<div class="col-sm-7">
+					            	<input type="text" class="form-control date" id="dateFrom"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="doc.validFrom" is-open="opened.dateFrom"  date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+					          	</div>
+					        </div>
+
+							
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Valid To</label>
+					          	<div class="col-sm-7">
+					            	<input type="text" class="form-control date" id="dateTo"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="doc.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<div class="col-sm-offset-5  col-sm-1">
+									<button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
+								</div>
+					        </div>
+						</div>
+					</form>
 				</div>
 		    </tab>
 
 		    <tab heading="Price">
 		   		<div class=" m-t-25">
 					<!-- <b>Found {{filteredItems.length}} entries</b> -->
-					<table class="table table-stripped custom-table">
+					<table class="table table-stripped custom-table ">
 						<tbody>
-							<tr>
-								<th><input type="checkbox"> </th>
+							<tr >
+								<th class="check-box"><input type="checkbox" id="selectall"  ng-click="selectAllpriceCBoxes()"> </th>
 								<th>Contract</th>
 								<th>Info</th>
 								<th>Description</th>
@@ -488,27 +676,275 @@
 								<th>Actions</th>
 							</tr>
 
-							<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
+							<tr ng-click="editprice(pdata)" class="hoverptr" ng-repeat="pdata in editproduct.prices track by $index ">
+								<td class="check-box"><input type="checkbox" value="{{pdata._id}}" ng-checked="pdata.checked" ng-model="pdata.checked" ></td>
+								<td>{{pdata.contractId}}</td>
+								<td>{{pdata.info}}</td>
+								<td>{{pdata.description}}</td>
+								<td>{{pdata.validFromQuantity}}</td>
+								<td>{{pdata.priceUnit}}</td>
+								<td>{{pdata.currencyId}}</td>
+								<td>{{pdata.validFrom}}</td>
+								<td>{{pdata.validTo}}</td>
+								<td>{{pdata.statusId}}</td>
+								<td>{{pdata.}}</td>
+								<td>{{pdata.}}</td>
+								<td>{{pdata.unitOfMeasureId}}</td>
+
+
+								<td ><button class="btn btn-primary btn-xs">Edit</button></td>
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="12">
+							<td colspan="14">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
 					</table>
+				</div>
+				<div class="row ">
+					<div class="col-sm-4 m-b-20 " >
+						<button class="btn btn-primary" ng-click="newprice()">New Price</button>
+						<button class="btn btn-primary" ng-click="deleteprice()">Delete Selected</button>
+					</div>
+				</div>
+
+				<div class="row m-t-25 " ng-show="pricevar" >
+					<form name="newdocform" novalidate>
+						<div class="col-sm-6" >
+							<div class="form-group">
+					          	<label class="col-sm-5 control-label"> Contract </label>
+					          	<div class="col-sm-7">
+					          		<input type="number" name="contract" class="form-control" ng-model="price.contractId" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Description </label>
+					          	<div class="col-sm-7">
+					          		<input type="number" name="description" class="form-control" ng-model="price.description" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> From Quantity </label>
+					          	<div class="col-sm-7">
+					          		<input type="number" name="quantity" class="form-control" ng-model="price.validFromQuantity" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Price </label>
+					          	<div class="col-sm-7">
+					          		<input type="number" name="price" class="form-control" ng-model="price.priceTypeId" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Fix Net price </label>
+					          	<div class="col-sm-7">
+					          		<input type="number" name="price" class="form-control" ng-model="price.netPrice" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> VAT Percentage </label>
+					          	<div class="col-sm-7">
+					          		<input type="number" name="price" class="form-control" ng-model="price.vatPercentage" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> is Preferred </label>
+					          	<div class="col-sm-7">
+					          		<input type="checkbox" name="price" ng-model="price.isPreferred" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Price Unit </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="price" class="form-control" ng-model="price.priceUnit" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Currency</label>
+					          	<div class="col-sm-7">
+					            	<select name="language" class="form-control m-b" ng-model="price.currencyId">
+										<option value="CHF">CHF</option>
+										<option value="EUR" selected="selected">EUR</option>
+										<option value="GBP">GBP</option>
+										<option value="JPY">JPY</option>
+										<option value="NZD">NZD</option>
+										<option value="USD">USD</option>
+					            	</select>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Valid From</label>
+					          	<div class="col-sm-7">
+					            	<input type="text" class="form-control date" id="dateFrom"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="price.validFrom" is-open="opened.dateFrom"  date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+					          	</div>
+					        </div>
+
+							
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Valid To</label>
+					          	<div class="col-sm-7">
+					            	<input type="text" class="form-control date" id="dateTo"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="price.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Status</label>
+					          	<div class="col-sm-7">
+					            	<select name="language" class="form-control m-b" ng-model="price.statusId">
+										<option value="35">080 error</option>
+										<option value="36">090 warning</option>
+										<option value="37">100 new</option>
+										<option value="71">105 changed</option>
+										<option value="39">110 unchanged</option>
+										<option value="38" selected="selected">400 confirmed</option>
+										<option value="60">700 temporary</option>
+										<option value="40">800 deleted</option>
+					            	</select>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Type</label>
+					          	<div class="col-sm-7">
+					            	<select name="language" class="form-control m-b" ng-model="price.priceTypeId">
+										<option value="default" selected="selected">Default</option>
+										<option value="list">the list price of the product</option>
+					            	</select>
+					          	</div>
+					        </div>
+
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Unit of Measure</label>
+					          	<div class="col-sm-7">
+					            	<select name="language" class="form-control m-b" ng-model="price.unitOfMeasureId">
+										<option value=""></option>
+										<option value="2P">kB</option>
+										<option value="4L">MB</option>
+										<option value="A86">GHz</option>
+										<option value="A99">bit</option>
+										<option value="AD">B</option>
+										<option value="AMH">Ah</option>
+										<option value="AMP">A</option>
+										<option value="ANN">a</option>
+										<option value="B10">bit/s</option>
+										<option value="BAR">bar</option>
+										<option value="C26">ms</option>
+										<option value="C31">mW</option>
+										<option value="C62">piece</option>
+										<option value="CEL">°C</option>
+										<option value="CMK">cm²</option>
+										<option value="CMQ">m³</option>
+										<option value="CMT">cm</option>
+										<option value="DAY">d</option>
+										<option value="DD">°</option>
+										<option value="EA">each</option>
+										<option value="GB">GB</option>
+										<option value="GM">g/m</option>
+										<option value="GRM">g</option>
+										<option value="HTZ">Hz</option>
+										<option value="HUR">h</option>
+										<option value="KEL">K</option>
+										<option value="KGM">kg</option>
+										<option value="KTM">km</option>
+										<option value="KVT">kV</option>
+										<option value="KWH">kWh</option>
+										<option value="KWT">kW</option>
+										<option value="LTR">Litre</option>
+										<option value="MAW">MW</option>
+										<option value="MGM">mg</option>
+										<option value="MIN">min</option>
+										<option value="MLT">ml</option>
+										<option value="MMT">mm</option>
+										<option value="MON">month</option>
+										<option value="MTR">m</option>
+										<option value="MTS">m/s</option>
+										<option value="P1">%</option>
+										<option value="PCE">piece</option>
+										<option value="PK">PK</option>
+										<option value="PR">pair</option>
+										<option value="SEC">s</option>
+										<option value="ST">ST</option>
+										<option value="WEE">week</option>
+										<option value="WTT">watt</option>
+										<option value="ZOL">Zoll</option>
+					            	</select>
+					          	</div>
+					        </div>
+
+
+					      
+					      	<accordion close-others="oneAtATime">
+							    
+							    <accordion-group is-open="status.open">
+							        <accordion-heading>
+							            Additional Information<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+							        </accordion-heading>
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> List Price </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="price.listPrice" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Gross Price </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="price.grossPrice" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Prod Id Ext For Uom </label>
+							          	<div class="col-sm-4">
+							          		<input type="number" name="price" class="form-control" ng-model="price.productIdExtensionForUoM" required>
+							          	</div>
+							        </div>
+
+							    </accordion-group>
+
+
+							    <accordion-group is-open="status.close">
+							        <accordion-heading>
+							            Audit Info<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+							        </accordion-heading>
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Created On/By </label>
+							          	<div class="col-sm-7">
+							          		<p>{{editproduct.createdAt}}</p>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Changed On/By </label>
+							          	<div class="col-sm-7">
+							          		<p>{{editproduct.updatedAt}}</p>										
+							          	</div>
+							        </div>
+
+							       
+
+							    </accordion-group>
+
+							</accordion>
+
+					        <div class="form-group">
+					          	<div class="col-sm-1">
+									<button class="btn btn-primary" type="submit" ng-click="saveprice(price);">Save</button>
+								</div>
+					        </div>
+						</div>
+					</form>
 				</div>
 	 
 				
@@ -518,10 +954,10 @@
 
 	 			<div class=" m-t-25">
 					<!-- <b>Found {{filteredItems.length}} entries</b> -->
-					<table class="table table-stripped custom-table">
+					<table class="table table-stripped custom-table ">
 						<tbody>
 							<tr>
-								<th><input type="checkbox"></th>
+								<th class="check-box"><input type="checkbox" id="selectall"  ng-click="selectAllcproductCBoxes()"> </th>
 								<th>Contract</th> 
 								<th>Info</th>
 								<th>Status</th>
@@ -532,27 +968,342 @@
 								<th>Actions</th>
 							</tr>
 
-							<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
+							<tr ng-click="editcproduct(cprodata)" class="hoverptr" ng-repeat="cprodata in editproduct.contractedProducts track by $index ">
+								<td ><input type="checkbox" value="{{cprodata._id}}" ng-checked="cprodata.checked" ng-model="cprodata.checked" ></td>
+								<td >{{cprodata.contractId}}</td>
 								<td ></td>
 								<td ></td>
 								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
+								<td >{{cprodata.extClassificationId}}</td>
+								<td >{{cprodata.extClassificationGroupId}}</td>
+								<td >{{cprodata.descShort}}</td>
+								<td ><button class="btn btn-primary btn-xs">Edit</button></td>
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="12">
+							<td colspan="9">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
 					</table>
+				</div>
+
+				<div class="row ">
+					<div class="col-sm-4 m-b-20 " >
+						<button class="btn btn-primary" ng-click="newcproduct()">New Contracted Product</button>
+						<button class="btn btn-primary" ng-click="deletecproduct()">Delete Selected</button>
+					</div>
+				</div>
+
+				<div class="row m-t-25 " ng-show="cproductvar" >
+					<form name="newdocform" novalidate>
+						<div class="col-sm-6" >
+							<div class="form-group">
+					          	<label class="col-sm-5 control-label"> Contract </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="contract" class="form-control" ng-model="cproduct.contractId" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Status </label>
+					          	<div class="col-sm-7">
+					          		<select name="language" class="form-control m-b" ng-model="cproduct.status">
+										<option value=""></option>
+										<option value="72">105 changed</option>
+										<option value="57">400 active</option>
+										<option value="56">600 archive</option>
+						            </select>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Ext Product Id </label>
+					          	<div class="col-sm-7">
+					          		<input type="number" name="extpid" class="form-control" ng-model="cproduct.extproductid" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Ext Classification Id </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="classificationid" class="form-control" ng-model="cproduct.extClassificationId" >
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Ext Classification Group Id </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="classificationgid" class="form-control" ng-model="cproduct.extClassificationGroupId" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Ext Short description </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="shortdesc" class="form-control" ng-model="cproduct.descShort" required>
+					          	</div>
+					        </div>
+					      
+					      	<accordion close-others="oneAtATime">
+							    
+							    <accordion-group is-open="status.open">
+							        <accordion-heading>
+							            Additional Information<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+							        </accordion-heading>
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> AltExtProductId </label>
+							          	<div class="col-sm-7">
+							          		<input type="string" name="price" class="form-control" ng-model="cproduct.altExtProductId" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Long description </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="ldesc" class="form-control" ng-model="cproduct.descLong" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> ExtGlAccountId </label>
+							          	<div class="col-sm-4">
+							          		<input type="string" name="price" class="form-control" ng-model="cproduct.extGLAccountId" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Quantity Interval  </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="cproduct.quantityInterval" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Max Quantity </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="cproduct.maxQuantity" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Min Quantity </label>
+							          	<div class="col-sm-4">
+							          		<input type="number" name="price" class="form-control" ng-model="cproduct.minQuantity" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> LeadtimeInDays </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="cproduct.grossPrice" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Sales UnitOfMeasure </label>
+							          	<div class="col-sm-7">
+							          		<select name="language" class="form-control m-b" ng-model="cproduct.salesUnitOfMeasureId">
+												<option value=""></option>
+												<option value="2P">kB</option>
+												<option value="4L">MB</option>
+												<option value="A86">GHz</option>
+												<option value="A99">bit</option>
+												<option value="AD">B</option>
+												<option value="AMH">Ah</option>
+												<option value="AMP">A</option>
+												<option value="ANN">a</option>
+												<option value="B10">bit/s</option>
+												<option value="BAR">bar</option>
+												<option value="C26">ms</option>
+												<option value="C31">mW</option>
+												<option value="C62">piece</option>
+												<option value="CEL">°C</option>
+												<option value="CMK">cm²</option>
+												<option value="CMQ">m³</option>
+												<option value="CMT">cm</option>
+												<option value="DAY">d</option>
+												<option value="DD">°</option>
+												<option value="EA">each</option>
+												<option value="GB">GB</option>
+												<option value="GM">g/m</option>
+												<option value="GRM">g</option>
+												<option value="HTZ">Hz</option>
+												<option value="HUR">h</option>
+												<option value="KEL">K</option>
+												<option value="KGM">kg</option>
+												<option value="KTM">km</option>
+												<option value="KVT">kV</option>
+												<option value="KWH">kWh</option>
+												<option value="KWT">kW</option>
+												<option value="LTR">Litre</option>
+												<option value="MAW">MW</option>
+												<option value="MGM">mg</option>
+												<option value="MIN">min</option>
+												<option value="MLT">ml</option>
+												<option value="MMT">mm</option>
+												<option value="MON">month</option>
+												<option value="MTR">m</option>
+												<option value="MTS">m/s</option>
+												<option value="P1">%</option>
+												<option value="PCE">piece</option>
+												<option value="PK">PK</option>
+												<option value="PR">pair</option>
+												<option value="SEC">s</option>
+												<option value="ST">ST</option>
+												<option value="WEE">week</option>
+												<option value="WTT">watt</option>
+												<option value="ZOL">Zoll</option>
+							            	</select>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Discount </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="discount" class="form-control" ng-model="cproduct.discount" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label">Visibility</label>
+							          	<div class="col-sm-7">
+							            	<select name="visibility" class="form-control m-b" ng-model="cproduct.visibility">
+												<option value="-1">exclude</option>
+												<option value="0">neutral</option>
+												<option value="1">include</option>
+							            	</select>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label">Status Date </label>
+							          	<div class="col-sm-7">
+							            	<input type="text" class="form-control date" id="dateFrom"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="price.validFrom" is-open="opened.dateFrom"  date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+							          	</div>
+							        </div>
+
+							    </accordion-group>
+
+
+							    <accordion-group is-open="status.close">
+							        <accordion-heading>
+							            Contract Amount<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+							        </accordion-heading>
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Cost </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="cproduct.cost" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label">Currency</label>
+							          	<div class="col-sm-7">
+							            	<select name="language" class="form-control m-b" ng-model="cproduct.currencyId">
+												<option value=""></option>
+												<option value="CHF">CHF</option>
+												<option value="EUR">EUR</option>
+												<option value="GBP">GBP</option>
+												<option value="JPY">JPY</option>
+												<option value="NZD">NZD</option>
+												<option value="USD">USD</option>
+							            	</select>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> Amount </label>
+							          	<div class="col-sm-4">
+							          		<input type="number" name="price" class="form-control" ng-model="cproduct.ammount" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label">Unit of Measure</label>
+							          	<div class="col-sm-7">
+							            	<select name="language" class="form-control m-b" ng-model="cproduct.unitOfMeasureId">
+												<option value=""></option>
+												<option value="2P">kB</option>
+												<option value="4L">MB</option>
+												<option value="A86">GHz</option>
+												<option value="A99">bit</option>
+												<option value="AD">B</option>
+												<option value="AMH">Ah</option>
+												<option value="AMP">A</option>
+												<option value="ANN">a</option>
+												<option value="B10">bit/s</option>
+												<option value="BAR">bar</option>
+												<option value="C26">ms</option>
+												<option value="C31">mW</option>
+												<option value="C62">piece</option>
+												<option value="CEL">°C</option>
+												<option value="CMK">cm²</option>
+												<option value="CMQ">m³</option>
+												<option value="CMT">cm</option>
+												<option value="DAY">d</option>
+												<option value="DD">°</option>
+												<option value="EA">each</option>
+												<option value="GB">GB</option>
+												<option value="GM">g/m</option>
+												<option value="GRM">g</option>
+												<option value="HTZ">Hz</option>
+												<option value="HUR">h</option>
+												<option value="KEL">K</option>
+												<option value="KGM">kg</option>
+												<option value="KTM">km</option>
+												<option value="KVT">kV</option>
+												<option value="KWH">kWh</option>
+												<option value="KWT">kW</option>
+												<option value="LTR">Litre</option>
+												<option value="MAW">MW</option>
+												<option value="MGM">mg</option>
+												<option value="MIN">min</option>
+												<option value="MLT">ml</option>
+												<option value="MMT">mm</option>
+												<option value="MON">month</option>
+												<option value="MTR">m</option>
+												<option value="MTS">m/s</option>
+												<option value="P1">%</option>
+												<option value="PCE">piece</option>
+												<option value="PK">PK</option>
+												<option value="PR">pair</option>
+												<option value="SEC">s</option>
+												<option value="ST">ST</option>
+												<option value="WEE">week</option>
+												<option value="WTT">watt</option>
+												<option value="ZOL">Zoll</option>
+							            	</select>
+					          			</div>
+					        		</div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label">Time Period</label>
+							          	<div class="col-sm-7">
+							            	<select name="timeperiod" class="form-control m-b" ng-model="cproduct.timePeriod">
+												<option value=""></option>
+												<option value="week">week</option>
+												<option value="month">month</option>
+												<option value="quarter">quarter</option>
+												<option value="half-year">half-year</option>
+												<option value="year">year</option>
+							            	</select>
+							          	</div>
+							        </div>
+
+							       
+							    </accordion-group>
+
+							</accordion>
+
+					        <div class="form-group">
+					          	<div class="col-sm-1">
+									<button class="btn btn-primary" type="submit" ng-click="savecproduct(cproduct);">Save</button>
+								</div>
+					        </div>
+
+						</div>
+					</form>
 				</div>
 																	
 		    </tab>
@@ -564,7 +1315,7 @@
 					<table class="table table-stripped custom-table">
 						<tbody>
 							<tr>
-								<th><input type="checkbox"></th>
+								<th class="check-box"><input type="checkbox" id="selectall"  ng-click="selectAllprelationCBoxes()"> </th>
 								<th>Product ID/Description	 </th>
 								<th>Relation</th>
 								<th>Product ID</th>
@@ -579,58 +1330,558 @@
 								<th>Actions</th>
 							</tr>
 
-							<tr ng-click="showeditor(tdata._id)" class="hoverptr" ng-repeat="tdata in tabledata">
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
+							<tr ng-click="editprelation(prdata)" class="hoverptr" ng-repeat="prdata in editproduct.productRelations track by $index ">
+								<td class="check-box">
+									<input type="checkbox" value="{{prdata._id}}" ng-checked="prdata.checked" ng-model="prdata.checked">
+								</td>
+								<td >{{editproduct.productId}}</td>
+								<td >{{prdata.typeId}}</td>
+								<td >{{prdata.}}</td>
+								<td >{{prdata.Description}}</td>
+								<td >{{prdata.statusId}}</td>
+								<td >{{prdata.syncTypeId}}</td>
+								<td >{{prdata.seqNo}}</td>
+								<td >{{prdata.quantity}}</td>
+								<td >{{prdata.selectionGroupId}}</td>
+								<td >{{prdata.isMandatory}}</td>
+								<td >{{prdata.isDefaultSelected}}</td>
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="12">
+							<td colspan="13">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
 					</table>
 				</div>
+
+				<div class="row ">
+					<div class="col-sm-4 m-b-20 " >
+						<button class="btn btn-primary" ng-click="newprelation()">New Product Relation</button>
+						<button class="btn btn-primary" ng-click="deleteprelation()">Delete Selected</button>
+					</div>
+				</div>
+ 				<div class="row m-t-25 " ng-show="nproductvar" >
+					<form name="newdocform" novalidate>
+						<div class="col-sm-8" >
+							<div class="form-group">					        
+					          	<label class="col-sm-5 control-label"> Product </label>
+					          	<div class="col-sm-7">
+					          		<input type="string" name="contract" class="form-control" ng-model="editproduct.productId" ng-disabled="true">
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Related Product </label>
+					          	<div class="col-sm-7">
+					          		<input type="string" name="description" class="form-control" ng-model="prelation.relatedProductId" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Relation</label>
+					          	<div class="col-sm-7">
+					            	<select name="relation" class="form-control m-b" ng-model="prelation.typeId" size=6>
+										<option value="Beleuchtung_source">Beleuchtung (source)</option>
+										<option value="Beleuchtung_target">Beleuchtung (target)</option>
+										<option value="Elektro_source">Elektro (source)</option>
+										<option value="Elektro_target">Elektro (target)</option>
+										<option value="Fahrdienste_source">Fahrdienste (source)</option>
+										<option value="Fahrdienste_target">Fahrdienste (target)</option>
+										<option value="Hostessen_source">Hostessen (source)</option>
+										<option value="Hostessen_target">Hostessen (target)</option>
+										<option value="Peripherals_source">Peripherals (source)</option>
+										<option value="Peripherals_target">Peripherals (target)</option>
+										<option value="Reinigung_source">Reinigung (source)</option>
+										<option value="Reinigung_target">Reinigung (target)</option>
+										<option value="Services_source">Services (source)</option>
+										<option value="Services_target">Services (target)</option>
+										<option value="Wachdienste_source">Wachdienste (source)</option>
+										<option value="Wachdienste_target">Wachdienste (target)</option>
+										<option value="Warranty_source">Warranty (source)</option>
+										<option value="Warranty_target">Warranty (target)</option>
+										<option value="accessories_source">is accessories for</option>
+										<option value="accessories_target">is accessories of</option>
+										<option value="accessory_source">is accessory for</option>
+										<option value="accessory_target">is accessory of</option>
+										<option value="consists_of_source">has component</option>
+										<option value="consists_of_target">is component for</option>
+										<option value="diff_orderunit_source">has different orderunit</option>
+										<option value="diff_orderunit_target">is different orderunit for</option>
+										<option value="followup_source">is successor of</option>
+										<option value="followup_target">is predecessor of</option>
+										<option value="kit_item_source">has kit item</option>
+										<option value="kit_item_target">is kit item of</option>
+										<option value="mandatory_source">has mandatory article</option>
+										<option value="mandatory_target">is mandatory article from</option>
+										<option value="others_source">other relation</option>
+										<option value="others_target">other relation</option>
+										<option value="part_of_source">is part of</option>
+										<option value="part_of_target">is part for</option>
+										<option value="replaces_source">replaces (source)</option>
+										<option value="replaces_target">replaces (target)</option>
+										<option value="select_source">has select article</option>
+										<option value="select_target">is select article from</option>
+										<option value="service_source">has service</option>
+										<option value="service_target">is service for</option>
+										<option value="similar_source">similar article</option>
+										<option value="similar_target">similar article</option>
+										<option value="sparepart_source">has sparepart</option>
+										<option value="sparepart_target">is sparepart for</option>
+										<option value="substitute_source">has substitute</option>
+										<option value="substitute_target">is substitute of</option>
+										<option value="variant_source">is master for</option>
+										<option value="variant_target">is variant of</option>
+					            	</select>
+					          	</div>
+					        </div>
+
+					        
+					        	
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Description </label>
+
+					          	<span class="col-sm-1 pull-right"><button class="btn btn-primary " ng-click="addContact()"><i class="fa fa-plus"></i></button></span>
+					          	
+					          	
+					          	
+						        	<div class="col-sm-2 m-b-10">
+						          		<select name="status" class="form-control m-b" ng-model="contact.type">
+											<option value="de">de</option>
+											<option value="en">en</option>
+											<option value="es">es</option>
+											<option value="fr">fr</option>
+						            	</select>
+						          	</div>
+
+						          	<div class="col-sm-4 m-b-10">
+						          		<input type="text" name="price" class="form-control" ng-model="prelation.descriptions" >
+						          	</div>
+						        
+
+						        <span ng-repeat="">
+
+						        	<span class="col-sm-5 m-b-10" ></span>
+						        	<span class="col-sm-1 pull-right m-b-10"><button class="btn btn-primary " ng-click="removeContact(contact)"><i class="fa fa-remove"></i></button></span>
+
+						        	<div class="col-sm-2 m-b-10">
+						          		<select name="status" class="form-control m-b" ng-model="contact.type">
+											<option value="de">de</option>
+											<option value="en">en</option>
+											<option value="es">es</option>
+											<option value="fr">fr</option>
+						            	</select>
+						          	</div>
+
+						          	<div class="col-sm-4 m-b-10">
+						          		<input type="text" name="price" class="form-control" ng-model="prelation.descriptions" >
+						          	</div>
+						        </span>
+
+
+					        </div>
+
+
+
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Status </label>
+					          	<div class="col-sm-7">
+					          		<select name="status" class="form-control m-b" ng-model="prelation.statusId">
+										<option value="29">100 new</option>
+										<option value="69">105 changed</option>
+										<option value="30">400 confirmed</option>
+										<option value="61">700 temporary</option>
+										<option value="31">800 deleted</option>
+					            	</select>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Sync Type ID </label>
+					          	<div class="col-sm-7">
+					          		<input type="number" name="price" class="form-control" ng-model="prelation.syncTypeId" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Seq No </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="price" class="form-control" ng-model="prelation.seqNo" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Quantity </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="price" class="form-control" ng-model="prelation.quantity" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Selection Group Id </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="price" class="form-control" ng-model="prelation.selectionGroupId" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> is Mandatory </label>
+					          	<div class="col-sm-7">
+					          		<input type="checkbox" name="price" ng-model="prelation.isMandatory" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label"> Is Default Selected </label>
+					          	<div class="col-sm-7">
+					          		<input type="checkbox" name="price" ng-model="prelation.isDefaultSelected" required>
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Valid From</label>
+					          	<div class="col-sm-7">
+					            	<input type="text" class="form-control date" id="dateFrom"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validFrom" is-open="opened.dateFrom"  date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+					          	</div>
+					        </div>
+
+							
+					        <div class="form-group">
+					          	<label class="col-sm-5 control-label">Valid To</label>
+					          	<div class="col-sm-7">
+					            	<input type="text" class="form-control date" id="dateTo"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+					          	</div>
+					        </div>
+
+					        
+					      
+					      	<accordion close-others="oneAtATime">
+							    
+							    <accordion-group is-open="status.open">
+							        <accordion-heading>
+							            Udx Info<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+							        </accordion-heading>
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxText 1 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxText1" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxText 2 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxText2" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxText 3 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxText3" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxNum 1 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxNum1" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxNum 2 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxNum2" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxNum 3 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxNum3" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxSortKey 1 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxSortKey1" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxSortKey 2 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxSortKey2" required>
+							          	</div>
+							        </div>
+
+							        <div class="form-group">
+							          	<label class="col-sm-5 control-label"> UdxSortKey 3 </label>
+							          	<div class="col-sm-7">
+							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxSortKey3" required>
+							          	</div>
+							        </div>
+							    </accordion-group>
+
+							</accordion>
+
+					        <div class="form-group">
+					          	<div class="col-sm-1">
+									<button class="btn btn-primary" type="submit" ng-click="saverelation(prelation);">Save</button>
+								</div>
+					        </div>
+						</div>
+					</form>
+				</div>
 	 
 
 		    </tab>
 		</tabset>
-		
-		<div ng-include="'app/partials/_auditInfo.html'">
 
-				
-		
-
+		<div class="row">
+			<div ng-include="'app/partials/_auditInfo.html'"></div>
+		</div>
 	</div>
-	
 
 
 
 
 
-	<!-- <div class="row col-sm-12 form-group ">
-		<div class="col-sm-4">
-			<label class=8control-label">Product ID</label>
-		</div>
-		<div class="col-sm-3">
-			<input type="text" class="form-control" name="attributeSectionId" ng-model="searchData.productId">
-		</div>
-		<div class="col-sm-4 col-sm-offset-2">
-			<label class=8control-label">Class Group ID</label>
-		</div>
-		<div class="col-sm-3">
-			<input type="text" class="form-control" name="name" ng-model="searchData.classificationGroupId">
-		</div>
-	</div> -->
+		<!-- <div class="row col-sm-12 form-group ">
+			<div class="col-sm-4">
+				<label class=8control-label">Product ID</label>
+			</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" name="attributeSectionId" ng-model="searchData.productId">
+			</div>
+			<div class="col-sm-4 col-sm-offset-2">
+				<label class=8control-label">Class Group ID</label>
+			</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" name="name" ng-model="searchData.classificationGroupId">
+			</div>
+		</div> -->
+
+
+
+
+</span>
+
+
+<span ng-hide="previewvar">
+	<!-- Preview Page -->
+			<div class="row">
+				<div class="col-sm-12 m-b-20">
+					<a href="/#" class="btn btn-primary">Back to result list</a>
+
+				</div>
+			</div>
+			<div class="row" >
+
+				<div class="col-sm-6">
+			      	<div class="panel panel-default">
+				        <div class="panel-heading font-bold">Product Information
+				        	<a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
+				        </div>
+
+					    <div class="panel-body">
+					        <h4>Reliable Multitasking Performance</h4>
+
+							<p>Powered by the 2nd generation Intel Core i5-2410M processor with Intel Turbo Boost 2.0 Technology, the A53E-XA2 easily handles multitasking and entertainment on its brilliant 15.6" LED-backlit HD display. HDMI ready, supersize your high-definition media to an HDTV for 1080p visuals and 8 channel surround sound support. The A53E-XA2 is also engineered with ASUS IceCool technology with hairline brushed aluminum to maintain a low temperature on the keyboard and palm rest area for comfortable computing even after the longest sessions.</p>
+
+							<h4>Comfort and Control Included</h4>
+							<p>The A53E-XA2 has an array of built-in features that are specialized for ease of use. It features a chiclet keyboard with numeric keypad and multi-touch trackpad to effortlessly type documents or navigate through your mobile world. The A53E-XA2 also has a spacious palm rest with ASUS Palm-Proof Technology where the trackpad intelligently distinguishes between your palm and finger to prevent errors for a worry-free typing experience.With its sunken-hinge screen design, you will be able to enjoy wider and more ergonomic viewing angles, enabling greater clarity and comfort. Plus, the ASUS Power4Gear utility controls the fans noise level so you can relax with a virtually silent computing experience anywhere you go.</p>
+
+
+							<div class="form-horizontal">
+					            <div class="form-group m-b-sm">
+					              	<label class="col-sm-3 control-label">Product no.</label>
+					              	<div class="col-sm-9">
+					              	  <p class="form-control-static " >X53SV-SO951V</p>
+					              	</div>
+					            </div>
+					            <div class="form-group " >
+					              	<label class="col-sm-3 control-label">Supplier</label>
+					              	<div class="col-sm-9">
+					              	  <p class="form-control-static" >Hardware AG</p>
+					              	</div>
+					            </div>
+					            <div class="form-group m-b-sm">
+					              	<label class="col-sm-3 control-label">Manufacturer no.</label>
+					              	<div class="col-sm-9">
+					              	  <p class="form-control-static " >90N3GY1A4N2D27VL151</p>
+					              	</div>
+					            </div>
+					            <div class="form-group m-b-sm" >
+					              	<label class="col-sm-3 control-label">Manufacturer</label>
+					              	<div class="col-sm-9">
+					              	  <p class="form-control-static ">ASUS Computer</p>
+					              	</div>
+					            </div>
+					            <div class="form-group m-b-sm " >
+					              	<label class="col-sm-3 control-label">EAN</label>
+					              	<div class="col-sm-9">
+					              	  <p class="form-control-static ">5053072776354</p>
+					              	</div>
+					            </div>
+					            <div class="form-group m-b-sm" >
+					              	<label class="col-sm-3 control-label">Catalog</label>
+					              	<div class="col-sm-9">
+					              	  <p class="form-control-static ">Laptops</p>
+					              	</div>
+					            </div>
+					            <div class="form-group m-b-sm " >
+					              	<label class="col-sm-3 control-label">Contracts</label>
+					              	<div class="col-sm-9">
+					              	  <p class="form-control-static ">Laptops</p>
+					              	</div>
+					            </div>
+					      	</div>
+					    </div>
+			      	</div>
+			    </div>
+
+			    <div class="col-sm-6">
+			      <div class="panel panel-default">
+			        <div class="panel-heading font-bold">Product View</div>
+				        <div class="panel-body">
+					        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+							    <ol class="carousel-indicators">
+							      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+							      <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+							      <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+							    </ol>
+							    <div class="carousel-inner" role="listbox">
+							        <div class="item active">ng-src="{{editproduct.documents[0].path}}"
+							          <img ng-src="{{editproduct.documents[2].path}}"   data-holder-rendered="true">
+							        </div>
+							        <div class="item">
+							          <img ng-src="{{editproduct.documents[3].path}}" data-holder-rendered="true">
+							        </div>
+							        <div class="item">
+							          <img ng-src="{{editproduct.documents[0].path}}" data-holder-rendered="true">
+							        </div>
+							    </div>
+							   
+							</div>
+				        </div>
+			      	</div>
+			    </div>
+			</div>
+
+
+			<div class="row" >
+				<div class="col-sm-3">
+			      <div class="panel panel-default">
+			        <div class="panel-heading font-bold">Contract	        
+			        	<a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
+			        </div>
+
+			        <div class="panel-body">
+			    	    <div class="form-horizontal">
+			    	        <div class="form-group m-b-sm">
+			    	         	<label class="col-sm-3 control-label">Laptops</label>
+			    	         	
+			    	        </div>
+			    	        <div class="form-group " >
+			    	         	<label class="col-sm-3 control-label">Laptops</label>
+			    	         	
+			    	        </div>
+			    	        
+			    	    </div>
+		        	</div>
+			      </div>
+			    </div>
+
+			    <div class="col-sm-3">
+			      <div class="panel panel-default">
+			        <div class="panel-heading font-bold">Price
+			        	<a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
+			        </div>
+			        <div class="panel-body">
+			    	    <div class="form-horizontal">
+			    	        <div class="form-group m-b-sm">
+			    	         	<label class="col-sm-6 control-label">549.00 EUR/1 </label>
+			    	         	
+			    	        </div>
+			    	        <div class="form-group " >
+			    	         	<label class="col-sm-6 control-label">549.00 EUR/1</label>
+			    	         	
+			    	        </div>
+			    	        
+			    	    </div>
+		        	</div>
+			      </div>
+			    </div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-3">
+			      <div class="panel panel-default">
+			        <div class="panel-heading font-bold">Classification</div>
+			        <div class="panel-body">
+			    	    <div class="form-horizontal">
+			    	        <div class="form-group m-b-sm">
+			    	         	<label class="col-sm-6 control-label">basic </label>
+			    	         	
+			    	        </div>
+			    	        <div class="form-group m-b-sm">
+			    	         	<label class="col-sm-6 control-label">basic </label>
+			    	         	
+			    	        </div>
+			    	        <div class="form-group m-b-sm">
+			    	         	<label class="col-sm-6 control-label">basic </label>
+			    	         	
+			    	        </div>
+			    	        <div class="form-group " >
+			    	         	<label class="col-sm-6 control-label">eClass 5.1.3</label>
+			    	         	
+			    	        </div>
+			    	        
+			    	    </div>
+		        	</div>
+			      </div>
+			    </div>
+
+
+			    <div class="col-sm-3">
+			      	<div class="panel panel-default">
+			        	<div class="panel-heading font-bold">Classification Group
+			        		<a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
+			        	</div>
+			        	<div class="panel-body">
+				    	    <div class="form-horizontal">
+				    	        <div class="form-group m-b-sm">
+				    	         	<label class="col-sm-6 control-label">Text </label>
+				    	         	
+				    	        </div>
+				    	        <div class="form-group m-b-sm">
+				    	         	<label class="col-sm-6 control-label">productfield </label>
+				    	         	
+				    	        </div>
+				    	        <div class="form-group m-b-sm">
+				    	         	<label class="col-sm-6 control-label">document </label>
+				    	         	
+				    	        </div>
+				    	        <div class="form-group " >
+				    	         	<label class="col-sm-6 control-label">Notebooks</label>
+				    	         	
+				    	        </div>
+				    	        
+				    	    </div>
+		        		</div>
+			      	</div>
+			    </div>
+			</div>
+</span>
+
+			
+		    
+
 
 </div>
+

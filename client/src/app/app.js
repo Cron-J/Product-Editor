@@ -3,7 +3,7 @@
 var myApp = angular
 	.module('myApp',['ngRoute', 'ngResource', 'ui.bootstrap', 'ngSanitize', 
 		'angular-growl', 'ngDragDrop', 'angularjs-dropdown-multiselect', 
-		'ui.tree', 'multi-select', 'xeditable','blockUI','daterangepicker'])
+		'ui.tree', 'multi-select', 'xeditable','blockUI','daterangepicker','ui.bootstrap.carousel'])
 	.config(['$routeProvider', 'growlProvider', 'blockUIConfig', function($routeProvider, growlProvider, blockUIConfig) {
 		growlProvider.globalTimeToLive(3000);
 		growlProvider.globalEnableHtml(true);  
