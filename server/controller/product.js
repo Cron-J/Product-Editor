@@ -17,7 +17,7 @@ exports.searchProduct = {
     handler: function(request, reply) {
         var query = {};
         if (request.payload.productId) query['productId'] = new RegExp(request.payload.productId, "i");
-        if (request.payload.classificationGroupId) query['classificationGroupAssociations.classificationGroupId'] = new RegExp(request.payload.classificationGroupId, "i");
+        if (request.payload.classificationGroupId) query['varients.hasVariantClassificationGroupAssociations.classificationGroupId'] = new RegExp(request.payload.classificationGroupId, "i");
         Product.searchProduct(query, function(err, result) {
             if (!err) {
                 return reply(result);
