@@ -2,12 +2,8 @@
 var mongoose = require('mongoose'),
     timestamps = require('mongoose-timestamp'),
     Schema = mongoose.Schema,
-    Product2ClassificationGroup = require('./product-classification-group').Product2ClassificationGroup,
-    ProductAttributeValue = require('./product-attribute-value').ProductAttributeValue,
-    Price = require('./price').Price,
-    ContractedProduct = require('./contracted-product').ContractedProduct,
-    ProductRelation = require('./product-relation').ProductRelation,
-    ProductDocAssociation = require('./product-doc-association').ProductDocAssociation;
+    Variant = require('./varient').Variant;
+    
 
 /**
  * <p>Common Product with primitive types for fields and collections of ProductRelations, ContractedProducts, Prices, Product2ClassificationGroups, ProductAttributeValues and ProductDocAssociation
@@ -169,6 +165,11 @@ var ProductSchema = new Schema({
     },
 
     /**
+     * product can have one or more varients of product.
+     */
+    varients: [Variant],
+
+    /**
      * Product valid range from.
      */
     validFrom: {
@@ -186,45 +187,17 @@ var ProductSchema = new Schema({
      * User name who has created the Product.
      */
     createdBy: {
-        type: String
+        type: String,
+        default:'jcadmin'
     },
 
     /**
      * User name who has changed the Product last time.
      */
     updatedBy: {
-        type: String
-    },
-
-    /**
-     * Set of {@link Product2ClassificationGroup}s.
-     */
-    classificationGroupAssociations: [Product2ClassificationGroup],
-
-    /**
-     * Set of {@link ProductAttributeValue}s.
-     */
-    attributeValues: [ProductAttributeValue],
-
-    /**
-     * Set of {@link ContractedProduct}s. {@link ContractedProduct} links the product to a contract as part of it's assortment.
-     */
-    contractedProducts: [ContractedProduct],
-
-    /**
-     * Set of {@link Price}s.
-     */
-    prices: [Price],
-
-    /**
-     * Set of {@link ProductRelation}s.
-     */
-    productRelations: [ProductRelation],
-
-    /**
-     * Set of {@link ProductDocAssociation}s.
-     */
-    documents: [ProductDocAssociation]
+        type: String,
+        default:'jcadmin'
+    }
 
 });
 
