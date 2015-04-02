@@ -14,6 +14,20 @@ var variant = {
         type: String
     }],
 
+    /**
+     * Varient name.
+     */
+    name: {
+        type: String
+    },
+
+    /**
+     * Description.
+     */
+    description: {
+        type: String
+    },    
+
     hasVariantClassificationGroupAssociations: [Product2ClassificationGroup],
 
     hasVariantPrices: [Price],
