@@ -1,4 +1,4 @@
-myApp.controller('EditProductCtrl', [ '$scope','$rootScope', 
+myApp.controller('variantCtrl', [ '$scope','$rootScope', 
 	'$http','$location','growl','$modal','$routeParams','$filter',
 	'blockUI',
 	function($scope,$rootScope, $http, $location,
@@ -76,13 +76,6 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
  	$scope.sortType     = 'name'; // set the default sort type
   	$scope.sortReverse  = false;  // set the default sort order
   	$scope.search  = '';     // set the default search/filter term
-
-
-// Variant
-
-
-
-
 
 
 // Product classification

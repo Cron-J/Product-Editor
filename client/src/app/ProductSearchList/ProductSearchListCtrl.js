@@ -16,7 +16,16 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
  			$location.path("/edit-product/" + id);
  		}
 		
-		
+
+
+		// $scope.showvariants = function (id){
+ 	// 		$location.path("/product-variant/" + id);
+ 	// 	}
+
+
+
+
+
         $scope.maxSize = 5;
         
 

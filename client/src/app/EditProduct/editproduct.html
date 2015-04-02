@@ -26,9 +26,7 @@
 			
 
 	<div class="row col-sm-12">
-		<tabset justified="true">
-
-			
+		<tabset>
 
 		    <tab heading="Master Data">
 
@@ -268,6 +266,170 @@
 
 		    </tab>
 
+		    <tab heading="Variants">
+
+		    	<div class=" m-t-25">
+					
+					<table class="table table-stripped  custom-table">
+						<tbody >
+							<tr>
+								<th class="check-box"><span id="selectall" ng-click="selectAllcBoxes()"><input type="checkbox" ></span> </th>
+								<th>
+									<a  ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Name
+							            <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+
+
+								<th>
+									<a  ng-click="sortType = 'classificationGroupId'; sortReverse = !sortReverse">Description
+							            <span ng-show="sortType =='classificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType =='classificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+
+								<th>Action</th>
+
+
+							</tr>
+
+							<tr>
+								<td></td>
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.classificationId">
+											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+											</button>
+									</div>
+								</td>
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.classificationGroupId">
+										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+									</div>
+								</td>
+								
+								<td></td>
+							</tr>
+
+							<tr  ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict" >
+								<td class="check-box"><input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked"
+									ng-model="tdata.checked" ng-click="itemToRemove($index)"> </td>
+
+								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationId}}</td>
+								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationGroupId}}</td>
+								
+								<td  > <button class="btn btn-primary btn-xs" ng-click="editGrp(tdata)">Edit</button> </td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<td colspan="4">
+								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+							</td>
+						</tfoot>
+					</table>
+					
+				</div>
+			    
+			    <div class="row ">
+					<div class="col-sm-4 " >
+						<button class="btn btn-primary" ng-click="assignGrp()">Assign New Variant</button>
+						<button class="btn btn-primary" ng-click="deleteRow()">Delete Variant</button>
+					</div>
+				</div>
+			    	
+				<!-- On clicking assign new variant button -->
+
+				<div class="row m-t-25" ng-show="showvar">
+					<form name="assignGrpForm" novalidate>
+						<div class="col-sm-6" >
+							<div class="form-group">
+					          	<label class="col-sm-5 control-label" >Name </label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" required>
+					          		<span style="color:red" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid"></span>
+					          		<span ng-show="assignGrpForm.classificationid.$error.required">Required field.</span>
+
+					          	</div>
+
+					        </div>
+
+							<div class="form-group">
+					          	<label class="col-sm-5 control-label">Description</label>
+					          	<div class="col-sm-7">
+					            	<textarea type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" required></textarea> 
+					            	<span style="color:red" ng-show="assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid"></span>
+					          		<span ng-show="assignGrpForm.cgId.$error.required">Required field.</span>
+					          	</div>
+					        </div>
+
+					        
+					          	<div class="col-sm-offset-5  col-sm-1">
+									<button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid ||  
+									
+									assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
+								</div>
+					        
+
+						</div>
+					</form>
+				</div>
+
+				<!-- On clicking row -->
+
+				<div class="row m-t-25" ng-show="editvar">
+
+					<div class="col-sm-6" >
+
+						<div class="form-group">
+				          	<label class="col-sm-4 control-label">Classification </label>
+				          	<div class="col-sm-8">
+				            	<input type="text" class="form-control" ng-model="editrow.classificationId" ng-disabled="true">
+				          	</div>
+				        </div>
+
+				        <div class="form-group">
+				          <label class="col-sm-4 control-label">Classification Group</label>
+				          <div class="col-sm-8">
+				            <div class="row">
+				              <div class="col-md-6">
+				                <input type="text" class="form-control" ng-disabled="true" ng-model="editrow.classificationGroupId">
+				              </div>
+				              <div class="col-md-6">
+				                <input type="text" class="form-control" ng-disabled="true">
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+
+				        <div class="form-group">
+				          	<label class="col-sm-4 control-label">Order No.</label>
+				          	<div class="col-sm-8">
+				            	<input type="text" class="form-control" ng-model="editrow.orderNo">
+				          	</div>
+				        </div>
+
+
+				        <div class="form-group">
+				          	<div class="col-sm-offset-4  col-sm-1">
+								<button class="btn btn-primary" ng-click="updateitem(editproduct)">Save</button>
+							</div>
+				        </div>
+
+
+					</div>
+		        
+				</div>
+
+		    </tab>
+
+
+		</tabset>
+	</div>
+
+	<div class="row col-sm-12" ng-hide="true">
+		<tabset justified="true">
 
 		    <tab heading="Classification">
 
