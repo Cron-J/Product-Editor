@@ -1,10 +1,3 @@
-var Product2ClassificationGroup = require('./product-classification-group').Product2ClassificationGroup,
-    ProductAttributeValue = require('./product-attribute-value').ProductAttributeValue,
-    Price = require('./price').Price,
-    ContractedProduct = require('./contracted-product').ContractedProduct,
-    ProductRelation = require('./product-relation').ProductRelation,
-    ProductDocAssociation = require('./product-doc-association').ProductDocAssociation;
-
 var variant = {
 
     /**
@@ -28,17 +21,29 @@ var variant = {
         type: String
     },    
 
-    hasVariantClassificationGroupAssociations: [Product2ClassificationGroup],
+    hasVariantClassificationGroupAssociations: {
+        type: Boolean
+    },
 
-    hasVariantPrices: [Price],
+    hasVariantPrices: {
+        type: Boolean
+    },
 
-    hasVariantDocAssociation: [ProductDocAssociation],
+    hasVariantDocAssociation: {
+        type: Boolean
+    },
 
-    hasVariantProductRelation: [ProductRelation],
+    hasVariantProductRelation: {
+        type: Boolean
+    },
 
-    hasVariantContractedProducts: [ContractedProduct],
+    hasVariantContractedProducts: {
+        type: Boolean
+    },
 
-    hasVariantAttributeValues: [ProductAttributeValue]
+    hasVariantAttributeValues: {
+        type: Boolean
+    }
 
 };
 
