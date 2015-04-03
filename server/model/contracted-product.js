@@ -1,12 +1,12 @@
 var contractedProduct = {
 
     /**
-     * Identifier(contractId) of Contract.
+     * Identifier of product variant.
      */
-    contractId: {
+    variantId : {
         type: String
     },
-
+    
     /**
      * Alternative customer specific product identifier.
      */

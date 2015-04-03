@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
     ContractedProduct = require('./contracted-product').ContractedProduct,
     ProductRelation = require('./product-relation').ProductRelation,
     ProductDocAssociation = require('./product-doc-association').ProductDocAssociation,
-    Variant = require('./varient').Variant;
+    Variant = require('./variant').Variant;
 
 /**
  * <p>Common Product with primitive types for fields and collections of ProductRelations, ContractedProducts, Prices, Product2ClassificationGroups, ProductAttributeValues and ProductDocAssociation
@@ -258,7 +258,7 @@ ProductSchema.statics.updateProduct = function(id, product, callback) {
 };
 
 // export
-var product = mongoose.model('Product', ProductSchema);
+var product = mongoose.model('product', ProductSchema);
 
 /** export schema */
 module.exports = {

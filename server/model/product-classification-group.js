@@ -1,6 +1,13 @@
 var product2ClassificationGroup = {
 
     /**
+     * Identifier of product variant.
+     */
+    variantId : {
+        type: String
+    },
+    
+    /**
      * Identifier of Classification.
      */
     classificationId: {

@@ -2,6 +2,16 @@ var Channel = require('./channel').Channel;
 
 var productAttributeValue = {
 
+    /**
+     * Identifier of product variant.
+     */
+    variantId : {
+        type: String
+    },
+
+    /**
+     * Identifier of product attribute.
+     */
     attribute: {
         type: String,
         required: true
@@ -36,6 +46,9 @@ var productAttributeValue = {
         type: String
     },
 
+    /**
+     * Each attribute value can have multiple channels.
+     */
     channels: [Channel]
 
 };

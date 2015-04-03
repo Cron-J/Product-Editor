@@ -12,7 +12,8 @@
     "hapi": "7.0.0",
     "joi": "4.x.x",
     "mongoose": "3.8.23",
-    "mongoose-timestamp": "^0.4.0"
+    "mongoose-timestamp": "^0.4.0",
+    "mongoose-validators": "^0.1.0"
   },
   "author": {
     "name": "gaurav gupta",

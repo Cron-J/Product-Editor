@@ -1,4 +1,12 @@
 var productDocAssociation = {
+    
+    /**
+     * Identifier of product variant.
+     */
+    variantId : {
+        type: String
+    },
+    
     /**
      * Path to external document (image, pdf and etc).
      */

@@ -1,5 +1,8 @@
 var channel = {
-
+    
+    /**
+     * String representation of atrribute name to be specified in channel.
+     */
     attribute: {
         type: String,
         required: true
@@ -14,12 +17,15 @@ var channel = {
     },
 
     /**
-     * Identifier of Language for multi language attribute.
+     * Identifier of Language used for channel.
      */
     language: {
         type: String
     },
 
+    /**
+     * List of channel for which attribute and it's value will be used. If channel is empty it means stands for all
+     */
     channel: [{
         type: String
     }]

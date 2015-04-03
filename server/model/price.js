@@ -1,9 +1,9 @@
 var price = {
    
     /**
-     * Identifier of Contract.
+     * Identifier of product variant.
      */
-    contractId: {
+    variantId : {
         type: String
     },
 
@@ -69,7 +69,6 @@ var price = {
     /**
      * Price valid range from.
      */
-
     validFrom: {
         type: Date
     },

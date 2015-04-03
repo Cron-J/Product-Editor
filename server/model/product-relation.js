@@ -1,4 +1,13 @@
+var validator = require('mongoose-validators');
+
 var productRelation = {
+
+    /**
+     * Identifier of product variant.
+     */
+    variantId : {
+        type: String
+    },
 
     /**
      * Identifier of related product.
@@ -12,7 +21,13 @@ var productRelation = {
      * key is languageId, value is description for language
      */
     descriptions: [{
-        type: String
+
+        language: { type: String},
+        /**
+          * Short Description can only contain alphanumeric characters (letters A-Z, numbers 0-9), hyphens ( - ), underscores ( _ ), space
+          * and maximum 20 characters.
+        */        
+        description:{type: String, validate:[ validator.matches(/^[a-zA-Z0-9_-\s]+$/), validator.isLength(0, 200) ] }
     }],
 
     /**
