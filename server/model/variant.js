@@ -1,3 +1,5 @@
+'use strict';
+
 // dependencies
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
@@ -15,7 +17,7 @@ var VariantSchema = new Schema({
     /**
      * Is used to decide whether varient need new Classification Group for a product.
      * Default selection is false.
-     */    
+     */
     hasVariantClassificationGroupAssociations: {
         type: Boolean,
         default: false

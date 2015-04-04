@@ -1,3 +1,5 @@
+'use strict';
+
 var validator = require('mongoose-validators');
 
 var productRelation = {
@@ -5,7 +7,7 @@ var productRelation = {
     /**
      * Identifier of product variant.
      */
-    variantId : {
+    variantId: {
         type: String
     },
 
@@ -22,12 +24,17 @@ var productRelation = {
      */
     descriptions: [{
 
-        language: { type: String},
+        language: {
+            type: String
+        },
         /**
-          * Short Description can only contain alphanumeric characters (letters A-Z, numbers 0-9), hyphens ( - ), underscores ( _ ), space
-          * and maximum 20 characters.
-        */        
-        description:{type: String, validate:[ validator.matches(/^[a-zA-Z0-9_-\s]+$/), validator.isLength(0, 200) ] }
+         * Short Description can only contain alphanumeric characters (letters A-Z, numbers 0-9), hyphens ( - ), underscores ( _ ), space
+         * and maximum 20 characters.
+         */
+        description: {
+            type: String,
+            validate: [validator.matches(/^[a-zA-Z0-9_-\s]+$/), validator.isLength(0, 200)]
+        }
     }],
 
     /**

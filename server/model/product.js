@@ -1,3 +1,5 @@
+'use strict';
+
 // dependencies
 var mongoose = require('mongoose'),
     timestamps = require('mongoose-timestamp'),
@@ -198,9 +200,9 @@ var ProductSchema = new Schema({
     },
 
     /**
-     * product can have one or more varients of product.
+     * Product can have one or more varients of product.
      */
-    varients: [Variant],
+    variants: [Variant],
 
     /**
      * Set of {@link Product2ClassificationGroup}s.
@@ -234,6 +236,32 @@ var ProductSchema = new Schema({
 
 });
 
+ProductSchema.pre('save', function(next) {
+    if (this.variants && 0 === this.variants.length) {
+        this.variants = undefined;
+    }
+    if (this.classificationGroupAssociations && 0 === this.classificationGroupAssociations.length) {
+        this.classificationGroupAssociations = undefined;
+    }
+    if (this.attributeValues && 0 === this.attributeValues.length) {
+        this.attributeValues = undefined;
+    }
+    if (this.contractedProducts && 0 === this.contractedProducts.length) {
+        this.contractedProducts = undefined;
+    }
+    if (this.prices && 0 === this.prices.length) {
+        this.prices = undefined;
+    }
+    if (this.productRelations && 0 === this.productRelations.length) {
+        this.productRelations = undefined;
+    }
+    if (this.documents && 0 === this.documents.length) {
+        this.documents = undefined;
+    }
+    
+    next();
+});
+
 /**
  * Date when the Product was created.
  * Date when the Product was changed last time.
@@ -250,11 +278,15 @@ ProductSchema.statics.searchProduct = function(query, callback) {
 };
 
 ProductSchema.statics.getProductById = function(id, callback) {
-    this.findOne({'_id': id}, callback);
+    this.findOne({
+        '_id': id
+    }, callback);
 };
 
 ProductSchema.statics.updateProduct = function(id, product, callback) {
-    this.update({'_id': id}, product, callback);
+    this.update({
+        '_id': id
+    }, product, callback);
 };
 
 // export

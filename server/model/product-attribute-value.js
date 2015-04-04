@@ -1,3 +1,5 @@
+'use strict';
+
 var Channel = require('./channel').Channel;
 
 var productAttributeValue = {
@@ -5,7 +7,7 @@ var productAttributeValue = {
     /**
      * Identifier of product variant.
      */
-    variantId : {
+    variantId: {
         type: String
     },
 

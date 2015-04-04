@@ -1,5 +1,7 @@
+'use strict';
+
 var channel = {
-    
+
     /**
      * String representation of atrribute name to be specified in channel.
      */

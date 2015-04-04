@@ -1,12 +1,14 @@
+'use strict';
+
 var contractedProduct = {
 
     /**
      * Identifier of product variant.
      */
-    variantId : {
+    variantId: {
         type: String
     },
-    
+
     /**
      * Alternative customer specific product identifier.
      */

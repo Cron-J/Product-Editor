@@ -1,9 +1,11 @@
+'use strict';
+
 var price = {
-   
+
     /**
      * Identifier of product variant.
      */
-    variantId : {
+    variantId: {
         type: String
     },
 

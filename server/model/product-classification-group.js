@@ -1,12 +1,14 @@
+'use strict';
+
 var product2ClassificationGroup = {
 
     /**
      * Identifier of product variant.
      */
-    variantId : {
+    variantId: {
         type: String
     },
-    
+
     /**
      * Identifier of Classification.
      */
