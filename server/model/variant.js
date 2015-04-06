@@ -15,6 +15,13 @@ var VariantSchema = new Schema({
     }],
 
     /**
+     * Identifier of product.
+     */
+    productId: {
+        type: String
+    },
+
+    /**
      * Is used to decide whether varient need new Classification Group for a product.
      * Default selection is false.
      */
@@ -69,6 +76,22 @@ var VariantSchema = new Schema({
     }
 
 });
+
+VariantSchema.statics.createVariant = function(varient, callback) {
+    this.create(varient, callback);
+};
+
+VariantSchema.statics.getVariantsByProductId = function(productId, callback) {
+    this.findOne({
+        'productId': productId
+    }, callback);
+};
+
+VariantSchema.statics.updateVariant = function(id, variant, callback) {
+    this.update({
+        '_id': id
+    }, variant, callback);
+};
 
 // export
 var variant = mongoose.model('variant', VariantSchema);

@@ -38,8 +38,7 @@ var ProductSchema = new Schema({
      */
     productId: {
         type: String,
-        index: true,
-        required: true
+        unique: true
     },
 
     /**
