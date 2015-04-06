@@ -60,11 +60,11 @@ exports.getProductById = {
                         if (err) {
                             console.log(err);
                         } else {
-                            return reply(result);
+                            return reply(deleteEmptyArrayHelper(result));
                         }
                     });
                 } else {
-                    return reply(result);
+                    return reply(deleteEmptyArrayHelper(result));
                 }
             } else reply(Boom.forbidden(err));
         });
@@ -79,4 +79,15 @@ exports.updateProduct = {
             } else reply(Boom.forbidden(err));
         });
     }
+};
+
+ /**Helper function to delete empty array*/
+var deleteEmptyArrayHelper = function(data) {
+    var originalData = JSON.parse(JSON.stringify(data));
+    for (var req in originalData) {
+        if(Array.isArray(originalData[req]) && !originalData[req].length){
+            originalData[req] = undefined;
+        }        
+    }
+    return originalData;
 };
