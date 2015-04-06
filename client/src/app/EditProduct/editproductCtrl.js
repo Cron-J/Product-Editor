@@ -4,6 +4,11 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 	function($scope,$rootScope, $http, $location,
 		growl, $modal, $routeParams, blockUI,$filter){
 
+		 $scope.countries = [ // Taken from https://gist.github.com/unceus/6501985
+    	{names: 'Afghanistan', code: 'AF'},
+	    {names: 'Åland Islands', code: 'AX'},
+	    
+	  ];
 
 		$scope.updateitem = function(editproduct){
 

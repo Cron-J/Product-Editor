@@ -320,13 +320,58 @@
 								
 
 								<td>
-									<div class="form-inline">
+									<!-- <div class="form-inline">
 										<select class="input-sm"  ng-options="option.variantId as option.variantId for option in options" ng-model="search.variantId"> 
 									      <option value="">-- choose Variant --</option>
 										</select>
 										<button class="btn btn-default btn-xs" ng-click="search.variantId='' "><i class="glyphicon glyphicon-remove"></i></button>
 										
 									</div>
+ -->
+
+ 	<!-- 
+									<ui-select ng-model="option.selected" theme="selectize" ng-disabled="disabled" >
+									    <ui-select-match placeholder="Select variant">{{$select.selected.variantId}}</ui-select-match>
+									    <ui-select-choices repeat="option in options | filter: $select.search">
+									      <span ng-bind-html="option.variantId | highlight: $select.search"></span>
+									    </ui-select-choices>
+									  </ui-select> -->
+
+									 <!--  <ui-select ng-model="country.selected" theme="selectize" ng-disabled="disabled">
+    <ui-select-match placeholder="Select or search a country in the list...">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="country in countries | filter: $select.search">
+      <span ng-bind-html="country.names | highlight: $select.search"></span>
+      
+    </ui-select-choices>
+  </ui-select> -->{{options}}
+
+  					<div  
+						
+				    multi-select 
+				    input-model="options"
+				    output-model="abc"
+				    button-label="variantId"         
+				    item-label="variantId" 
+				    tick-property="ticked"
+				    helper-elements="filter"
+				    selection-mode="single"
+				    output-properties="variantId"
+					>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 								</td>
 
 

@@ -2,11 +2,7 @@
 
 // dependencies
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    autoIncrement = require('mongoose-auto-increment'),
-    db = require('../config/db').db;
-
-    autoIncrement.initialize(db);
+    Schema = mongoose.Schema;
 
 
 var VariantSchema = new Schema({
@@ -16,7 +12,8 @@ var VariantSchema = new Schema({
      */
     variantId: {
         type: String,
-        unique: true
+        unique: true,
+        required: true
     },
 
     /**
@@ -96,8 +93,6 @@ VariantSchema.statics.updateVariant = function(id, variant, callback) {
         '_id': id
     }, variant, callback);
 };
-
-VariantSchema.plugin(autoIncrement.plugin,{ model: 'variant', field: 'variantId' });
 
 // export
 var variant = mongoose.model('variant', VariantSchema);
