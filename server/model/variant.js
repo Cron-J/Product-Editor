@@ -2,10 +2,22 @@
 
 // dependencies
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    autoIncrement = require('mongoose-auto-increment'),
+    db = require('../config/db').db;
+
+    autoIncrement.initialize(db);
 
 
 var VariantSchema = new Schema({
+
+    /**
+     * Id for varient.
+     */
+    variantId: {
+        type: String,
+        unique: true
+    },
 
     /**
      * Identifier of list of product attribute.
@@ -14,12 +26,6 @@ var VariantSchema = new Schema({
         type: String
     }],
 
-    /**
-     * Identifier of product.
-     */
-    productId: {
-        type: String
-    },
 
     /**
      * Is used to decide whether varient need new Classification Group for a product.
@@ -81,10 +87,8 @@ VariantSchema.statics.createVariant = function(varient, callback) {
     this.create(varient, callback);
 };
 
-VariantSchema.statics.getVariantsByProductId = function(productId, callback) {
-    this.findOne({
-        'productId': productId
-    }, callback);
+VariantSchema.statics.getVariants = function(callback) {
+    this.find({}, callback);
 };
 
 VariantSchema.statics.updateVariant = function(id, variant, callback) {
@@ -92,6 +96,8 @@ VariantSchema.statics.updateVariant = function(id, variant, callback) {
         '_id': id
     }, variant, callback);
 };
+
+VariantSchema.plugin(autoIncrement.plugin,{ model: 'variant', field: 'variantId' });
 
 // export
 var variant = mongoose.model('variant', VariantSchema);

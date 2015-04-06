@@ -14,7 +14,7 @@ exports.createVariant = {
 
 exports.getVariants = {
     handler: function(request, reply) {
-        Product.getVariantsByProductId(request.params.productId, function(err, result) {
+        Variant.getVariants(function(err, result) {
             if (!err) {
                 reply(result);
             } else reply(Boom.forbidden(err));
@@ -24,7 +24,7 @@ exports.getVariants = {
 
 exports.updateVariant = {
     handler: function(request, reply) {
-        Product.updateVariant(request.params.id, request.payload, function(err, result) {
+        Variant.updateVariant(request.params.id, request.payload, function(err, result) {
             if (!err) {
                 return reply(result);
             } else reply(Boom.forbidden(err));

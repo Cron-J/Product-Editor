@@ -78,13 +78,6 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
   	$scope.search  = '';     // set the default search/filter term
 
 
-// Variant
-
-
-
-
-
-
 // Product classification
 
 

@@ -198,10 +198,6 @@ var ProductSchema = new Schema({
         type: String
     },
 
-    /**
-     * Product can have one or more varients of product.
-     */
-    variants: [Variant],
 
     /**
      * Set of {@link Product2ClassificationGroup}s.

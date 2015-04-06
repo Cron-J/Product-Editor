@@ -3,8 +3,6 @@
 	<!-- Header Name-->
 
 <span ng-show="previewvar">
-	
-
 
 	<div class="row col-sm-12" >
 		<div class="col-sm-7 m-b-20">
@@ -12,6 +10,13 @@
 			<!-- 			<h3 class="m-b-50">Search Product Section</h3>-->	
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="col-sm-12 m-b-20">
+			<a href="/#" class="btn btn-primary">Back to result list</a>
+		</div>
+	</div>
+
 	<div class="row col-sm-12">
 		<div class="col-sm-12 m-b-20">
 			
@@ -20,416 +25,238 @@
 			<button class="btn btn-primary pull-right" ng-click="showhidepreview()" >Preview</button>
  		</div>
  		<!-- <div class="col-sm-4">
- 			
+ 		
  		</div> -->
 	</div>
-			
+
 
 	<div class="row col-sm-12">
-		<tabset>
+		<tabset justified="true">
 
 		    <tab heading="Master Data">
 
-			    <div class="row m-t-25">
-			    	
-			    	<div class="col-sm-6">
-			    		<div class="form-group">
-				          <label class="col-sm-4 control-label">Product ID</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.productId">
-				          </div>
-				        </div>
+			    <form name="masterdata" novalidate>
+			    	<div class="row m-t-25">
+				    	
+				    	<div class="col-sm-6">
+				    		<div class="form-group">
+					          <label class="col-sm-4 control-label">Product ID</label>
+					          <div class="col-sm-8">
+					            <input type="text" name="pid" class="form-control" ng-model="editproduct.productId" required>
+					            <p ng-show="masterdata.pid.$invalid && !masterdata.pid.$pristine" class="help-block">Product ID is Required.</p>
 
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >ext. Product ID</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.extProductId">
-				          </div>
-				        </div>
-				    </div>
-
-				    <div class="col-sm-6">
-			    		<div class="form-group">
-				          <label class="col-sm-4 control-label">Created on/by</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.createdAt" ng-disabled="true">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >Changed on/by</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.updatedAt" ng-disabled="true">
-				          </div>
-				        </div>
-				    </div>
-
-				    <div class="col-sm-6">
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >GTIN/EAN</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.ean">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label">Keywords</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.keywords">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >Supplier*</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.supplierId">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >Product catalog*</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.catalogId">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >Status*</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.statusId">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >Valid From</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control date" id="dateFrom" placeholder="From" ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="editproduct.validFrom" is-open="opened.dateFrom" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
-
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >Valid To</label>
-				          <div class="col-sm-8">
-							<input type="text" class="form-control date" id="dateTo"   placeholder="To" ng-click="open($event)"   class="form-control"
-							datepicker-popup="{{format}}" ng-model="editproduct.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom"
-							datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >Manufacturer Name</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >Manufacturer </label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.manufactererName">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label" >MfgProduct ID</label>
-				          <div class="col-sm-8">
-				            <input type="text" class="form-control" ng-model="editproduct.mfgProductId">
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          	<label class="col-sm-4 control-label">Unit of measure</label>
-				          	<div class="col-sm-8">
-				            	<select name="account" class="form-control m-b" ng-model="editproduct.unitOfMeasureId">
-				            	  	<option value=""></option>
-									<option value="2P">kilobyte</option>
-									<option value="4L">megabyte</option>
-									<option value="A86">gigahertz</option>
-									<option value="A99">A99</option>
-									<option value="AD">byte</option>
-									<option value="AMH">ampere hour</option>
-									<option value="AMP">ampere</option>
-									<option value="ANN">year</option>
-									<option value="B10">B10</option>
-									<option value="BAR">bar</option>
-									<option value="C26">millisecond</option>
-									<option value="C31">milliwatt</option>
-									<option value="C62">piece</option>
-									<option value="CEL">degrees Celsius</option>
-									<option value="CMK">square centimeter</option>
-									<option value="CMQ">cubic centimeter</option>
-									<option value="CMT">centimeter</option>
-									<option value="DAY">day</option>
-									<option value="DD">degrees</option>
-									<option value="EA">each</option>
-									<option value="GB">gigabyte</option>
-									<option value="GM">GM</option>
-									<option value="GRM">gramms</option>
-									<option value="HTZ">hertz</option>
-									<option value="HUR">hour</option>
-									<option value="KEL">kelvin</option>
-									<option value="KGM">kilogramm</option>
-									<option value="KTM">kilometer</option>
-									<option value="KVT">kilovolt</option>
-									<option value="KWH">kilowatt hours</option>
-									<option value="KWT">kilowatt</option>
-									<option value="LTR">Litre</option>
-									<option value="MAW">megawatt</option>
-									<option value="MGM">milligramms</option>
-									<option value="MIN">minutes</option>
-									<option value="MLT">milliliter</option>
-									<option value="MMT">millimeters</option>
-									<option value="MON">month</option>
-									<option value="MTR">meter</option>
-									<option value="MTS">MTS</option>
-									<option value="P1">percent</option>
-									<option value="PCE" selected="selected">piece</option>
-									<option value="PK">PK</option>
-									<option value="PR">pair</option>
-									<option value="SEC">second</option>
-									<option value="ST">ST</option>
-									<option value="WEE">week</option>
-									<option value="WTT">watt</option>
-									<option value="ZOL">Zoll</option>
-				            	</select>
-				          	</div>
-				        </div>
-
-				        <div class="form-group">
-				          	<label class="col-sm-4 control-label">Sales Unit</label>
-				          	<div class="col-sm-8">
-				          	  	<select name="account" class="form-control m-b" ng-model="editproduct.salesUnitOfMeasureId">
-				          	  	  	<option value=""></option>
-									<option value="2P">kilobyte</option>
-									<option value="4L">megabyte</option>
-									<option value="A86">gigahertz</option>
-									<option value="A99">A99</option>
-									<option value="AD">byte</option>
-									<option value="AMH">ampere hour</option>
-									<option value="AMP">ampere</option>
-									<option value="ANN">year</option>
-									<option value="B10">B10</option>
-									<option value="BAR">bar</option>
-									<option value="C26">millisecond</option>
-									<option value="C31">milliwatt</option>
-									<option value="C62">piece</option>
-									<option value="CEL">degrees Celsius</option>
-									<option value="CMK">square centimeter</option>
-									<option value="CMQ">cubic centimeter</option>
-									<option value="CMT">centimeter</option>
-									<option value="DAY">day</option>
-									<option value="DD">degrees</option>
-									<option value="EA">each</option>
-									<option value="GB">gigabyte</option>
-									<option value="GM">GM</option>
-									<option value="GRM">gramms</option>
-									<option value="HTZ">hertz</option>
-									<option value="HUR">hour</option>
-									<option value="KEL">kelvin</option>
-									<option value="KGM">kilogramm</option>
-									<option value="KTM">kilometer</option>
-									<option value="KVT">kilovolt</option>
-									<option value="KWH">kilowatt hours</option>
-									<option value="KWT">kilowatt</option>
-									<option value="LTR">Litre</option>
-									<option value="MAW">megawatt</option>
-									<option value="MGM">milligramms</option>
-									<option value="MIN">minutes</option>
-									<option value="MLT">milliliter</option>
-									<option value="MMT">millimeters</option>
-									<option value="MON">month</option>
-									<option value="MTR">meter</option>
-									<option value="MTS">MTS</option>
-									<option value="P1">percent</option>
-									<option value="PCE" selected="selected">piece</option>
-									<option value="PK">PK</option>
-									<option value="PR">pair</option>
-									<option value="SEC">second</option>
-									<option value="ST">ST</option>
-									<option value="WEE">week</option>
-									<option value="WTT">watt</option>
-									<option value="ZOL">Zoll</option>
-				          	  	</select>
-				          	</div>
-				        </div>
-			    	</div>
-			    </div>
-
-			    <div class="row col-sm-8 col-sm-offset-2 ">
-						<div class="form-button-group">
-							<button class="btn btn-primary" ng-click="updateitem(editproduct)">Update</button>
-							<button class="btn btn-primary" ng-click="cancel()">Cancel</button>
-							
-					</div>
-				</div>
-
-		    </tab>
-
-		    <tab heading="Variants">
-
-		    	<div class=" m-t-25">
-					
-					<table class="table table-stripped  custom-table">
-						<tbody >
-							<tr>
-								<th class="check-box"><span id="selectall" ng-click="selectAllcBoxes()"><input type="checkbox" ></span> </th>
-								<th>
-									<a  ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Name
-							            <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
-
-
-								<th>
-									<a  ng-click="sortType = 'classificationGroupId'; sortReverse = !sortReverse">Description
-							            <span ng-show="sortType =='classificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType =='classificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
-
-								<th>Action</th>
-
-
-							</tr>
-
-							<tr>
-								<td></td>
-								<td>
-									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.classificationId">
-											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
-											</button>
-									</div>
-								</td>
-								<td>
-									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.classificationGroupId">
-										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-									</div>
-								</td>
-								
-								<td></td>
-							</tr>
-
-							<tr  ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict" >
-								<td class="check-box"><input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked"
-									ng-model="tdata.checked" ng-click="itemToRemove($index)"> </td>
-
-								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationId}}</td>
-								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationGroupId}}</td>
-								
-								<td  > <button class="btn btn-primary btn-xs" ng-click="editGrp(tdata)">Edit</button> </td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<td colspan="4">
-								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
-							</td>
-						</tfoot>
-					</table>
-					
-				</div>
-			    
-			    <div class="row ">
-					<div class="col-sm-4 " >
-						<button class="btn btn-primary" ng-click="assignGrp()">Assign New Variant</button>
-						<button class="btn btn-primary" ng-click="deleteRow()">Delete Variant</button>
-					</div>
-				</div>
-			    	
-				<!-- On clicking assign new variant button -->
-
-				<div class="row m-t-25" ng-show="showvar">
-					<form name="assignGrpForm" novalidate>
-						<div class="col-sm-6" >
-							<div class="form-group">
-					          	<label class="col-sm-5 control-label" >Name </label>
-					          	<div class="col-sm-7">
-					          		<input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" required>
-					          		<span style="color:red" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid"></span>
-					          		<span ng-show="assignGrpForm.classificationid.$error.required">Required field.</span>
-
-					          	</div>
-
+					          </div>
 					        </div>
 
-							<div class="form-group">
-					          	<label class="col-sm-5 control-label">Description</label>
-					          	<div class="col-sm-7">
-					            	<textarea type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" required></textarea> 
-					            	<span style="color:red" ng-show="assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid"></span>
-					          		<span ng-show="assignGrpForm.cgId.$error.required">Required field.</span>
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >ext. Product ID</label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="extpid" ng-model="editproduct.extProductId">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" > GTIN </label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="gtin" ng-model="editproduct.ean">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label">Keywords</label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="keywords" ng-model="editproduct.keywords">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >Supplier</label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="supplier"  ng-model="editproduct.supplierId">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >Product catalog</label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="pcid" ng-model="editproduct.catalogId">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >Status*</label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="status" ng-model="editproduct.statusId">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >Valid From</label>
+					          <div class="col-sm-8">
+					            <input type="text" name="validfrom" class="form-control date" id="dateFrom" placeholder="From" ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="editproduct.validFrom" is-open="opened.dateFrom" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >Valid To</label>
+					          <div class="col-sm-8">
+								<input type="text" name="validto" class="form-control date" id="dateTo"   placeholder="To" ng-click="open($event)"   class="form-control"
+								datepicker-popup="{{format}}" ng-model="editproduct.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom"
+								datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >Manufacturer Name</label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="mfname" ng-model="editproduct.">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >Manufacturer </label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="mf" ng-model="editproduct.manufactererName">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          <label class="col-sm-4 control-label" >MfgProduct ID</label>
+					          <div class="col-sm-8">
+					            <input type="text" class="form-control" name="mfgid" ng-model="editproduct.mfgProductId">
+					          </div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-4 control-label">Unit of measure</label>
+					          	<div class="col-sm-8">
+					            	<select name="account" class="form-control m-b" name="uom" ng-model="editproduct.unitOfMeasureId">
+					            	  	<option value=""></option>
+										<option value="2P">kilobyte</option>
+										<option value="4L">megabyte</option>
+										<option value="A86">gigahertz</option>
+										<option value="A99">A99</option>
+										<option value="AD">byte</option>
+										<option value="AMH">ampere hour</option>
+										<option value="AMP">ampere</option>
+										<option value="ANN">year</option>
+										<option value="B10">B10</option>
+										<option value="BAR">bar</option>
+										<option value="C26">millisecond</option>
+										<option value="C31">milliwatt</option>
+										<option value="C62">piece</option>
+										<option value="CEL">degrees Celsius</option>
+										<option value="CMK">square centimeter</option>
+										<option value="CMQ">cubic centimeter</option>
+										<option value="CMT">centimeter</option>
+										<option value="DAY">day</option>
+										<option value="DD">degrees</option>
+										<option value="EA">each</option>
+										<option value="GB">gigabyte</option>
+										<option value="GM">GM</option>
+										<option value="GRM">gramms</option>
+										<option value="HTZ">hertz</option>
+										<option value="HUR">hour</option>
+										<option value="KEL">kelvin</option>
+										<option value="KGM">kilogramm</option>
+										<option value="KTM">kilometer</option>
+										<option value="KVT">kilovolt</option>
+										<option value="KWH">kilowatt hours</option>
+										<option value="KWT">kilowatt</option>
+										<option value="LTR">Litre</option>
+										<option value="MAW">megawatt</option>
+										<option value="MGM">milligramms</option>
+										<option value="MIN">minutes</option>
+										<option value="MLT">milliliter</option>
+										<option value="MMT">millimeters</option>
+										<option value="MON">month</option>
+										<option value="MTR">meter</option>
+										<option value="MTS">MTS</option>
+										<option value="P1">percent</option>
+										<option value="PCE" selected="selected">piece</option>
+										<option value="PK">PK</option>
+										<option value="PR">pair</option>
+										<option value="SEC">second</option>
+										<option value="ST">ST</option>
+										<option value="WEE">week</option>
+										<option value="WTT">watt</option>
+										<option value="ZOL">Zoll</option>
+					            	</select>
 					          	</div>
 					        </div>
 
-					        
-					          	<div class="col-sm-offset-5  col-sm-1">
-									<button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid ||  
-									
-									assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
-								</div>
-					        
+					        <div class="form-group">
+					          	<label class="col-sm-4 control-label">Sales Unit</label>
+					          	<div class="col-sm-8">
+					          	  	<select name="account" class="form-control m-b" name="salesunit" ng-model="editproduct.salesUnitOfMeasureId">
+					          	  	  	<option value=""></option>
+										<option value="2P">kilobyte</option>
+										<option value="4L">megabyte</option>
+										<option value="A86">gigahertz</option>
+										<option value="A99">A99</option>
+										<option value="AD">byte</option>
+										<option value="AMH">ampere hour</option>
+										<option value="AMP">ampere</option>
+										<option value="ANN">year</option>
+										<option value="B10">B10</option>
+										<option value="BAR">bar</option>
+										<option value="C26">millisecond</option>
+										<option value="C31">milliwatt</option>
+										<option value="C62">piece</option>
+										<option value="CEL">degrees Celsius</option>
+										<option value="CMK">square centimeter</option>
+										<option value="CMQ">cubic centimeter</option>
+										<option value="CMT">centimeter</option>
+										<option value="DAY">day</option>
+										<option value="DD">degrees</option>
+										<option value="EA">each</option>
+										<option value="GB">gigabyte</option>
+										<option value="GM">GM</option>
+										<option value="GRM">gramms</option>
+										<option value="HTZ">hertz</option>
+										<option value="HUR">hour</option>
+										<option value="KEL">kelvin</option>
+										<option value="KGM">kilogramm</option>
+										<option value="KTM">kilometer</option>
+										<option value="KVT">kilovolt</option>
+										<option value="KWH">kilowatt hours</option>
+										<option value="KWT">kilowatt</option>
+										<option value="LTR">Litre</option>
+										<option value="MAW">megawatt</option>
+										<option value="MGM">milligramms</option>
+										<option value="MIN">minutes</option>
+										<option value="MLT">milliliter</option>
+										<option value="MMT">millimeters</option>
+										<option value="MON">month</option>
+										<option value="MTR">meter</option>
+										<option value="MTS">MTS</option>
+										<option value="P1">percent</option>
+										<option value="PCE" selected="selected">piece</option>
+										<option value="PK">PK</option>
+										<option value="PR">pair</option>
+										<option value="SEC">second</option>
+										<option value="ST">ST</option>
+										<option value="WEE">week</option>
+										<option value="WTT">watt</option>
+										<option value="ZOL">Zoll</option>
+					          	  	</select>
+					          	</div>
+					        </div>
+					    </div>
+				    </div>
 
+				    <div class="row col-sm-8 col-sm-offset-2 ">
+							<div class="form-button-group">
+								<button class="btn btn-primary" type="submit" ng-click="updateitem(editproduct)">Update</button>
+								<button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+								
 						</div>
-					</form>
-				</div>
-
-				<!-- On clicking row -->
-
-				<div class="row m-t-25" ng-show="editvar">
-
-					<div class="col-sm-6" >
-
-						<div class="form-group">
-				          	<label class="col-sm-4 control-label">Classification </label>
-				          	<div class="col-sm-8">
-				            	<input type="text" class="form-control" ng-model="editrow.classificationId" ng-disabled="true">
-				          	</div>
-				        </div>
-
-				        <div class="form-group">
-				          <label class="col-sm-4 control-label">Classification Group</label>
-				          <div class="col-sm-8">
-				            <div class="row">
-				              <div class="col-md-6">
-				                <input type="text" class="form-control" ng-disabled="true" ng-model="editrow.classificationGroupId">
-				              </div>
-				              <div class="col-md-6">
-				                <input type="text" class="form-control" ng-disabled="true">
-				              </div>
-				            </div>
-				          </div>
-				        </div>
-
-				        <div class="form-group">
-				          	<label class="col-sm-4 control-label">Order No.</label>
-				          	<div class="col-sm-8">
-				            	<input type="text" class="form-control" ng-model="editrow.orderNo">
-				          	</div>
-				        </div>
-
-
-				        <div class="form-group">
-				          	<div class="col-sm-offset-4  col-sm-1">
-								<button class="btn btn-primary" ng-click="updateitem(editproduct)">Save</button>
-							</div>
-				        </div>
-
-
 					</div>
-		        
-				</div>
-
+			    </form>
+			    
 		    </tab>
 
-
-		</tabset>
-	</div>
-
-	<div class="row col-sm-12" ng-hide="true">
-		<tabset justified="true">
 
 		    <tab heading="Classification">
 
@@ -509,17 +336,12 @@
 					</table>
 				</div>
 
-
-
-
 				<div class="row ">
 					<div class="col-sm-4 " >
 						<button class="btn btn-primary" ng-click="assignGrp()">Assign New Group</button>
 						<button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button>
 					</div>
 				</div>
-
-
 
 				<!-- On clicking assign new group button -->
 
@@ -540,7 +362,7 @@
 							<div class="form-group">
 					          	<label class="col-sm-5 control-label">Classification Group</label>
 					          	<div class="col-sm-7">
-					            	<input type="number" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" required>
+					            	<input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" required>
 					            	<span style="color:red" ng-show="assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid"></span>
 					          		<span ng-show="assignGrpForm.cgId.$error.required">Required field.</span>
 					          	</div>
@@ -559,8 +381,6 @@
 				</div>
 
 				<!-- On clicking row -->
-	
-
 
 				<div class="row m-t-25" ng-show="editvar">
 
@@ -593,17 +413,25 @@
 				            	<input type="text" class="form-control" ng-model="editrow.orderNo">
 				          	</div>
 				        </div>
-
-
-				        <div class="form-group">
-				          	<div class="col-sm-offset-4  col-sm-1">
-								<button class="btn btn-primary" ng-click="updateitem(editproduct)">Save</button>
-							</div>
-				        </div>
-
-
 					</div>
 		        
+			        <div class="row">
+			        	<div class="col-sm-12">
+			        		<div ng-include="'app/partials/_auditInfo.html'"></div>
+			        	</div>
+						
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+			        		<div class="form-group">
+					          	<div class=" col-sm-offset-2 col-sm-1">
+									<button class="btn btn-primary" ng-click="updateitem(editproduct)">Save</button>
+								</div>
+					        </div>
+						</div>
+			        </div>
+							
 				</div>
 
 		    </tab>
@@ -663,11 +491,36 @@
 						<tbody>
 							<tr>
 								<th class="check-box"><input id="selectall"  ng-click="selectAlldocCBoxes()" type="checkbox"> </th>
-								<th>URl</th>
-								<th>View Type</th>
-								<th>Language</th>
-								<th>Description</th>
-								<th>Order No.</th>
+								<th>
+									<a  ng-click="sortType = 'path'; sortReverse = !sortReverse">URL
+							            <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'documentViewTypeId'; sortReverse = !sortReverse">View Type
+							            <span ng-show="sortType == 'documentViewTypeId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'documentViewTypeId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
+							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Description
+							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Order No.
+							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
 								<th>Action</th>
 							</tr>
 
@@ -710,7 +563,7 @@
 								<td></td>
 							</tr>
 
-							<tr ng-click="editdoc(ddata)" class="hoverptr" ng-repeat="ddata in editproduct.documents track by $index ">
+							<tr ng-click="editdoc(ddata)" class="hoverptr" ng-repeat="ddata in editproduct.documents | orderBy:sortType:sortReverse  | filter:search:strict">
 
 								<td class="check-box" ><input type="checkbox" value="{{ddata._id}}" ng-checked="ddata.checked" ng-model="ddata.checked" ></td>
 								<td  class="hoverptr" >{{ddata.path}}</td>
@@ -745,7 +598,7 @@
 					<form name="newdocform" novalidate>
 						<div class="col-sm-6" >
 							<div class="form-group">
-					          	<label class="col-sm-5 control-label"> URL </label>
+					          	<label class="col-sm-4 control-label"> URL </label>
 					          	<div class="col-sm-7">
 					          		<textarea type="text" name="url" class="form-control" ng-model="doc.path" required></textarea>
 					          		
@@ -753,7 +606,7 @@
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label">Language</label>
+					          	<label class="col-sm-4 control-label">Language</label>
 					          	<div class="col-sm-7">
 					            	<select name="language" class="form-control m-b" ng-model="doc.languageId">
 										<option value="de">de</option>
@@ -766,7 +619,7 @@
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label">View Type</label>
+					          	<label class="col-sm-4 control-label">View Type</label>
 					          	<div class="col-sm-7">
 					            	<select name="type" class="form-control m-b" ng-model="doc.documentViewTypeId">
 					            	  	<option value="Atmosphere">Atmosphere</option>
@@ -777,7 +630,7 @@
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label">Order No.</label>
+					          	<label class="col-sm-4 control-label">Order No.</label>
 					          	<div class="col-sm-7">
 					            	<input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" required>
 					            	
@@ -785,14 +638,14 @@
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label" >Description </label>
+					          	<label class="col-sm-4 control-label" >Description </label>
 					          	<div class="col-sm-7">
 					          		<textarea type="text" name="classificationid" class="form-control" ng-model="doc.description" required></textarea>
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label">Valid From</label>
+					          	<label class="col-sm-4 control-label">Valid From</label>
 					          	<div class="col-sm-7">
 					            	<input type="text" class="form-control date" id="dateFrom"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="doc.validFrom" is-open="opened.dateFrom"  date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
 					          	</div>
@@ -800,20 +653,37 @@
 
 							
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label">Valid To</label>
+					          	<label class="col-sm-4 control-label">Valid To</label>
 					          	<div class="col-sm-7">
 					            	<input type="text" class="form-control date" id="dateTo"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="doc.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
 					          	</div>
 					        </div>
 
-					        <div class="form-group">
-					          	<div class="col-sm-offset-5  col-sm-1">
-									<button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
-								</div>
-					        </div>
+					        
 						</div>
-					</form>
+					
+						<div class="row">
+				        	<div class="col-sm-12">
+				        		<div ng-include="'app/partials/_auditInfo.html'"></div>
+				        	</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+				        		<div class="form-group">
+						          	<div class="col-sm-offset-2  col-sm-3">
+										<button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
+										<button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Cancel</button>
+									</div>
+						        </div>
+							</div>
+				        </div>
+
+			        </form>
+
 				</div>
+
+					
+
 		    </tab>
 
 		    <tab heading="Price">
@@ -823,33 +693,82 @@
 						<tbody>
 							<tr >
 								<th class="check-box"><input type="checkbox" id="selectall"  ng-click="selectAllpriceCBoxes()"> </th>
-								<th>Contract</th>
-								<th>Info</th>
-								<th>Description</th>
-								<th>From Quantity</th>
-								<th>Price</th>
-								<th>Price Unit</th>
-								<th>Currency</th>
-								<th>Valid From</th>
-								<th>Valid To</th>
-								<th>Status</th>
-								<th>Type</th>
-								<th>UoM</th>
+								<th>
+									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Contract
+							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'info'; sortReverse = !sortReverse">Info
+							            <span ng-show="sortType == 'info' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'info' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'description'; sortReverse = !sortReverse">Description
+							            <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'validFromQuantity'; sortReverse = !sortReverse">From Quantity
+							            <span ng-show="sortType == 'validFromQuantity' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'validFromQuantity' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'priceTypeId'; sortReverse = !sortReverse">Price
+							            <span ng-show="sortType == 'priceTypeId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'priceTypeId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'priceUnit'; sortReverse = !sortReverse">Price Unit
+							            <span ng-show="sortType == 'priceUnit' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'priceUnit' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'currencyId'; sortReverse = !sortReverse">Currency
+							            <span ng-show="sortType == 'currencyId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'currencyId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'validFrom'; sortReverse = !sortReverse">Valid From
+							            <span ng-show="sortType == 'validFrom' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'validFrom' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'validTo'; sortReverse = !sortReverse">Valid To
+							            <span ng-show="sortType == 'validTo' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'validTo' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
+							            <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'path'; sortReverse = !sortReverse">Type
+							            <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th><a  ng-click="sortType = 'unitOfMeasureId'; sortReverse = !sortReverse">UoM
+							            <span ng-show="sortType == 'unitOfMeasureId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'unitOfMeasureId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
 								<th>Actions</th>
 							</tr>
 
-							<tr ng-click="editprice(pdata)" class="hoverptr" ng-repeat="pdata in editproduct.prices track by $index ">
+							<tr ng-click="editprice(pdata)" class="hoverptr" ng-repeat="pdata in editproduct.prices | orderBy:sortType:sortReverse  | filter:search:strict ">
 								<td class="check-box"><input type="checkbox" value="{{pdata._id}}" ng-checked="pdata.checked" ng-model="pdata.checked" ></td>
 								<td>{{pdata.contractId}}</td>
 								<td>{{pdata.info}}</td>
 								<td>{{pdata.description}}</td>
 								<td>{{pdata.validFromQuantity}}</td>
+								<td>{{pdata.priceTypeId}}</td>
 								<td>{{pdata.priceUnit}}</td>
 								<td>{{pdata.currencyId}}</td>
 								<td>{{pdata.validFrom}}</td>
 								<td>{{pdata.validTo}}</td>
 								<td>{{pdata.statusId}}</td>
-								<td>{{pdata.}}</td>
 								<td>{{pdata.}}</td>
 								<td>{{pdata.unitOfMeasureId}}</td>
 
@@ -871,8 +790,9 @@
 					</div>
 				</div>
 
-				<div class="row m-t-25 " ng-show="pricevar" >
-					<form name="newdocform" novalidate>
+				<form name="newdocform" novalidate>
+					<div class="row m-t-25 " ng-show="pricevar" >
+					
 						<div class="col-sm-6" >
 							<div class="form-group">
 					          	<label class="col-sm-5 control-label"> Contract </label>
@@ -884,7 +804,7 @@
 					        <div class="form-group">
 					          	<label class="col-sm-5 control-label"> Description </label>
 					          	<div class="col-sm-7">
-					          		<input type="number" name="description" class="form-control" ng-model="price.description" required>
+					          		<input type="string" name="description" class="form-control" ng-model="price.description" required>
 					          	</div>
 					        </div>
 
@@ -1075,39 +995,28 @@
 
 							    </accordion-group>
 
-
-							    <accordion-group is-open="status.close">
-							        <accordion-heading>
-							            Audit Info<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-							        </accordion-heading>
-							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> Created On/By </label>
-							          	<div class="col-sm-7">
-							          		<p>{{editproduct.createdAt}}</p>
-							          	</div>
-							        </div>
-
-							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> Changed On/By </label>
-							          	<div class="col-sm-7">
-							          		<p>{{editproduct.updatedAt}}</p>										
-							          	</div>
-							        </div>
-
-							       
-
-							    </accordion-group>
-
 							</accordion>
 
-					        <div class="form-group">
-					          	<div class="col-sm-1">
-									<button class="btn btn-primary" type="submit" ng-click="saveprice(price);">Save</button>
-								</div>
-					        </div>
 						</div>
-					</form>
-				</div>
+
+						<div class="row">
+				        	<div class="col-sm-12">
+				        		<div ng-include="'app/partials/_auditInfo.html'"></div>
+				        	</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+				        		<div class="form-group">
+						          	<div class="col-sm-offset-5  col-sm-1">
+										<button class="btn btn-primary" type="submit" ng-click="saveprice(price);">Save</button>
+									</div>
+						        </div>
+							</div>
+				        </div>
+				    </div>
+				</form>
+				
 	 
 				
 		    </tab>
@@ -1120,17 +1029,52 @@
 						<tbody>
 							<tr>
 								<th class="check-box"><input type="checkbox" id="selectall"  ng-click="selectAllcproductCBoxes()"> </th>
-								<th>Contract</th> 
-								<th>Info</th>
-								<th>Status</th>
-								<th>Ext Product Id</th>	 
-								<th>Ext Classification Id</th>	 
-								<th>Ext Classification Group Id</th>	 
-								<th>Ext Short description</th>
+								<th>
+									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Contract
+							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th> 
+								<th>
+									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Info
+							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Status
+							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Ext Product Id
+							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>	 
+								<th>
+									<a  ng-click="sortType = 'extClassificationId'; sortReverse = !sortReverse">Ext Classification Id
+							            <span ng-show="sortType == 'extClassificationId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'extClassificationId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>	 
+								<th>
+									<a  ng-click="sortType = 'extClassificationGroupId'; sortReverse = !sortReverse">Ext Classification Group Id
+							            <span ng-show="sortType == 'extClassificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'extClassificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>	 
+								<th>
+									<a  ng-click="sortType = 'descShort'; sortReverse = !sortReverse">Ext Short description
+							            <span ng-show="sortType == 'descShort' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'descShort' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
 								<th>Actions</th>
 							</tr>
 
-							<tr ng-click="editcproduct(cprodata)" class="hoverptr" ng-repeat="cprodata in editproduct.contractedProducts track by $index ">
+							<tr ng-click="editcproduct(cprodata)" class="hoverptr" ng-repeat="cprodata in editproduct.contractedProducts | orderBy:sortType:sortReverse  | filter:search:strict  ">
 								<td ><input type="checkbox" value="{{cprodata._id}}" ng-checked="cprodata.checked" ng-model="cprodata.checked" ></td>
 								<td >{{cprodata.contractId}}</td>
 								<td ></td>
@@ -1157,8 +1101,9 @@
 					</div>
 				</div>
 
-				<div class="row m-t-25 " ng-show="cproductvar" >
-					<form name="newdocform" novalidate>
+				
+				<form name="newdocform" novalidate>
+					<div class="row m-t-25 " ng-show="cproductvar" >
 						<div class="col-sm-6" >
 							<div class="form-group">
 					          	<label class="col-sm-5 control-label"> Contract </label>
@@ -1458,15 +1403,26 @@
 
 							</accordion>
 
-					        <div class="form-group">
-					          	<div class="col-sm-1">
-									<button class="btn btn-primary" type="submit" ng-click="savecproduct(cproduct);">Save</button>
-								</div>
-					        </div>
-
 						</div>
-					</form>
-				</div>
+
+						<div class="row">
+				        	<div class="col-sm-12">
+				        		<div ng-include="'app/partials/_auditInfo.html'"></div>
+				        	</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+				        		<div class="form-group">
+						          	<div class="col-sm-offset-5  col-sm-1">
+										<button class="btn btn-primary" type="submit" ng-click="savecproduct(cproduct);">Save</button>
+									</div>
+						        </div>
+							</div>
+				        </div>
+				    </div>
+				</form>
+				
 																	
 		    </tab>
 
@@ -1478,17 +1434,72 @@
 						<tbody>
 							<tr>
 								<th class="check-box"><input type="checkbox" id="selectall"  ng-click="selectAllprelationCBoxes()"> </th>
-								<th>Product ID/Description	 </th>
-								<th>Relation</th>
-								<th>Product ID</th>
-								<th>Description	</th>
-								<th>Status</th>
-								<th>Sync Type</th>
-								<th>Seq No</th>
-								<th>Quantity</th>
-								<th>Selection Group Id</th>
-								<th>Is Mandatory</th>
-								<th>Is Default Selected</th>
+								<th>
+									<a  ng-click="sortType = 'productId'; sortReverse = !sortReverse">Product ID/Description
+							            <span ng-show="sortType == 'productId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'productId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'typeId'; sortReverse = !sortReverse">Relation
+							            <span ng-show="sortType == 'typeId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'typeId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Product ID
+							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'Description'; sortReverse = !sortReverse">Description
+							            <span ng-show="sortType == 'Description' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'Description' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    	</th>
+								<th>
+									<a  ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
+							            <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'syncTypeId'; sortReverse = !sortReverse">Sync Type
+							            <span ng-show="sortType == 'syncTypeId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'syncTypeId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'seqNo'; sortReverse = !sortReverse">Seq No
+							            <span ng-show="sortType == 'seqNo' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'seqNo' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'quantity'; sortReverse = !sortReverse">Quantity
+							            <span ng-show="sortType == 'quantity' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'quantity' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'selectionGroupId'; sortReverse = !sortReverse">Selection Group Id
+							            <span ng-show="sortType == 'selectionGroupId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'selectionGroupId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'isMandatory'; sortReverse = !sortReverse">Is Mandatory
+							            <span ng-show="sortType == 'isMandatory' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'isMandatory' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+								<th>
+									<a  ng-click="sortType = 'isDefaultSelected'; sortReverse = !sortReverse">Is Default Selected
+							            <span ng-show="sortType == 'isDefaultSelected' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'isDefaultSelected' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
 								<th>Actions</th>
 							</tr>
 
@@ -1523,25 +1534,26 @@
 						<button class="btn btn-primary" ng-click="deleteprelation()">Delete Selected</button>
 					</div>
 				</div>
- 				<div class="row m-t-25 " ng-show="nproductvar" >
-					<form name="newdocform" novalidate>
-						<div class="col-sm-8" >
+ 				
+				<form name="newdocform" novalidate>
+					<div class="row m-t-25 " ng-show="nproductvar" >
+						<div class="col-sm-7" >
 							<div class="form-group">					        
-					          	<label class="col-sm-5 control-label"> Product </label>
+					          	<label class="col-sm-4 control-label"> Product </label>
 					          	<div class="col-sm-7">
 					          		<input type="string" name="contract" class="form-control" ng-model="editproduct.productId" ng-disabled="true">
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Related Product </label>
+					          	<label class="col-sm-4 control-label"> Related Product </label>
 					          	<div class="col-sm-7">
 					          		<input type="string" name="description" class="form-control" ng-model="prelation.relatedProductId" required>
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label">Relation</label>
+					          	<label class="col-sm-4 control-label">Relation</label>
 					          	<div class="col-sm-7">
 					            	<select name="relation" class="form-control m-b" ng-model="prelation.typeId" size=6>
 										<option value="Beleuchtung_source">Beleuchtung (source)</option>
@@ -1602,7 +1614,7 @@
 					        	
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Description </label>
+					          	<label class="col-sm-4 control-label"> Description </label>
 
 					          	<span class="col-sm-1 pull-right"><button class="btn btn-primary " ng-click="addContact()"><i class="fa fa-plus"></i></button></span>
 					          	
@@ -1641,14 +1653,10 @@
 						          	</div>
 						        </span>
 
-
 					        </div>
 
-
-
-
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Status </label>
+					          	<label class="col-sm-4 control-label"> Status </label>
 					          	<div class="col-sm-7">
 					          		<select name="status" class="form-control m-b" ng-model="prelation.statusId">
 										<option value="29">100 new</option>
@@ -1661,49 +1669,49 @@
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Sync Type ID </label>
+					          	<label class="col-sm-4 control-label"> Sync Type ID </label>
 					          	<div class="col-sm-7">
 					          		<input type="number" name="price" class="form-control" ng-model="prelation.syncTypeId" required>
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Seq No </label>
+					          	<label class="col-sm-4 control-label"> Seq No </label>
 					          	<div class="col-sm-7">
 					          		<input type="text" name="price" class="form-control" ng-model="prelation.seqNo" required>
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Quantity </label>
+					          	<label class="col-sm-4 control-label"> Quantity </label>
 					          	<div class="col-sm-7">
 					          		<input type="text" name="price" class="form-control" ng-model="prelation.quantity" required>
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Selection Group Id </label>
+					          	<label class="col-sm-4 control-label"> Selection Group Id </label>
 					          	<div class="col-sm-7">
 					          		<input type="text" name="price" class="form-control" ng-model="prelation.selectionGroupId" required>
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> is Mandatory </label>
+					          	<label class="col-sm-4 control-label"> is Mandatory </label>
 					          	<div class="col-sm-7">
 					          		<input type="checkbox" name="price" ng-model="prelation.isMandatory" required>
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Is Default Selected </label>
+					          	<label class="col-sm-4 control-label"> Is Default Selected </label>
 					          	<div class="col-sm-7">
 					          		<input type="checkbox" name="price" ng-model="prelation.isDefaultSelected" required>
 					          	</div>
 					        </div>
 
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label">Valid From</label>
+					          	<label class="col-sm-4 control-label">Valid From</label>
 					          	<div class="col-sm-7">
 					            	<input type="text" class="form-control date" id="dateFrom"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validFrom" is-open="opened.dateFrom"  date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
 					          	</div>
@@ -1711,7 +1719,7 @@
 
 							
 					        <div class="form-group">
-					          	<label class="col-sm-5 control-label">Valid To</label>
+					          	<label class="col-sm-4 control-label">Valid To</label>
 					          	<div class="col-sm-7">
 					            	<input type="text" class="form-control date" id="dateTo"  ng-click="open($event)"   class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" >
 					          	</div>
@@ -1726,63 +1734,63 @@
 							            Udx Info<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
 							        </accordion-heading>
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxText 1 </label>
+							          	<label class="col-sm-4 control-label"> UdxText 1 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxText1" required>
 							          	</div>
 							        </div>
 
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxText 2 </label>
+							          	<label class="col-sm-4 control-label"> UdxText 2 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxText2" required>
 							          	</div>
 							        </div>
 
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxText 3 </label>
+							          	<label class="col-sm-4 control-label"> UdxText 3 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxText3" required>
 							          	</div>
 							        </div>
 
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxNum 1 </label>
+							          	<label class="col-sm-4 control-label"> UdxNum 1 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxNum1" required>
 							          	</div>
 							        </div>
 
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxNum 2 </label>
+							          	<label class="col-sm-4 control-label"> UdxNum 2 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxNum2" required>
 							          	</div>
 							        </div>
 
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxNum 3 </label>
+							          	<label class="col-sm-4 control-label"> UdxNum 3 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxNum3" required>
 							          	</div>
 							        </div>
 
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxSortKey 1 </label>
+							          	<label class="col-sm-4 control-label"> UdxSortKey 1 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxSortKey1" required>
 							          	</div>
 							        </div>
 
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxSortKey 2 </label>
+							          	<label class="col-sm-4 control-label"> UdxSortKey 2 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxSortKey2" required>
 							          	</div>
 							        </div>
 
 							        <div class="form-group">
-							          	<label class="col-sm-5 control-label"> UdxSortKey 3 </label>
+							          	<label class="col-sm-4 control-label"> UdxSortKey 3 </label>
 							          	<div class="col-sm-7">
 							          		<input type="number" name="price" class="form-control" ng-model="prelation.udxSortKey3" required>
 							          	</div>
@@ -1790,23 +1798,31 @@
 							    </accordion-group>
 
 							</accordion>
-
-					        <div class="form-group">
-					          	<div class="col-sm-1">
-									<button class="btn btn-primary" type="submit" ng-click="saverelation(prelation);">Save</button>
-								</div>
-					        </div>
 						</div>
-					</form>
-				</div>
-	 
 
+						<div class="row">
+				        	<div class="col-sm-12">
+				        		<div ng-include="'app/partials/_auditInfo.html'"></div>
+				        	</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+				        		<div class="form-group">
+						          	<div class="col-sm-offset-5  col-sm-1">
+										<button class="btn btn-primary" type="submit" ng-click="saverelation(prelation);">Save</button>
+									</div>
+						        </div>
+							</div>
+				        </div>
+
+				    </div>
+				</form>
+				
 		    </tab>
 		</tabset>
 
-		<div class="row">
-			<div ng-include="'app/partials/_auditInfo.html'"></div>
-		</div>
+		
 	</div>
 
 
