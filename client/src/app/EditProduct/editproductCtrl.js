@@ -29,10 +29,26 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 			  .catch(function(err){
 			  	console.log('error')
 			  })
+
+			   getOption();
+
 		 }
 
 
 		 init();
+
+		  function getOption(){
+		 	var urlBase = '/getVariants';
+		 	$http.get(urlBase)
+			  .then(function(result) {
+			    $scope.options = result.data;
+			    
+				})
+			  .catch(function(err){
+			  	console.log('error')
+			  })
+		 }
+
 
 		// $scope.fetchProductData = function(){
 
@@ -94,6 +110,9 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 
 		  $scope.editGrp = function (data){
 		  	$scope.editrow=data;
+		  	if(data.variantId){
+		  		$scope.editrow.variantId=parseInt(data.variantId);
+		  	}
 		  	$scope.editvar=true;
 		  	$scope.showvar=false;
 		  }

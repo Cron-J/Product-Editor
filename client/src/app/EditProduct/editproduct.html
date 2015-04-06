@@ -282,6 +282,13 @@
 							    </th>
 
 
+							    <th>
+									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
+							            <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+
 								<th>
 									<a  ng-click="sortType = 'orderNo'; sortReverse = !sortReverse">Order
 							            <span ng-show="sortType =='orderNo' && !sortReverse" class="fa fa-caret-down"></span>
@@ -309,6 +316,20 @@
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
+
+								
+
+								<td>
+									<div class="form-inline">
+										<select class="input-sm"  ng-options="option.variantId as option.variantId for option in options" ng-model="search.variantId"> 
+									      <option value="">-- choose Variant --</option>
+										</select>
+										<button class="btn btn-default btn-xs" ng-click="search.variantId='' "><i class="glyphicon glyphicon-remove"></i></button>
+										
+									</div>
+								</td>
+
+
 								<td>
 									<div class="form-inline">
 										<input type="text" class="input-sm" ng-model="search.orderNo">
@@ -317,19 +338,24 @@
 								</td>
 								<td></td>
 							</tr>
-
+							
 							<tr  ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict" >
 								<td class="check-box"><input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked"
 									ng-model="tdata.checked" ng-click="itemToRemove($index)"> </td>
 
 								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationId}}</td>
+
 								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationGroupId}}</td>
+
+								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.variantId}}</td>
+
+								<!-- <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.variantId}}</td> -->
 								<td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.orderNo}}</td>
 								<td  > <button class="btn btn-primary btn-xs" ng-click="editGrp(tdata)">Edit</button> </td>
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="5">
+							<td colspan="6">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
@@ -368,13 +394,22 @@
 					          	</div>
 					        </div>
 
-					        <div class="form-group">
+					       
+
+							<div class="form-group">
+					          	<label class="col-sm-5 control-label">Variant ID</label>
+					          	<select  class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="createNew.variantId"> 
+								      <option value="">-- choose Variant --</option>
+								</select>
+					        </div>
+
+					        
 					          	<div class="col-sm-offset-5  col-sm-1">
 									<button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid ||  
 									
 									assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
 								</div>
-					        </div>
+					        
 
 						</div>
 					</form>
@@ -413,6 +448,16 @@
 				            	<input type="text" class="form-control" ng-model="editrow.orderNo">
 				          	</div>
 				        </div>
+
+				        <div class="form-group">
+					         	<label class="col-sm-4 control-label">Variant ID</label>
+					         	<div class="col-sm-8">
+						         	<select class="input-sm"  ng-options="option.variantId as option.variantId for option in options" ng-model="editrow.variantId"> 
+								        <option value="">-- choose Variant --</option>
+									</select>
+								</div>
+					    </div>
+
 					</div>
 		        
 			        <div class="row">
@@ -443,6 +488,7 @@
 						<tbody>
 							<tr>
 								<th>Attribute</th>
+								<th>Variant</th>
 								<th>Language</th>
 								<th>Value</th>
 								<th>Synchronized</th>
@@ -457,6 +503,7 @@
 
 							<tr  class="hoverptr inactive"  ng-repeat="tdata in editproduct" >
 								{{tdata.product}}
+								<td>Variant</td>
 								<td ></td>
 								<td ></td>
 								<td ng-dblclick="startEditing(item);">
@@ -476,7 +523,7 @@
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="11">
+							<td colspan="12">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
@@ -497,6 +544,14 @@
 							            <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
 							        </a>
 							    </th>
+
+							    <th>
+									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">variant
+							            <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+
 								<th>
 									<a  ng-click="sortType = 'documentViewTypeId'; sortReverse = !sortReverse">View Type
 							            <span ng-show="sortType == 'documentViewTypeId' && !sortReverse" class="fa fa-caret-down"></span>
@@ -533,6 +588,9 @@
 											</button>
 									</div>
 								</td>
+
+								<td>variant</td>
+
 								<td>
 									<div class="form-inline">
 										<input type="text" class="input-sm" ng-model="search.classificationGroupId">
@@ -575,7 +633,7 @@
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="7">
+							<td colspan="8">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
@@ -699,6 +757,14 @@
 							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
 							        </a>
 							    </th>
+
+							    <th>
+									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
+							            <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
+
 								<th><a  ng-click="sortType = 'info'; sortReverse = !sortReverse">Info
 							            <span ng-show="sortType == 'info' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'info' && sortReverse" class="fa fa-caret-up"></span>
@@ -759,6 +825,7 @@
 
 							<tr ng-click="editprice(pdata)" class="hoverptr" ng-repeat="pdata in editproduct.prices | orderBy:sortType:sortReverse  | filter:search:strict ">
 								<td class="check-box"><input type="checkbox" value="{{pdata._id}}" ng-checked="pdata.checked" ng-model="pdata.checked" ></td>
+								<td>variant id</td>
 								<td>{{pdata.contractId}}</td>
 								<td>{{pdata.info}}</td>
 								<td>{{pdata.description}}</td>
@@ -777,7 +844,7 @@
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="14">
+							<td colspan="15">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
@@ -1035,6 +1102,14 @@
 							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
 							        </a>
 							    </th> 
+
+							    <th>
+									<a  ng-click="sortType = 'VariantId'; sortReverse = !sortReverse">Variant
+							            <span ng-show="sortType == 'VariantId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'VariantId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th> 
+
 								<th>
 									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Info
 							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
@@ -1076,6 +1151,7 @@
 
 							<tr ng-click="editcproduct(cprodata)" class="hoverptr" ng-repeat="cprodata in editproduct.contractedProducts | orderBy:sortType:sortReverse  | filter:search:strict  ">
 								<td ><input type="checkbox" value="{{cprodata._id}}" ng-checked="cprodata.checked" ng-model="cprodata.checked" ></td>
+								<td>variant</td>
 								<td >{{cprodata.contractId}}</td>
 								<td ></td>
 								<td ></td>
@@ -1087,7 +1163,7 @@
 							</tr>
 						</tbody>
 						<tfoot>
-							<td colspan="9">
+							<td colspan="10">
 								<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
 							</td>
 						</tfoot>
@@ -1440,6 +1516,12 @@
 							            <span ng-show="sortType == 'productId' && sortReverse" class="fa fa-caret-up"></span>
 							        </a>
 							    </th>
+							    <th>
+									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
+							            <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
+							            <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
+							        </a>
+							    </th>
 								<th>
 									<a  ng-click="sortType = 'typeId'; sortReverse = !sortReverse">Relation
 							            <span ng-show="sortType == 'typeId' && !sortReverse" class="fa fa-caret-down"></span>
@@ -1508,6 +1590,7 @@
 									<input type="checkbox" value="{{prdata._id}}" ng-checked="prdata.checked" ng-model="prdata.checked">
 								</td>
 								<td >{{editproduct.productId}}</td>
+								<td >variant</td>
 								<td >{{prdata.typeId}}</td>
 								<td >{{prdata.}}</td>
 								<td >{{prdata.Description}}</td>
@@ -1634,7 +1717,7 @@
 						          	</div>
 						        
 
-						        <span ng-repeat="">
+						        <!-- <span ng-repeat="">
 
 						        	<span class="col-sm-5 m-b-10" ></span>
 						        	<span class="col-sm-1 pull-right m-b-10"><button class="btn btn-primary " ng-click="removeContact(contact)"><i class="fa fa-remove"></i></button></span>
@@ -1651,7 +1734,7 @@
 						          	<div class="col-sm-4 m-b-10">
 						          		<input type="text" name="price" class="form-control" ng-model="prelation.descriptions" >
 						          	</div>
-						        </span>
+						        </span> -->
 
 					        </div>
 
