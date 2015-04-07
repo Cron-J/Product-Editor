@@ -115,9 +115,9 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 
 		  $scope.editGrp = function (data){
 		  	$scope.editrow=data;
-		  	if(data.variantId){
-		  		$scope.editrow.variantId=parseInt(data.variantId);
-		  	}
+		  	// if(data.variantId){
+		  	// 	$scope.editrow.variantId=parseInt(data.variantId);
+		  	// }
 		  	$scope.editvar=true;
 		  	$scope.showvar=false;
 		  }
