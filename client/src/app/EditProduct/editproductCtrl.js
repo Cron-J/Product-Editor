@@ -4,11 +4,8 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 	function($scope,$rootScope, $http, $location,
 		growl, $modal, $routeParams, blockUI,$filter){
 
-		 $scope.countries = [ // Taken from https://gist.github.com/unceus/6501985
-    	{names: 'Afghanistan', code: 'AF'},
-	    {names: 'Åland Islands', code: 'AX'},
-	    
-	  ];
+		 
+	  $scope.output={mk:[]};
 
 		$scope.updateitem = function(editproduct){
 
@@ -120,6 +117,14 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 		  	// }
 		  	$scope.editvar=true;
 		  	$scope.showvar=false;
+		  }
+
+		  // $scope.$watch('output.mk',function(){
+		  // 	if($scope.output.mk.length>0)
+		  // 	// $scope.search.variantId=$scope.output.mk[0].variantId;
+		  // })
+		  $scope.test=function(){
+		  	console.log('sdsd');
 		  }
 
 
