@@ -4,6 +4,8 @@
 var mongoose = require('mongoose'),
     timestamps = require('mongoose-timestamp'),
     Schema = mongoose.Schema,
+    constants = require('../Utility/constants').constants,
+    validator = require('mongoose-validators'),
     Product2ClassificationGroup = require('./product-classification-group').Product2ClassificationGroup,
     ProductAttributeValue = require('./product-attribute-value').ProductAttributeValue,
     Price = require('./price').Price,
@@ -30,7 +32,8 @@ var ProductSchema = new Schema({
     tenantId: {
         type: String,
         index: true,
-        required: true
+        required: true,
+        validate: [ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
@@ -38,7 +41,8 @@ var ProductSchema = new Schema({
      */
     productId: {
         type: String,
-        unique: true
+        unique: true,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
@@ -46,84 +50,96 @@ var ProductSchema = new Schema({
      */
     supplierId: {
         type: String,
-        index: true
+        index: true,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * Identifier of product status (like <i>800 - deleted</i>, <i>400 - confirmed</i>, etc).
      */
     statusId: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * Manufacturer article identifier.
      */
     mfgProductId: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * Manufacturer article name. (WARN: in PIM this is same fields means <code>manufacturerName</code> because <code>mfgProductName</code> doesn't exist in PIM)
      */
     mfgProductName: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.nameRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * Identifier of Manufacturer of the product.
      */
-    manufactererId: {
-        type: String
+    manufacturerId: {
+        type: String,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * The name of the manufacturer of the product. (WARN: in PIM the same fields means <code>mfgProductName</code> because <code>mfgProductName</code> doesn't exist in PIM)
      */
-    manufactererName: {
-        type: String
+    manufacturerName: {
+        type: String,
+        validate:[ validator.matches(constants.nameRegex), validator.isLength(0, 50) ]
     },
 
     /**
      *  External product ID. Useful when external products are mapped to jCatalog using a different set of ids.
      */
     extProductId: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
      *  Extension to {@link #productId}. Useful in scope of Master/Variants scenarios to store the variant's Id suffix.
      */
     productIdExtension: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * Identifier of additional UOM for BMECat CONTENT_UNIT.
      */
     unitOfMeasureId: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * Identifier of UOM to be used for this product when ordered. This is also the unit the price is related to.
      */
     salesUnitOfMeasureId: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * Keywords that are used for searching products, separated by white space.
      */
     keywords: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.nameRegex), validator.isLength(0, 50) ]
     },
 
     /**
      * EAN/GTIN  internationally unique article number
      */
     ean: {
-        type: String
+        type: String,
+        validate:[ validator.matches(constants.nameRegex), validator.isLength(0, 50) ]
     },
 
     /**
