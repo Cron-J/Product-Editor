@@ -60,11 +60,11 @@ exports.getProductById = {
                         if (err) {
                             console.log(err);
                         } else {
-                            return reply(deleteEmptyArrayHelper(result));
+                            return reply(result);
                         }
                     });
                 } else {
-                    return reply(deleteEmptyArrayHelper(result));
+                    return reply(result);
                 }
             } else reply(Boom.forbidden(err));
         });
