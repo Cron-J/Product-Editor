@@ -320,8 +320,10 @@
 								
 
 								<td>
-				  					<div multi-select input-model="options" output-model="abc" button-label="variantId" item-label="variantId" 
+				  					<div isteven-multi-select input-model="options" output-model="mk" button-label="variantId" item-label="variantId" 
 								    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+
+								    	 
 									</div>
 								</td>
 
@@ -356,11 +358,12 @@
 							</td>
 						</tfoot>
 					</table>
+					{{mk}}
 				</div>
 
 				<div class="row ">
 					<div class="col-sm-4 " >
-						<button class="btn btn-primary" ng-click="assignGrp()">Assign New Group</button>
+						<button class="btn btn-primary" ng-click="assignGrp()">Assign New Group </button>
 						<button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button>
 					</div>
 				</div>
@@ -535,7 +538,7 @@
 							<tr>
 								<th class="check-box"><input id="selectall"  ng-click="selectAlldocCBoxes()" type="checkbox"> </th>
 								<th>
-									<a  ng-click="sortType = 'path'; sortReverse = !sortReverse">URL
+									<a  ng-click="sortType = 'path'; sortReverse = !sortReverse">Path
 							            <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
 							        </a>
@@ -579,37 +582,40 @@
 								<td></td>
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.classificationId">
+										<input type="text" class="input-sm" ng-model="search.path">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
 											</button>
 									</div>
 								</td>
 
 								<td>
-				  					<div multi-select input-model="options" output-model="vdoc" button-label="variantId" item-label="variantId" 
+				  					<div multi-select input-model="options" output-model="variantdoc" button-label="variantId" item-label="variantId" 
 								    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
 									</div>
 								</td>
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.classificationGroupId">
+										<input type="text" class="input-sm" ng-model="search.documentViewTypeId">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
 
 								<td>
 									<div class="form-inline">
-										<select name="language" class="input-sm" ng-model="doc.languageId">
-											<option value="de">de</option>
-											<option value="en">en</option>
-											<option value="es">es</option>
-											<option value="fr">fr</option>
-											<option value="jp">jp</option>
-						            	</select>
+										<input type="text" class="input-sm" ng-model="search.languageId">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
+
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.description">
+										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+									</div>
+								</td>
+
+								
 
 								<td>
 									<div class="form-inline">
@@ -617,7 +623,7 @@
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
-								<td></td>
+								
 								<td></td>
 							</tr>
 
@@ -625,6 +631,7 @@
 
 								<td class="check-box" ><input type="checkbox" value="{{ddata._id}}" ng-checked="ddata.checked" ng-model="ddata.checked" ></td>
 								<td  class="hoverptr" >{{ddata.path}}</td>
+								<td  class="hoverptr">{{ddata.variantId}}</td>
 								<td  class="hoverptr" >{{ddata.documentViewTypeId}}</td>
 								<td  class="hoverptr" >{{ddata.languageId}}</td>
 								<td  class="hoverptr" >{{ddata.description}}</td>
@@ -656,7 +663,7 @@
 					<form name="newdocform" novalidate>
 						<div class="col-sm-6" >
 							<div class="form-group">
-					          	<label class="col-sm-4 control-label"> URL </label>
+					          	<label class="col-sm-4 control-label"> Path </label>
 					          	<div class="col-sm-7">
 					          		<textarea type="text" name="url" class="form-control" ng-model="doc.path" required></textarea>
 					          		
@@ -835,7 +842,7 @@
 								</td>
 
 								<td>
-				  					<div multi-select input-model="options" output-model="vdoc" button-label="variantId" item-label="variantId" 
+				  					<div multi-select input-model="options" output-model="variantprice" button-label="variantId" item-label="variantId" 
 								    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
 									</div>
 								</td>
@@ -923,7 +930,7 @@
 
 							<tr ng-click="editprice(pdata)" class="hoverptr" ng-repeat="pdata in editproduct.prices | orderBy:sortType:sortReverse  | filter:search:strict ">
 								<td class="check-box"><input type="checkbox" value="{{pdata._id}}" ng-checked="pdata.checked" ng-model="pdata.checked" ></td>
-								<td>variant id</td>
+								<td>{{pdata.variantId}}</td>
 								<td>{{pdata.contractId}}</td>
 								<td>{{pdata.info}}</td>
 								<td>{{pdata.description}}</td>
@@ -1208,24 +1215,8 @@
 							        </a>
 							    </th> 
 
-								<th>
-									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Info
-							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
-								<th>
-									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Status
-							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
-								<th>
-									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Ext Product Id
-							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>	 
+								
+									 
 								<th>
 									<a  ng-click="sortType = 'extClassificationId'; sortReverse = !sortReverse">Ext Classification Id
 							            <span ng-show="sortType == 'extClassificationId' && !sortReverse" class="fa fa-caret-down"></span>
@@ -1249,21 +1240,19 @@
 
 							<tr>
 								<td ></td>
-								<td >
-									<div multi-select input-model="options" output-model="vassortment" button-label="variantId" item-label="variantId" 
-								    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
-									</div>
-								</td>
-
 								<td>
 									<div class="form-inline">
 										<input type="text" class="input-sm" ng-model="search.contractId">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
+								<td >
+									<div multi-select input-model="options" output-model="vassortment" button-label="variantId" item-label="variantId" 
+								    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+									</div>
+								</td>
+
+								
 								<td>
 									<div class="form-inline">
 										<input type="text" class="input-sm" ng-model="search.extClassificationId">
@@ -1289,13 +1278,9 @@
 
 							<tr ng-click="editcproduct(cprodata)" class="hoverptr" ng-repeat="cprodata in editproduct.contractedProducts | orderBy:sortType:sortReverse  | filter:search:strict  ">
 								<td ><input type="checkbox" value="{{cprodata._id}}" ng-checked="cprodata.checked" ng-model="cprodata.checked" ></td>
-								<td>
-				  					
-								</td>
+								<td></td>
 								<td >{{cprodata.contractId}}</td>
-								<td ></td>
-								<td ></td>
-								<td ></td>
+								
 								<td >{{cprodata.extClassificationId}}</td>
 								<td >{{cprodata.extClassificationGroupId}}</td>
 								<td >{{cprodata.descShort}}</td>
@@ -1742,11 +1727,18 @@
 									</div>
 								</td>
 
-								<td></td>
+								
 
 								<td>
 									<div class="form-inline">
 										<input type="text" class="input-sm" ng-model="search.typeId">
+											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+									</div>
+								</td>
+
+								<td>
+									<div class="form-inline">
+										<input type="text" class="input-sm" ng-model="search.productId">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
