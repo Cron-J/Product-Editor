@@ -2,7 +2,9 @@
 
 // dependencies
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    constants = require('../Utility/constants').constants,
+    validator = require('mongoose-validators');
 
 
 var VariantSchema = new Schema({
@@ -13,7 +15,8 @@ var VariantSchema = new Schema({
     variantId: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        validate: [ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
     /**
