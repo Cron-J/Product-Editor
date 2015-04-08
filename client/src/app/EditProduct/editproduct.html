@@ -364,7 +364,7 @@
 								<td></td>
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.classificationId">
+										<input  type="text" class="input-sm" ng-model="search.classificationId">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
 											</button>
 									</div>
@@ -375,18 +375,15 @@
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
-
-								
-
+							
 								<td>
 									<div class="form-inline">
-					  					<div  isteven-multi-select input-model="options" output-model="output" button-label="variantId" item-label="variantId" 
+					  					<div class="tdwidth" isteven-multi-select input-model="options" output-model="output" button-label="variantId" item-label="variantId" 
 									    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId" >
 										</div>
 										<button class="btn btn-default btn-xs" ><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
-
 
 								<td>
 									<div class="form-inline">
@@ -555,6 +552,22 @@
 		    <tab heading="Attributes">
 		    	<div class=" m-t-25">
 					<!-- <b>Found {{filteredItems.length}} entries</b> -->
+
+					<div class="row">
+						<select multiple ng-model="select.atrcolhide" ng-options="">
+						  	<option value="variant">Variant</option>
+						  	<option value="language">Language</option>
+						  	<option value="status">Status</option>
+						  	<option value="order">Order</option>
+						</select>
+						<button class="btn btn-primary" ng-click="hidecol()"> Hide </button>		
+					</div>
+						
+					
+					
+
+
+
 					<table class="table table-stripped table-bordered custom-table">
 						<tbody>
 							
@@ -566,14 +579,14 @@
 							        </a>
 							    </th>
 
-							    <th>
-									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
+							    <th ng-show="select.atrcolhide.indexOf('variant')>=0">
+									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant{{select.atrcolhide.indexOf('variant')>=0}}
 							            <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
 							        </a>
 							    </th>
 
-							    <th>
+							    <th ng-if="! select.atrcolhide.indexOf('language')>=0">
 									<a  ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
 							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
@@ -587,7 +600,7 @@
 							        </a>
 							    </th>
 
-							    <th>
+							    <th ng-if="! select.atrcolhide.indexOf('order')>=0">
 									<a  ng-click="sortType = 'orderNro'; sortReverse = !sortReverse">Order No.
 							            <span ng-show="sortType == 'orderNro' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'orderNro' && sortReverse" class="fa fa-caret-up"></span>
@@ -596,7 +609,7 @@
 
 							   
 
-							    <th>
+							    <th ng-if="! select.atrcolhide.indexOf('status')>=0">
 									<a  ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
 							            <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
@@ -611,15 +624,15 @@
 								
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.attribute">
+										<input  type="text" class="input-sm tdwidth" ng-model="search.attribute">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
 											</button>
 									</div>
 								</td>
 
 								<td>
-									<div class="form-inline">
-					  					<div isteven-multi-select input-model="options" output-model="attributeop" button-label="variantId" item-label="variantId" 
+									<div class="form-inline ">
+					  					<div  isteven-multi-select input-model="options" output-model="attributeop" button-label="variantId" item-label="variantId" 
 									    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId" >
 										</div>
 										<button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
@@ -628,7 +641,7 @@
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.languageId">
+										<input type="text" class="input-sm tdwidth" ng-model="search.languageId">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
@@ -637,7 +650,7 @@
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.value">
+										<input type="text" class="input-sm tdwidth" ng-model="search.value">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
@@ -645,14 +658,14 @@
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.orderNro">
+										<input type="text" class="input-sm tdwidth" ng-model="search.orderNro">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.statusId">
+										<input type="text" class="input-sm tdwidth" ng-model="search.statusId">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
@@ -660,12 +673,14 @@
 								<td></td>
 							</tr>
 								
+         
 							<tr  class="hoverptr inactive"  ng-repeat="atrdata in editproduct.attributeValues | orderBy:sortType:sortReverse  | filter:search:strict | filter:attributeop[0]:strict"  >
 								<td >{{atrdata.attribute}}</td>
 								<td >{{atrdata.variantId}}</td>
 								<td >{{atrdata.languageId}}</td>
-								<td ><span style="width:100%;height:100%;"  editable ng-model="editproduct.attributeValues[$index].value">{{atrdata.value}}</span></td>
-								<td ><span editable ng-model="editproduct.attributeValues[$index].orderNro">{{atrdata.orderNro}}</span></td>
+								<td editable model="editproduct.attributeValues[$index].value"><span>{{atrdata.value}}</span></td>
+								<td editable model="editproduct.attributeValues[$index].orderNro"><span>{{atrdata.orderNro}}</span></td>
+								
 								<td>{{atrdata.statusId}}</td>
 								<td></td>
 							</tr>
@@ -742,7 +757,7 @@
 								<td></td>
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.path">
+										<input type="text" class="input-sm dtdwidth" ng-model="search.path">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
 											</button>
 									</div>
@@ -750,7 +765,7 @@
 
 								<td>
 									<div class="form-inline">
-					  					<div isteven-multi-select input-model="options" output-model="variantdoc" button-label="variantId" item-label="variantId" 
+					  					<div class="dtdwidth" isteven-multi-select input-model="options" output-model="variantdoc" button-label="variantId" item-label="variantId" 
 									    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId" >
 										</div>
 										<button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
@@ -760,21 +775,21 @@
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.documentViewTypeId">
+										<input type="text" class="input-sm dtdwidth" ng-model="search.documentViewTypeId">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.languageId">
+										<input type="text" class="input-sm dtdwidth" ng-model="search.languageId">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.description">
+										<input type="text" class="input-sm dtdwidth" ng-model="search.description">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
@@ -783,7 +798,7 @@
 
 								<td>
 									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.orderNo">
+										<input type="text" class="input-sm dtdwidth" ng-model="search.orderNo">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>

@@ -5,7 +5,9 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 		growl, $modal, $routeParams, blockUI,$filter){
 
 		 
-	  $scope.output={mk:[]};
+	  // $scope.output={mk:[]};
+	  
+
 
 		$scope.updateitem = function(editproduct){
 
@@ -174,7 +176,62 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 		}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    // Attribute Tab
+
+   $scope.select={};
+   $scope.hidecol=function(x){
+   	console.log($scope.select.atrcolhide);
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

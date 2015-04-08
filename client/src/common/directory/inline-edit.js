@@ -20,37 +20,37 @@
 
 myApp.directive('editable', function($compile,$parse) {
     return {
-        require: 'ngModel',
         
-          
-          
             link: function(scope, elm, attrs, ctrl) {
-              console.log(ctrl.$modelValue);
-             template = '<input style="width:100%;height:100%;" ng-model="' + attrs.ngModel + '">';
-
+             
+             template = '<input class="ui-input-text"  ng-model="' + attrs.model + '">';
             var inp=angular.element($compile(template)(scope));
+            inp.css('display','none');
+            elm.append(inp);
+            var txt=angular.element(elm.children()[0]);
             
              elm.bind('dblclick',function(event){
                event.preventDefault();
                inp.css('display','inline');
-              // inp.focus();
-                elm.css('display','none'); 
-                elm.after(inp);
-              
-                
+               txt.css('display','none');
+               inp[0].focus()
              })
              inp.bind('blur',function(){
-            
                 inp.css('display','none'); 
-                elm.css('display','inline');
-            
+                txt.css('display','inline');
                 
              })
+             inp.bind('keydown keypress',function(event){
+               if(event.which===13){
+                inp.css('display','none'); 
+                txt.css('display','inline');
+               }
+               if(event.which===27){
+                  inp.css('display','none'); 
+                  txt.css('display','inline');
+               }
+               
+             })
             }
-        
-      
-        
-        
-       
     };
 });

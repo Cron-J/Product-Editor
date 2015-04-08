@@ -214,3 +214,23 @@ th{
 	color:red;
 }
 
+.tdwidth{
+  width: 83%;
+  display: inline;
+}
+
+
+.dtdwidth {
+  width: 82%;
+  display: inline;
+}
+
+
+.ui-input-text{
+   outline: none;
+text-align: left;
+border: none;
+    width:100%;
+    height:100%;
+}
+
