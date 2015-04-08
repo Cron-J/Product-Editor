@@ -13,6 +13,7 @@ exports.endpoints = [
     { method: 'PUT', path: '/updateProduct/{id}', config: Product.updateProduct },
     { method: 'POST', path: '/createVariant', config: Variant.createVariant },
     { method: 'GET', path: '/getVariants', config: Variant.getVariants },
-    { method: 'PUT', path: '/updateVariant/{id}', config: Variant.updateVariant }
+    { method: 'PUT', path: '/updateVariant/{id}', config: Variant.updateVariant },
+    { method: 'GET', path: '/getConfig', config: Product.getHostFromConfig }
 ];
 

@@ -14,5 +14,8 @@ module.exports = {
     filePath: {
         directory: "/../../upload",
         subdirectory: "/supplier"    
+  },
+  host: {
+    ModuleLinkup: 'http://cron-j7-pc:8080' 
   }
 };

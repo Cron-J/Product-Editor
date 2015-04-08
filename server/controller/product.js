@@ -4,7 +4,8 @@ var Boom = require('boom'),
     Product = require('../model/product').Product,
     fs = require('fs'),
     async = require('async'),
-    filePath = require('../config/config').filePath;
+    filePath = require('../config/config').filePath,
+    hostFromConfig = require('../config/config').host;
 
 exports.createProduct = {
     handler: function(request, reply) {
@@ -78,6 +79,12 @@ exports.updateProduct = {
                 return reply(result);
             } else reply(Boom.forbidden(err));
         });
+    }
+};
+
+exports.getHostFromConfig = {
+    handler: function(request, reply) {
+        return reply(hostFromConfig);
     }
 };
 
