@@ -573,14 +573,20 @@
 		    	<div class=" m-t-25">
 					<!-- <b>Found {{filteredItems.length}} entries</b> -->
 
-					<div class="row">
-						<select multiple ng-model="select.atrcolhide" ng-options="">
-						  	<option value="variant">Variant</option>
-						  	<option value="language">Language</option>
-						  	<option value="status">Status</option>
-						  	<option value="order">Order</option>
-						</select>
-						<button class="btn btn-primary" ng-click="hidecol()"> Hide </button>		
+					<div class="row m-b-20">
+						<div class="col-md-2">
+							<select multiple ng-model="atrcolhide" ng-options="">
+							  	<option value="variant">Variant</option>
+							  	<option value="language">Language</option>
+							  	<option value="status">Status</option>
+							  	<option value="order">Order</option>
+							</select>
+						</div>
+						<div class="col-md-1">
+							<button class="btn btn-primary" ng-click="hidecol(atrcolhide)"> Hide </button>
+						</div>
+						
+								
 					</div>
 						
 					
@@ -599,14 +605,14 @@
 							        </a>
 							    </th>
 
-							    <th ng-show="select.atrcolhide.indexOf('variant')>=0">
-									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant{{select.atrcolhide.indexOf('variant')>=0}}
+							    <th ng-hide="select.atrcolhide.indexOf('variant')>=0">
+									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
 							            <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
 							        </a>
 							    </th>
 
-							    <th ng-if="! select.atrcolhide.indexOf('language')>=0">
+							    <th ng-hide="select.atrcolhide.indexOf('language')>=0">
 									<a  ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
 							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
@@ -620,7 +626,7 @@
 							        </a>
 							    </th>
 
-							    <th ng-if="! select.atrcolhide.indexOf('order')>=0">
+							    <th ng-hide="select.atrcolhide.indexOf('order')>=0">
 									<a  ng-click="sortType = 'orderNro'; sortReverse = !sortReverse">Order No.
 							            <span ng-show="sortType == 'orderNro' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'orderNro' && sortReverse" class="fa fa-caret-up"></span>
@@ -629,7 +635,7 @@
 
 							   
 
-							    <th ng-if="! select.atrcolhide.indexOf('status')>=0">
+							    <th ng-hide="select.atrcolhide.indexOf('status')>=0">
 									<a  ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
 							            <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
 							            <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
@@ -650,7 +656,7 @@
 									</div>
 								</td>
 
-								<td>
+								<td ng-hide="select.atrcolhide.indexOf('variant')>=0">
 									<div class="form-inline ">
 					  					<div  isteven-multi-select input-model="options" output-model="attributeop" button-label="variantId" item-label="variantId" 
 									    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId" >
@@ -659,7 +665,7 @@
 									</div>
 								</td>
 
-								<td>
+								<td ng-hide="select.atrcolhide.indexOf('language')>=0">
 									<div class="form-inline">
 										<input type="text" class="input-sm tdwidth" ng-model="search.languageId">
 										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
@@ -676,14 +682,14 @@
 								</td>
 
 
-								<td>
+								<td ng-hide="select.atrcolhide.indexOf('order')>=0">
 									<div class="form-inline">
 										<input type="text" class="input-sm tdwidth" ng-model="search.orderNro">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 									</div>
 								</td>
 
-								<td>
+								<td ng-hide="select.atrcolhide.indexOf('status')>=0">
 									<div class="form-inline">
 										<input type="text" class="input-sm tdwidth" ng-model="search.statusId">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
@@ -696,12 +702,12 @@
          
 							<tr  class="hoverptr inactive"  ng-repeat="atrdata in editproduct.attributeValues | orderBy:sortType:sortReverse  | filter:search:strict | filter:attributeop[0]:strict"  >
 								<td >{{atrdata.attribute}}</td>
-								<td >{{atrdata.variantId}}</td>
-								<td >{{atrdata.languageId}}</td>
+								<td ng-hide="select.atrcolhide.indexOf('variant')>=0">{{atrdata.variantId}}</td>
+								<td ng-hide="select.atrcolhide.indexOf('language')>=0">{{atrdata.languageId}}</td>
 								<td editable model="editproduct.attributeValues[$index].value"><span>{{atrdata.value}}</span></td>
-								<td editable model="editproduct.attributeValues[$index].orderNro"><span>{{atrdata.orderNro}}</span></td>
+								<td ng-hide="select.atrcolhide.indexOf('order')>=0" editable model="editproduct.attributeValues[$index].orderNro"><span>{{atrdata.orderNro}}</span></td>
 								
-								<td>{{atrdata.statusId}}</td>
+								<td ng-hide="select.atrcolhide.indexOf('status')>=0">{{atrdata.statusId}}</td>
 								<td></td>
 							</tr>
 						</tbody>
@@ -2311,12 +2317,17 @@
 					        <div class="form-group">
 					          	<label class="col-sm-4 control-label"> Description </label>
 
-					          	<span class="col-sm-1 pull-right"><button class="btn btn-primary " ng-click="addContact()"><i class="fa fa-plus"></i></button></span>
+					          	<span class="col-sm-1 pull-right"><button class="btn btn-primary " ng-click="addlang()"><i class="fa fa-plus"></i></button></span>
 					          	
-					          	
+
+
+
+
+					          	<span ng-repeat="langdes in prelation.descriptions">
+					          		<span class="col-sm-1 pull-right"><button class="btn btn-primary " ng-click="delLang($index)"><i class="fa fa-times"></i></button></span>
 					          	
 						        	<div class="col-sm-2 m-b-10">
-						          		<select name="status" class="form-control m-b" ng-model="contact.type">
+						          		<select name="status" class="form-control m-b" ng-model="langdes.language">
 											<option value="de">de</option>
 											<option value="en">en</option>
 											<option value="es">es</option>
@@ -2325,8 +2336,10 @@
 						          	</div>
 
 						          	<div class="col-sm-4 m-b-10">
-						          		<input type="text" name="price" class="form-control" ng-model="prelation.descriptions" >
+						          		<input type="text" name="price" class="form-control" ng-model="langdes.description" >
 						          	</div>
+					          	</span>
+					          		
 						        
 
 						        <!-- <span ng-repeat="">

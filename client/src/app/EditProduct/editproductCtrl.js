@@ -177,62 +177,12 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    // Attribute Tab
 
    $scope.select={};
    $scope.hidecol=function(x){
-   	console.log($scope.select.atrcolhide);
+   	$scope.select.atrcolhide=angular.copy(x);
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -526,10 +476,22 @@ $scope.iscproductAll = false;
 	$scope.newprelation =  function(){
 
 		$scope.nproductvar=true;
-		$scope.prelation={};
+		$scope.prelation={
+		descriptions:[{language:'en',description:''}]
+	}
 
 	}
 
+
+	$scope.addlang = function(){
+		$scope.prelation.descriptions.push({language:'en',description:''});
+	}
+
+	$scope.delLang = function(index){
+
+		$scope.prelation.descriptions.splice(index,1);
+
+	}
 
 
 
@@ -604,15 +566,24 @@ $scope.isprelationAll = false;
 
 // add remove description text box
 	
+	
+
 
 	 $scope.addContact = function() {
 	    $scope.contacts.push({type:'email', value:'yourname@example.org'});
 	  };
 
+
+
+
+
 	  $scope.removeContact = function(contactToRemove) {
 	    var index = $scope.contacts.indexOf(contactToRemove);
 	    $scope.contacts.splice(index, 1);
 	  };
+
+
+
 
 // search classification modal
 

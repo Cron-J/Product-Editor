@@ -16,6 +16,6 @@ module.exports = {
         subdirectory: "/supplier"    
   },
   host: {
-    ModuleLinkup: 'http://cron-j7-pc:8080' 
+    ModuleLinkup: 'http://cronj@sushant:8080' 
   }
 };
