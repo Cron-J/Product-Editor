@@ -174,7 +174,7 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 		}
 
 
-
+   // Attribute Tab
 
 
 
@@ -206,8 +206,8 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 					$scope.editproduct.documents[key] = docdata;
 					$scope.updateitem($scope.editproduct);
 					
-					console.log($scope.editproduct.documents);
-					console.log($scope.editproduct);
+					// console.log($scope.editproduct.documents);
+					// console.log($scope.editproduct);
 				}
 
 				});
@@ -377,7 +377,7 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 	$scope.newcproduct =  function(){
 
 		$scope.cproductvar=true;
-		$scope.price={};
+		$scope.cproduct={};
 
 	}
 
