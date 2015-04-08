@@ -84,7 +84,7 @@ exports.updateProduct = {
 
 exports.getHostFromConfig = {
     handler: function(request, reply) {
-        return reply(hostFromConfig);
+        return reply(hostFromConfig.ModuleLinkup);
     }
 };
 
