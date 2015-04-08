@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="defModalHead">Classification Search</h4>
+</div>
+<div class="modal-body">
+
+    <div class="page-content-wrap">
+       <div class="modal-body" style="overflow: auto;">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="col-sm-10">
+							<div class="row">
+								<div class="col-sm-4">
+									<label >Classification ID</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.classificationId" />
+								</div>
+								<!-- <div class="col-sm-4">
+									<label >Short Description</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.description" />
+								</div> -->
+								<div class="form-button-group search-buttons col-sm-3">
+									<button class="btn btn-primary btn-sm" ng-click="searchClassification(searchQuery);"><span class="glyphicon glyphicon-search"></span></button>
+									<button class="btn btn-primary btn-sm" ng-click="reset_search()">Clear</button>
+								</div>
+							</div>		
+						</div>	
+						<div class="col-sm-12">
+							<div>
+								<div ng-show="details.length == 0">
+									<p>No records found</p>
+								</div>
+								<table class="table table-stripped custom-table" ng-show="details.length > 0">
+									<thead>
+										<tr>
+										<th>Classification ID</th>
+										<th>Type</th>
+										<th>Orderno</th>
+										</tr>
+									</thead>
+				                     <tbody>
+										<tr ng-click="getClassification(classdata)" class="hoverptr" ng-repeat="classdata in details">
+										<td >{{classdata.classificationId}}</td>
+										<td >{{classdata.type}}</td>
+										<td >{{classdata.orderNo}}</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<td colspan="6">
+											<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+										</td>
+									</tfoot>
+							    </table>
+							</div>		
+						</div>
+					</div>
+				</div>		
+			</div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+    <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="ok(createProduct)" ng-disabled="createPr.$invalid">Clear</button>
+</div>

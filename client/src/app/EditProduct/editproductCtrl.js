@@ -614,7 +614,141 @@ $scope.isprelationAll = false;
 	    $scope.contacts.splice(index, 1);
 	  };
 
+// search classification modal
+
+$scope.openClassification = function(size) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent.html',
+                    controller: ModalInstanceCtrl,
+                    size: size,
+                    resolve: {
+                       
+                    }
+                });
+
+                modalInstance.result.then(function(cid) {
+                $scope.classification_id = cid._id;
+                   $scope.createNew = {
+						"classificationId" : cid.classificationId,
+
+					}
+                });
+            },
+            function() {
+                // $scope.editProfile=editProfileBeforeCancle;
+                // $log.info('Modal dismissed at: ' + new Date());
+
+            };
+
+//search classificationGroup
+
+$scope.openClassificationGroup = function(size) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent1.html',
+                    controller: ClassificationGroupCtrl,
+                    size: size,
+                    resolve: {
+                    	cid_detail: function() {
+                            return $scope.classification_id;
+                        }
+                    }
+                });
+                modalInstance.result.then(function(cid) {
+                   $scope.createNew.classificationGroupId = cid.classificationGroupId;
+                });
+            },
+            function() {
+                // $scope.editProfile=editProfileBeforeCancle;
+                // $log.info('Modal dismissed at: ' + new Date());
+
+            };
+
 	}]);
 
+
+
+//modal for classification
+var ModalInstanceCtrl = function($scope, $modalInstance,  $http, $location) {
+	$scope.searchClassification = function(reqData){
+		$http.get('/getConfig')
+			  .then(function(result) {
+			    $scope.result = result.data;
+			   		postClassification(reqData);
+			    
+				})
+			  .catch(function(err){
+			  	console.log('error')
+			  })
+	}
+
+	var postClassification = function(rqstData){
+		
+		$http.post($scope.result +'/api/classificationSearch',rqstData)
+			  .then(function(result) {
+			    $scope.details = result.data;
+			    
+				})
+			  .catch(function(err){
+			  	console.log('error')
+			  })
+	}
+
+	$scope.getClassification = function(cid){
+		$modalInstance.close(cid);
+		console.log(cid);
+	}
+
+    $scope.cancel = function() {
+
+        $modalInstance.dismiss('cancel');
+
+    };
+};
+
+//modal for classificationGroup
+var ClassificationGroupCtrl = function($scope, $modalInstance, $http, $location, cid_detail) {
+	$scope.cIdDetail = {
+		"classificationRef": cid_detail
+	};
+	var _scope = {};
+	_scope.init = function() {
+		$scope.searchClassificationGroup();
+	}
+	$scope.searchClassificationGroup = function(){
+		$http.get('/getConfig')
+			  .then(function(result) {
+			    $scope.result = result.data;
+			   		postClassificationGroup($scope.cIdDetail);
+			    
+				})
+			  .catch(function(err){
+			  	console.log('error')
+			  })
+	}
+
+	var postClassificationGroup = function( cid){
+		console.log(cid);
+		$http.post($scope.result +'/api/classificationGroupSearch', cid)
+			  .then(function(result) {
+			    $scope.classificationGroupdetails = result.data;
+
+			    
+				})
+			  .catch(function(err){
+			  	console.log('error')
+			  })
+	}
+
+	$scope.getClassificationGroup = function(cid){
+		$modalInstance.close(cid);
+		console.log(cid);
+	}
+    $scope.cancel = function() {
+
+        $modalInstance.dismiss('cancel');
+
+    };
+    _scope.init();
+};
 
 

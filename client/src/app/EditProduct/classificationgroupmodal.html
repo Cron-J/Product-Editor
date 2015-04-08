@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="defModalHead">ClassificationGroup Search</h4>
+</div>
+<div class="modal-body">
+
+    <div class="page-content-wrap">
+       <div class="modal-body" style="overflow: auto;">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="col-sm-12">
+							<div>
+								<div ng-show="classificationGroupdetails.length == 0">
+									<p>No records found</p>
+								</div>
+								<table class="table table-stripped custom-table" ng-show="classificationGroupdetails.length > 0">
+									<thead>
+										<th>Classification ID</th>
+										<th>Status</th>
+										<th>Description</th>
+									</thead>
+				                     <tbody>
+										<tr ng-click="getClassificationGroup(classdata)" class="hoverptr" ng-repeat="classdata in classificationGroupdetails">
+										<td >{{classdata.classificationGroupId}}</td>
+										<td >{{classdata.status}}</td>
+										<td >{{classdata.descriptions.descShort[0].description}}</td>
+										<!-- <td >{{classdata.classificationId}}</td> -->
+										</tr>
+									</tbody>
+									<tfoot>
+										<td colspan="6">
+											<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+										</td>
+									</tfoot>
+							    </table>
+							</div>		
+						</div>
+					</div>
+				</div>		
+			</div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+    <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="ok(createProduct)" ng-disabled="createPr.$invalid">Clear</button>
+</div>
