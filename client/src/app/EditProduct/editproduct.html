@@ -593,20 +593,21 @@
 					<!-- <b>Found {{filteredItems.length}} entries</b> -->
 
 					<div class="row m-b-20">
-						<div class="col-md-2">
-							<select multiple ng-model="atrcolhide" ng-options="">
-							  	<option value="variant">Variant</option>
-							  	<option value="language">Language</option>
-							  	<option value="status">Status</option>
-							  	<option value="order">Order</option>
-							</select>
-						</div>
-						<div class="col-md-1">
-							<button class="btn btn-primary" ng-click="hidecol(atrcolhide)"> Hide </button>
-						</div>
-						
-								
-					</div>
+				      <div class="col-md-2">
+				       <select multiple ng-model="atrcolhide" ng-options="">
+				        <option value=""></option>
+				          <option value="variant">Variant</option>
+				          <option value="language">Language</option>
+				          <option value="status">Status</option>
+				          <option value="order">Order</option>
+				       </select>
+				      </div>
+				      <div class="col-md-1">
+				       <button class="btn btn-primary" ng-click="hidecol(atrcolhide)"> Hide </button>
+				      </div>
+				      
+				        
+				     </div>
 						
 					
 					
@@ -617,118 +618,118 @@
 						<tbody>
 							
 							<tr>
-								<th>
-									<a  ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Attribute
-							            <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
+						        <th>
+						         <a  ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Attribute
+						                   <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
+						                   <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
+						               </a>
+						           </th>
 
-							    <th ng-hide="select.atrcolhide.indexOf('variant')>=0">
-									<a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-							            <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
+						           <th ng-hide="select.atrcolhide.indexOf('variant')>=0">
+						         <a  ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
+						                   <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
+						                   <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
+						               </a>
+						           </th>
 
-							    <th ng-hide="select.atrcolhide.indexOf('language')>=0">
-									<a  ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
-							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
+						           <th ng-hide="select.atrcolhide.indexOf('language')>=0">
+						         <a  ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
+						                   <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+						                   <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+						               </a>
+						           </th>
 
-							    <th>
-									<a  ng-click="sortType = 'value'; sortReverse = !sortReverse">Value
-							            <span ng-show="sortType == 'value' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'value' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
+						           <th>
+						         <a  ng-click="sortType = 'value'; sortReverse = !sortReverse">Value
+						                   <span ng-show="sortType == 'value' && !sortReverse" class="fa fa-caret-down"></span>
+						                   <span ng-show="sortType == 'value' && sortReverse" class="fa fa-caret-up"></span>
+						               </a>
+						           </th>
 
-							    <th ng-hide="select.atrcolhide.indexOf('order')>=0">
-									<a  ng-click="sortType = 'orderNro'; sortReverse = !sortReverse">Order No.
-							            <span ng-show="sortType == 'orderNro' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'orderNro' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
+						           <th ng-hide="select.atrcolhide.indexOf('order')>=0">
+						         <a  ng-click="sortType = 'orderNro'; sortReverse = !sortReverse">Order No.
+						                   <span ng-show="sortType == 'orderNro' && !sortReverse" class="fa fa-caret-down"></span>
+						                   <span ng-show="sortType == 'orderNro' && sortReverse" class="fa fa-caret-up"></span>
+						               </a>
+						           </th>
 
-							   
+						          
 
-							    <th ng-hide="select.atrcolhide.indexOf('status')>=0">
-									<a  ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
-							            <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>
+						           <th ng-hide="select.atrcolhide.indexOf('status')>=0">
+						         <a  ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
+						                   <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
+						                   <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
+						               </a>
+						           </th>
 
-							    <th>Action</th>
+						           <th>Action</th>
 
-							</tr>
+						       </tr>
 
 							<tr>
-								
-								<td>
-									<div class="form-inline">
-										<input  type="text" class="input-sm tdwidth" ng-model="search.attribute">
-											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
-											</button>
-									</div>
-								</td>
+        
+						        <td>
+						         <div class="form-inline">
+						          <input  type="text" class="input-sm tdwidth" ng-model="search.attribute">
+						           <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+						           </button>
+						         </div>
+						        </td>
 
-								<td ng-hide="select.atrcolhide.indexOf('variant')>=0">
-									<div class="form-inline ">
-					  					<div  isteven-multi-select input-model="options" output-model="attributeop" button-label="variantId" item-label="variantId" 
-									    	 tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId" >
-										</div>
-										<button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
-									</div>
-								</td>
+						        <td ng-hide="select.atrcolhide.indexOf('variant')>=0">
+						         <div class="form-inline ">
+						            <div  isteven-multi-select input-model="options" output-model="attributeop" button-label="variantId" item-label="variantId" 
+						               tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId" >
+						          </div>
+						          <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
+						         </div>
+						        </td>
 
-								<td ng-hide="select.atrcolhide.indexOf('language')>=0">
-									<div class="form-inline">
-										<input type="text" class="input-sm tdwidth" ng-model="search.languageId">
-										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-									</div>
-								</td>
+						        <td ng-hide="select.atrcolhide.indexOf('language')>=0">
+						         <div class="form-inline">
+						          <input type="text" class="input-sm tdwidth" ng-model="search.languageId">
+						          <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+						         </div>
+						        </td>
 
-								
+						        
 
-								<td>
-									<div class="form-inline">
-										<input type="text" class="input-sm tdwidth" ng-model="search.value">
-										<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-									</div>
-								</td>
+						        <td>
+						         <div class="form-inline">
+						          <input type="text" class="input-sm tdwidth" ng-model="search.value">
+						          <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+						         </div>
+						        </td>
 
 
-								<td ng-hide="select.atrcolhide.indexOf('order')>=0">
-									<div class="form-inline">
-										<input type="text" class="input-sm tdwidth" ng-model="search.orderNro">
-											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-									</div>
-								</td>
+						        <td ng-hide="select.atrcolhide.indexOf('order')>=0">
+						         <div class="form-inline">
+						          <input type="text" class="input-sm tdwidth" ng-model="search.orderNro">
+						           <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+						         </div>
+						        </td>
 
-								<td ng-hide="select.atrcolhide.indexOf('status')>=0">
-									<div class="form-inline">
-										<input type="text" class="input-sm tdwidth" ng-model="search.statusId">
-											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-									</div>
-								</td>
+						        <td ng-hide="select.atrcolhide.indexOf('status')>=0">
+						         <div class="form-inline">
+						          <input type="text" class="input-sm tdwidth" ng-model="search.statusId">
+						           <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+						         </div>
+						        </td>
 
-								<td></td>
-							</tr>
+						        <td></td>
+						       </tr>
 								
          
 							<tr  class="hoverptr inactive"  ng-repeat="atrdata in editproduct.attributeValues | orderBy:sortType:sortReverse  | filter:search:strict | filter:attributeop[0]:strict"  >
-								<td >{{atrdata.attribute}}</td>
-								<td ng-hide="select.atrcolhide.indexOf('variant')>=0">{{atrdata.variantId}}</td>
-								<td ng-hide="select.atrcolhide.indexOf('language')>=0">{{atrdata.languageId}}</td>
-								<td editable model="editproduct.attributeValues[$index].value"><span>{{atrdata.value}}</span></td>
-								<td ng-hide="select.atrcolhide.indexOf('order')>=0" editable model="editproduct.attributeValues[$index].orderNro"><span>{{atrdata.orderNro}}</span></td>
-								
-								<td ng-hide="select.atrcolhide.indexOf('status')>=0">{{atrdata.statusId}}</td>
-								<td></td>
-							</tr>
+						        <td >{{atrdata.attribute}}</td>
+						        <td ng-hide="select.atrcolhide.indexOf('variant')>=0">{{atrdata.variantId}}</td>
+						        <td ng-hide="select.atrcolhide.indexOf('language')>=0">{{atrdata.languageId}}</td>
+						        <td editable model="editproduct.attributeValues[$index].value"><span>{{atrdata.value}}</span></td>
+						        <td ng-hide="select.atrcolhide.indexOf('order')>=0" editable model="editproduct.attributeValues[$index].orderNro"><span>{{atrdata.orderNro}}</span></td>
+						        
+						        <td ng-hide="select.atrcolhide.indexOf('status')>=0">{{atrdata.statusId}}</td>
+						        <td></td>
+						    </tr>
 						</tbody>
 						<tfoot>
 							<td colspan="7">

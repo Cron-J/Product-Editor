@@ -184,9 +184,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         $scope.select = {};
         $scope.hidecol = function(x) {
-            console.log($scope.select.atrcolhide);
+            $scope.select.atrcolhide=angular.copy(x);
         }
-
 
 
 
@@ -460,7 +459,9 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         // Contracted product funcion end
 
 
-        $scope.nproductvar = false;
+        //Relation tab
+
+		$scope.nproductvar = false;
 
 
         $scope.newprelation = function() {
@@ -507,6 +508,20 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         }
 
+        $scope.editlang = function() {
+            var lang = ['en', 'es', 'fr', 'de'];
+                angular.forEach($scope.prelation.descriptions, function(val, key) {
+                    angular.forEach(lang, function(val1, key1) {
+                        if (val1 == val.language){
+                            var temp=lang.splice(key1, 1);
+                            $scope.selectedlang.push(temp[0]);
+                        }
+                    })
+                })
+                
+                
+        }
+
 
 
 
@@ -545,8 +560,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         $scope.editprelation = function(editcproductdata) {
 
             $scope.nproductvar = true;
-
+            $scope.selectedlang=[];
             $scope.prelation = angular.copy(editcproductdata);
+            $scope.editlang();
+
         }
 
 
