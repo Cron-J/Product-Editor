@@ -14,18 +14,21 @@
 									<input type="text" class="form-control" name="" 
 									ng-model="classificationId" ng-disabled="classificationId" />
 								</div>
+							</div>
+							<div class="row">
+								
 								<div class="col-sm-4">
 									<label >ClassificationGroup ID</label>
 									<input type="text" class="form-control" name="" 
-									ng-model="searchQuery.classificationGroupId" />
+									ng-model="cIdDetail.classificationGroupId" />
 								</div>
-								<!-- <div class="col-sm-4">
+								<div class="col-sm-4">
 									<label >Short Description</label>
 									<input type="text" class="form-control" name="" 
-									ng-model="searchQuery.description" />
-								</div> -->
+									ng-model="cIdDetail.description" />
+								</div>
 								<div class="form-button-group search-buttons col-sm-3">
-									<button class="btn btn-primary btn-sm" ng-click="searchClassificationGroup(searchQuery);"><span class="glyphicon glyphicon-search"></span></button>
+									<button class="btn btn-primary btn-sm" ng-click="searchClassificationGroup()"><span class="glyphicon glyphicon-search"></span></button>
 									<button class="btn btn-primary btn-sm" ng-click="reset_search()">Clear</button>
 								</div>
 							</div>		
@@ -63,5 +66,5 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+    <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="cancel()">Close</button>
 </div>

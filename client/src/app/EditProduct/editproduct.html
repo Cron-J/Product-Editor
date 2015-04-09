@@ -428,36 +428,41 @@
 				<!-- On clicking assign new group button -->
 
 				<div class="row m-t-25" ng-show="showvar">
-					<form name="assignGrpForm" novalidate>
-						<div class="col-sm-6" >
-							<div class="form-group">
-					          	<label class="col-sm-4 control-label" >Classification </label>
-					          	<div class="col-sm-5">
-					          		<input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId"  ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" required>
-					          		<span class="error" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid">Invalid:
-			                        <span ng-show="assignGrpForm.classificationid.$error.required">Tell us your Classification</span>
-			                        <span ng-show="assignGrpForm.classificationid.$error.minlength">Classification should be minimum of 0 characters</span>
-			                        <span ng-show="assignGrpForm.classificationid.$error.maxlength">Classification should be maximum of 50 characters</span>
-			                        <span ng-show="assignGrpForm.classificationid.$error.pattern">Classification won't allow special characters</span>
-			                        </span>
-
-					          	</div>
-					          	<div class="col-sm-1">
-					          		<span class="ng-scope"> 
-			                            <script type="text/ng-template" id="myModalContent.html">
-			                              <div ng-include="'app/EditProduct/classificationmodal.html'"></div>
-			                            </script>
-			                            <button class="btn btn-primary btn-xs" ng-click="openClassification('lg')">
-							  			          <span class="glyphicon glyphicon-search"></span>
-							  	        </button>
-                                    </span>						          	
-			  	                </div>
-
-					        </div>
-
-							<div class="form-group">
-					          	<label class="col-sm-4 control-label">Classification Group</label>
-					          	<div class="col-sm-5">
+					<form name="assignGrpForm"  novalidate>
+						<div class="col-sm-8" >
+							<div class="form-inline" style="margin-bottom:16px;">
+								<div class="form-group ">
+						          	<label class="col-sm-3 control-label" >Classification </label>
+						          	<div class="col-sm-4">
+						          		<input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId"  ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" required>
+						          		<span class="error" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid">Invalid:
+				                        <span ng-show="assignGrpForm.classificationid.$error.required">Tell us your Classification</span>
+				                        <span ng-show="assignGrpForm.classificationid.$error.minlength">Classification should be minimum of 0 characters</span>
+				                        <span ng-show="assignGrpForm.classificationid.$error.maxlength">Classification should be maximum of 50 characters</span>
+				                        <span ng-show="assignGrpForm.classificationid.$error.pattern">Classification won't allow special characters</span>
+				                        </span>
+						          	</div>
+						          	<div class="col-sm-4">
+										<input type="text" class="form-control" name="" 
+										ng-model="description.descShort[0].description" ng-readonly="true" />
+									</div>
+						          	<div class="col-sm-1">
+						          		<span class="ng-scope"> 
+				                            <script type="text/ng-template" id="myModalContent.html">
+				                              <div ng-include="'app/EditProduct/classificationmodal.html'"></div>
+				                            </script>
+				                            <button class="btn btn-primary btn-xs" ng-click="openClassification('lg')">
+								  			          <span class="glyphicon glyphicon-search"></span>
+								  	        </button>
+	                                    </span>						          	
+				  	                </div>
+						        </div>
+							</div>
+							
+							<div class="form-inline">
+								<div class="form-group" style="margin-bottom:16px;">
+					          	<label class="col-sm-3 control-label">Classification</label>
+					          	<div class="col-sm-4">
 					            	<input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
 					            	<span class="error" ng-show="assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid">Invalid:
 			                        <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
@@ -466,6 +471,10 @@
 			                        <span ng-show="assignGrpForm.cgId.$error.pattern">Classification Group won't allow special characters</span>
 			                        </span>
 					          	</div>
+					          	<div class="col-sm-4">
+										<input type="text" class="form-control" name="" 
+										ng-model="classificationGroupDescription.descShort[0].description" ng-readonly="true" />
+								</div>
 					          	<div class="col-sm-1">
 					          		<span class="ng-scope"> 
 			                            <script type="text/ng-template" id="myModalContent1.html">
@@ -477,17 +486,18 @@
                                     </span>						          	
 			  	                </div>
 					        </div>
-
-					       
-
-							<div class="form-group">
-					          	<label class="col-sm-4 control-label">Variant ID</label>
-					          	<div class="col-sm-8">
-					          		<select  class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="createNew.variantId"> 
-								      <option value="">-- choose Variant --</option>
-									</select>
-								</div>
-					        </div>
+							</div>												       
+							<div class="form-inline">
+								<div class="form-group">
+						          	<label class="col-sm-4 control-label">Variant ID</label>
+						          	<div class="col-sm-5">
+						          		<select  class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="createNew.variantId"> 
+									      <option value="">-- choose Variant --</option>
+										</select>
+									</div>
+					            </div>
+							</div>
+							
 
 					        
 					          	<div class="col-sm-offset-4  col-sm-1">
@@ -496,7 +506,6 @@
 									assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
 								</div>
 					        
-
 						</div>
 					</form>
 				</div>
@@ -2315,53 +2324,32 @@
 					        	
 
 					        <div class="form-group">
-					          	<label class="col-sm-4 control-label"> Description </label>
+                 <label class="col-sm-4 control-label"> Description </label>
 
-					          	<span class="col-sm-1 pull-right"><button class="btn btn-primary " ng-click="addlang()"><i class="fa fa-plus"></i></button></span>
-					          	
+                
 
+                 <span class="col-sm-1 pull-right" ng-if="prelation.descriptions.length<=3"><button class="btn btn-primary " ng-click="addlang()"><i class="fa fa-plus"></i></button></span>
 
+                 <span class="col-sm-7" ng-repeat="langdes in prelation.descriptions">
+                  <span ng-hide="$first && prelation.descriptions.length==1" class="col-sm-1 pull-right"><button class="btn btn-primary " ng-click="delLang($index)"><i class="fa fa-times"></i></button></span>
+                 
+                <div class="col-sm-5 m-b-10">
+                   <select name="status" class="form-control m-b" ng-model="langdes.language" ng-change="changeoption($index,langdes.language,'{{langdes.language}}')">
+            <option ng-if="langdes.language=='de'|| selectedlang.indexOf('de')==-1" value="de">de</option>
+            <option ng-if="langdes.language=='en'|| selectedlang.indexOf('en')==-1" value="en">en</option>
+            <option ng-if="langdes.language=='es'|| selectedlang.indexOf('es')==-1"value="es">es</option>
+            <option ng-if="langdes.language=='fr'|| selectedlang.indexOf('fr')==-1" value="fr">fr</option>
+                    </select>
+                  </div>
 
-
-					          	<span ng-repeat="langdes in prelation.descriptions">
-					          		<span class="col-sm-1 pull-right"><button class="btn btn-primary " ng-click="delLang($index)"><i class="fa fa-times"></i></button></span>
-					          	
-						        	<div class="col-sm-2 m-b-10">
-						          		<select name="status" class="form-control m-b" ng-model="langdes.language">
-											<option value="de">de</option>
-											<option value="en">en</option>
-											<option value="es">es</option>
-											<option value="fr">fr</option>
-						            	</select>
-						          	</div>
-
-						          	<div class="col-sm-4 m-b-10">
-						          		<input type="text" name="price" class="form-control" ng-model="langdes.description" >
-						          	</div>
-					          	</span>
-					          		
-						        
-
-						        <!-- <span ng-repeat="">
-
-						        	<span class="col-sm-5 m-b-10" ></span>
-						        	<span class="col-sm-1 pull-right m-b-10"><button class="btn btn-primary " ng-click="removeContact(contact)"><i class="fa fa-remove"></i></button></span>
-
-						        	<div class="col-sm-2 m-b-10">
-						          		<select name="status" class="form-control m-b" ng-model="contact.type">
-											<option value="de">de</option>
-											<option value="en">en</option>
-											<option value="es">es</option>
-											<option value="fr">fr</option>
-						            	</select>
-						          	</div>
-
-						          	<div class="col-sm-4 m-b-10">
-						          		<input type="text" name="price" class="form-control" ng-model="prelation.descriptions" >
-						          	</div>
-						        </span> -->
-
-					        </div>
+                  <div class="col-sm-5 m-b-10">
+                   <input type="text" name="price" class="form-control" ng-model="langdes.description" >
+                  </div>
+                 </span>
+                
+                
+                 
+             </div>
 
 					        <div class="form-group">
 					          	<label class="col-sm-4 control-label"> Status </label>

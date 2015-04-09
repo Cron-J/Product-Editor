@@ -516,91 +516,134 @@ $scope.iscproductAll = false;
 // Contracted product funcion end
 
 
-// Product relation tab functions
+$scope.nproductvar = false;
 
 
+$scope.newprelation = function() {
 
-	$scope.nproductvar=false;
-
-
-	$scope.newprelation =  function(){
-
-		$scope.nproductvar=true;
-		$scope.prelation={};
-
-	}
-
-
+    $scope.nproductvar = true;
+    $scope.prelation = {
+        descriptions: [{
+            language: 'en',
+            description: ''
+        }]
+    }
+    $scope.selectedlang = ['en'];
 
 
-$scope.saverelation = function (relationdata){
-
-			// $scope.editproduct.documents.push(angular.copy(docdata));
-			// $scope.updateitem($scope.editproduct);
-			// console.log($scope.editproduct);
-			if(relationdata._id){
-				angular.forEach($scope.editproduct.productRelations,function(value,key){
-
-				if(relationdata._id == value._id)
-				{
-					$scope.editproduct.productRelations[key] = relationdata;
-					$scope.updateitem($scope.editproduct);
-					
-					
-				}
-
-				});
-			}
-			else{
-				$scope.editproduct.productRelations.push(angular.copy(relationdata));
-				$scope.updateitem($scope.editproduct);
-				$scope.prelation={};
-			}
-		  
-		}
+}
 
 
+$scope.addlang = function() {
+    var lang = ['en', 'es', 'fr', 'de'];
 
-		$scope.editprelation = function (editcproductdata){
+    if ($scope.prelation.descriptions.length <= 4) {
+        angular.forEach($scope.prelation.descriptions, function(val, key) {
+            angular.forEach(lang, function(val1, key1) {
+                if (val1 == val.language)
+                    lang.splice(key1, 1);
+            })
+        })
+        $scope.prelation.descriptions.push({
+            language: lang[0],
+            description: ''
+        });
+        $scope.selectedlang.push(lang[0]);
+    }
+}
 
-			$scope.nproductvar=true;
+$scope.delLang = function(index) {
 
-		  	$scope.prelation = angular.copy(editcproductdata); 	
-		}
+    vardelitem = $scope.prelation.descriptions.splice(index, 1);
+    $scope.selectedlang.splice($scope.selectedlang.indexOf(vardelitem[0].language), 1)
+
+}
+$scope.changeoption = function(index, newval, oldval) {
+    $scope.selectedlang[$scope.selectedlang.indexOf(oldval)] = newval;
+
+}
 
 
 
 
-		$scope.deleteprelation = function () {
-			for (var i = $scope.editproduct.productRelations.length - 1; i >= 0 ; i--) {
-				if($scope.editproduct.productRelations[i].checked == true)
-					$scope.editproduct.productRelations.splice(i, 1);
-			};	
-			$scope.updateitem($scope.editproduct);
-			$scope.prelation={};
+$scope.saverelation = function(relationdata) {
 
-		}
+    // $scope.editproduct.documents.push(angular.copy(docdata));
+    // $scope.updateitem($scope.editproduct);
+    // console.log($scope.editproduct);
+    if (relationdata._id) {
+        angular.forEach($scope.editproduct.productRelations, function(value, key) {
+
+            if (relationdata._id == value._id) {
+                $scope.editproduct.productRelations[key] = relationdata;
+                $scope.updateitem($scope.editproduct);
 
 
-$scope.isprelationAll = false;	
+            }
 
-		$scope.selectAllprelationCBoxes = function() {	
-            if($scope.isprelationAll === false) {
-    		angular.forEach($scope.editproduct.productRelations, function(checkbox){
-             	checkbox.checked = true;
+        });
+    } else {
+        $scope.editproduct.productRelations.push(angular.copy(relationdata));
+        $scope.updateitem($scope.editproduct);
+        $scope.prelation = {
+            descriptions: [{
+                language: 'en',
+                description: ''
+            }]
+        };
+        $scope.selectedlang = ['en'];
+    }
 
-    		});
-    		
-	        $scope.isprelationAll = true;	
+}
 
-	        } 
-	        else {
-	        angular.forEach($scope.editproduct.productRelations, function(checkbox){
-	             	checkbox.checked = false;
-	    		});
-	        $scope.isprelationAll = false;	
-        	}
-		}
+
+
+$scope.editprelation = function(editcproductdata) {
+
+    $scope.nproductvar = true;
+
+    $scope.prelation = angular.copy(editcproductdata);
+}
+
+
+
+
+$scope.deleteprelation = function() {
+    for (var i = $scope.editproduct.productRelations.length - 1; i >= 0; i--) {
+        if ($scope.editproduct.productRelations[i].checked == true)
+            $scope.editproduct.productRelations.splice(i, 1);
+    };
+    $scope.updateitem($scope.editproduct);
+
+    $scope.prelation = {
+        descriptions: [{
+            language: 'en',
+            description: ''
+        }]
+    };
+    $scope.selectedlang = ['en'];
+
+}
+
+
+$scope.isprelationAll = false;
+
+$scope.selectAllprelationCBoxes = function() {
+    if ($scope.isprelationAll === false) {
+        angular.forEach($scope.editproduct.productRelations, function(checkbox) {
+            checkbox.checked = true;
+
+        });
+
+        $scope.isprelationAll = true;
+
+    } else {
+        angular.forEach($scope.editproduct.productRelations, function(checkbox) {
+            checkbox.checked = false;
+        });
+        $scope.isprelationAll = false;
+    }
+}
 
 // add remove description text box
 	
@@ -627,10 +670,12 @@ $scope.openClassification = function(size) {
                 });
 
                 modalInstance.result.then(function(cid) {
+                $scope.description = cid.descriptions;
                 $scope.classification_id = cid;
                    $scope.createNew = {
 						"classificationId" : cid.classificationId,
-
+						"classificationRef" : cid._id
+						
 					}
                 });
             },
@@ -654,6 +699,7 @@ $scope.openClassificationGroup = function(size) {
                     }
                 });
                 modalInstance.result.then(function(cid) {
+                   $scope.classificationGroupDescription = cid.descriptions;
                    $scope.createNew.classificationGroupId = cid.classificationGroupId;
                 });
             },
@@ -729,12 +775,9 @@ var ClassificationGroupCtrl = function($scope, $modalInstance, $http, $location,
 	}
 
 	var postClassificationGroup = function( cid){
-		console.log(cid);
 		$http.post($scope.result +'/api/classificationGroupSearch', cid)
 			  .then(function(result) {
 			    $scope.classificationGroupdetails = result.data;
-
-			    
 				})
 			  .catch(function(err){
 			  	console.log('error')
@@ -743,7 +786,6 @@ var ClassificationGroupCtrl = function($scope, $modalInstance, $http, $location,
 
 	$scope.getClassificationGroup = function(cid){
 		$modalInstance.close(cid);
-		console.log(cid);
 	}
     $scope.cancel = function() {
 

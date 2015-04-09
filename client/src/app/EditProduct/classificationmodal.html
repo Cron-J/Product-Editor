@@ -14,11 +14,11 @@
 									<input type="text" class="form-control" name="" 
 									ng-model="searchQuery.classificationId" />
 								</div>
-								<!-- <div class="col-sm-4">
+								<div class="col-sm-4">
 									<label >Short Description</label>
 									<input type="text" class="form-control" name="" 
 									ng-model="searchQuery.description" />
-								</div> -->
+								</div>
 								<div class="form-button-group search-buttons col-sm-3">
 									<button class="btn btn-primary btn-sm" ng-click="searchClassification(searchQuery);"><span class="glyphicon glyphicon-search"></span></button>
 									<button class="btn btn-primary btn-sm" ng-click="reset_search()">Clear</button>
@@ -34,14 +34,14 @@
 									<thead>
 										<tr>
 										<th>Classification ID</th>
-										<th>Type</th>
+										<th>Description</th>
 										<th>Orderno</th>
 										</tr>
 									</thead>
 				                     <tbody>
 										<tr ng-click="getClassification(classdata)" class="hoverptr" ng-repeat="classdata in details">
 										<td >{{classdata.classificationId}}</td>
-										<td >{{classdata.type}}</td>
+										<td >{{classdata.descriptions.descShort[0].description}}</td>
 										<td >{{classdata.orderNo}}</td>
 										</tr>
 									</tbody>
@@ -59,5 +59,5 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-Primary"data-dismiss="modal" ng-click="cancel()">Cancel</button>
+    <button type="button" class="btn btn-Primary"data-dismiss="modal" ng-click="cancel()">Close</button>
 </div>
