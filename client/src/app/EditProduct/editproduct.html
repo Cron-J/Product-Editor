@@ -461,12 +461,12 @@
 							
 							<div class="form-inline">
 								<div class="form-group" style="margin-bottom:16px;">
-					          	<label class="col-sm-3 control-label">Classification</label>
+					          	<label class="col-sm-2 control-label">Classification</label>
 					          	<div class="col-sm-4">
 					            	<input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-					            	<span class="error" ng-show="assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid">Invalid:
+					            	<span class="error" ng-show="assignGrpForm.cgId.$dirty && assigrpForm.cgId.$invalid">Invalid:
 			                        <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
-			                        <span ng-show="assignGrpForm.cgId.$error.minlength">Classification Group should be minimum of 0 characters</span>
+			                        <span ng-show="assignGrpForm.cgId.$error.minlength">Classification Group should be minimum of 0 characters</span>nG
 			                        <span ng-show="assignGrpForm.cgId.$error.maxlength">Classification Group should be maximum of 50 characters</span>
 			                        <span ng-show="assignGrpForm.cgId.$error.pattern">Classification Group won't allow special characters</span>
 			                        </span>
@@ -476,6 +476,16 @@
 										ng-model="classificationGroupDescription.descShort[0].description" ng-readonly="true" />
 								</div>
 					          	<div class="col-sm-1">
+					          		<span class="ng-scope"> 
+			                            <script type="text/ng-template" id="myModalContent1.html">
+			                              <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
+			                            </script>
+			                            <button class="btn btn-primary btn-xs" ng-click="classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId=''">
+							  			          <span class="glyphicon glyphicon-remove"></span>
+							  	        </button>
+                                    </span>						          	
+			  	                </div>
+			  	                <div class="col-sm-1">
 					          		<span class="ng-scope"> 
 			                            <script type="text/ng-template" id="myModalContent1.html">
 			                              <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
