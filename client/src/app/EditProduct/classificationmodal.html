@@ -38,8 +38,8 @@
 										<th>Orderno</th>
 										</tr>
 									</thead>
-				                     <tbody>
-										<tr ng-click="getClassification(classdata)" class="hoverptr" ng-repeat="classdata in details">
+				                    <tbody>
+										<tr ng-click="getClassification(classdata)" class="hoverptr" ng-repeat="classdata in pagedItems[currentPage]">
 										<td >{{classdata.classificationId}}</td>
 										<td >{{classdata.descriptions.descShort[0].description}}</td>
 										<td >{{classdata.orderNo}}</td>
@@ -47,7 +47,19 @@
 									</tbody>
 									<tfoot>
 										<td colspan="6">
-											<pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+											<div class="pagination pull-right">
+												<ul>
+													<li ng-class="{disabled: currentPage == 0}">
+														<a href ng-click="prevPage()">« Prev</a>
+													</li>
+													<li ng-repeat="n in range(pagedItems.length)" ng-class="{active: n == currentPage}"ng-click="setPage()">
+													<a href ng-show="n >= min && n < max" ng-bind="n + 1">1</a>
+													</li>
+													<li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+														<a href ng-click="nextPage()">Next »</a>
+													</li>
+												</ul>
+											</div>
 										</td>
 									</tfoot>
 							    </table>
