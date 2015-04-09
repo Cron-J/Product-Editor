@@ -7,6 +7,29 @@
        <div class="modal-body" style="overflow: auto;">
 				<div class="row">
 					<div class="col-sm-12 col-md-12 col-lg-12">
+					<div class="col-sm-10">
+							<div class="row">
+								<div class="col-sm-4">
+									<label >Classification ID</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="classificationId" ng-disabled="classificationId" />
+								</div>
+								<div class="col-sm-4">
+									<label >ClassificationGroup ID</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.classificationGroupId" />
+								</div>
+								<!-- <div class="col-sm-4">
+									<label >Short Description</label>
+									<input type="text" class="form-control" name="" 
+									ng-model="searchQuery.description" />
+								</div> -->
+								<div class="form-button-group search-buttons col-sm-3">
+									<button class="btn btn-primary btn-sm" ng-click="searchClassificationGroup(searchQuery);"><span class="glyphicon glyphicon-search"></span></button>
+									<button class="btn btn-primary btn-sm" ng-click="reset_search()">Clear</button>
+								</div>
+							</div>		
+						</div>
 						<div class="col-sm-12">
 							<div>
 								<div ng-show="classificationGroupdetails.length == 0">
@@ -14,7 +37,7 @@
 								</div>
 								<table class="table table-stripped custom-table" ng-show="classificationGroupdetails.length > 0">
 									<thead>
-										<th>Classification ID</th>
+										<th>ClassificationGroup ID</th>
 										<th>Status</th>
 										<th>Description</th>
 									</thead>
@@ -40,6 +63,5 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="cancel()">Cancel</button>
-    <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="ok(createProduct)" ng-disabled="createPr.$invalid">Clear</button>
+    <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="cancel()">Cancel</button>
 </div>

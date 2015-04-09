@@ -177,12 +177,62 @@ myApp.controller('EditProductCtrl', [ '$scope','$rootScope',
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    // Attribute Tab
 
    $scope.select={};
    $scope.hidecol=function(x){
-   	$scope.select.atrcolhide=angular.copy(x);
+   	console.log($scope.select.atrcolhide);
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -476,22 +526,10 @@ $scope.iscproductAll = false;
 	$scope.newprelation =  function(){
 
 		$scope.nproductvar=true;
-		$scope.prelation={
-		descriptions:[{language:'en',description:''}]
-	}
+		$scope.prelation={};
 
 	}
 
-
-	$scope.addlang = function(){
-		$scope.prelation.descriptions.push({language:'en',description:''});
-	}
-
-	$scope.delLang = function(index){
-
-		$scope.prelation.descriptions.splice(index,1);
-
-	}
 
 
 
@@ -566,24 +604,15 @@ $scope.isprelationAll = false;
 
 // add remove description text box
 	
-	
-
 
 	 $scope.addContact = function() {
 	    $scope.contacts.push({type:'email', value:'yourname@example.org'});
 	  };
 
-
-
-
-
 	  $scope.removeContact = function(contactToRemove) {
 	    var index = $scope.contacts.indexOf(contactToRemove);
 	    $scope.contacts.splice(index, 1);
 	  };
-
-
-
 
 // search classification modal
 
@@ -598,7 +627,7 @@ $scope.openClassification = function(size) {
                 });
 
                 modalInstance.result.then(function(cid) {
-                $scope.classification_id = cid._id;
+                $scope.classification_id = cid;
                    $scope.createNew = {
 						"classificationId" : cid.classificationId,
 
@@ -679,8 +708,10 @@ var ModalInstanceCtrl = function($scope, $modalInstance,  $http, $location) {
 //modal for classificationGroup
 var ClassificationGroupCtrl = function($scope, $modalInstance, $http, $location, cid_detail) {
 	$scope.cIdDetail = {
-		"classificationRef": cid_detail
+		"classificationRef": cid_detail._id
 	};
+
+	$scope.classificationId = cid_detail.classificationId;
 	var _scope = {};
 	_scope.init = function() {
 		$scope.searchClassificationGroup();
