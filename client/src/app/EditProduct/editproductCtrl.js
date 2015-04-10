@@ -689,9 +689,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 });
                 modalInstance.result.then(function(attributedata) {
                 	$scope.attributeDetails = attributedata;
-                	$scope.doc = {
-                        "attributeId": attributedata.attributeId
-                    }
+                	$scope.doc = attributedata;
                 });
             },
             function() {
@@ -699,31 +697,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 // $log.info('Modal dismissed at: ' + new Date());
 
             };
-
-            $scope.openEditAttribute= function(size) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'myModalContent4.html',
-                    controller: EditAttributeCtrl,
-                    size: size,
-                    resolve: {
-                        editattribute_detail: function() {
-                            return $scope.editproduct.attributeValues;
-                        }
-                    }
-                    
-                });
-                modalInstance.result.then(function(attributedata) {
-                	$scope.attributeDetails = attributedata;
-                	$scope.doc = {
-                        "attributeId": attributedata.attributeId
-                    }
-                });
-            },
-            function() {
-                // $scope.editProfile=editProfileBeforeCancle;
-                // $log.info('Modal dismissed at: ' + new Date());
-
-            };
+//Edit Attribute
+	$scope.editAttribute = function(){
+		window.open('http://classificationattribute-44842.onmodulus.net/#/attributes', '_blank', 'toolbar=0,location=0,menubar=0');
+	}
 
     }
 ]);
@@ -967,7 +944,7 @@ var AttributeCtrl = function($scope, $modalInstance, $http, $location,$modal) {
             })
     }
     var postAttribute = function(rqstData) {
-
+    	delete rqstData.attributeSectionId;
         $http.post($scope.result + '/api/attributeSearch', rqstData)
             .then(function(result) {
                 $scope.attrdetails = result.data;
@@ -988,8 +965,10 @@ var AttributeCtrl = function($scope, $modalInstance, $http, $location,$modal) {
                 });
                 modalInstance.result.then(function(attrsectiondata) {
                 	$scope.attrsectionData = attrsectiondata;
+                	console.log('@@@@@@@@',  attrsectiondata);
                 	$scope.attrID = {
-                        "attributeSectionId": attrsectiondata.attributeSectionId
+                        "attributeSectionId": attrsectiondata.attributeSectionId,
+                        "sectionRef": attrsectiondata.attributeSectionId
                     }
                 });
             },
@@ -1180,43 +1159,3 @@ var AttributeSectionCtrl = function($scope, $modalInstance, $http, $location) {
     };
 };
 
-//edit attribute section controller
-
-var EditAttributeCtrl = function($scope, $modalInstance, $http, $location,editattribute_detail) {
-	console.log('fasfsf',editattribute_detail);
-    $scope.searchSection = function(reqData) {
-        $http.get('/getConfig')
-            .then(function(result) {
-                $scope.result = result.data;
-                postSection(reqData);
-
-            })
-            .catch(function(err) {
-                console.log('error')
-            })
-    }
-    var postSection = function(rqstData) {
-
-        $http.post($scope.result + '/api/attributeSectionSearch', rqstData)
-            .then(function(result) {
-                $scope.attrsectiondetails = result.data;
-                $scope.currentPage = 0;
-				$scope.groupToPages();
-            })
-            .catch(function(err) {
-                console.log('error')
-            })
-    }
-
-
-
-
-    $scope.getAttributeSection = function(cid) {
-        $modalInstance.close(cid);
-    }
-    $scope.cancel = function() {
-
-        $modalInstance.dismiss('cancel');
-
-    };
-};

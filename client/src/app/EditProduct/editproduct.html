@@ -725,13 +725,7 @@
 
                     <td ng-hide="select.atrcolhide.indexOf('status')>=0">{{atrdata.statusId}}</td>
                     <td>
-                        <span class="ng-scope"> 
-			                            <script type="text/ng-template" id="myModalContent4.html">
-			                              <div ng-include="'app/EditProduct/editattributemodal.html'"></div>
-			                            </script>
-			                            <button class="btn btn-primary btn-xs" ng-click="openEditAttribute('lg', atrdata)">Edit</button>
-                                    </span>
-
+			            <button class="btn btn-primary btn-xs" ng-click="editAttribute()">Edit</button>
                     </td>
                 </tr>
             </tbody>
