@@ -142,7 +142,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         }
 
          $scope.newAttribute = function(createNewAttribute) {
-            $scope.editproduct.attributeValues.push(angular.copy(createNewAttribute));
+            $scope.editproduct.attributeValues.push(createNewAttribute);
             $scope.updateitem($scope.editproduct);
             // $scope.createNew = {};
         }
@@ -688,8 +688,9 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                     size: size
                 });
                 modalInstance.result.then(function(attributedata) {
-                	$scope.attributeDetails = attributedata;
+                	// $scope.attributeDetails = attributedata;
                 	$scope.doc = attributedata;
+                	$scope.doc.attribute = attributedata._id;
                 });
             },
             function() {
@@ -944,7 +945,6 @@ var AttributeCtrl = function($scope, $modalInstance, $http, $location,$modal) {
             })
     }
     var postAttribute = function(rqstData) {
-    	delete rqstData.attributeSectionId;
         $http.post($scope.result + '/api/attributeSearch', rqstData)
             .then(function(result) {
                 $scope.attrdetails = result.data;
@@ -965,9 +965,7 @@ var AttributeCtrl = function($scope, $modalInstance, $http, $location,$modal) {
                 });
                 modalInstance.result.then(function(attrsectiondata) {
                 	$scope.attrsectionData = attrsectiondata;
-                	console.log('@@@@@@@@',  attrsectiondata);
                 	$scope.attrID = {
-                        "attributeSectionId": attrsectiondata.attributeSectionId,
                         "sectionRef": attrsectiondata.attributeSectionId
                     }
                 });
@@ -1067,7 +1065,6 @@ var AttributeSectionCtrl = function($scope, $modalInstance, $http, $location) {
             })
     }
     var postSection = function(rqstData) {
-
         $http.post($scope.result + '/api/attributeSectionSearch', rqstData)
             .then(function(result) {
                 $scope.attrsectiondetails = result.data;

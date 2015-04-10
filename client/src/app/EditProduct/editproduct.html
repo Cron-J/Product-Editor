@@ -716,8 +716,8 @@
                 </tr>
 
 
-                <tr ng-repeat="atrdata in editproduct.attributeValues | orderBy:sortType:sortReverse  | filter:search:strict | filter:attributeop[0]:strict">
-                    <td>{{atrdata.attributeId}}</td>
+                <tr ng-repeat="atrdata in editproduct.attributeValues | orderBy:sortType:sortReverse  | filter:search:strict | filter:attributeop[0]:strict track by $index">
+                    <td>{{atrdata.attribute}}</td>
                     <td ng-hide="select.atrcolhide.indexOf('variant')>=0">{{atrdata.variantId}}</td>
                     <td ng-hide="select.atrcolhide.indexOf('language')>=0">{{atrdata.languageId}}</td>
                     <td editable model="editproduct.attributeValues[$index].value"><span>{{atrdata.value}}</span></td>
