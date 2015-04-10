@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="defModalHead">ClassificationGroup Search</h4>
+    <h4 class="modal-title" id="defModalHead">Attribute Search</h4>
 </div>
 <div class="modal-body">
 
@@ -29,12 +29,20 @@
 									ng-model="attrID.extAttributeId" />
 								</div>
 								<div class="col-sm-4">
-									<label >Section</label>
-									<input type="text" class="form-control" name="" 
+									<label>Section</label>
+									<input type="text" class="form-control" name="" ng-model="attrID.attributeSectionId"
 									 />
+									   
 								</div>
 								<div class="form-button-group search-buttons col-sm-3">
-									<button class="btn btn-primary btn-sm" ng-click=""><span class="glyphicon glyphicon-search"></span></button>
+		                            <span class="ng-scope"> 
+			                            <script type="text/ng-template" id="myModalContent3.html">
+			                              <div ng-include="'app/EditProduct/attributesectionmodal.html'"></div>
+			                            </script>
+			                            <button class="btn btn-primary btn-xs" ng-click="attributeSection('lg')">
+							  			          <span class="glyphicon glyphicon-search"></span>
+							  	        </button>
+                                    </span>	
 								</div>
 							</div>
 							<div class="row">
@@ -57,7 +65,7 @@
 										<th>Description</th>
 									</thead>
 				                     <tbody>
-										<tr ng-click="" class="hoverptr" ng-repeat="attrdata in groupItems[currentPage]">
+										<tr ng-click="getAttribute(attrdata)" class="hoverptr" ng-repeat="attrdata in groupItems[currentPage]">
 											<td >{{attrdata.attributeId}}</td>
 											<td >{{attrdata.descriptions.descShort[0].description}}</td>
 										</tr>

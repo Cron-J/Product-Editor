@@ -720,8 +720,8 @@
 						       </tr>
 								
          
-							<tr  class="hoverptr inactive"  ng-repeat="atrdata in editproduct.attributeValues | orderBy:sortType:sortReverse  | filter:search:strict | filter:attributeop[0]:strict"  >
-						        <td >{{atrdata.attribute}}</td>
+							<tr    ng-repeat="atrdata in editproduct.attributeValues | orderBy:sortType:sortReverse  | filter:search:strict | filter:attributeop[0]:strict"  >
+						        <td >{{atrdata.attributeId}}</td>
 						        <td ng-hide="select.atrcolhide.indexOf('variant')>=0">{{atrdata.variantId}}</td>
 						        <td ng-hide="select.atrcolhide.indexOf('language')>=0">{{atrdata.languageId}}</td>
 						        <td editable model="editproduct.attributeValues[$index].value"><span>{{atrdata.value}}</span></td>
@@ -766,7 +766,7 @@
 							<div class="form-group">
 					          	<label class="col-sm-4 control-label"> Attribute Id </label>
 					          	<div class="col-sm-6">
-					          		<input type="text" name="attributeid" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.path" required/>
+					          		<input type="text" name="attributeid" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.attributeId" required/>
 					          		<span class="error" ng-show="attrform.attributeid.$invalid && attrform.attributeid.$dirty">Invalid:
 					          			<span ng-show="attrform.attributeid.$error.required">AttributeId is required</span>
 					          		    <span ng-show="attrform.attributeid.$error.minlength">AttributeId should be minimum of 0 characters</span>
@@ -801,7 +801,7 @@
 					        <div class="form-group">
 					          	<label class="col-sm-4 control-label">Order No.</label>
 					          	<div class="col-sm-7">
-					            	<input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
+					            	<input type="number" name="orderno" class="form-control" ng-model="doc.orderNro" ng-minlength="0" ng-maxlength="50">
 					            	<span class="error" ng-show="attrform.orderno.$invalid">Invalid:
 					            	    <span ng-show="attrform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
 				                        <span ng-show="attrform.orderno.$error.maxlength">Order No. should be maximum of 50 digit</span>
@@ -814,7 +814,7 @@
 					        <div class="form-group">
 					          	<label class="col-sm-4 control-label">StatusId</label>
 					          	<div class="col-sm-7">
-					            	<input type="number" name="statusId" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
+					            	<input type="number" name="statusId" class="form-control" ng-model="doc.statusId" ng-minlength="0" ng-maxlength="50">
 					            	<span class="error" ng-show="attrform.statusId.$invalid">Invalid:
 					            	    <span ng-show="attrform.statusId.$error.minlength">Order No. should be minimum of 0 digit</span>
 				                        <span ng-show="attrform.statusId.$error.maxlength">Order No. should be maximum of 50 digit</span>
@@ -856,7 +856,7 @@
 							<div class="col-sm-12">
 				        		
 						          	<div class="col-sm-offset-2  col-sm-3">
-										<button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
+										<button class="btn btn-primary" type="submit" ng-click="newAttribute(doc);">Save</button>
 										<button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Cancel</button>
 									</div>
 						        
