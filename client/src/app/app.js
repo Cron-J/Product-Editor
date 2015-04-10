@@ -19,9 +19,9 @@ var myApp = angular
 				{templateUrl:'app/EditProduct/editproduct.html'}
 				)
 
-			// .when('/product-variant/:id',
-			// 	{templateUrl:'app/productVariant/product-variant.html'}
-			// 	)
+			.when('/product-variant',
+				{templateUrl:'app/productVariant/product-variant.html'}
+				)
 
 
 			// .when('/',

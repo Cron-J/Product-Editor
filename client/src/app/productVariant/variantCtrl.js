@@ -31,7 +31,7 @@ myApp.controller('variantCtrl', [ '$scope','$rootScope',
 
    var init = function(){
     var urlBase = '/getVariants';
-    $http.get(urlBase)
+    $http.post(urlBase)
      .then(function(result) {
        $scope.tabledata = result.data;
        
