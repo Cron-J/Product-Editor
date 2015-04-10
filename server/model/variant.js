@@ -87,8 +87,8 @@ VariantSchema.statics.createVariant = function(varient, callback) {
     this.create(varient, callback);
 };
 
-VariantSchema.statics.getVariants = function(callback) {
-    this.find({}, callback);
+VariantSchema.statics.searchVariant = function(query, callback) {
+    this.find(query, callback);
 };
 
 VariantSchema.statics.updateVariant = function(id, variant, callback) {
