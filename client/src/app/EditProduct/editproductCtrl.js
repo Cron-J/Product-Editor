@@ -700,6 +700,31 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
             };
 
+            $scope.openEditAttribute= function(size) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent4.html',
+                    controller: EditAttributeCtrl,
+                    size: size,
+                    resolve: {
+                        editattribute_detail: function() {
+                            return $scope.editproduct.attributeValues;
+                        }
+                    }
+                    
+                });
+                modalInstance.result.then(function(attributedata) {
+                	$scope.attributeDetails = attributedata;
+                	$scope.doc = {
+                        "attributeId": attributedata.attributeId
+                    }
+                });
+            },
+            function() {
+                // $scope.editProfile=editProfileBeforeCancle;
+                // $log.info('Modal dismissed at: ' + new Date());
+
+            };
+
     }
 ]);
 
@@ -1049,7 +1074,7 @@ var AttributeCtrl = function($scope, $modalInstance, $http, $location,$modal) {
 
     };
 };
-
+//attribute section controller
 var AttributeSectionCtrl = function($scope, $modalInstance, $http, $location) {
     $scope.searchSection = function(reqData) {
         $http.get('/getConfig')
@@ -1145,6 +1170,47 @@ var AttributeSectionCtrl = function($scope, $modalInstance, $http, $location) {
 	 	$scope.min = 0;
 	 	$scope.max =5;
 		$scope.groupToPages();
+    $scope.getAttributeSection = function(cid) {
+        $modalInstance.close(cid);
+    }
+    $scope.cancel = function() {
+
+        $modalInstance.dismiss('cancel');
+
+    };
+};
+
+//edit attribute section controller
+
+var EditAttributeCtrl = function($scope, $modalInstance, $http, $location,editattribute_detail) {
+	console.log('fasfsf',editattribute_detail);
+    $scope.searchSection = function(reqData) {
+        $http.get('/getConfig')
+            .then(function(result) {
+                $scope.result = result.data;
+                postSection(reqData);
+
+            })
+            .catch(function(err) {
+                console.log('error')
+            })
+    }
+    var postSection = function(rqstData) {
+
+        $http.post($scope.result + '/api/attributeSectionSearch', rqstData)
+            .then(function(result) {
+                $scope.attrsectiondetails = result.data;
+                $scope.currentPage = 0;
+				$scope.groupToPages();
+            })
+            .catch(function(err) {
+                console.log('error')
+            })
+    }
+
+
+
+
     $scope.getAttributeSection = function(cid) {
         $modalInstance.close(cid);
     }
