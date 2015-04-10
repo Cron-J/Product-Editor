@@ -749,6 +749,123 @@
 							</div>
 				        </div>
 				</div>
+				<div class="row ">
+					<div class="col-sm-4 m-b-20 " >
+						<button class="btn btn-primary" ng-click="createdoc()">New Attribute</button>
+						<button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
+					</div>
+				</div>
+
+				
+				<!-- Display this section on clicking new button -->
+				
+
+				<div class="row m-t-25 " ng-show="docvar" >
+					<form name="attrform" novalidate>
+						<div class="col-sm-6" >
+							<div class="form-group">
+					          	<label class="col-sm-4 control-label"> Attribute Id </label>
+					          	<div class="col-sm-6">
+					          		<input type="text" name="attributeid" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.path" required/>
+					          		<span class="error" ng-show="attrform.attributeid.$invalid && attrform.attributeid.$dirty">Invalid:
+					          			<span ng-show="attrform.attributeid.$error.required">AttributeId is required</span>
+					          		    <span ng-show="attrform.attributeid.$error.minlength">AttributeId should be minimum of 0 characters</span>
+				                        <span ng-show="attrform.attributeid.$error.maxlength">AttributeId should be maximum of 50 characters</span>
+				                        <span ng-show="attrform.attributeid.$error.pattern">AttributeId won't allow special characters</span>
+		                            </span>
+					          	</div>
+					          	<div class="col-sm-1">
+					          		<span class="ng-scope"> 
+			                            <script type="text/ng-template" id="myModalContent2.html">
+			                              <div ng-include="'app/EditProduct/attributemodal.html'"></div>
+			                            </script>
+			                            <button class="btn btn-primary btn-xs" ng-click="openAttribute('lg')">
+							  			          <span class="glyphicon glyphicon-search"></span>
+							  	        </button>
+                                    </span>						          	
+			  	                </div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-4 control-label">Language</label>
+					          	<div class="col-sm-7">
+					            	<select name="language" class="form-control m-b" ng-model="doc.languageId">
+										<option value="de">de</option>
+										<option value="en">en</option>
+										<option value="es">es</option>
+										<option value="fr">fr</option>
+										<option value="jp">jp</option>
+					            	</select>
+					          	</div>
+					        </div>
+					        <div class="form-group">
+					          	<label class="col-sm-4 control-label">Order No.</label>
+					          	<div class="col-sm-7">
+					            	<input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
+					            	<span class="error" ng-show="attrform.orderno.$invalid">Invalid:
+					            	    <span ng-show="attrform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
+				                        <span ng-show="attrform.orderno.$error.maxlength">Order No. should be maximum of 50 digit</span>
+				                        <span ng-show="attrform.orderno.$error.number">Enter only digit</span>
+		                            </span>
+					            	
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-4 control-label">StatusId</label>
+					          	<div class="col-sm-7">
+					            	<input type="number" name="statusId" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
+					            	<span class="error" ng-show="attrform.statusId.$invalid">Invalid:
+					            	    <span ng-show="attrform.statusId.$error.minlength">Order No. should be minimum of 0 digit</span>
+				                        <span ng-show="attrform.statusId.$error.maxlength">Order No. should be maximum of 50 digit</span>
+				                        <span ng-show="attrform.statusId.$error.number">Enter only digit</span>
+		                            </span>
+					            	
+					          	</div>
+					        </div>
+
+					        <div class="form-group">
+					          	<label class="col-sm-4 control-label" >Value</label>
+					          	<div class="col-sm-7">
+					          		<input type="text" name="description" class="form-control" ng-model="doc.value" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" />
+					          		<span class="error" ng-show="attrform.description.$invalid">Invalid:
+					          		    <span ng-show="attrform.description.$error.minlength">Value should be minimum of 0 characters</span>
+				                        <span ng-show="attrform.description.$error.maxlength">Value should be maximum of 50 characters</span>
+				                        <span ng-show="attrform.description.$error.pattern">Value won't allow special characters</span>
+		                            </span>
+					          	</div>
+					        </div>
+					        <div class="form-group">
+					          	<label class="col-sm-4 control-label">Variant ID</label>
+					          	<div class="col-sm-8">
+					          		<select  class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="doc.variantId"> 
+								      <option value="">-- choose Variant --</option>
+									</select>
+								</div>
+					        </div>
+
+					        
+						</div>
+					
+						<div class="row">
+				        	<div class="col-sm-12">
+				        		<div ng-include="'app/partials/_auditInfo.html'"></div>
+				        	</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+				        		
+						          	<div class="col-sm-offset-2  col-sm-3">
+										<button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
+										<button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Cancel</button>
+									</div>
+						        
+							</div>
+				        </div>
+
+			        </form>
+
+				</div>
 		    </tab>
 
 		    <tab heading="Document">

@@ -673,6 +673,23 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
             };
 
+//Attribute search modal 
+
+		    $scope.openAttribute= function(size) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent2.html',
+                    controller: AttributeCtrl,
+                    size: size
+                });
+                modalInstance.result.then(function() {
+                });
+            },
+            function() {
+                // $scope.editProfile=editProfileBeforeCancle;
+                // $log.info('Modal dismissed at: ' + new Date());
+
+            };
+
     }
 ]);
 
@@ -897,4 +914,109 @@ var ClassificationGroupCtrl = function($scope, $modalInstance, $http, $location,
 
     };
     _scope.init();
+};
+
+
+//controller for Attribute modal
+
+var AttributeCtrl = function($scope, $modalInstance, $http, $location) {
+    $scope.searchAttribute = function(reqData) {
+        $http.get('/getConfig')
+            .then(function(result) {
+                $scope.result = result.data;
+                postAttribute(reqData);
+
+            })
+            .catch(function(err) {
+                console.log('error')
+            })
+    }
+    var postAttribute = function(rqstData) {
+
+        $http.post($scope.result + '/api/attributeSearch', rqstData)
+            .then(function(result) {
+                $scope.attrdetails = result.data;
+                $scope.currentPage = 0;
+				$scope.groupToPages();
+            })
+            .catch(function(err) {
+                console.log('error')
+            })
+    }
+
+        $scope.range = function (start, end) {
+			var ret = [];
+			if (!end) {
+				end = start;
+				start = 0;
+			}
+			for (var i = start; i < end; i++) {
+				ret.push(i);
+			}
+		return ret;
+	};
+
+	$scope.prevPage = function () {
+		if ($scope.currentPage > 0) {
+			$scope.currentPage--;
+		}
+		if($scope.min > 0){ 
+			$scope.min--;
+		}
+		if($scope.max > 5){ 
+			$scope.max--;
+		}
+	};
+
+	$scope.nextPage = function () {
+		if ($scope.currentPage < $scope.groupItems.length - 1) {
+			$scope.currentPage++;
+		}
+		$scope.limit = $scope.groupItems.length;
+		if($scope.min < $scope.limit && $scope.min <= $scope.limit - 6) {
+			$scope.min++;
+		}
+		if($scope.max < $scope.limit && $scope.min <= $scope.limit) {
+			$scope.max++;
+		}
+	};
+
+	$scope.setPage = function () {
+		$scope.currentPage = this.n;
+	};
+
+	$scope.groupToPages = function () {
+		$scope.groupItems = [];
+		$scope.filteredItems = $scope.attrdetails;
+		$scope.filtered();
+	};
+
+	$scope.filtered = function () {
+			if($scope.filteredItems){
+				for (var i = 0; i < $scope.filteredItems.length; i++) {
+					if (i % $scope.itemsPerPage === 0) {
+						$scope.groupItems[Math.floor(i / $scope.itemsPerPage)] = [ $scope.filteredItems[i] ];
+					}
+					else {
+						$scope.groupItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
+					}
+				}
+			}   
+	};
+
+	    $scope.groupItems = [];
+		$scope.currentPage = 0;
+		$scope.filteredItems = [];
+	 	$scope.itemsPerPage = 5;
+	 	$scope.min = 0;
+	 	$scope.max =5;
+		$scope.groupToPages();
+    $scope.getClassificationGroup = function(cid) {
+        $modalInstance.close(cid);
+    }
+    $scope.cancel = function() {
+
+        $modalInstance.dismiss('cancel');
+
+    };
 };
