@@ -33,7 +33,13 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                     console.log('error')
                 })
 
-            getOption();
+            getcgOption();
+            getattrOption();
+            getdocOption();
+            getpriceOption();
+            getassortOption();
+            getrelOption();
+
 
         }
 
@@ -142,11 +148,11 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
 
 
-        function getOption() {
+        function getcgOption() {
             var urlBase = '/getVariants';
-            $http.post(urlBase)
+            $http.post(urlBase , {hasVariantClassificationGroupAssociations:true})
                 .then(function(result) {
-                    $scope.options = result.data;
+                    $scope.cgoptions = result.data;
 
                 })
                 .catch(function(err) {
@@ -154,6 +160,65 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 })
         }
 
+        function getattrOption() {
+            var urlBase = '/getVariants';
+            $http.post(urlBase , {hasVariantAttributeValues:true})
+                .then(function(result) {
+                    $scope.attroptions = result.data;
+
+                })
+                .catch(function(err) {
+                    console.log('error')
+                })
+        }
+
+        function getdocOption() {
+            var urlBase = '/getVariants';
+            $http.post(urlBase , {hasVariantDocAssociation:true})
+                .then(function(result) {
+                    $scope.docoptions = result.data;
+
+                })
+                .catch(function(err) {
+                    console.log('error')
+                })
+        }
+
+        function getpriceOption() {
+            var urlBase = '/getVariants';
+            $http.post(urlBase , {hasVariantPrices:true})
+                .then(function(result) {
+                    $scope.priceptions = result.data;
+
+                })
+                .catch(function(err) {
+                    console.log('error')
+                })
+        }
+
+        function getassortOption() {
+            var urlBase = '/getVariants';
+            $http.post(urlBase , {hasVariantContractedProducts:true})
+                .then(function(result) {
+                    $scope.assortoptions = result.data;
+
+                })
+                .catch(function(err) {
+                    console.log('error')
+                })
+        }
+
+        function getrelOption() {
+            var urlBase = '/getVariants';
+            $http.post(urlBase , {hasVariantProductRelation:true})
+                .then(function(result) {
+                    $scope.reloptions = result.data;
+
+                })
+                .catch(function(err) {
+                    console.log('error')
+                })
+        }
 
         // check Uncheck check boxes
 

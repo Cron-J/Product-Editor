@@ -376,7 +376,7 @@
 
                     <td>
                         <div class="form-inline">
-                            <div class="tdwidth" isteven-multi-select input-model="options" output-model="output" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+                            <div class="tdwidth" isteven-multi-select input-model="cgoptions" output-model="output" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
@@ -498,7 +498,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Variant ID</label>
                         <div class="col-sm-5">
-                            <select class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="createNew.variantId">
+                            <select class="input-sm" ng-options="option.variantId as option.variantId for option in cgoptions" ng-model="createNew.variantId">
                                 <option value="">-- choose Variant --</option>
                             </select>
                         </div>
@@ -556,7 +556,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Variant ID</label>
                     <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="editrow.variantId">
+                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in cgoptions" ng-model="editrow.variantId">
                             <option value="">-- choose Variant --</option>
                         </select>
                     </div>
@@ -674,7 +674,7 @@
 
                     <td ng-hide="select.atrcolhide.indexOf('variant')>=0">
                         <div class="form-inline ">
-                            <div isteven-multi-select input-model="options" output-model="attributeop" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+                            <div isteven-multi-select input-model="attroptions" output-model="attributeop" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
@@ -837,7 +837,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Variant ID</label>
                     <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="doc.variantId">
+                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in attroptions" ng-model="doc.variantId">
                             <option value="">-- choose Variant --</option>
                         </select>
                     </div>
@@ -922,7 +922,7 @@
 
                     <td>
                         <div class="form-inline">
-                            <div class="dtdwidth" isteven-multi-select input-model="options" output-model="variantdoc" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+                            <div class="dtdwidth" isteven-multi-select input-model="docoptions" output-model="variantdoc" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
@@ -1082,7 +1082,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Variant ID</label>
                     <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="doc.variantId">
+                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in docoptions" ng-model="doc.variantId">
                             <option value="">-- choose Variant --</option>
                         </select>
                     </div>
@@ -1198,7 +1198,7 @@
 
                 <tr>
                     <td></td>
-                    <!-- <td>
+                    			<!-- <td>
 									<div class="form-inline">
 										<input type="text" class="input-sm" ng-model="search.contractId">
 											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
@@ -1208,7 +1208,7 @@
 
                     <td>
                         <div class="form-inline">
-                            <div isteven-multi-select input-model="options" output-model="variantprice" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+                            <div isteven-multi-select input-model="priceptions" output-model="variantprice" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
@@ -1353,7 +1353,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Variant ID</label>
                     <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="price.variantId">
+                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in priceptions" ng-model="price.variantId">
                             <option value="">-- choose Variant --</option>
                         </select>
                     </div>
@@ -1677,7 +1677,7 @@
                     <td></td>
                     <td>
                         <div class="form-inline">
-                            <div isteven-multi-select input-model="options" output-model="vassortment" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+                            <div isteven-multi-select input-model="assortoptions" output-model="vassortment" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
@@ -1755,7 +1755,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Variant ID</label>
                     <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="cproduct.variantId">
+                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in assortoptions" ng-model="cproduct.variantId">
                             <option value="">-- choose Variant --</option>
                         </select>
                     </div>
@@ -2242,7 +2242,7 @@
 
                     <td>
                         <div class="form-inline">
-                            <div isteven-multi-select input-model="options" output-model="varelation" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+                            <div isteven-multi-select input-model="reloptions" output-model="varelation" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
@@ -2365,7 +2365,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Variant ID</label>
                     <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in options" ng-model="cproduct.variantId">
+                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in reloptions" ng-model="cproduct.variantId">
                             <option value="">-- choose Variant --</option>
                         </select>
                     </div>
