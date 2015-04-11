@@ -4,6 +4,7 @@ var Boom = require('boom'),
     Product = require('../model/product').Product,
     fs = require('fs'),
     async = require('async'),
+    json2csv = require('json2csv'),
     filePath = require('../config/config').filePath,
     hostFromConfig = require('../config/config').host;
 
@@ -25,6 +26,15 @@ exports.searchProduct = {
             if (!err) {
                 return reply(result);
             } else reply(Boom.forbidden(err));
+        });
+    }
+};
+
+exports.exportProduct = {
+    handler: function(request, reply) {
+        json2csv({data: request.payload,  fields: ['productId', 'extProductId', 'tenantId', 'supplierId', 'statusId', 'mfgProductId', 'mfgProductName', 'manufacturerId', 'manufacturerName'], fieldNames: ['productId', 'extProductId', 'tenantId', 'supplierId', 'statusId', 'mfgProductId', 'mfgProductName', 'manufacturerId', 'manufacturerName']}, function(err, csv) {
+          if (err) console.log(err);
+          return reply(csv).header('Content-Type', 'application/octet-stream').header('content-disposition', 'attachment; filename=user.csv;');
         });
     }
 };
