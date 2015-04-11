@@ -145,6 +145,7 @@
     </div>
 </div>
 
+
 <div class="form-group">
     <label class="col-sm-4 control-label">Manufacturer Name</label>
     <div class="col-sm-8">
@@ -749,7 +750,7 @@
     </div>
     <div class="row ">
         <div class="col-sm-4 m-b-20 ">
-            <button class="btn btn-primary" ng-click="createdoc()">New Attribute</button>
+            <button class="btn btn-primary" ng-click="attvar=true">New Attribute</button>
             <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
         </div>
     </div>
@@ -758,7 +759,7 @@
     <!-- Display this section on clicking new button -->
 
 
-    <div class="row m-t-25 " ng-show="docvar">
+    <div class="row m-t-25 " ng-show="attvar">
         <form name="attrform" novalidate>
             <div class="col-sm-6">
                 <div class="form-group">

@@ -5,7 +5,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         growl, $modal, $routeParams, blockUI, $filter) {
 
 
-        // $scope.output={mk:[]};
 
 
 
@@ -41,17 +40,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         init();
 
-        function getOption() {
-            var urlBase = '/getVariants';
-            $http.get(urlBase)
-                .then(function(result) {
-                    $scope.options = result.data;
-
-                })
-                .catch(function(err) {
-                    console.log('error')
-                })
-        }
+        
 
 
         // $scope.fetchProductData = function(){
@@ -101,6 +90,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         $scope.search = ''; // set the default search/filter term
 
 
+
+
+
+
         // Product classification
 
 
@@ -148,6 +141,20 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         }
 
 
+
+        function getOption() {
+            var urlBase = '/getVariants';
+            $http.post(urlBase)
+                .then(function(result) {
+                    $scope.options = result.data;
+
+                })
+                .catch(function(err) {
+                    console.log('error')
+                })
+        }
+
+
         // check Uncheck check boxes
 
 
@@ -187,6 +194,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
 
         // Attribute Tab
+
+        $scope.attvar = false;
 
         $scope.select = {};
         $scope.hidecol = function(x) {
