@@ -44,26 +44,25 @@
 					            <input type="text" name="pid" class="form-control" ng-model="editproduct.productId"  ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" required>
 					            <span class="error" ng-show="masterdata.pid.$dirty">Invalid:
 		                        <span ng-show="masterdata.pid.$error.required">Tell us your Product ID</span>
-    <span ng-show="masterdata.pid.$error.minlength">Product ID should be minimum of 0 characters</span>
-    <span ng-show="masterdata.pid.$error.maxlength">Product ID should be maximum of 50 characters</span>
-    <span ng-show="masterdata.pid.$error.pattern">Product ID won't allow special characters</span>
-    </span>
+                                <span ng-show="masterdata.pid.$error.minlength">Product ID should be minimum of 0 characters</span>
+                                <span ng-show="masterdata.pid.$error.maxlength">Product ID should be maximum of 50 characters</span>
+                                <span ng-show="masterdata.pid.$error.pattern">Product ID won't allow special characters</span>
+                                </span>
+                            </div>
+                        </div>
 
-</div>
-</div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">ext. Product ID</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="extpid" ng-model="editproduct.extProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                <span class="error" ng-show="masterdata.extpid.$invalid">Invalid:
+                        					               <span ng-show="masterdata.extpid.$error.minlength">ext. Product ID should be minimum of 0 characters</span>
+                                <span ng-show="masterdata.extpid.$error.maxlength">ext. Product ID should be maximum of 50 characters</span>
+                                <span ng-show="masterdata.extpid.$error.pattern">ext. Product ID won't allow special characters</span>
+                                </span>
 
-<div class="form-group">
-    <label class="col-sm-4 control-label">ext. Product ID</label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="extpid" ng-model="editproduct.extProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-        <span class="error" ng-show="masterdata.extpid.$invalid">Invalid:
-					               <span ng-show="masterdata.extpid.$error.minlength">ext. Product ID should be minimum of 0 characters</span>
-        <span ng-show="masterdata.extpid.$error.maxlength">ext. Product ID should be maximum of 50 characters</span>
-        <span ng-show="masterdata.extpid.$error.pattern">ext. Product ID won't allow special characters</span>
-        </span>
-
-    </div>
-</div>
+                            </div>
+                        </div>
 
 <div class="form-group">
     <label class="col-sm-4 control-label"> GTIN </label>
@@ -376,12 +375,19 @@
 
                     <td>
                         <div class="form-inline">
+                            <input type="text" class="input-sm" ng-model="search.variantId">
+                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                        </div>
+                    </td>
+
+                    <!-- <td>
+                        <div class="form-inline">
                             <div class="tdwidth" isteven-multi-select input-model="cgoptions" output-model="output" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
-
+ -->
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.orderNo">
@@ -672,11 +678,18 @@
                         </div>
                     </td>
 
-                    <td ng-hide="select.atrcolhide.indexOf('variant')>=0">
+                    <!-- <td ng-hide="select.atrcolhide.indexOf('variant')>=0">
                         <div class="form-inline ">
                             <div isteven-multi-select input-model="attroptions" output-model="attributeop" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
+                        </div>
+                    </td> -->
+
+                    <td>
+                        <div class="form-inline">
+                            <input type="text" class="input-sm" ng-model="search.variantId">
+                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
@@ -726,7 +739,7 @@
 
                     <td ng-hide="select.atrcolhide.indexOf('status')>=0">{{atrdata.statusId}}</td>
                     <td>
-			            <button class="btn btn-primary btn-xs" ng-click="editAttribute()">Edit</button>
+			            <button class="btn btn-primary btn-xs" ng-click="editAttribute(atrdata.attribute)">Edit</button>
                     </td>
                 </tr>
             </tbody>
@@ -878,9 +891,9 @@
 
                     <th>
                         <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-							            <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+						    <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
+						    <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
+						</a>
                     </th>
 
                     <th>
@@ -920,14 +933,20 @@
                         </div>
                     </td>
 
-                    <td>
+                    <!-- <td>
                         <div class="form-inline">
                             <div class="dtdwidth" isteven-multi-select input-model="docoptions" output-model="variantdoc" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
-
+ -->
+                    <td>
+                        <div class="form-inline">
+                            <input type="text" class="input-sm" ng-model="search.variantId">
+                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                        </div>
+                    </td>
 
                     <td>
                         <div class="form-inline">
@@ -1206,15 +1225,20 @@
 									</div>
 								</td> -->
 
-                    <td>
+                    <!-- <td>
                         <div class="form-inline">
                             <div isteven-multi-select input-model="priceptions" output-model="variantprice" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
+                    </td> -->
+
+                    <td>
+                        <div class="form-inline">
+                            <input type="text" class="input-sm" ng-model="search.variantId">
+                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                        </div>
                     </td>
-
-
 
                     <td>
                         <div class="form-inline">
@@ -1675,15 +1699,20 @@
 
                 <tr>
                     <td></td>
-                    <td>
+                    <!-- <td>
                         <div class="form-inline">
                             <div isteven-multi-select input-model="assortoptions" output-model="vassortment" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
-
-
+ -->
+                    <td>
+                        <div class="form-inline">
+                            <input type="text" class="input-sm" ng-model="search.variantId">
+                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                        </div>
+                    </td>
 
                     <td>
                         <div class="form-inline">
@@ -2240,13 +2269,13 @@
                         </div>
                     </td>
 
-                    <td>
+                    <!-- <td>
                         <div class="form-inline">
                             <div isteven-multi-select input-model="reloptions" output-model="varelation" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                             </div>
                             <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
-                    </td>
+                    </td> -->
 
                     <td>
                         <div class="form-inline">

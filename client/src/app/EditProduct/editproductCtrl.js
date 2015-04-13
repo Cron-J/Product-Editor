@@ -773,8 +773,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
             };
 //Edit Attribute
-	$scope.editAttribute = function(){
-		window.open('http://classificationattribute-44842.onmodulus.net/#/attributes', '_blank', 'toolbar=0,location=0,menubar=0');
+	$scope.editAttribute = function(id){
+		window.open('http://classificationattribute-44842.onmodulus.net/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
 	}
 
     }
@@ -1125,6 +1125,7 @@ var AttributeCtrl = function($scope, $modalInstance, $http, $location,$modal) {
 
     };
 };
+
 //attribute section controller
 var AttributeSectionCtrl = function($scope, $modalInstance, $http, $location) {
     $scope.searchSection = function(reqData) {
