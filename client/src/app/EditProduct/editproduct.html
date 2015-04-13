@@ -897,10 +897,11 @@
                                 </thead>
                                 <tbody>
                                     <!-- ngRepeat: avo in attribute.valueOptions -->
-                                    <tr ng-repeat="channelOption in attribute.channels" >
+                                    <tr ng-repeat="channelOption in channels" >
                                         <td class="custom-row ">{{channelOption.attribute}}</td>
                                         <td class="custom-row ">{{channelOption.value}} </td>
                                         <td class="custom-row ">{{channelOption.language}}</td>
+                                        <td class="custom-row ">{{channelOption.channel}}</td>
                                         <td>
                                             <!-- ngIf: page!='view' -->
                                             <button type="button" class="btn btn-primary btn-xs ng-scope" data-toggle="modal" ng-click="editValueOption(avo, $index)" style="position: relative;bottom: 6px;">Edit

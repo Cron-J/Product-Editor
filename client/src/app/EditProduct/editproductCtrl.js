@@ -707,15 +707,18 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
 
        // Add channel
+        $scope.channels =[];
 
         $scope.addChannel = function(size) {
+
                 var modalInstance = $modal.open({
                     templateUrl: 'myModalContent8.html',
                     controller: ChannelModalInstanceCtrl,
                     size: size
                 });
 
-                modalInstance.result.then(function() {
+                modalInstance.result.then(function(channel_data) {
+                    $scope.channels.push(channel_data);
                     
                 });
         }
@@ -1214,19 +1217,21 @@ var AttributeSectionCtrl = function($scope, $modalInstance, $http, $location) {
 };
 
 var ChannelModalInstanceCtrl = function($scope, $modalInstance, $http, $location,$controller) {
-    $scope.doc={
-        'channel':{}
-    };
    var testCtrl1ViewModel = $scope.$new(); 
+   $scope.channelinfo = {};
 $scope.openChannelModal =function(){
     $controller('EditProductCtrl',{$scope : testCtrl1ViewModel ,$modalInstance:$modalInstance});
     testCtrl1ViewModel.openAttribute().then(function(){
         console.log(testCtrl1ViewModel);
-         $scope.doc.channel.attribute=testCtrl1ViewModel.doc.attributeId;
-         $scope.doc.channel.attributeid=testCtrl1ViewModel.doc.attribute;
+         $scope.channelinfo.attribute=testCtrl1ViewModel.doc.attributeId;
+         $scope.channelinfo.attributeid=testCtrl1ViewModel.doc.attribute;
     })
    
    
+}
+
+$scope.addChannelRow = function(channel_info){
+    $modalInstance.close(channel_info);
 }
     
     $scope.cancel = function() {
