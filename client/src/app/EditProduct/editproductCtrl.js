@@ -9,7 +9,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
 
         $scope.updateitem = function(editproduct) {
-            alert('ds')
             $http.put('/updateProduct/' + editproduct._id, editproduct)
                 .success(function(status, data) {
                     console.log(data);
@@ -133,6 +132,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         }
 
          $scope.newAttribute = function(createNewAttribute) {
+           createNewAttribute.channels = $scope.channels;
             $scope.editproduct.attributeValues.push(createNewAttribute);
             $scope.updateitem($scope.editproduct);
             // $scope.createNew = {};
