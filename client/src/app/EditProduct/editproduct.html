@@ -439,7 +439,7 @@
                     <div class="form-group ">
                         <label class="col-sm-3 control-label">Classification </label>
                         <div class="col-sm-4">
-                            <input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" required>
+                            <input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true" required>
                             <span class="error" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid">Invalid:
 				                        <span ng-show="assignGrpForm.classificationid.$error.required">Tell us your Classification</span>
                             <span ng-show="assignGrpForm.classificationid.$error.minlength">Classification should be minimum of 0 characters</span>
@@ -467,7 +467,7 @@
                     <div class="form-group" style="margin-bottom:16px;">
                         <label class="col-sm-2 control-label">Classification</label>
                         <div class="col-sm-4">
-                            <input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                            <input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true">
                             <span class="error" ng-show="assignGrpForm.cgId.$dirty && assigrpForm.cgId.$invalid">Invalid:
 			                        <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
                             <span ng-show="assignGrpForm.cgId.$error.minlength">Classification Group should be minimum of 0 characters</span>nG
@@ -500,16 +500,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-inline">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">Variant ID</label>
-                        <div class="col-sm-5">
-                            <select class="input-sm" ng-options="option.variantId as option.variantId for option in cgoptions" ng-model="createNew.variantId">
-                                <option value="">-- choose Variant --</option>
-                            </select>
+                        <label class="col-sm-2 control-label">Variant ID</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" />
+                        </div>
+                        <div class="col-sm-1">
+                            <span class="ng-scope"> 
+                                        <script type="text/ng-template" id="myModalContent6.html">
+                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','createNew')">
+                                                  <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            </span>
                         </div>
                     </div>
-                </div>
+
 
 
 
@@ -560,11 +567,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Variant ID</label>
-                    <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in cgoptions" ng-model="editrow.variantId">
-                            <option value="">-- choose Variant --</option>
-                        </select>
+                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="" ng-model="editrow.variantId" ng-readonly="true" />
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="ng-scope"> 
+                                    <script type="text/ng-template" id="myModalContent6.html">
+                                      <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                    </script>
+                                    <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','editrow')">
+                                              <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
                     </div>
                 </div>
 
@@ -848,14 +863,68 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Variant ID</label>
-                    <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in attroptions" ng-model="doc.variantId">
-                            <option value="">-- choose Variant --</option>
-                        </select>
-                    </div>
+                        <label class="col-sm-2 control-label">Variant ID</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
+                        </div>
+                        <div class="col-sm-1">
+                            <span class="ng-scope"> 
+                                        <script type="text/ng-template" id="myModalContent6.html">
+                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantAttributeValues','doc')">
+                                                  <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            </span>
+                        </div>
                 </div>
 
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Channel Value Options</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        
+                            <table class="table table-stripped custom-table">
+                                <thead class="active">
+                                    <tr>
+                                        <th style="width:20%;">Attribute</th>
+                                        <th style="width:35%;">Value</th>
+                                        <th style="width:20%;">Language</th>
+                                        <th style="width:25%;">Channels</th>
+                                        <th style="width:25%;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ngRepeat: avo in attribute.valueOptions -->
+                                    <tr ng-repeat="channelOption in attribute.channels" >
+                                        <td class="custom-row ">{{channelOption.attribute}}</td>
+                                        <td class="custom-row ">{{channelOption.value}} </td>
+                                        <td class="custom-row ">{{channelOption.language}}</td>
+                                        <td>
+                                            <!-- ngIf: page!='view' -->
+                                            <button type="button" class="btn btn-primary btn-xs ng-scope" data-toggle="modal" ng-click="editValueOption(avo, $index)" style="position: relative;bottom: 6px;">Edit
+                                            </button><!-- end ngIf: page!='view' -->
+                                            <!-- ngIf: page!='view' -->
+                                            <button type="button" class="btn btn-primary btn-xs " >Delete
+                                            </button><!-- end ngIf: page!='view' -->
+                                            <!-- ngIf: page=='view' -->
+                                        </td>
+                                    </tr><!-- end ngRepeat: avo in attribute.valueOptions -->
+                                </tbody>
+                            </table>
+                        
+                            <!-- Button trigger modal -->
+                        
+                                <script type="text/ng-template" id="myModalContent8.html">
+                                    <div ng-include="'app/EditProduct/channelmodal.html'"></div>
+                                </script>
+                                <button class="btn btn-primary btn-xs" ng-click="addChannel('lg')">
+                                    + Add Channel
+                                </button>
+                            
+                    </div>
+                </div>
 
             </div>
             <div class="row">
@@ -1099,14 +1168,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Variant ID</label>
-                    <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in docoptions" ng-model="doc.variantId">
-                            <option value="">-- choose Variant --</option>
-                        </select>
+                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="ng-scope"> 
+                                    <script type="text/ng-template" id="myModalContent6.html">
+                                      <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                    </script>
+                                    <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantDocAssociation','doc')">
+                                              <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
                     </div>
                 </div>
-
 
             </div>
 
@@ -1375,12 +1451,20 @@
 					        </div> -->
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Variant ID</label>
-                    <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in priceptions" ng-model="price.variantId">
-                            <option value="">-- choose Variant --</option>
-                        </select>
-                    </div>
+                        <label class="col-sm-2 control-label">Variant ID</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="" ng-model="price.variantId" ng-readonly="true" />
+                        </div>
+                        <div class="col-sm-1">
+                            <span class="ng-scope"> 
+                                        <script type="text/ng-template" id="myModalContent6.html">
+                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantPrices','price')">
+                                                  <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            </span>
+                        </div>
                 </div>
 
                 <div class="form-group">
@@ -1781,13 +1865,21 @@
 					          	</div>
 					        </div> -->
 
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Variant ID</label>
-                    <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in assortoptions" ng-model="cproduct.variantId">
-                            <option value="">-- choose Variant --</option>
-                        </select>
-                    </div>
+                 <div class="form-group">
+                        <label class="col-sm-2 control-label">Variant ID</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="" ng-model="cproduct.variantId" ng-readonly="true" />
+                        </div>
+                        <div class="col-sm-1">
+                            <span class="ng-scope"> 
+                                        <script type="text/ng-template" id="myModalContent6.html">
+                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantContractedProducts','cproduct')">
+                                                  <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            </span>
+                        </div>
                 </div>
 
                 <div class="form-group">
@@ -2391,13 +2483,21 @@
         <div class="row m-t-25 " ng-show="nproductvar">
             <div class="col-sm-9">
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Variant ID</label>
-                    <div class="col-sm-8">
-                        <select class="input-sm" ng-options="option.variantId as option.variantId for option in reloptions" ng-model="cproduct.variantId">
-                            <option value="">-- choose Variant --</option>
-                        </select>
-                    </div>
+                 <div class="form-group">
+                        <label class="col-sm-2 control-label">Variant ID</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="" ng-model="prelation.variantId" ng-readonly="true" />
+                        </div>
+                        <div class="col-sm-1">
+                            <span class="ng-scope"> 
+                                        <script type="text/ng-template" id="myModalContent6.html">
+                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantProductRelation','prelation')">
+                                        <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            </span>
+                        </div>
                 </div>
 
                 <div class="form-group">

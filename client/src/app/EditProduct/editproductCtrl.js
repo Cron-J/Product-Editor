@@ -1,16 +1,15 @@
 myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
     '$http', '$location', 'growl', '$modal', '$routeParams', '$filter',
-    'blockUI',
+    'blockUI','$q',
     function($scope, $rootScope, $http, $location,
-        growl, $modal, $routeParams, blockUI, $filter) {
+        growl, $modal, $routeParams, blockUI, $filter,$q) {
 
 
 
 
 
         $scope.updateitem = function(editproduct) {
-
-
+            alert('ds')
             $http.put('/updateProduct/' + editproduct._id, editproduct)
                 .success(function(status, data) {
                     console.log(data);
@@ -32,13 +31,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 .catch(function(err) {
                     console.log('error')
                 })
-
-            getcgOption();
-            getattrOption();
-            getdocOption();
-            getpriceOption();
-            getassortOption();
-            getrelOption();
 
 
         }
@@ -146,79 +138,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             // $scope.createNew = {};
         }
 
-
-
-        function getcgOption() {
-            var urlBase = '/getVariants';
-            $http.post(urlBase , {hasVariantClassificationGroupAssociations:true})
-                .then(function(result) {
-                    $scope.cgoptions = result.data;
-
-                })
-                .catch(function(err) {
-                    console.log('error')
-                })
-        }
-
-        function getattrOption() {
-            var urlBase = '/getVariants';
-            $http.post(urlBase , {hasVariantAttributeValues:true})
-                .then(function(result) {
-                    $scope.attroptions = result.data;
-
-                })
-                .catch(function(err) {
-                    console.log('error')
-                })
-        }
-
-        function getdocOption() {
-            var urlBase = '/getVariants';
-            $http.post(urlBase , {hasVariantDocAssociation:true})
-                .then(function(result) {
-                    $scope.docoptions = result.data;
-
-                })
-                .catch(function(err) {
-                    console.log('error')
-                })
-        }
-
-        function getpriceOption() {
-            var urlBase = '/getVariants';
-            $http.post(urlBase , {hasVariantPrices:true})
-                .then(function(result) {
-                    $scope.priceptions = result.data;
-
-                })
-                .catch(function(err) {
-                    console.log('error')
-                })
-        }
-
-        function getassortOption() {
-            var urlBase = '/getVariants';
-            $http.post(urlBase , {hasVariantContractedProducts:true})
-                .then(function(result) {
-                    $scope.assortoptions = result.data;
-
-                })
-                .catch(function(err) {
-                    console.log('error')
-                })
-        }
-
-        function getrelOption() {
-            var urlBase = '/getVariants';
-            $http.post(urlBase , {hasVariantProductRelation:true})
-                .then(function(result) {
-                    $scope.reloptions = result.data;
-
-                })
-                .catch(function(err) {
-                    console.log('error')
-                })
-        }
 
         // check Uncheck check boxes
 
@@ -701,6 +620,24 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.contacts.splice(index, 1);
         };
 
+        //search variant
+
+        $scope.openVariant = function(size,which,resmodel) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent6.html',
+                    controller: VariantModalInstanceCtrl,
+                    size: size,
+                    resolve: {
+                        data:function(){
+                            return which;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function(variant_data) {
+                    $scope[resmodel].variantId = variant_data.variantId;
+                });
+            }
         // search classification modal
 
         $scope.openClassification = function(size) {
@@ -722,12 +659,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
                     }
                 });
-            },
-            function() {
-                // $scope.editProfile=editProfileBeforeCancle;
-                // $log.info('Modal dismissed at: ' + new Date());
-
-            };
+            }
 
         //search classificationGroup
 
@@ -746,16 +678,12 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                     $scope.classificationGroupDescription = cid.descriptions;
                     $scope.createNew.classificationGroupId = cid.classificationGroupId;
                 });
-            },
-            function() {
-                // $scope.editProfile=editProfileBeforeCancle;
-                // $log.info('Modal dismissed at: ' + new Date());
-
             };
 
 //Attribute search modal 
 
 		    $scope.openAttribute= function(size) {
+                 var deferred = $q.defer();
                 var modalInstance = $modal.open({
                     templateUrl: 'myModalContent2.html',
                     controller: AttributeCtrl,
@@ -764,14 +692,33 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 modalInstance.result.then(function(attributedata) {
                 	// $scope.attributeDetails = attributedata;
                 	$scope.doc = attributedata;
+                    console.log('attr',$scope.doc);
                 	$scope.doc.attribute = attributedata._id;
-                });
-            },
+                    deferred.resolve(attributedata);
+                },
             function() {
                 // $scope.editProfile=editProfileBeforeCancle;
                 // $log.info('Modal dismissed at: ' + new Date());
+                    deferred.reject('rjected');
+                
+            });
+            return deferred.promise;
+            }
 
-            };
+
+       // Add channel
+
+        $scope.addChannel = function(size) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent8.html',
+                    controller: ChannelModalInstanceCtrl,
+                    size: size
+                });
+
+                modalInstance.result.then(function() {
+                    
+                });
+        }
 //Edit Attribute
 	$scope.editAttribute = function(id){
 		window.open('http://classificationattribute-44842.onmodulus.net/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
@@ -781,7 +728,41 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 ]);
 
 
+//channel modal controller
 
+
+
+//variant modal controller
+
+var VariantModalInstanceCtrl = function($scope, $modalInstance, $http, $location,data) {
+    var searchVariants = function() {
+        var a={};
+        var b=data;
+        a[b]=true;
+        $http.post('/getVariants',a)
+            .then(function(result) {
+                $scope.getVariantsList = result.data;
+
+            })
+            .catch(function(err) {
+                console.log('error')
+            })
+    }
+
+    $scope.getVariant = function(cid) {
+        $modalInstance.close(cid);
+        console.log(cid);
+    }
+      
+
+    $scope.cancel = function() {
+
+        $modalInstance.dismiss('cancel');
+
+    };
+
+    searchVariants();
+};
 //modal for classification
 var ModalInstanceCtrl = function($scope, $modalInstance, $http, $location) {
     $scope.searchClassification = function(reqData) {
@@ -1126,6 +1107,7 @@ var AttributeCtrl = function($scope, $modalInstance, $http, $location,$modal) {
     };
 };
 
+
 //attribute section controller
 var AttributeSectionCtrl = function($scope, $modalInstance, $http, $location) {
     $scope.searchSection = function(reqData) {
@@ -1231,3 +1213,27 @@ var AttributeSectionCtrl = function($scope, $modalInstance, $http, $location) {
     };
 };
 
+var ChannelModalInstanceCtrl = function($scope, $modalInstance, $http, $location,$controller) {
+    $scope.doc={
+        'channel':{}
+    };
+   var testCtrl1ViewModel = $scope.$new(); 
+$scope.openChannelModal =function(){
+    $controller('EditProductCtrl',{$scope : testCtrl1ViewModel ,$modalInstance:$modalInstance});
+    testCtrl1ViewModel.openAttribute().then(function(){
+        console.log(testCtrl1ViewModel);
+         $scope.doc.channel.attribute=testCtrl1ViewModel.doc.attributeId;
+         $scope.doc.channel.attributeid=testCtrl1ViewModel.doc.attribute;
+    })
+   
+   
+}
+    
+    $scope.cancel = function() {
+
+        $modalInstance.dismiss('cancel');
+
+    };
+
+
+}
