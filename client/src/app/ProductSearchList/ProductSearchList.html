@@ -76,7 +76,7 @@
 
 				<tr  ng-repeat="tdata in tabledata | orderBy:sortType:sortReverse  | filter:strict" >
 				    <td>
-                        <input type="checkbox" ng-model="tdata._id">
+                        <input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked" ng-model="tdata.checked">
                     </td>
 				    <td ng-click="showeditor(tdata._id)" class="hoverptr">{{tdata.productId}}</td>
 					<td ng-click="showeditor(tdata._id)" class="hoverptr">{{tdata.supplierId}}</td>

@@ -1,8 +1,8 @@
 myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope', 
-	'$http','$location','growl','$modal','$routeParams',
+	'$http','$location','growl','$modal','$routeParams','$filter',
 	'blockUI',
 	function($scope,$rootScope, $http, $location,
-		growl, $modal, $routeParams, blockUI){
+		growl, $modal, $routeParams,$filter, blockUI){
 
 		// $scope.tempvar =true;
 
@@ -99,6 +99,14 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
 //export csv file of selected product
 
 $scope.exportProduct = function(searchdata){
+	searchdata=$filter('filter')(searchdata, function(value){
+		if(value.checked==true){
+			return true;
+		}
+		else{
+			return false;
+		}
+	})
 	$http.post('/exportProduct',searchdata)
         .success(function (data, status) {
         $scope.tabledatas=data;
