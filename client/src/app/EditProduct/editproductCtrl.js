@@ -134,7 +134,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
            createNewAttribute.channels = $scope.channels;
             $scope.editproduct.attributeValues.push(createNewAttribute);
             $scope.updateitem($scope.editproduct);
-            // $scope.createNew = {};
+            $scope.doc = {};
         }
 
         // $scope.seeChannel = function() {
@@ -283,7 +283,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         // Document tab function End
 
-
+        $scope.doc = {};
 
 
         // Price tab function Start

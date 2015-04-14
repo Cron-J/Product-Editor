@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="defModalHead">ClassificationGroup Search</h4>
+    <h4 class="modal-title" id="defModalHead">Channel Details</h4>
 </div>
 <div class="modal-body">
 
@@ -21,7 +21,7 @@
 
 									</thead>
 				                     <tbody>
-										<tr ng-repeat="channeldata in getChannelDetails">
+										<tr ng-repeat="channeldata in getChannelDetails track by $index">
 										<td >{{channeldata.attribute}}</td>
 										<td ng-repeat="channels in channeldata.channel">{{channels}}</td>
 										<td >{{channeldata.value}}</td>

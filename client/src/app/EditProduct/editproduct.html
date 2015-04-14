@@ -803,7 +803,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Attribute Id </label>
                     <div class="col-sm-6">
-                        <input type="text" name="attributeid" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.attributeId" required/>
+                        <input type="text" name="attributeid" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.attributeId" ng-readonly='true' required/>
                         <span class="error" ng-show="attrform.attributeid.$invalid && attrform.attributeid.$dirty">Invalid:
 					          			<span ng-show="attrform.attributeid.$error.required">AttributeId is required</span>
                         <span ng-show="attrform.attributeid.$error.minlength">AttributeId should be minimum of 0 characters</span>
