@@ -96,7 +96,14 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
   	$scope.search  = '';     // set the default search/filter term
 
 
+//export csv file of selected product
 
+$scope.exportProduct = function(searchdata){
+	$http.post('/exportProduct',searchdata)
+        .success(function (data, status) {
+        $scope.tabledatas=data;
+    });
+}
 
 }]);
 
