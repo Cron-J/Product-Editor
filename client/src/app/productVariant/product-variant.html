@@ -1,12 +1,22 @@
 <div class="row" ng-controller="variantCtrl">
  <div class="row col-sm-12">
   <div class="col-sm-7">
-   <h1>Product Editor</h1>
+   <!-- <h1>Product Editor</h1> -->
    <h3 class="m-b-50">Product Variant</h3>
   </div>
  </div>
 
-
+  <div class="row col-sm-12 form-group ">
+    <div class="col-sm-2">
+      <label class="control-label">Search variant</label>
+    </div>
+    <div class="col-sm-3">
+      <input type="text" class="form-control" name="attributeSectionId" ng-model="searchvData.variantId">
+    </div>
+    <div class="col-sm-2">
+      <button class="btn btn-primary" ng-click="searchvariant(searchvData)">Search</button>
+    </div>
+  </div>
 
  <div class="row col-sm-12">
   <!-- <b>Found {{filteredItems.length}} entries</b> -->
@@ -25,7 +35,7 @@
       
     </tr>
 
-    <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in tabledata | orderBy:sortType:sortReverse  | filter:strict" >
+    <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in tabledata | orderBy:sortType:sortReverse " >
      <td >{{vdata.variantId}}</td>
      <td></td>
     </tr>

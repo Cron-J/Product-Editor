@@ -72,7 +72,7 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
 
 
 			$http.put('/updateProduct/'+editproduct._id ,editproduct)
-			.success(function (status,data){
+			.success(function (data,status){
 				console.log(data);
 			});
 

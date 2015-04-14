@@ -7,11 +7,21 @@ myApp.controller('variantCtrl', [ '$scope','$rootScope',
   $scope.create = function(variantinfo){
 
    $http.post('/createVariant',variantinfo)
-   .success(function (status,data){
+   .success(function (data,status){
     console.log(variantinfo);
    });
 
   }
+
+  $scope.searchvariant = function(variantdata){
+
+   $http.post('/getVariants',variantdata)
+   .success(function (data,status){
+    $scope.tabledata= data;
+   });
+
+  }
+
 
   $scope.updatevariant = function(editedvariant) {
 
