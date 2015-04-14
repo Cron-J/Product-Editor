@@ -99,18 +99,27 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
 //export csv file of selected product
 
 $scope.exportProduct = function(searchdata){
-	searchdata=$filter('filter')(searchdata, function(value){
-		if(value.checked==true){
-			return true;
-		}
-		else{
-			return false;
-		}
-	})
-	$http.post('/exportProduct',searchdata)
-        .success(function (data, status) {
-        $scope.tabledatas=data;
-    });
+		searchdata=$filter('filter')(searchdata, function(value){
+			if(value.checked==true){
+				return true;
+			}
+			else{
+				return false;
+			}
+		})
+		$http.post('/exportProduct',searchdata).
+		    success(function(data, status, headers, config) {
+		     var element = angular.element('<a/>');
+		     element.attr({
+		         href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+		         target: '_blank',
+		         download: 'product.csv'
+		     })[0].click();
+		   }).
+			error(function(data, status, headers, config) {
+			   
+			});
+	
 }
 
 }]);
