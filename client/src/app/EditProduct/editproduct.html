@@ -792,7 +792,7 @@
             </div>
         </div>
     </div>
-    <div class="row ">
+    <div class="row m-t-20">
         <div class="col-sm-4 m-b-20 ">
             <button class="btn btn-primary" ng-click="attvar=true">New Attribute</button>
             <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
@@ -1110,7 +1110,7 @@
         <form name="docform" novalidate>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> Path </label>
+                    <label class="col-sm-3 control-label"> Path </label>
                     <div class="col-sm-7">
                         <textarea type="text" name="path" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.path"></textarea>
                         <!-- <span class="error" ng-show="docform.url.$invalid">Invalid:Provide valid url
@@ -1124,8 +1124,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Language</label>
-                    <div class="col-sm-7">
+                    <label class="col-sm-3 control-label">Language</label>
+                    <div class="col-sm-1">
                         <select name="language" class="form-control m-b" ng-model="doc.languageId">
                             <option value="de">de</option>
                             <option value="en">en</option>
@@ -1137,8 +1137,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">View Type</label>
-                    <div class="col-sm-7">
+                    <label class="col-sm-3 control-label">View Type</label>
+                    <div class="col-sm-2">
                         <select name="type" class="form-control m-b" ng-model="doc.documentViewTypeId">
                             <option value="Atmosphere">Atmosphere</option>
                             <option value="BackView">BackView</option>
@@ -1148,8 +1148,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Order No.</label>
-                    <div class="col-sm-7">
+                    <label class="col-sm-3 control-label">Order No.</label>
+                    <div class="col-sm-5">
                         <input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="docform.orderno.$invalid">Invalid:
                                         <span ng-show="docform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
@@ -1161,7 +1161,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Description </label>
+                    <label class="col-sm-3 control-label">Description </label>
                     <div class="col-sm-7">
                         <textarea type="text" name="description" class="form-control" ng-model="doc.description" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/"></textarea>
                         <span class="error" ng-show="docform.description.$invalid">Invalid:
@@ -1173,22 +1173,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Valid From</label>
-                    <div class="col-sm-7">
+                    <label class="col-sm-3 control-label">Valid From</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                     </div>
                 </div>
 
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Valid To</label>
-                    <div class="col-sm-7">
+                    <label class="col-sm-3 control-label">Valid To</label>
+                    <div class="col-sm-4">
                         <input type="text" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <label class="col-sm-3 control-label">Variant ID</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
                     </div>
@@ -1199,7 +1199,7 @@
                                     </script>
                                     <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantDocAssociation','doc')">
                                               <span class="glyphicon glyphicon-search"></span>
-                        </button>
+                                    </button>
                         </span>
                     </div>
                 </div>
@@ -1214,7 +1214,7 @@
             <div class="row">
                 <div class="col-sm-12">
 
-                    <div class="col-sm-offset-2  col-sm-3">
+                    <div class="col-sm-offset-1  col-sm-3">
                         <button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
                         <button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Cancel</button>
                     </div>
@@ -1471,7 +1471,7 @@
                             </div> -->
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <label class="col-sm-4 control-label">Variant ID</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="" ng-model="price.variantId" ng-readonly="true" />
                     </div>
@@ -1501,7 +1501,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> From Quantity </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <input type="number" name="quantity" class="form-control" ng-model="price.validFromQuantity" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.quantity.$invalid">Invalid:
                                         <span ng-show="priceform.quantity.$error.minlength">From Quantity should be minimum of 0 digit</span>
@@ -1513,7 +1513,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Price </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <input type="text" name="price" class="form-control" ng-model="price.priceTypeId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="priceform.price.$invalid">Invalid:
                                         <span ng-show="priceform.price.$error.minlength">Price should be minimum of 0 character</span>
@@ -1525,7 +1525,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Fix Net price </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <input type="number" name="fix_price" class="form-control" ng-model="price.netPrice" ng-minlength="0" ng-maxlength="50" required>
                         <span class="error" ng-show="priceform.fix_price.$invalid && priceform.fix_price.$dirty">Invalid:
                                         <span ng-show="priceform.fix_price.$error.required">Fix Net price is required</span>
@@ -1538,7 +1538,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> VAT Percentage </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-3">
                         <input type="number" name="vatper" class="form-control" ng-model="price.vatPercentage" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.vatper.$invalid">Invalid:
                                         <span ng-show="priceform.vatper.$error.minlength">VAT Percentage should be minimum of 0 digit</span>
@@ -1550,7 +1550,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> is Preferred </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-3">
                         <input type="checkbox" name="ispref" ng-model="price.isPreferred" required>
                         <span class="error" ng-show="priceform.ispref.$invalid && priceform.pcid.$dirty">Invalid:
                                         
@@ -1561,7 +1561,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Price Unit </label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-2">
                         <input type="number" name="priceunit" class="form-control" ng-model="price.priceUnit" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.priceunit.$invalid">Invalid:
                                         <span ng-show="priceform.priceunit.$error.minlength">Price Unit should be minimum of 0 digit</span>
@@ -1573,7 +1573,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Currency</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-2">
                         <select name="language" class="form-control m-b" ng-model="price.currencyId">
                             <option value="CHF">CHF</option>
                             <option value="EUR" selected="selected">EUR</option>
@@ -1587,7 +1587,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Valid From</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="price.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                     </div>
                 </div>
@@ -1595,14 +1595,14 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Valid To</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                         <input type="text" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="price.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Status</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-5">
                         <select name="language" class="form-control m-b" ng-model="price.statusId">
                             <option value="35">080 error</option>
                             <option value="36">090 warning</option>
@@ -1629,7 +1629,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Unit of Measure</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-2">
                         <select name="language" class="form-control m-b" ng-model="price.unitOfMeasureId">
                             <option value=""></option>
                             <option value="2P">kB</option>
@@ -1695,7 +1695,7 @@
                         </accordion-heading>
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> List Price </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-2">
                                 <input type="number" name="listprice" class="form-control" ng-model="price.listPrice" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="priceform.listprice.$invalid">Invalid:
                                                 <span ng-show="priceform.listprice.$error.minlength">List Price should be minimum of 0 digit</span>
@@ -1707,7 +1707,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Gross Price </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-3">
                                 <input type="number" name="grossprice" class="form-control" ng-model="price.grossPrice" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="priceform.grossprice.$invalid">Invalid:
                                                 <span ng-show="priceform.grossprice.$error.minlength">Gross Price should be minimum of 0 digit</span>
@@ -1719,7 +1719,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Prod Id Ext For Uom </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-3">
                                 <input type="text" name="pridforum" class="form-control" ng-model="price.productIdExtensionForUoM" ng-minlength="0" ng-maxlength="50" ng-pattern=" /^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="priceform.pridforum.$invalid">Invalid:
                                                 <span ng-show="priceform.pridforum.$error.minlength">Prod Id Ext For Uom should be minimum of 0 cahracter</span>
