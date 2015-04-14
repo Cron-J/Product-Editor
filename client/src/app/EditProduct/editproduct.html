@@ -3,608 +3,614 @@
 
     <span ng-show="previewvar">
 
-	<div class="row col-sm-12" >
-		<div class="col-sm-7 m-b-20">
-			<h1>Product Editor</h1>
-			<!-- 			<h3 class="m-b-50">Search Product Section</h3>-->	
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-12 m-b-20">
-			<a href="/#" class="btn btn-primary">Back to result list</a>
-		</div>
-	</div>
-
-	<div class="row col-sm-12">
-		<div class="col-sm-12 m-b-20">
-			
-			<h3> <img  style="width:50px;" ng-src="{{editproduct.documents[0].path}}"/> {{editproduct.mfgProductId}}</h3>
-
-			<button class="btn btn-primary pull-right" ng-click="showhidepreview()" >Preview</button>
- 		</div>
- 		<!-- <div class="col-sm-4">
- 		
- 		</div> -->
-	</div>
-
-
-	<div class="row col-sm-12">
-		<tabset justified="true">
-
-		    <tab heading="Master Data">
-
-			    <form name="masterdata" novalidate>
-			    	<div class="row m-t-25">
-				    	
-				    	<div class="col-sm-6">
-				    		<div class="form-group">
-					          <label class="col-sm-4 control-label">Product ID</label>
-					          <div class="col-sm-8">
-					            <input type="text" name="pid" class="form-control" ng-model="editproduct.productId"  ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" required>
-					            <span class="error" ng-show="masterdata.pid.$dirty">Invalid:
-		                        <span ng-show="masterdata.pid.$error.required">Tell us your Product ID</span>
-                                <span ng-show="masterdata.pid.$error.minlength">Product ID should be minimum of 0 characters</span>
-                                <span ng-show="masterdata.pid.$error.maxlength">Product ID should be maximum of 50 characters</span>
-                                <span ng-show="masterdata.pid.$error.pattern">Product ID won't allow special characters</span>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">ext. Product ID</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="extpid" ng-model="editproduct.extProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="masterdata.extpid.$invalid">Invalid:
-                        					               <span ng-show="masterdata.extpid.$error.minlength">ext. Product ID should be minimum of 0 characters</span>
-                                <span ng-show="masterdata.extpid.$error.maxlength">ext. Product ID should be maximum of 50 characters</span>
-                                <span ng-show="masterdata.extpid.$error.pattern">ext. Product ID won't allow special characters</span>
-                                </span>
-
-                            </div>
-                        </div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label"> GTIN </label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="gtin" ng-model="editproduct.ean" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-        <span class="error" ng-show="masterdata.gtin.$invalid">Invalid:
-					                <span ng-show="masterdata.gtin.$error.minlength">GTIN should be minimum of 0 characters</span>
-        <span ng-show="masterdata.gtin.$error.maxlength">GTIN should be maximum of 50 characters</span>
-        <span ng-show="masterdata.gtin.$error.pattern">GTIN won't allow special characters</span>
-        </span>
-    </div>
-
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Keywords</label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="keywords" ng-model="editproduct.keywords" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-        <span class="error" ng-show="masterdata.keywords.$invalid">Invalid:
-					                <span ng-show="masterdata.keywords.$error.minlength">Keywords should be minimum of 0 characters</span>
-        <span ng-show="masterdata.keywords.$error.maxlength">Keywords should be maximum of 50 characters</span>
-        <span ng-show="masterdata.keywords.$error.pattern">Keywords won't allow special characters</span>
-        </span>
-    </div>
-
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Supplier</label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="supplier" ng-model="editproduct.supplierId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-        <span class="error" ng-show="masterdata.supplier.$invalid">Invalid:
-					                <span ng-show="masterdata.supplier.$error.minlength">Supplier should be minimum of 0 characters</span>
-        <span ng-show="masterdata.supplier.$error.maxlength">Supplier should be maximum of 50 characters</span>
-        <span ng-show="masterdata.supplier.$error.pattern">Supplier won't allow special characters</span>
-        </span>
-    </div>
-
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Product catalog</label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="pcid" ng-model="editproduct.catalogId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-        <span class="error" ng-show="masterdata.pcid.$invalid">Invalid:
-					                <span ng-show="masterdata.pcid.$error.minlength">Product catalog should be minimum of 0 characters</span>
-        <span ng-show="masterdata.pcid.$error.maxlength">Product catalog should be maximum of 50 characters</span>
-        <span ng-show="masterdata.pcid.$error.pattern">Product catalog won't allow special characters</span>
-        </span>
-    </div>
-
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Status*</label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="status" ng-model="editproduct.statusId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-        <span class="error" ng-show="masterdata.status.$invalid">Invalid:
-					                <span ng-show="masterdata.status.$error.minimum">Status should be minimum of 0 characters</span>
-        <span ng-show="masterdata.status.$error.maxlength">Status should be maximum of 50 characters</span>
-        <span ng-show="masterdata.status.$error.pattern">Status won't allow special characters</span>
-        </span>
-    </div>
-
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Valid From</label>
-    <div class="col-sm-8">
-        <input type="text" name="validfrom" class="form-control date" id="dateFrom" placeholder="From" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="editproduct.validFrom" is-open="opened.dateFrom" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
-
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Valid To</label>
-    <div class="col-sm-8">
-        <input type="text" name="validto" class="form-control date" id="dateTo" placeholder="To" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="editproduct.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
-    </div>
-</div>
-
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Manufacturer Name</label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="mfname" ng-model="editproduct." ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-        <span class="error" ng-show="masterdata.mfname.$invalid">Invalid:
-					            	<span ng-show="masterdata.mfname.$error.minlength">Manufacturer Name should be minimum of 0 characters</span>
-        <span ng-show="masterdata.mfname.$error.maxlength">Manufacturer Name should be maximum of 50 characters</span>
-        <span ng-show="masterdata.mfname.$error.pattern">Manufacturer Name won't allow special characters</span>
-        </span>
-    </div>
-
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Manufacturer </label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="mf" ng-model="editproduct.manufactererName" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
-        <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
-					                <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
-        <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
-        <span ng-show="masterdata.mf.$error.pattern">Manufacturer  won't allow special characters</span>
-        </span>
-    </div>
-
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">MfgProduct ID</label>
-    <div class="col-sm-8">
-        <input type="text" class="form-control" name="mfgid" ng-model="editproduct.mfgProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-        <span class="error" ng-show="masterdata.mfgid.$invalid">Invalid:
-					                <span ng-show="masterdata.mfgid.$error.minlength">MfgProduct ID should be minimum of 0 characters</span>
-        <span ng-show="masterdata.mfgid.$error.maxlength">MfgProduct ID should be maximum of 50 characters</span>
-        <span ng-show="masterdata.mfgid.$error.pattern">MfgProduct ID won't allow special characters</span>
-        </span>
-    </div>
-
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Unit of measure</label>
-    <div class="col-sm-8">
-        <select name="account" class="form-control m-b" name="uom" ng-model="editproduct.unitOfMeasureId">
-            <option value=""></option>
-            <option value="2P">kilobyte</option>
-            <option value="4L">megabyte</option>
-            <option value="A86">gigahertz</option>
-            <option value="A99">A99</option>
-            <option value="AD">byte</option>
-            <option value="AMH">ampere hour</option>
-            <option value="AMP">ampere</option>
-            <option value="ANN">year</option>
-            <option value="B10">B10</option>
-            <option value="BAR">bar</option>
-            <option value="C26">millisecond</option>
-            <option value="C31">milliwatt</option>
-            <option value="C62">piece</option>
-            <option value="CEL">degrees Celsius</option>
-            <option value="CMK">square centimeter</option>
-            <option value="CMQ">cubic centimeter</option>
-            <option value="CMT">centimeter</option>
-            <option value="DAY">day</option>
-            <option value="DD">degrees</option>
-            <option value="EA">each</option>
-            <option value="GB">gigabyte</option>
-            <option value="GM">GM</option>
-            <option value="GRM">gramms</option>
-            <option value="HTZ">hertz</option>
-            <option value="HUR">hour</option>
-            <option value="KEL">kelvin</option>
-            <option value="KGM">kilogramm</option>
-            <option value="KTM">kilometer</option>
-            <option value="KVT">kilovolt</option>
-            <option value="KWH">kilowatt hours</option>
-            <option value="KWT">kilowatt</option>
-            <option value="LTR">Litre</option>
-            <option value="MAW">megawatt</option>
-            <option value="MGM">milligramms</option>
-            <option value="MIN">minutes</option>
-            <option value="MLT">milliliter</option>
-            <option value="MMT">millimeters</option>
-            <option value="MON">month</option>
-            <option value="MTR">meter</option>
-            <option value="MTS">MTS</option>
-            <option value="P1">percent</option>
-            <option value="PCE" selected="selected">piece</option>
-            <option value="PK">PK</option>
-            <option value="PR">pair</option>
-            <option value="SEC">second</option>
-            <option value="ST">ST</option>
-            <option value="WEE">week</option>
-            <option value="WTT">watt</option>
-            <option value="ZOL">Zoll</option>
-        </select>
-    </div>
-</div>
-
-<div class="form-group">
-    <label class="col-sm-4 control-label">Sales Unit</label>
-    <div class="col-sm-8">
-        <select name="account" class="form-control m-b" name="salesunit" ng-model="editproduct.salesUnitOfMeasureId">
-            <option value=""></option>
-            <option value="2P">kilobyte</option>
-            <option value="4L">megabyte</option>
-            <option value="A86">gigahertz</option>
-            <option value="A99">A99</option>
-            <option value="AD">byte</option>
-            <option value="AMH">ampere hour</option>
-            <option value="AMP">ampere</option>
-            <option value="ANN">year</option>
-            <option value="B10">B10</option>
-            <option value="BAR">bar</option>
-            <option value="C26">millisecond</option>
-            <option value="C31">milliwatt</option>
-            <option value="C62">piece</option>
-            <option value="CEL">degrees Celsius</option>
-            <option value="CMK">square centimeter</option>
-            <option value="CMQ">cubic centimeter</option>
-            <option value="CMT">centimeter</option>
-            <option value="DAY">day</option>
-            <option value="DD">degrees</option>
-            <option value="EA">each</option>
-            <option value="GB">gigabyte</option>
-            <option value="GM">GM</option>
-            <option value="GRM">gramms</option>
-            <option value="HTZ">hertz</option>
-            <option value="HUR">hour</option>
-            <option value="KEL">kelvin</option>
-            <option value="KGM">kilogramm</option>
-            <option value="KTM">kilometer</option>
-            <option value="KVT">kilovolt</option>
-            <option value="KWH">kilowatt hours</option>
-            <option value="KWT">kilowatt</option>
-            <option value="LTR">Litre</option>
-            <option value="MAW">megawatt</option>
-            <option value="MGM">milligramms</option>
-            <option value="MIN">minutes</option>
-            <option value="MLT">milliliter</option>
-            <option value="MMT">millimeters</option>
-            <option value="MON">month</option>
-            <option value="MTR">meter</option>
-            <option value="MTS">MTS</option>
-            <option value="P1">percent</option>
-            <option value="PCE" selected="selected">piece</option>
-            <option value="PK">PK</option>
-            <option value="PR">pair</option>
-            <option value="SEC">second</option>
-            <option value="ST">ST</option>
-            <option value="WEE">week</option>
-            <option value="WTT">watt</option>
-            <option value="ZOL">Zoll</option>
-        </select>
-    </div>
-</div>
-</div>
-</div>
-
-<div class="row col-sm-8 col-sm-offset-2 ">
-    <div class="form-button-group">
-        <button class="btn btn-primary" type="submit" ng-click="updateitem(editproduct)">Update</button>
-        <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
-
-    </div>
-</div>
-</form>
-
-</tab>
-
-
-<tab heading="Classification">
-
-    <div class=" m-t-25">
-
-        <table class="table table-stripped  custom-table">
-            <tbody>
-                <tr>
-                    <th class="check-box"><span id="selectall" ng-click="selectAllcBoxes()"><input type="checkbox" ></span> </th>
-                    <th>
-                        <a ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Classification-ID
-							            <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-                    </th>
-
-
-                    <th>
-                        <a ng-click="sortType = 'classificationGroupId'; sortReverse = !sortReverse">Classification Group ID
-							            <span ng-show="sortType =='classificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType =='classificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-                    </th>
-
-
-                    <th>
-                        <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-							            <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-                    </th>
-
-                    <th>
-                        <a ng-click="sortType = 'orderNo'; sortReverse = !sortReverse">Order
-							            <span ng-show="sortType =='orderNo' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType =='orderNo' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-                    </th>
-
-                    <th>Action</th>
-
-
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.classificationId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
-                            </button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.classificationGroupId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.variantId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <!-- <td>
-                        <div class="form-inline">
-                            <div class="tdwidth" isteven-multi-select input-model="cgoptions" output-model="output" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
-                            </div>
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
- -->
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.orderNo">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-                    <td></td>
-                </tr>
-
-                <tr ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict | filter:output[0]:strict">
-                    <td class="check-box">
-                        <input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked" ng-model="tdata.checked" ng-click="itemToRemove($index)"> </td>
-
-                    <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationId}}</td>
-
-                    <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationGroupId}}</td>
-
-                    <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.variantId}}</td>
-
-                    <!-- <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.variantId}}</td> -->
-                    <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.orderNo}}</td>
-                    <td>
-                        <button class="btn btn-primary btn-xs" ng-click="editGrp(tdata)">Edit</button>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <td colspan="6">
-                    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
-                </td>
-            </tfoot>
-        </table>
-
-    </div>
-
-    <div class="row ">
-        <div class="col-sm-4 ">
-            <button class="btn btn-primary" ng-click="assignGrp()">Assign New Group </button>
-            <button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button>
+    <div class="row col-sm-12" >
+        <div class="col-sm-7 m-b-20">
+            <h1>Product Editor</h1>
+            <!--            <h3 class="m-b-50">Search Product Section</h3>-->   
         </div>
     </div>
 
-    <!-- On clicking assign new group button -->
-
-    <div class="row m-t-25" ng-show="showvar">
-        <form name="assignGrpForm" novalidate>
-            <div class="col-sm-8">
-                <div class="form-inline" style="margin-bottom:16px;">
-                    <div class="form-group ">
-                        <label class="col-sm-3 control-label">Classification </label>
-                        <div class="col-sm-4">
-                            <input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true" required>
-                            <span class="error" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid">Invalid:
-				                        <span ng-show="assignGrpForm.classificationid.$error.required">Tell us your Classification</span>
-                            <span ng-show="assignGrpForm.classificationid.$error.minlength">Classification should be minimum of 0 characters</span>
-                            <span ng-show="assignGrpForm.classificationid.$error.maxlength">Classification should be maximum of 50 characters</span>
-                            <span ng-show="assignGrpForm.classificationid.$error.pattern">Classification won't allow special characters</span>
-                            </span>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" name="" ng-model="description.descShort[0].description" ng-readonly="true" />
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
-				                            <script type="text/ng-template" id="myModalContent.html">
-				                              <div ng-include="'app/EditProduct/classificationmodal.html'"></div>
-				                            </script>
-				                            <button class="btn btn-primary btn-xs" ng-click="openClassification('lg')">
-								  			          <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-inline">
-                    <div class="form-group" style="margin-bottom:16px;">
-                        <label class="col-sm-2 control-label">Classification</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true">
-                            <span class="error" ng-show="assignGrpForm.cgId.$dirty && assigrpForm.cgId.$invalid">Invalid:
-			                        <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
-                            <span ng-show="assignGrpForm.cgId.$error.minlength">Classification Group should be minimum of 0 characters</span>nG
-                            <span ng-show="assignGrpForm.cgId.$error.maxlength">Classification Group should be maximum of 50 characters</span>
-                            <span ng-show="assignGrpForm.cgId.$error.pattern">Classification Group won't allow special characters</span>
-                            </span>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" name="" ng-model="classificationGroupDescription.descShort[0].description" ng-readonly="true" />
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
-			                            <script type="text/ng-template" id="myModalContent1.html">
-			                              <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
-			                            </script>
-			                            <button class="btn btn-primary btn-xs" ng-click="classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId=''">
-							  			          <span class="glyphicon glyphicon-remove"></span>
-                            </button>
-                            </span>
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
-			                            <script type="text/ng-template" id="myModalContent1.html">
-			                              <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
-			                            </script>
-			                            <button class="btn btn-primary btn-xs" ng-click="openClassificationGroup('lg')">
-							  			          <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Variant ID</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" />
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
-                                        <script type="text/ng-template" id="myModalContent6.html">
-                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
-                                        </script>
-                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','createNew')">
-                                                  <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
-                    </div>
-
-
-
-
-                <div class="col-sm-offset-4  col-sm-1">
-                    <button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid ||  
-									
-									assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
-                </div>
-
-            </div>
-        </form>
+    <div class="row">
+        <div class="col-sm-12 m-b-20">
+            <a href="/#" class="btn btn-primary">Back to result list</a>
+        </div>
     </div>
 
-    <!-- On clicking row -->
+    <div class="row col-sm-12">
+        <div class="col-sm-12 m-b-20">
+            
+            <h3> <img  style="width:50px;" ng-src="{{editproduct.documents[0].path}}"/> {{editproduct.mfgProductId}}</h3>
 
-    <div class="row m-t-25" ng-show="editvar">
-        <form name="editGrpForm" novalidate>
-            <div class="col-sm-6">
+            <button class="btn btn-primary pull-right" ng-click="showhidepreview()" >Preview</button>
+        </div>
+        <!-- <div class="col-sm-4">
+        
+        </div> -->
+    </div>
 
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Classification </label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="editrow.classificationId" ng-disabled="true">
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Classification Group</label>
-                    <div class="col-sm-8">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" ng-disabled="true" ng-model="editrow.classificationGroupId">
+    <div class="row col-sm-12">
+        <tabset justified="true">
+
+            <tab heading="Master Data">
+
+                <form name="masterdata" novalidate>
+                    <div class="row m-t-25">
+                        
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Product ID</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="pid" class="form-control" ng-model="editproduct.productId"  ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" required>
+                                    <span class="error" ng-show="masterdata.pid.$dirty">Invalid:
+                                        <span ng-show="masterdata.pid.$error.required">Tell us your Product ID</span>
+                                        <span ng-show="masterdata.pid.$error.minlength">Product ID should be minimum of 0 characters</span>
+                                        <span ng-show="masterdata.pid.$error.maxlength">Product ID should be maximum of 50 characters</span>
+                                        <span ng-show="masterdata.pid.$error.pattern">Product ID won't allow special characters</span>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" ng-disabled="true">
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">ext. Product ID</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="extpid" ng-model="editproduct.extProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                    <span class="error" ng-show="masterdata.extpid.$invalid">Invalid:
+                                                                                       <span ng-show="masterdata.extpid.$error.minlength">ext. Product ID should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.extpid.$error.maxlength">ext. Product ID should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.extpid.$error.pattern">ext. Product ID won't allow special characters</span>
+                                    </span>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"> GTIN </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="gtin" ng-model="editproduct.ean" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                    <span class="error" ng-show="masterdata.gtin.$invalid">Invalid:
+                                                                <span ng-show="masterdata.gtin.$error.minlength">GTIN should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.gtin.$error.maxlength">GTIN should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.gtin.$error.pattern">GTIN won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Keywords</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="keywords" ng-model="editproduct.keywords" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                    <span class="error" ng-show="masterdata.keywords.$invalid">Invalid:
+                                                                <span ng-show="masterdata.keywords.$error.minlength">Keywords should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.keywords.$error.maxlength">Keywords should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.keywords.$error.pattern">Keywords won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Supplier</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="supplier" ng-model="editproduct.supplierId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                    <span class="error" ng-show="masterdata.supplier.$invalid">Invalid:
+                                                                <span ng-show="masterdata.supplier.$error.minlength">Supplier should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.supplier.$error.maxlength">Supplier should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.supplier.$error.pattern">Supplier won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label class="col-sm-4 control-label">Product catalog</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="pcid" ng-model="editproduct.catalogId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                    <span class="error" ng-show="masterdata.pcid.$invalid">Invalid:
+                                                                <span ng-show="masterdata.pcid.$error.minlength">Product catalog should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.pcid.$error.maxlength">Product catalog should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.pcid.$error.pattern">Product catalog won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                            </div> -->
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Status*</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="status" ng-model="editproduct.statusId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                    <span class="error" ng-show="masterdata.status.$invalid">Invalid:
+                                                                <span ng-show="masterdata.status.$error.minimum">Status should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.status.$error.maxlength">Status should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.status.$error.pattern">Status won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Valid From</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="validfrom" class="form-control date" id="dateFrom" placeholder="From" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="editproduct.validFrom" is-open="opened.dateFrom" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Valid To</label>
+                                <div class="col-sm-6">
+                                    <input type="text" name="validto" class="form-control date" id="dateTo" placeholder="To" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="editproduct.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Manufacturer Name</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="mfname" ng-model="editproduct." ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                    <span class="error" ng-show="masterdata.mfname.$invalid">Invalid:
+                                                                <span ng-show="masterdata.mfname.$error.minlength">Manufacturer Name should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mfname.$error.maxlength">Manufacturer Name should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mfname.$error.pattern">Manufacturer Name won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Manufacturer </label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="mf" ng-model="editproduct.manufactererName" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+                                    <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
+                                                                <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mf.$error.pattern">Manufacturer  won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">MfgProduct ID</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="mfgid" ng-model="editproduct.mfgProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                    <span class="error" ng-show="masterdata.mfgid.$invalid">Invalid:
+                                                                <span ng-show="masterdata.mfgid.$error.minlength">MfgProduct ID should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mfgid.$error.maxlength">MfgProduct ID should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mfgid.$error.pattern">MfgProduct ID won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Unit of measure</label>
+                                <div class="col-sm-5">
+                                    <select name="account" class="form-control m-b" name="uom" ng-model="editproduct.unitOfMeasureId">
+                                        <option value=""></option>
+                                        <option value="2P">kilobyte</option>
+                                        <option value="4L">megabyte</option>
+                                        <option value="A86">gigahertz</option>
+                                        <option value="A99">A99</option>
+                                        <option value="AD">byte</option>
+                                        <option value="AMH">ampere hour</option>
+                                        <option value="AMP">ampere</option>
+                                        <option value="ANN">year</option>
+                                        <option value="B10">B10</option>
+                                        <option value="BAR">bar</option>
+                                        <option value="C26">millisecond</option>
+                                        <option value="C31">milliwatt</option>
+                                        <option value="C62">piece</option>
+                                        <option value="CEL">degrees Celsius</option>
+                                        <option value="CMK">square centimeter</option>
+                                        <option value="CMQ">cubic centimeter</option>
+                                        <option value="CMT">centimeter</option>
+                                        <option value="DAY">day</option>
+                                        <option value="DD">degrees</option>
+                                        <option value="EA">each</option>
+                                        <option value="GB">gigabyte</option>
+                                        <option value="GM">GM</option>
+                                        <option value="GRM">gramms</option>
+                                        <option value="HTZ">hertz</option>
+                                        <option value="HUR">hour</option>
+                                        <option value="KEL">kelvin</option>
+                                        <option value="KGM">kilogramm</option>
+                                        <option value="KTM">kilometer</option>
+                                        <option value="KVT">kilovolt</option>
+                                        <option value="KWH">kilowatt hours</option>
+                                        <option value="KWT">kilowatt</option>
+                                        <option value="LTR">Litre</option>
+                                        <option value="MAW">megawatt</option>
+                                        <option value="MGM">milligramms</option>
+                                        <option value="MIN">minutes</option>
+                                        <option value="MLT">milliliter</option>
+                                        <option value="MMT">millimeters</option>
+                                        <option value="MON">month</option>
+                                        <option value="MTR">meter</option>
+                                        <option value="MTS">MTS</option>
+                                        <option value="P1">percent</option>
+                                        <option value="PCE" selected="selected">piece</option>
+                                        <option value="PK">PK</option>
+                                        <option value="PR">pair</option>
+                                        <option value="SEC">second</option>
+                                        <option value="ST">ST</option>
+                                        <option value="WEE">week</option>
+                                        <option value="WTT">watt</option>
+                                        <option value="ZOL">Zoll</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Sales Unit</label>
+                                <div class="col-sm-4">
+                                    <select name="account" class="form-control m-b" name="salesunit" ng-model="editproduct.salesUnitOfMeasureId">
+                                        <option value=""></option>
+                                        <option value="2P">kilobyte</option>
+                                        <option value="4L">megabyte</option>
+                                        <option value="A86">gigahertz</option>
+                                        <option value="A99">A99</option>
+                                        <option value="AD">byte</option>
+                                        <option value="AMH">ampere hour</option>
+                                        <option value="AMP">ampere</option>
+                                        <option value="ANN">year</option>
+                                        <option value="B10">B10</option>
+                                        <option value="BAR">bar</option>
+                                        <option value="C26">millisecond</option>
+                                        <option value="C31">milliwatt</option>
+                                        <option value="C62">piece</option>
+                                        <option value="CEL">degrees Celsius</option>
+                                        <option value="CMK">square centimeter</option>
+                                        <option value="CMQ">cubic centimeter</option>
+                                        <option value="CMT">centimeter</option>
+                                        <option value="DAY">day</option>
+                                        <option value="DD">degrees</option>
+                                        <option value="EA">each</option>
+                                        <option value="GB">gigabyte</option>
+                                        <option value="GM">GM</option>
+                                        <option value="GRM">gramms</option>
+                                        <option value="HTZ">hertz</option>
+                                        <option value="HUR">hour</option>
+                                        <option value="KEL">kelvin</option>
+                                        <option value="KGM">kilogramm</option>
+                                        <option value="KTM">kilometer</option>
+                                        <option value="KVT">kilovolt</option>
+                                        <option value="KWH">kilowatt hours</option>
+                                        <option value="KWT">kilowatt</option>
+                                        <option value="LTR">Litre</option>
+                                        <option value="MAW">megawatt</option>
+                                        <option value="MGM">milligramms</option>
+                                        <option value="MIN">minutes</option>
+                                        <option value="MLT">milliliter</option>
+                                        <option value="MMT">millimeters</option>
+                                        <option value="MON">month</option>
+                                        <option value="MTR">meter</option>
+                                        <option value="MTS">MTS</option>
+                                        <option value="P1">percent</option>
+                                        <option value="PCE" selected="selected">piece</option>
+                                        <option value="PK">PK</option>
+                                        <option value="PR">pair</option>
+                                        <option value="SEC">second</option>
+                                        <option value="ST">ST</option>
+                                        <option value="WEE">week</option>
+                                        <option value="WTT">watt</option>
+                                        <option value="ZOL">Zoll</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row col-sm-8 col-sm-offset-2 ">
+                        <div class="form-button-group">
+                            <button class="btn btn-primary" type="submit" ng-click="updateitem(editproduct)">Update</button>
+                            <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div ng-include="'app/partials/_auditInfo.html'"></div>
+                    </div>
+
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">Order No.</label>
-                    <div class="col-sm-8">
-                        <input type="number" name="order_no" class="form-control" ng-model="editrow.orderNo">
-                        <span class="error" ng-show="editGrpForm.order_no.$invalid">Invalid:Only Number is allowed
-				                    </span>
+            </tab>
+
+            <tab heading="Classification">
+
+                <div class=" m-t-25">
+
+                    <table class="table table-stripped  custom-table">
+                        <tbody>
+                            <tr>
+                                <th class="check-box"><span id="selectall" ng-click="selectAllcBoxes()"><input type="checkbox" ></span> </th>
+                                <th>
+                                    <a ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Classification-ID
+                                                    <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
+                                                    <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
+                                                </a>
+                                </th>
+
+
+                                <th>
+                                    <a ng-click="sortType = 'classificationGroupId'; sortReverse = !sortReverse">Classification Group ID
+                                                    <span ng-show="sortType =='classificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
+                                                    <span ng-show="sortType =='classificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
+                                                </a>
+                                </th>
+
+
+                                <th>
+                                    <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
+                                                    <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
+                                                    <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
+                                                </a>
+                                </th>
+
+                                <th>
+                                    <a ng-click="sortType = 'orderNo'; sortReverse = !sortReverse">Order
+                                                    <span ng-show="sortType =='orderNo' && !sortReverse" class="fa fa-caret-down"></span>
+                                                    <span ng-show="sortType =='orderNo' && sortReverse" class="fa fa-caret-up"></span>
+                                                </a>
+                                </th>
+
+                                <th>Action</th>
+
+
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-inline">
+                                        <input type="text" class="input-sm" ng-model="search.classificationId">
+                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <input type="text" class="input-sm" ng-model="search.classificationGroupId">
+                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="form-inline">
+                                        <input type="text" class="input-sm" ng-model="search.variantId">
+                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </div>
+                                </td>
+
+                                <!-- <td>
+                                    <div class="form-inline">
+                                        <div class="tdwidth" isteven-multi-select input-model="cgoptions" output-model="output" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
+                                        </div>
+                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </div>
+                                </td>
+             -->
+                                <td>
+                                    <div class="form-inline">
+                                        <input type="text" class="input-sm" ng-model="search.orderNo">
+                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+
+                            <tr ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict | filter:output[0]:strict">
+                                <td class="check-box">
+                                    <input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked" ng-model="tdata.checked" ng-click="itemToRemove($index)"> </td>
+
+                                <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationId}}</td>
+
+                                <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationGroupId}}</td>
+
+                                <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.variantId}}</td>
+
+                                <!-- <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.variantId}}</td> -->
+                                <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.orderNo}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs" ng-click="editGrp(tdata)">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <td colspan="6">
+                                <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+                            </td>
+                        </tfoot>
+                    </table>
+
+                </div>
+
+                <div class="row ">
+                    <div class="col-sm-4 ">
+                        <button class="btn btn-primary" ng-click="assignGrp()">Assign New Group </button>
+                        <button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Variant ID</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name="" ng-model="editrow.variantId" ng-readonly="true" />
-                    </div>
-                    <div class="col-sm-1">
-                        <span class="ng-scope"> 
-                                    <script type="text/ng-template" id="myModalContent6.html">
-                                      <div ng-include="'app/EditProduct/variantmodal.html'"></div>
-                                    </script>
-                                    <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','editrow')">
-                                              <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
+                <!-- On clicking assign new group button -->
+
+                <div class="row m-t-25" ng-show="showvar">
+                    <form name="assignGrpForm" novalidate>
+                        <div class="col-sm-8">
+                            <div class="form-inline" style="margin-bottom:16px;">
+                                <div class="form-group ">
+                                    <label class="col-sm-3 control-label">Classification </label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true" required>
+                                        <span class="error" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid">Invalid:
+                                                    <span ng-show="assignGrpForm.classificationid.$error.required">Tell us your Classification</span>
+                                        <span ng-show="assignGrpForm.classificationid.$error.minlength">Classification should be minimum of 0 characters</span>
+                                        <span ng-show="assignGrpForm.classificationid.$error.maxlength">Classification should be maximum of 50 characters</span>
+                                        <span ng-show="assignGrpForm.classificationid.$error.pattern">Classification won't allow special characters</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="" ng-model="description.descShort[0].description" ng-readonly="true" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <span class="ng-scope"> 
+                                            <script type="text/ng-template" id="myModalContent.html">
+                                              <div ng-include="'app/EditProduct/classificationmodal.html'"></div>
+                                            </script>
+                                            <button class="btn btn-primary btn-xs" ng-click="openClassification('lg')">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-inline">
+                                <div class="form-group" style="margin-bottom:16px;">
+                                    <label class="col-sm-2 control-label">Classification</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true">
+                                        <span class="error" ng-show="assignGrpForm.cgId.$dirty && assigrpForm.cgId.$invalid">Invalid:
+                                                <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
+                                        <span ng-show="assignGrpForm.cgId.$error.minlength">Classification Group should be minimum of 0 characters</span>nG
+                                        <span ng-show="assignGrpForm.cgId.$error.maxlength">Classification Group should be maximum of 50 characters</span>
+                                        <span ng-show="assignGrpForm.cgId.$error.pattern">Classification Group won't allow special characters</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="" ng-model="classificationGroupDescription.descShort[0].description" ng-readonly="true" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <span class="ng-scope"> 
+                                                    <script type="text/ng-template" id="myModalContent1.html">
+                                                      <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
+                                                    </script>
+                                                    <button class="btn btn-primary btn-xs" ng-click="classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId=''">
+                                                              <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <span class="ng-scope"> 
+                                                    <script type="text/ng-template" id="myModalContent1.html">
+                                                      <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
+                                                    </script>
+                                                    <button class="btn btn-primary btn-xs" ng-click="openClassificationGroup('lg')">
+                                                              <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Variant ID</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" />
+                                </div>
+                                <div class="col-sm-1">
+                                    <span class="ng-scope"> 
+                                                    <script type="text/ng-template" id="myModalContent6.html">
+                                                      <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                                    </script>
+                                                    <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','createNew')">
+                                                              <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-sm-offset-4  col-sm-1">
+                                <button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid ||  
+                                                
+                                                assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
 
-            </div>
-        </form>
-        <div class="row">
-            <div class="col-sm-12">
-                <div ng-include="'app/partials/_auditInfo.html'"></div>
-            </div>
+                <!-- On clicking row -->
 
-        </div>
+                <div class="row m-t-25" ng-show="editvar">
+                    <form name="editGrpForm" novalidate>
+                        <div class="col-sm-6">
 
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <div class=" col-sm-offset-2 col-sm-1">
-                        <button class="btn btn-primary" ng-click="updateitem(editproduct)">Save</button>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Classification </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="editrow.classificationId" ng-disabled="true">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Classification Group</label>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" ng-disabled="true" ng-model="editrow.classificationGroupId">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Order No.</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="order_no" class="form-control" ng-model="editrow.orderNo">
+                                    <span class="error" ng-show="editGrpForm.order_no.$invalid">Invalid:Only Number is allowed
+                                                </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Variant ID</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="" ng-model="editrow.variantId" ng-readonly="true" />
+                                </div>
+                                <div class="col-sm-1">
+                                    <span class="ng-scope"> 
+                                                <script type="text/ng-template" id="myModalContent6.html">
+                                                  <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                                </script>
+                                                <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','editrow')">
+                                                          <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div ng-include="'app/partials/_auditInfo.html'"></div>
+                        </div>
+
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class=" col-sm-offset-2 col-sm-1">
+                                    <button class="btn btn-primary" ng-click="updateitem(editproduct)">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-        </div>
 
-    </div>
-
-</tab>
+            </tab>
 
 <tab heading="Attributes">
     <div class=" m-t-25">
@@ -637,46 +643,46 @@
                 <tr>
                     <th>
                         <a ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Attribute
-						                   <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
-						                   <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
-						               </a>
+                                           <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
+                                           <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
+                                       </a>
                     </th>
 
                     <th ng-hide="select.atrcolhide.indexOf('variant')>=0">
                         <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-						                   <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
-						                   <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
-						               </a>
+                                           <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
+                                           <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
+                                       </a>
                     </th>
 
                     <th ng-hide="select.atrcolhide.indexOf('language')>=0">
                         <a ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
-						                   <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
-						                   <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
-						               </a>
+                                           <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+                                           <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+                                       </a>
                     </th>
 
                     <th>
                         <a ng-click="sortType = 'value'; sortReverse = !sortReverse">Value
-						                   <span ng-show="sortType == 'value' && !sortReverse" class="fa fa-caret-down"></span>
-						                   <span ng-show="sortType == 'value' && sortReverse" class="fa fa-caret-up"></span>
-						               </a>
+                                           <span ng-show="sortType == 'value' && !sortReverse" class="fa fa-caret-down"></span>
+                                           <span ng-show="sortType == 'value' && sortReverse" class="fa fa-caret-up"></span>
+                                       </a>
                     </th>
 
                     <th ng-hide="select.atrcolhide.indexOf('order')>=0">
                         <a ng-click="sortType = 'orderNro'; sortReverse = !sortReverse">Order No.
-						                   <span ng-show="sortType == 'orderNro' && !sortReverse" class="fa fa-caret-down"></span>
-						                   <span ng-show="sortType == 'orderNro' && sortReverse" class="fa fa-caret-up"></span>
-						               </a>
+                                           <span ng-show="sortType == 'orderNro' && !sortReverse" class="fa fa-caret-down"></span>
+                                           <span ng-show="sortType == 'orderNro' && sortReverse" class="fa fa-caret-up"></span>
+                                       </a>
                     </th>
 
 
 
                     <th ng-hide="select.atrcolhide.indexOf('status')>=0">
                         <a ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
-						                   <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
-						                   <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
-						               </a>
+                                           <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
+                                           <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
+                                       </a>
                     </th>
                     <th>Channel</th>
                     <th>Action</th>
@@ -759,12 +765,12 @@
                                           <div ng-include="'app/EditProduct/channeldetailsmodal.html'"></div>
                                         </script>
                                         <button class="btn btn-primary btn-xs" ng-click="openChannelDetails('lg',atrdata)"> <span class="glyphicon glyphicon-list-alt"></span>
-                                        <!-- <span class="glyphicon glyphicon-search"></span> -->
+                        <!-- <span class="glyphicon glyphicon-search"></span> -->
                         </button>
                         </span>
                     </td>
                     <td>
-			            <button class="btn btn-primary btn-xs" ng-click="editAttribute(atrdata.attribute)">Edit</button>
+                        <button class="btn btn-primary btn-xs" ng-click="editAttribute(atrdata.attribute)">Edit</button>
                     </td>
                 </tr>
             </tbody>
@@ -805,7 +811,7 @@
                     <div class="col-sm-6">
                         <input type="text" name="attributeid" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.attributeId" ng-readonly='true' required/>
                         <span class="error" ng-show="attrform.attributeid.$invalid && attrform.attributeid.$dirty">Invalid:
-					          			<span ng-show="attrform.attributeid.$error.required">AttributeId is required</span>
+                                        <span ng-show="attrform.attributeid.$error.required">AttributeId is required</span>
                         <span ng-show="attrform.attributeid.$error.minlength">AttributeId should be minimum of 0 characters</span>
                         <span ng-show="attrform.attributeid.$error.maxlength">AttributeId should be maximum of 50 characters</span>
                         <span ng-show="attrform.attributeid.$error.pattern">AttributeId won't allow special characters</span>
@@ -813,11 +819,11 @@
                     </div>
                     <div class="col-sm-1">
                         <span class="ng-scope"> 
-			                            <script type="text/ng-template" id="myModalContent2.html">
-			                              <div ng-include="'app/EditProduct/attributemodal.html'"></div>
-			                            </script>
-			                            <button class="btn btn-primary btn-xs" ng-click="openAttribute('lg')">
-							  			          <span class="glyphicon glyphicon-search"></span>
+                                        <script type="text/ng-template" id="myModalContent2.html">
+                                          <div ng-include="'app/EditProduct/attributemodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openAttribute('lg')">
+                                                  <span class="glyphicon glyphicon-search"></span>
                         </button>
                         </span>
                     </div>
@@ -840,7 +846,7 @@
                     <div class="col-sm-7">
                         <input type="number" name="orderno" class="form-control" ng-model="doc.orderNro" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="attrform.orderno.$invalid">Invalid:
-					            	    <span ng-show="attrform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
+                                        <span ng-show="attrform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
                         <span ng-show="attrform.orderno.$error.maxlength">Order No. should be maximum of 50 digit</span>
                         <span ng-show="attrform.orderno.$error.number">Enter only digit</span>
                         </span>
@@ -853,7 +859,7 @@
                     <div class="col-sm-7">
                         <input type="number" name="statusId" class="form-control" ng-model="doc.statusId" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="attrform.statusId.$invalid">Invalid:
-					            	    <span ng-show="attrform.statusId.$error.minlength">Order No. should be minimum of 0 digit</span>
+                                        <span ng-show="attrform.statusId.$error.minlength">Order No. should be minimum of 0 digit</span>
                         <span ng-show="attrform.statusId.$error.maxlength">Order No. should be maximum of 50 digit</span>
                         <span ng-show="attrform.statusId.$error.number">Enter only digit</span>
                         </span>
@@ -866,27 +872,27 @@
                     <div class="col-sm-7">
                         <input type="text" name="description" class="form-control" ng-model="doc.value" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" />
                         <span class="error" ng-show="attrform.description.$invalid">Invalid:
-					          		    <span ng-show="attrform.description.$error.minlength">Value should be minimum of 0 characters</span>
+                                        <span ng-show="attrform.description.$error.minlength">Value should be minimum of 0 characters</span>
                         <span ng-show="attrform.description.$error.maxlength">Value should be maximum of 50 characters</span>
                         <span ng-show="attrform.description.$error.pattern">Value won't allow special characters</span>
                         </span>
                     </div>
                 </div>
                 <div class="form-group">
-                        <label class="col-sm-2 control-label">Variant ID</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
+                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="ng-scope"> 
                                         <script type="text/ng-template" id="myModalContent6.html">
                                           <div ng-include="'app/EditProduct/variantmodal.html'"></div>
                                         </script>
                                         <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantAttributeValues','doc')">
                                                   <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
+                        </button>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="panel panel-default">
@@ -894,46 +900,49 @@
                         <h3 class="panel-title"><b>Channel Value Options</b></h3>
                     </div>
                     <div class="panel-body">
-                        
-                            <table class="table table-stripped custom-table">
-                                <thead class="active">
-                                    <tr>
-                                        <th style="width:20%;">Attribute</th>
-                                        <th style="width:35%;">Value</th>
-                                        <th style="width:20%;">Language</th>
-                                        <th style="width:25%;">Channels</th>
-                                        <th style="width:25%;">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- ngRepeat: avo in attribute.valueOptions -->
-                                    <tr ng-repeat="channelOption in channels" >
-                                        <td class="custom-row ">{{channelOption.attribute}}</td>
-                                        <td class="custom-row ">{{channelOption.value}} </td>
-                                        <td class="custom-row ">{{channelOption.language}}</td>
-                                        <td class="custom-row ">{{channelOption.channel}}</td>
-                                        <td>
-                                            <!-- ngIf: page!='view' -->
-                                            <button type="button" class="btn btn-primary btn-xs ng-scope" data-toggle="modal" ng-click="editValueOption(avo, $index)" style="position: relative;bottom: 6px;">Edit
-                                            </button><!-- end ngIf: page!='view' -->
-                                            <!-- ngIf: page!='view' -->
-                                            <button type="button" class="btn btn-primary btn-xs " >Delete
-                                            </button><!-- end ngIf: page!='view' -->
-                                            <!-- ngIf: page=='view' -->
-                                        </td>
-                                    </tr><!-- end ngRepeat: avo in attribute.valueOptions -->
-                                </tbody>
-                            </table>
-                        
-                            <!-- Button trigger modal -->
-                        
-                                <script type="text/ng-template" id="myModalContent8.html">
-                                    <div ng-include="'app/EditProduct/channelmodal.html'"></div>
-                                </script>
-                                <button class="btn btn-primary btn-xs" ng-click="addChannel('lg')">
-                                    + Add Channel
-                                </button>
-                            
+
+                        <table class="table table-stripped custom-table">
+                            <thead class="active">
+                                <tr>
+                                    <th style="width:20%;">Attribute</th>
+                                    <th style="width:35%;">Value</th>
+                                    <th style="width:20%;">Language</th>
+                                    <th style="width:25%;">Channels</th>
+                                    <th style="width:25%;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- ngRepeat: avo in attribute.valueOptions -->
+                                <tr ng-repeat="channelOption in channels">
+                                    <td class="custom-row ">{{channelOption.attribute}}</td>
+                                    <td class="custom-row ">{{channelOption.value}} </td>
+                                    <td class="custom-row ">{{channelOption.language}}</td>
+                                    <td class="custom-row ">{{channelOption.channel}}</td>
+                                    <td>
+                                        <!-- ngIf: page!='view' -->
+                                        <button type="button" class="btn btn-primary btn-xs ng-scope" data-toggle="modal" ng-click="editValueOption(avo, $index)" style="position: relative;bottom: 6px;">Edit
+                                        </button>
+                                        <!-- end ngIf: page!='view' -->
+                                        <!-- ngIf: page!='view' -->
+                                        <button type="button" class="btn btn-primary btn-xs ">Delete
+                                        </button>
+                                        <!-- end ngIf: page!='view' -->
+                                        <!-- ngIf: page=='view' -->
+                                    </td>
+                                </tr>
+                                <!-- end ngRepeat: avo in attribute.valueOptions -->
+                            </tbody>
+                        </table>
+
+                        <!-- Button trigger modal -->
+
+                        <script type="text/ng-template" id="myModalContent8.html">
+                            <div ng-include="'app/EditProduct/channelmodal.html'"></div>
+                        </script>
+                        <button class="btn btn-primary btn-xs" ng-click="addChannel('lg')">
+                            + Add Channel
+                        </button>
+
                     </div>
                 </div>
 
@@ -964,41 +973,41 @@
                         <input id="selectall" ng-click="selectAlldocCBoxes()" type="checkbox"> </th>
                     <th>
                         <a ng-click="sortType = 'path'; sortReverse = !sortReverse">Path
-							            <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
 
                     <th>
                         <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-						    <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
-						    <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
-						</a>
+                            <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
 
                     <th>
                         <a ng-click="sortType = 'documentViewTypeId'; sortReverse = !sortReverse">View Type
-							            <span ng-show="sortType == 'documentViewTypeId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'documentViewTypeId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'documentViewTypeId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'documentViewTypeId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
-							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Description
-							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Order No.
-							            <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>Action</th>
                 </tr>
@@ -1105,9 +1114,9 @@
                     <div class="col-sm-7">
                         <textarea type="text" name="path" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.path"></textarea>
                         <!-- <span class="error" ng-show="docform.url.$invalid">Invalid:Provide valid url
-		                            </span> -->
+                                    </span> -->
                         <span class="error" ng-show="docform.path.$invalid">Invalid:
-					          		    <span ng-show="docform.path.$error.minlength">Path should be minimum of 0 characters</span>
+                                        <span ng-show="docform.path.$error.minlength">Path should be minimum of 0 characters</span>
                         <span ng-show="docform.path.$error.maxlength">Path should be maximum of 50 characters</span>
                         <span ng-show="docform.path.$error.pattern">Path won't allow special characters</span>
                         </span>
@@ -1143,7 +1152,7 @@
                     <div class="col-sm-7">
                         <input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="docform.orderno.$invalid">Invalid:
-					            	    <span ng-show="docform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
+                                        <span ng-show="docform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
                         <span ng-show="docform.orderno.$error.maxlength">Order No. should be maximum of 50 digit</span>
                         <span ng-show="docform.orderno.$error.number">Enter only digit</span>
                         </span>
@@ -1156,7 +1165,7 @@
                     <div class="col-sm-7">
                         <textarea type="text" name="description" class="form-control" ng-model="doc.description" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/"></textarea>
                         <span class="error" ng-show="docform.description.$invalid">Invalid:
-					          		    <span ng-show="docform.description.$error.minlength">Description should be minimum of 0 characters</span>
+                                        <span ng-show="docform.description.$error.minlength">Description should be minimum of 0 characters</span>
                         <span ng-show="docform.description.$error.maxlength">Description should be maximum of 50 characters</span>
                         <span ng-show="docform.description.$error.pattern">Description won't allow special characters</span>
                         </span>
@@ -1230,73 +1239,73 @@
                     <th class="check-box">
                         <input type="checkbox" id="selectall" ng-click="selectAllpriceCBoxes()"> </th>
                     <!-- <th>
-									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Contract
-							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th> -->
+                                    <a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Contract
+                                        <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                                </th> -->
 
                     <th>
                         <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-							            <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
 
                     <th><a ng-click="sortType = 'info'; sortReverse = !sortReverse">Info
-							            <span ng-show="sortType == 'info' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'info' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'info' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'info' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'description'; sortReverse = !sortReverse">Description
-							            <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'validFromQuantity'; sortReverse = !sortReverse">From Quantity
-							            <span ng-show="sortType == 'validFromQuantity' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'validFromQuantity' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'validFromQuantity' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'validFromQuantity' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'priceTypeId'; sortReverse = !sortReverse">Price
-							            <span ng-show="sortType == 'priceTypeId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'priceTypeId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'priceTypeId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'priceTypeId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'priceUnit'; sortReverse = !sortReverse">Price Unit
-							            <span ng-show="sortType == 'priceUnit' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'priceUnit' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'priceUnit' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'priceUnit' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'currencyId'; sortReverse = !sortReverse">Currency
-							            <span ng-show="sortType == 'currencyId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'currencyId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'currencyId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'currencyId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'validFrom'; sortReverse = !sortReverse">Valid From
-							            <span ng-show="sortType == 'validFrom' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'validFrom' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'validFrom' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'validFrom' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'validTo'; sortReverse = !sortReverse">Valid To
-							            <span ng-show="sortType == 'validTo' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'validTo' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'validTo' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'validTo' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
-							            <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'path'; sortReverse = !sortReverse">Type
-							            <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th><a ng-click="sortType = 'unitOfMeasureId'; sortReverse = !sortReverse">UoM
-							            <span ng-show="sortType == 'unitOfMeasureId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'unitOfMeasureId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'unitOfMeasureId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'unitOfMeasureId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -1304,13 +1313,13 @@
 
                 <tr>
                     <td></td>
-                    			<!-- <td>
-									<div class="form-inline">
-										<input type="text" class="input-sm" ng-model="search.contractId">
-											<button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
-											</button>
-									</div>
-								</td> -->
+                    <!-- <td>
+                                    <div class="form-inline">
+                                        <input type="text" class="input-sm" ng-model="search.contractId">
+                                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+                                            </button>
+                                    </div>
+                                </td> -->
 
                     <!-- <td>
                         <div class="form-inline">
@@ -1451,31 +1460,31 @@
 
             <div class="col-sm-6">
                 <!-- <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Contract </label>
-					          	<div class="col-sm-7">
-					          		<input type="number" name="contract" class="form-control" ng-model="price.contractId">
-					          		<span class="error" ng-show="priceform.contract.$invalid">Invalid:
-				                        <span ng-show="priceform.contract.$error.maxlength">Product catalog should be maximum of 50 characters</span>
-				                        <span ng-show="priceform.contract.$error.pattern">Product catalog won't allow special characters</span>
-		                            </span>
-					          	</div>
-					        </div> -->
+                                <label class="col-sm-5 control-label"> Contract </label>
+                                <div class="col-sm-7">
+                                    <input type="number" name="contract" class="form-control" ng-model="price.contractId">
+                                    <span class="error" ng-show="priceform.contract.$invalid">Invalid:
+                                        <span ng-show="priceform.contract.$error.maxlength">Product catalog should be maximum of 50 characters</span>
+                                        <span ng-show="priceform.contract.$error.pattern">Product catalog won't allow special characters</span>
+                                    </span>
+                                </div>
+                            </div> -->
 
                 <div class="form-group">
-                        <label class="col-sm-2 control-label">Variant ID</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="" ng-model="price.variantId" ng-readonly="true" />
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
+                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="" ng-model="price.variantId" ng-readonly="true" />
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="ng-scope"> 
                                         <script type="text/ng-template" id="myModalContent6.html">
                                           <div ng-include="'app/EditProduct/variantmodal.html'"></div>
                                         </script>
                                         <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantPrices','price')">
                                                   <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
+                        </button>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -1483,7 +1492,7 @@
                     <div class="col-sm-8">
                         <input type="string" name="description" class="form-control" ng-model="price.description" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="priceform.description.$invalid">Invalid:
-					          		    <span ng-show="priceform.description.$error.minlength">Description should be minimum of 0 characters</span>
+                                        <span ng-show="priceform.description.$error.minlength">Description should be minimum of 0 characters</span>
                         <span ng-show="priceform.description.$error.maxlength">Description should be maximum of 50 characters</span>
                         <span ng-show="priceform.description.$error.pattern">Description won't allow special characters</span>
                         </span>
@@ -1495,7 +1504,7 @@
                     <div class="col-sm-8">
                         <input type="number" name="quantity" class="form-control" ng-model="price.validFromQuantity" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.quantity.$invalid">Invalid:
-					          		    <span ng-show="priceform.quantity.$error.minlength">From Quantity should be minimum of 0 digit</span>
+                                        <span ng-show="priceform.quantity.$error.minlength">From Quantity should be minimum of 0 digit</span>
                         <span ng-show="priceform.quantity.$error.maxlength">From Quantity should be maximum of 50 digit</span>
                         <span ng-show="priceform.quantity.$error.number">Enter only digit</span>
                         </span>
@@ -1507,7 +1516,7 @@
                     <div class="col-sm-8">
                         <input type="text" name="price" class="form-control" ng-model="price.priceTypeId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="priceform.price.$invalid">Invalid:
-					          		    <span ng-show="priceform.price.$error.minlength">Price should be minimum of 0 character</span>
+                                        <span ng-show="priceform.price.$error.minlength">Price should be minimum of 0 character</span>
                         <span ng-show="priceform.price.$error.maxlength">Price should be maximum of 50 character</span>
                         <span ng-show="priceform.price.$error.pattern">Price won't allow special characters</span>
                         </span>
@@ -1519,7 +1528,7 @@
                     <div class="col-sm-8">
                         <input type="number" name="fix_price" class="form-control" ng-model="price.netPrice" ng-minlength="0" ng-maxlength="50" required>
                         <span class="error" ng-show="priceform.fix_price.$invalid && priceform.fix_price.$dirty">Invalid:
-					          			<span ng-show="priceform.fix_price.$error.required">Fix Net price is required</span>
+                                        <span ng-show="priceform.fix_price.$error.required">Fix Net price is required</span>
                         <span ng-show="priceform.fix_price.$error.minlength">Fix Net price should be minimum of 0 digit</span>
                         <span ng-show="priceform.fix_price.$error.maxlength">Fix Net price should be maximum of 50 digit</span>
                         <span ng-show="priceform.fix_price.$error.number">Enter only digit </span>
@@ -1532,7 +1541,7 @@
                     <div class="col-sm-8">
                         <input type="number" name="vatper" class="form-control" ng-model="price.vatPercentage" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.vatper.$invalid">Invalid:
-					          		    <span ng-show="priceform.vatper.$error.minlength">VAT Percentage should be minimum of 0 digit</span>
+                                        <span ng-show="priceform.vatper.$error.minlength">VAT Percentage should be minimum of 0 digit</span>
                         <span ng-show="priceform.vatper.$error.maxlength">VAT Percentage should be maximum of 50 digit</span>
                         <span ng-show="priceform.vatper.$error.number">Enter only digit</span>
                         </span>
@@ -1544,8 +1553,8 @@
                     <div class="col-sm-8">
                         <input type="checkbox" name="ispref" ng-model="price.isPreferred" required>
                         <span class="error" ng-show="priceform.ispref.$invalid && priceform.pcid.$dirty">Invalid:
-				                        
-				                        <span ng-show="priceform.ispref.$error.required">Select field</span>
+                                        
+                                        <span ng-show="priceform.ispref.$error.required">Select field</span>
                         </span>
                     </div>
                 </div>
@@ -1555,7 +1564,7 @@
                     <div class="col-sm-8">
                         <input type="number" name="priceunit" class="form-control" ng-model="price.priceUnit" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.priceunit.$invalid">Invalid:
-					          		    <span ng-show="priceform.priceunit.$error.minlength">Price Unit should be minimum of 0 digit</span>
+                                        <span ng-show="priceform.priceunit.$error.minlength">Price Unit should be minimum of 0 digit</span>
                         <span ng-show="priceform.priceunit.$error.maxlength">Price Unit should be maximum of 50 digit</span>
                         <span ng-show="priceform.priceunit.$error.number">Enter only digit</span>
                         </span>
@@ -1608,14 +1617,14 @@
                 </div>
 
                 <!-- <div class="form-group">
-					          	<label class="col-sm-4 control-label">Type</label>
-					          	<div class="col-sm-8">
-					            	<select name="language" class="form-control m-b" ng-model="price.priceTypeId">
-										<option value="default" >Default</option>
-										<option value="list">the list price of the product</option>
-					            	</select>
-					          	</div>
-					        </div> -->
+                                <label class="col-sm-4 control-label">Type</label>
+                                <div class="col-sm-8">
+                                    <select name="language" class="form-control m-b" ng-model="price.priceTypeId">
+                                        <option value="default" >Default</option>
+                                        <option value="list">the list price of the product</option>
+                                    </select>
+                                </div>
+                            </div> -->
 
 
                 <div class="form-group">
@@ -1689,7 +1698,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="listprice" class="form-control" ng-model="price.listPrice" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="priceform.listprice.$invalid">Invalid:
-							          		    <span ng-show="priceform.listprice.$error.minlength">List Price should be minimum of 0 digit</span>
+                                                <span ng-show="priceform.listprice.$error.minlength">List Price should be minimum of 0 digit</span>
                                 <span ng-show="priceform.listprice.$error.maxlength">List Price should be maximum of 50 digit</span>
                                 <span ng-show="priceform.listprice.$error.number">Enter only digit </span>
                                 </span>
@@ -1701,7 +1710,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="grossprice" class="form-control" ng-model="price.grossPrice" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="priceform.grossprice.$invalid">Invalid:
-							          		    <span ng-show="priceform.grossprice.$error.minlength">Gross Price should be minimum of 0 digit</span>
+                                                <span ng-show="priceform.grossprice.$error.minlength">Gross Price should be minimum of 0 digit</span>
                                 <span ng-show="priceform.grossprice.$error.maxlength">Gross Price should be maximum of 50 digit</span>
                                 <span ng-show="priceform.grossprice.$error.number">Enter only digit </span>
                                 </span>
@@ -1713,7 +1722,7 @@
                             <div class="col-sm-8">
                                 <input type="text" name="pridforum" class="form-control" ng-model="price.productIdExtensionForUoM" ng-minlength="0" ng-maxlength="50" ng-pattern=" /^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="priceform.pridforum.$invalid">Invalid:
-							          		    <span ng-show="priceform.pridforum.$error.minlength">Prod Id Ext For Uom should be minimum of 0 cahracter</span>
+                                                <span ng-show="priceform.pridforum.$error.minlength">Prod Id Ext For Uom should be minimum of 0 cahracter</span>
                                 <span ng-show="priceform.pridforum.$error.maxlength">Prod Id Ext For Uom should be maximum of 25 cahracters</span>
                                 <span ng-show="priceform.pridforum.$error.pattern">Prod Id Ext For Uom should not allow special character </span>
                                 </span>
@@ -1758,36 +1767,36 @@
                     <th class="check-box">
                         <input type="checkbox" id="selectall" ng-click="selectAllcproductCBoxes()"> </th>
                     <!-- <th>
-									<a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Contract
-							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
-							    </th>  -->
+                                    <a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Contract
+                                        <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                                </th>  -->
 
                     <th>
                         <a ng-click="sortType = 'VariantId'; sortReverse = !sortReverse">Variant
-							            <span ng-show="sortType == 'VariantId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'VariantId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'VariantId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'VariantId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
 
                     <th>
                         <a ng-click="sortType = 'extClassificationId'; sortReverse = !sortReverse">Ext Classification Id
-							            <span ng-show="sortType == 'extClassificationId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'extClassificationId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'extClassificationId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'extClassificationId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'extClassificationGroupId'; sortReverse = !sortReverse">Ext Classification Group Id
-							            <span ng-show="sortType == 'extClassificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'extClassificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'extClassificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'extClassificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'descShort'; sortReverse = !sortReverse">Ext Short description
-							            <span ng-show="sortType == 'descShort' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'descShort' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'descShort' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'descShort' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -1866,31 +1875,31 @@
         <div class="row m-t-25 " ng-show="cproductvar">
             <div class="col-sm-6">
                 <!-- <div class="form-group">
-					          	<label class="col-sm-5 control-label"> Contract </label>
-					          	<div class="col-sm-7">
-					          		<input type="text" name="contract" class="form-control" ng-model="cproduct.contractId" required>
-					          		<span class="error" ng-show="assortform.pcid.$invalid">Invalid:
-				                        <span ng-show="assortform.pcid.$error.maxlength">Product catalog should be maximum of 50 characters</span>
-				                        <span ng-show="assortform.pcid.$error.pattern">Product catalog won't allow special characters</span>
-		                            </span>
-					          	</div>
-					        </div> -->
+                                <label class="col-sm-5 control-label"> Contract </label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="contract" class="form-control" ng-model="cproduct.contractId" required>
+                                    <span class="error" ng-show="assortform.pcid.$invalid">Invalid:
+                                        <span ng-show="assortform.pcid.$error.maxlength">Product catalog should be maximum of 50 characters</span>
+                                        <span ng-show="assortform.pcid.$error.pattern">Product catalog won't allow special characters</span>
+                                    </span>
+                                </div>
+                            </div> -->
 
-                 <div class="form-group">
-                        <label class="col-sm-2 control-label">Variant ID</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="" ng-model="cproduct.variantId" ng-readonly="true" />
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="" ng-model="cproduct.variantId" ng-readonly="true" />
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="ng-scope"> 
                                         <script type="text/ng-template" id="myModalContent6.html">
                                           <div ng-include="'app/EditProduct/variantmodal.html'"></div>
                                         </script>
                                         <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantContractedProducts','cproduct')">
                                                   <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
+                        </button>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -1910,7 +1919,7 @@
                     <div class="col-sm-8">
                         <input type="string" name="extpid" class="form-control" ng-model="cproduct.extproductid" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="assortform.extpid.$invalid">Invalid:
-					          		    <span ng-show="assortform.extpid.$error.minlength">Ext Product Id should be minimum of 0 characters</span>
+                                        <span ng-show="assortform.extpid.$error.minlength">Ext Product Id should be minimum of 0 characters</span>
                         <span ng-show="assortform.extpid.$error.maxlength">Ext Product Id should be maximum of 50 characters</span>
                         <span ng-show="assortform.extpid.$error.pattern">Ext Product Id won't allow special characters</span>
                         </span>
@@ -1922,7 +1931,7 @@
                     <div class="col-sm-8">
                         <input type="text" name="extclassificationid" class="form-control" ng-model="cproduct.extClassificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="assortform.extclassificationid.$invalid">Invalid:
-					          		    <span ng-show="assortform.extclassificationid.$error.minlength">Ext Classification Id should be minimum of 0 characters</span>
+                                        <span ng-show="assortform.extclassificationid.$error.minlength">Ext Classification Id should be minimum of 0 characters</span>
                         <span ng-show="assortform.extclassificationid.$error.maxlength">Ext Classification Id should be maximum of 50 characters</span>
                         <span ng-show="assortform.extclassificationid.$error.pattern">Ext Classification Id won't allow special characters</span>
                         </span>
@@ -1934,7 +1943,7 @@
                     <div class="col-sm-8">
                         <input type="text" name="classificationgid" class="form-control" ng-model="cproduct.extClassificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="assortform.classificationgid.$invalid">Invalid:
-					          		    <span ng-show="assortform.classificationgid.$error.minlength">Ext Classification Group Id should be minimum of 0 characters</span>
+                                        <span ng-show="assortform.classificationgid.$error.minlength">Ext Classification Group Id should be minimum of 0 characters</span>
                         <span ng-show="assortform.classificationgid.$error.maxlength">Ext Classification Group Id should be maximum of 50 characters</span>
                         <span ng-show="assortform.classificationgid.$error.pattern">Ext Classification Group Id won't allow special characters</span>
                         </span>
@@ -1946,7 +1955,7 @@
                     <div class="col-sm-8">
                         <input type="text" name="shortdesc" class="form-control" ng-model="cproduct.descShort" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="assortform.shortdesc.$invalid">Invalid:
-					          		    <span ng-show="assortform.shortdesc.$error.minlength">Ext Short description should be minimum of 0 characters</span>
+                                        <span ng-show="assortform.shortdesc.$error.minlength">Ext Short description should be minimum of 0 characters</span>
                         <span ng-show="assortform.shortdesc.$error.maxlength">Ext Short description should be maximum of 50 characters</span>
                         <span ng-show="assortform.shortdesc.$error.pattern">Ext Short description won't allow special characters</span>
                         </span>
@@ -1964,7 +1973,7 @@
                             <div class="col-sm-8">
                                 <input type="text" name="altextproid" class="form-control" ng-model="cproduct.altExtProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="assortform.altextproid.$invalid">Invalid:
-							          		    <span ng-show="assortform.altextproid.$error.minlength">AltExtProductId should be minimum of 0 characters</span>
+                                                <span ng-show="assortform.altextproid.$error.minlength">AltExtProductId should be minimum of 0 characters</span>
                                 <span ng-show="assortform.altextproid.$error.maxlength">AltExtProductId should be maximum of 50 characters</span>
                                 <span ng-show="assortform.altextproid.$error.pattern">AltExtProductId won't allow special characters</span>
                                 </span>
@@ -1976,7 +1985,7 @@
                             <div class="col-sm-8">
                                 <input type="text" name="ldesc" class="form-control" ng-model="cproduct.descLong" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="assortform.ldesc.$invalid">Invalid:
-							          		    <span ng-show="assortform.ldesc.$error.minlength">Long description should be minimum of 0 characters</span>
+                                                <span ng-show="assortform.ldesc.$error.minlength">Long description should be minimum of 0 characters</span>
                                 <span ng-show="assortform.ldesc.$error.maxlength">Long description should be maximum of 50 characters</span>
                                 <span ng-show="assortform.ldesc.$error.pattern">Long description won't allow special characters</span>
                                 </span>
@@ -1988,7 +1997,7 @@
                             <div class="col-sm-8">
                                 <input type="string" name="extglid" class="form-control" ng-model="cproduct.extGLAccountId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="assortform.extglid.$invalid">Invalid:
-							          		    <span ng-show="assortform.extglid.$error.minlength">ExtGlAccountId should be minimum of 0 characters</span>
+                                                <span ng-show="assortform.extglid.$error.minlength">ExtGlAccountId should be minimum of 0 characters</span>
                                 <span ng-show="assortform.extglid.$error.maxlength">ExtGlAccountId should be maximum of 50 characters</span>
                                 <span ng-show="assortform.extglid.$error.pattern">ExtGlAccountId won't allow special characters</span>
                                 </span>
@@ -2000,7 +2009,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="qunatityinterval" class="form-control" ng-model="cproduct.quantityInterval" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="assortform.qunatityinterval.$invalid">Invalid:
-							          			<span ng-show="assortform.qunatityinterval.$error.minlength">Quantity Interval should be minimum of 0 digit</span>
+                                                <span ng-show="assortform.qunatityinterval.$error.minlength">Quantity Interval should be minimum of 0 digit</span>
                                 <span ng-show="assortform.qunatityinterval.$error.maxlength">Quantity Interval should be maximum of 50 digit</span>
                                 <span ng-show="assortform.qunatityinterval.$error.number">Enter only digit</span>
                                 </span>
@@ -2012,7 +2021,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="maxquantity" class="form-control" ng-model="cproduct.maxQuantity" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="assortform.maxquantity.$invalid">Invalid:
-							          			<span ng-show="assortform.maxquantity.$error.minlength">Max Quantity should be minimum of 0 digit</span>
+                                                <span ng-show="assortform.maxquantity.$error.minlength">Max Quantity should be minimum of 0 digit</span>
                                 <span ng-show="assortform.maxquantity.$error.maxlength">Max Quantity should be maximum of 50 digit</span>
                                 <span ng-show="assortform.maxquantity.$error.number">Enter only digit</span>
                                 </span>
@@ -2024,7 +2033,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="minquantity" class="form-control" ng-model="cproduct.minQuantity" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="assortform.minquantity.$invalid">Invalid:
-							          			<span ng-show="assortform.minquantity.$error.minlength">Min Quantity should be minimum of 0 digit</span>
+                                                <span ng-show="assortform.minquantity.$error.minlength">Min Quantity should be minimum of 0 digit</span>
                                 <span ng-show="assortform.minquantity.$error.maxlength">Min Quantity should be maximum of 50 digit</span>
                                 <span ng-show="assortform.minquantity.$error.number">Enter only digit</span>
                                 </span>
@@ -2036,7 +2045,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="leadtimedays" class="form-control" ng-model="cproduct.grossPrice" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="assortform.leadtimedays.$invalid">Invalid:
-							          			<span ng-show="assortform.leadtimedays.$error.minlength">LeadtimeInDays should be minimum of 0 digit</span>
+                                                <span ng-show="assortform.leadtimedays.$error.minlength">LeadtimeInDays should be minimum of 0 digit</span>
                                 <span ng-show="assortform.leadtimedays.$error.maxlength">LeadtimeInDays should be maximum of 50 digit</span>
                                 <span ng-show="assortform.leadtimedays.$error.number">Enter only digit</span>
                                 </span>
@@ -2106,7 +2115,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="discount" class="form-control" ng-model="cproduct.discount" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="assortform.discount.$invalid">Invalid:
-							          			<span ng-show="assortform.discount.$error.minlength">Discount should be minimum of 0 digit</span>
+                                                <span ng-show="assortform.discount.$error.minlength">Discount should be minimum of 0 digit</span>
                                 <span ng-show="assortform.discount.$error.maxlength">Discount should be maximum of 50 digit</span>
                                 <span ng-show="assortform.discount.$error.number">Enter only digit</span>
                                 </span>
@@ -2143,7 +2152,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="cost" class="form-control" ng-model="cproduct.cost" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="assortform.cost.$invalid">Invalid:
-							          			<span ng-show="assortform.cost.$error.minlength">Cost should be minimum of 0 digit</span>
+                                                <span ng-show="assortform.cost.$error.minlength">Cost should be minimum of 0 digit</span>
                                 <span ng-show="assortform.cost.$error.maxlength">Cost should be maximum of 50 digit</span>
                                 <span ng-show="assortform.cost.$error.number">Enter only digit</span>
                                 </span>
@@ -2170,7 +2179,7 @@
                             <div class="col-sm-8">
                                 <input type="number" name="amount" class="form-control" ng-model="cproduct.ammount" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="assortform.amount.$invalid">Invalid:
-							          			<span ng-show="assortform.amount.$error.minlength">Amount should be minimum of 0 digit</span>
+                                                <span ng-show="assortform.amount.$error.minlength">Amount should be minimum of 0 digit</span>
                                 <span ng-show="assortform.amount.$error.maxlength">Amount should be maximum of 50 digit</span>
                                 <span ng-show="assortform.amount.$error.number">Not vallid number</span>
                                 </span>
@@ -2288,75 +2297,75 @@
                         <input type="checkbox" id="selectall" ng-click="selectAllprelationCBoxes()"> </th>
                     <th>
                         <a ng-click="sortType = 'productId'; sortReverse = !sortReverse">Product ID/Description
-							            <span ng-show="sortType == 'productId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'productId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'productId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'productId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-							            <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'typeId'; sortReverse = !sortReverse">Relation
-							            <span ng-show="sortType == 'typeId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'typeId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'typeId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'typeId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Product ID
-							            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'Description'; sortReverse = !sortReverse">Description
-							            <span ng-show="sortType == 'Description' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'Description' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'Description' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'Description' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
-							            <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'syncTypeId'; sortReverse = !sortReverse">Sync Type
-							            <span ng-show="sortType == 'syncTypeId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'syncTypeId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'syncTypeId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'syncTypeId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'seqNo'; sortReverse = !sortReverse">Seq No
-							            <span ng-show="sortType == 'seqNo' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'seqNo' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'seqNo' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'seqNo' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'quantity'; sortReverse = !sortReverse">Quantity
-							            <span ng-show="sortType == 'quantity' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'quantity' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'quantity' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'quantity' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'selectionGroupId'; sortReverse = !sortReverse">Selection Group Id
-							            <span ng-show="sortType == 'selectionGroupId' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'selectionGroupId' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'selectionGroupId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'selectionGroupId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'isMandatory'; sortReverse = !sortReverse">Is Mandatory
-							            <span ng-show="sortType == 'isMandatory' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'isMandatory' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'isMandatory' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'isMandatory' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>
                         <a ng-click="sortType = 'isDefaultSelected'; sortReverse = !sortReverse">Is Default Selected
-							            <span ng-show="sortType == 'isDefaultSelected' && !sortReverse" class="fa fa-caret-down"></span>
-							            <span ng-show="sortType == 'isDefaultSelected' && sortReverse" class="fa fa-caret-up"></span>
-							        </a>
+                                        <span ng-show="sortType == 'isDefaultSelected' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'isDefaultSelected' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -2494,21 +2503,21 @@
         <div class="row m-t-25 " ng-show="nproductvar">
             <div class="col-sm-9">
 
-                 <div class="form-group">
-                        <label class="col-sm-2 control-label">Variant ID</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="" ng-model="prelation.variantId" ng-readonly="true" />
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="" ng-model="prelation.variantId" ng-readonly="true" />
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="ng-scope"> 
                                         <script type="text/ng-template" id="myModalContent6.html">
                                           <div ng-include="'app/EditProduct/variantmodal.html'"></div>
                                         </script>
                                         <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantProductRelation','prelation')">
                                         <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
+                        </button>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -2516,7 +2525,7 @@
                     <div class="col-sm-7">
                         <input type="string" name="contract" class="form-control" ng-model="editproduct.productId" ng-disabled="true">
                         <span class="error" ng-show="relationform.contract.$invalid">Invalid:
-					          			<span ng-show="relationform.contract.$error.minlength">Product  should be minimum of 0 characters</span>
+                                        <span ng-show="relationform.contract.$error.minlength">Product  should be minimum of 0 characters</span>
                         <span ng-show="relationform.contract.$error.maxlength">Product  should be maximum of 50 characters</span>
                         <span ng-show="relationform.contract.$error.pattern">Product  won't allow special characters</span>
                         </span>
@@ -2528,7 +2537,7 @@
                     <div class="col-sm-7">
                         <input type="text" name="relatedproduct" class="form-control" ng-model="prelation.relatedProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
                         <span class="error" ng-show="relationform.relatedproduct.$invalid">Invalid:
-					          			<span ng-show="relationform.relatedproduct.$error.minlength">Related Product should be minimum of 0 characters</span>
+                                        <span ng-show="relationform.relatedproduct.$error.minlength">Related Product should be minimum of 0 characters</span>
                         <span ng-show="relationform.relatedproduct.$error.maxlength">Related Product should be maximum of 50 characters</span>
                         <span ng-show="relationform.relatedproduct.$error.pattern">Related Product won't allow special characters</span>
                         </span>
@@ -2600,26 +2609,26 @@
 
                     <div class="col-sm-7">
                         <span class="col-sm-1 pull-right " ng-if="prelation.descriptions.length<=3">
-		                				<button class="btn btn-primary " ng-click="addlang()"><i class="fa fa-plus"></i></button>
-		                			</span>
+                                        <button class="btn btn-primary " ng-click="addlang()"><i class="fa fa-plus"></i></button>
+                                    </span>
 
                         <span class="row col-sm-11" ng-repeat="langdes in prelation.descriptions">
-		                				<div class=" row col-sm-6 m-b-10">
-		                   					<select name="status" class="form-control m-b" ng-model="langdes.language" ng-change="changeoption($index,langdes.language,'{{langdes.language}}')">
-		            							<option ng-if="langdes.language=='de'|| selectedlang.indexOf('de')==-1" value="de">de</option>
-		            							<option ng-if="langdes.language=='en'|| selectedlang.indexOf('en')==-1" value="en">en</option>
-		            							<option ng-if="langdes.language=='es'|| selectedlang.indexOf('es')==-1"value="es">es</option>
-		            							<option ng-if="langdes.language=='fr'|| selectedlang.indexOf('fr')==-1" value="fr">fr</option>
-		                    				</select>
-		                				</div>
+                                        <div class=" row col-sm-6 m-b-10">
+                                            <select name="status" class="form-control m-b" ng-model="langdes.language" ng-change="changeoption($index,langdes.language,'{{langdes.language}}')">
+                                                <option ng-if="langdes.language=='de'|| selectedlang.indexOf('de')==-1" value="de">de</option>
+                                                <option ng-if="langdes.language=='en'|| selectedlang.indexOf('en')==-1" value="en">en</option>
+                                                <option ng-if="langdes.language=='es'|| selectedlang.indexOf('es')==-1"value="es">es</option>
+                                                <option ng-if="langdes.language=='fr'|| selectedlang.indexOf('fr')==-1" value="fr">fr</option>
+                                            </select>
+                                        </div>
 
-		                				<div class="col-sm-5 m-b-10">
-		                				   <input type="text" name="price" class="form-control" ng-model="langdes.description" >
-		                				</div>
+                                        <div class="col-sm-5 m-b-10">
+                                           <input type="text" name="price" class="form-control" ng-model="langdes.description" >
+                                        </div>
 
-		                				<span ng-hide="$first && prelation.descriptions.length==1" class="col-sm-1 ">
-	                  						<button class="btn btn-primary " ng-click="delLang($index)"><i class="fa fa-times"></i></button>
-	                  					</span>
+                                        <span ng-hide="$first && prelation.descriptions.length==1" class="col-sm-1 ">
+                                            <button class="btn btn-primary " ng-click="delLang($index)"><i class="fa fa-times"></i></button>
+                                        </span>
                         </span>
                     </div>
                 </div>
@@ -2642,7 +2651,7 @@
                     <div class="col-sm-7">
                         <input type="text" name="syncid" class="form-control" ng-model="prelation.syncTypeId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="relationform.syncid.$invalid">Invalid:
-					          			<span ng-show="relationform.syncid.$error.minlength">Sync Type ID should be minimum of 0 characters</span>
+                                        <span ng-show="relationform.syncid.$error.minlength">Sync Type ID should be minimum of 0 characters</span>
                         <span ng-show="relationform.syncid.$error.maxlength">Sync Type ID should be maximum of 50 characters</span>
                         <span ng-show="relationform.syncid.$error.pattern">Sync Type ID won't allow special characters</span>
                         </span>
@@ -2654,7 +2663,7 @@
                     <div class="col-sm-7">
                         <input type="text" name="seqno" class="form-control" ng-model="prelation.seqNo" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
                         <span class="error" ng-show="relationform.seqno.$invalid">Invalid:
-					          			<span ng-show="relationform.seqno.$error.minlength">Seq No should be minimum of 0 characters</span>
+                                        <span ng-show="relationform.seqno.$error.minlength">Seq No should be minimum of 0 characters</span>
                         <span ng-show="relationform.seqno.$error.maxlength">Seq No should be maximum of 50 characters</span>
                         <span ng-show="relationform.seqno.$error.pattern">Seq No won't allow special characters</span>
                         </span>
@@ -2666,7 +2675,7 @@
                     <div class="col-sm-7">
                         <input type="number" name="quantity" class="form-control" ng-model="prelation.quantity" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="relationform.quantity.$invalid">Invalid:
-					          			<span ng-show="relationform.quantity.$error.minlength">Quantity should be minimum of 0 digit</span>
+                                        <span ng-show="relationform.quantity.$error.minlength">Quantity should be minimum of 0 digit</span>
                         <span ng-show="relationform.quantity.$error.maxlength">Quantity should be maximum of 50 digit</span>
                         <span ng-show="relationform.quantity.$error.number">Enter only digit</span>
                         </span>
@@ -2678,7 +2687,7 @@
                     <div class="col-sm-7">
                         <input type="text" name="slgroupid" class="form-control" ng-model="prelation.selectionGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="relationform.slgroupid.$invalid">Invalid:
-					          			<span ng-show="relationform.slgroupid.$error.minlength">Selection Group Id  should be minimum of 0 characters</span>
+                                        <span ng-show="relationform.slgroupid.$error.minlength">Selection Group Id  should be minimum of 0 characters</span>
                         <span ng-show="relationform.slgroupid.$error.maxlength">Selection Group Id  should be maximum of 50 characters</span>
                         <span ng-show="relationform.slgroupid.$error.pattern">Selection Group Id  won't allow special characters</span>
                         </span>
@@ -2727,7 +2736,7 @@
                             <div class="col-sm-7">
                                 <input type="text" name="udxtext1" class="form-control" ng-model="prelation.udxText1" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udxtext1.$invalid">Invalid:
-							          			<span ng-show="relationform.udxtext1.$error.minlength">UdxText 1 should be minimum of 0 characters</span>
+                                                <span ng-show="relationform.udxtext1.$error.minlength">UdxText 1 should be minimum of 0 characters</span>
                                 <span ng-show="relationform.udxtext1.$error.maxlength">UdxText 1 should be maximum of 50 characters</span>
                                 <span ng-show="relationform.udxtext1.$error.pattern">UdxText 1 won't allow special characters</span>
                                 </span>
@@ -2739,7 +2748,7 @@
                             <div class="col-sm-7">
                                 <input type="text" name="udxtext2" class="form-control" ng-model="prelation.udxText2" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udxtext2.$invalid">Invalid:
-							          			<span ng-show="relationform.udxtext2.$error.minlength">UdxText 2 should be minimum of 0 characters</span>
+                                                <span ng-show="relationform.udxtext2.$error.minlength">UdxText 2 should be minimum of 0 characters</span>
                                 <span ng-show="relationform.udxtext2.$error.maxlength">UdxText 2 should be maximum of 50 characters</span>
                                 <span ng-show="relationform.udxtext2.$error.pattern">UdxText 2 won't allow special characters</span>
                                 </span>
@@ -2751,7 +2760,7 @@
                             <div class="col-sm-7">
                                 <input type="text" name="udxtext3" class="form-control" ng-model="prelation.udxText3" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udxtext3.$invalid">Invalid:
-							          			<span ng-show="relationform.udxtext3.$error.minlength">UdxText 3 should be minimum of 0 characters</span>
+                                                <span ng-show="relationform.udxtext3.$error.minlength">UdxText 3 should be minimum of 0 characters</span>
                                 <span ng-show="relationform.udxtext3.$error.maxlength">UdxText 3 should be maximum of 50 characters</span>
                                 <span ng-show="relationform.udxtext3.$error.pattern">UdxText 3 won't allow special characters</span>
                                 </span>
@@ -2763,7 +2772,7 @@
                             <div class="col-sm-7">
                                 <input type="number" name="udxnum1" class="form-control" ng-model="prelation.udxNum1" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="relationform.udxnum1.$invalid">Invalid:
-						                        <span ng-show="relationform.udxnum1.$error.minlength">UdxNum 2 should be minimum of 0 digit</span>
+                                                <span ng-show="relationform.udxnum1.$error.minlength">UdxNum 2 should be minimum of 0 digit</span>
                                 <span ng-show="relationform.udxnum1.$error.maxlength">UdxNum 2 should be maximum of 50 digit</span>
                                 <span ng-show="relationform.udxnum1.$error.number">Enter only digit</span>
                                 </span>
@@ -2775,7 +2784,7 @@
                             <div class="col-sm-7">
                                 <input type="number" name="udxnum2" class="form-control" ng-model="prelation.udxNum2" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="relationform.udxnum2.$invalid">Invalid:
-							          			<span ng-show="relationform.udxnum2.$error.minlength">UdxNum 2 should be minimum of 0 digit</span>
+                                                <span ng-show="relationform.udxnum2.$error.minlength">UdxNum 2 should be minimum of 0 digit</span>
                                 <span ng-show="relationform.udxnum2.$error.maxlength">UdxNum 2 should be maximum of 50 digit</span>
                                 <span ng-show="relationform.udxnum2.$error.number">Enter only digit</span>
                                 </span>
@@ -2787,7 +2796,7 @@
                             <div class="col-sm-7">
                                 <input type="number" name="udexnum3" class="form-control" ng-model="prelation.udxNum3" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="relationform.udexnum3.$invalid">Invalid:
-							          			<span ng-show="relationform.udexnum3.$error.minlength">UdxNum 3 should be minimum of 0 digit</span>
+                                                <span ng-show="relationform.udexnum3.$error.minlength">UdxNum 3 should be minimum of 0 digit</span>
                                 <span ng-show="relationform.udexnum3.$error.maxlength">UdxNum 3 should be maximum of 50 digit</span>
                                 <span ng-show="relationform.udexnum3.$error.number">Enter only digit</span>
                                 </span>
@@ -2799,7 +2808,7 @@
                             <div class="col-sm-7">
                                 <input type="text" name="udx1" class="form-control" ng-model="prelation.udxSortKey1" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udx1.$invalid">Invalid:
-							          			<span ng-show="relationform.udx1.$error.minlength">UdxSortKey 1 should be minimum of 0 characters</span>
+                                                <span ng-show="relationform.udx1.$error.minlength">UdxSortKey 1 should be minimum of 0 characters</span>
                                 <span ng-show="relationform.udx1.$error.maxlength">UdxSortKey 1 should be maximum of 50 characters</span>
                                 <span ng-show="relationform.udx1.$error.pattern">UdxSortKey 1 won't allow special characters</span>
                                 </span>
@@ -2811,7 +2820,7 @@
                             <div class="col-sm-7">
                                 <input type="text" name="udx2" class="form-control" ng-model="prelation.udxSortKey2" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udx2.$invalid">Invalid:
-							          			<span ng-show="relationform.udx2.$error.minlength">UdxSortKey 2 should be minimum of 0 characters</span>
+                                                <span ng-show="relationform.udx2.$error.minlength">UdxSortKey 2 should be minimum of 0 characters</span>
                                 <span ng-show="relationform.udx2.$error.maxlength">UdxSortKey 2 should be maximum of 50 characters</span>
                                 <span ng-show="relationform.udx2.$error.pattern">UdxSortKey 2 won't allow special characters</span>
                                 </span>
@@ -2823,7 +2832,7 @@
                             <div class="col-sm-7">
                                 <input type="text" name="udx3" class="form-control" ng-model="prelation.udxSortKey3" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udx3.$invalid">Invalid:
-							          			<span ng-show="relationform.udx3.$error.minlength">UdxSortKey 3 should be minimum of 0 characters</span>
+                                                <span ng-show="relationform.udx3.$error.minlength">UdxSortKey 3 should be minimum of 0 characters</span>
                                 <span ng-show="relationform.udx3.$error.maxlength">UdxSortKey 3 should be maximum of 50 characters</span>
                                 <span ng-show="relationform.udx3.$error.pattern">UdxSortKey 3 won't allow special characters</span>
                                 </span>
@@ -2864,19 +2873,19 @@
 
 
 <!-- <div class="row col-sm-12 form-group ">
-			<div class="col-sm-4">
-				<label class=8control-label">Product ID</label>
-			</div>
-			<div class="col-sm-3">
-				<input type="text" class="form-control" name="attributeSectionId" ng-model="searchData.productId">
-			</div>
-			<div class="col-sm-4 col-sm-offset-2">
-				<label class=8control-label">Class Group ID</label>
-			</div>
-			<div class="col-sm-3">
-				<input type="text" class="form-control" name="name" ng-model="searchData.classificationGroupId">
-			</div>
-		</div> -->
+            <div class="col-sm-4">
+                <label class=8control-label">Product ID</label>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="attributeSectionId" ng-model="searchData.productId">
+            </div>
+            <div class="col-sm-4 col-sm-offset-2">
+                <label class=8control-label">Class Group ID</label>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="name" ng-model="searchData.classificationGroupId">
+            </div>
+        </div> -->
 
 
 
@@ -2885,210 +2894,210 @@
 
 
 <span ng-hide="previewvar">
-	<!-- Preview Page -->
-			<div class="row">
-				<div class="col-sm-12 m-b-20">
-					<a href="/#" class="btn btn-primary">Back to result list</a>
+    <!-- Preview Page -->
+            <div class="row">
+                <div class="col-sm-12 m-b-20">
+                    <a href="/#" class="btn btn-primary">Back to result list</a>
 
-				</div>
-			</div>
-			<div class="row" >
+                </div>
+            </div>
+            <div class="row" >
 
-				<div class="col-sm-6">
-			      	<div class="panel panel-default">
-				        <div class="panel-heading font-bold">Product Information
-				        	<a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
-				        </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading font-bold">Product Information
+                            <a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
+                        </div>
 
-					    <div class="panel-body">
-					        <h4>Reliable Multitasking Performance</h4>
+                        <div class="panel-body">
+                            <h4>Reliable Multitasking Performance</h4>
 
-							<p>Powered by the 2nd generation Intel Core i5-2410M processor with Intel Turbo Boost 2.0 Technology, the A53E-XA2 easily handles multitasking and entertainment on its brilliant 15.6" LED-backlit HD display. HDMI ready, supersize your high-definition media to an HDTV for 1080p visuals and 8 channel surround sound support. The A53E-XA2 is also engineered with ASUS IceCool technology with hairline brushed aluminum to maintain a low temperature on the keyboard and palm rest area for comfortable computing even after the longest sessions.</p>
+                            <p>Powered by the 2nd generation Intel Core i5-2410M processor with Intel Turbo Boost 2.0 Technology, the A53E-XA2 easily handles multitasking and entertainment on its brilliant 15.6" LED-backlit HD display. HDMI ready, supersize your high-definition media to an HDTV for 1080p visuals and 8 channel surround sound support. The A53E-XA2 is also engineered with ASUS IceCool technology with hairline brushed aluminum to maintain a low temperature on the keyboard and palm rest area for comfortable computing even after the longest sessions.</p>
 
-							<h4>Comfort and Control Included</h4>
-							<p>The A53E-XA2 has an array of built-in features that are specialized for ease of use. It features a chiclet keyboard with numeric keypad and multi-touch trackpad to effortlessly type documents or navigate through your mobile world. The A53E-XA2 also has a spacious palm rest with ASUS Palm-Proof Technology where the trackpad intelligently distinguishes between your palm and finger to prevent errors for a worry-free typing experience.With its sunken-hinge screen design, you will be able to enjoy wider and more ergonomic viewing angles, enabling greater clarity and comfort. Plus, the ASUS Power4Gear utility controls the fans noise level so you can relax with a virtually silent computing experience anywhere you go.</p>
-
-
-							<div class="form-horizontal">
-					            <div class="form-group m-b-sm">
-					              	<label class="col-sm-3 control-label">Product no.</label>
-					              	<div class="col-sm-9">
-					              	  <p class="form-control-static " >X53SV-SO951V</p>
-					              	</div>
-					            </div>
-					            <div class="form-group " >
-					              	<label class="col-sm-3 control-label">Supplier</label>
-					              	<div class="col-sm-9">
-					              	  <p class="form-control-static" >Hardware AG</p>
-					              	</div>
-					            </div>
-					            <div class="form-group m-b-sm">
-					              	<label class="col-sm-3 control-label">Manufacturer no.</label>
-					              	<div class="col-sm-9">
-					              	  <p class="form-control-static " >90N3GY1A4N2D27VL151</p>
-					              	</div>
-					            </div>
-					            <div class="form-group m-b-sm" >
-					              	<label class="col-sm-3 control-label">Manufacturer</label>
-					              	<div class="col-sm-9">
-					              	  <p class="form-control-static ">ASUS Computer</p>
-					              	</div>
-					            </div>
-					            <div class="form-group m-b-sm " >
-					              	<label class="col-sm-3 control-label">EAN</label>
-					              	<div class="col-sm-9">
-					              	  <p class="form-control-static ">5053072776354</p>
-					              	</div>
-					            </div>
-					            <div class="form-group m-b-sm" >
-					              	<label class="col-sm-3 control-label">Catalog</label>
-					              	<div class="col-sm-9">
-					              	  <p class="form-control-static ">Laptops</p>
-					              	</div>
-					            </div>
-					            <div class="form-group m-b-sm " >
-					              	<label class="col-sm-3 control-label">Contracts</label>
-					              	<div class="col-sm-9">
-					              	  <p class="form-control-static ">Laptops</p>
-					              	</div>
-					            </div>
-					      	</div>
-					    </div>
-			      	</div>
-			    </div>
-
-			    <div class="col-sm-6">
-			      <div class="panel panel-default">
-			        <div class="panel-heading font-bold">Product View</div>
-				        <div class="panel-body">
-					        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-							    <ol class="carousel-indicators">
-							      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-							      <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-							      <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-							    </ol>
-							    <div class="carousel-inner" role="listbox">
-							        <div class="item active">ng-src="{{editproduct.documents[0].path}}"
-							          <img ng-src="{{editproduct.documents[2].path}}"   data-holder-rendered="true">
-							        </div>
-							        <div class="item">
-							          <img ng-src="{{editproduct.documents[3].path}}" data-holder-rendered="true">
-							        </div>
-							        <div class="item">
-							          <img ng-src="{{editproduct.documents[0].path}}" data-holder-rendered="true">
-							        </div>
-							    </div>
-							   
-							</div>
-				        </div>
-			      	</div>
-			    </div>
-			</div>
+                            <h4>Comfort and Control Included</h4>
+                            <p>The A53E-XA2 has an array of built-in features that are specialized for ease of use. It features a chiclet keyboard with numeric keypad and multi-touch trackpad to effortlessly type documents or navigate through your mobile world. The A53E-XA2 also has a spacious palm rest with ASUS Palm-Proof Technology where the trackpad intelligently distinguishes between your palm and finger to prevent errors for a worry-free typing experience.With its sunken-hinge screen design, you will be able to enjoy wider and more ergonomic viewing angles, enabling greater clarity and comfort. Plus, the ASUS Power4Gear utility controls the fans noise level so you can relax with a virtually silent computing experience anywhere you go.</p>
 
 
-			<div class="row" >
-				<div class="col-sm-3">
-			      <div class="panel panel-default">
-			        <div class="panel-heading font-bold">Contract	        
-			        	<a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
-			        </div>
+                            <div class="form-horizontal">
+                                <div class="form-group m-b-sm">
+                                    <label class="col-sm-3 control-label">Product no.</label>
+                                    <div class="col-sm-9">
+                                      <p class="form-control-static " >X53SV-SO951V</p>
+                                    </div>
+                                </div>
+                                <div class="form-group " >
+                                    <label class="col-sm-3 control-label">Supplier</label>
+                                    <div class="col-sm-9">
+                                      <p class="form-control-static" >Hardware AG</p>
+                                    </div>
+                                </div>
+                                <div class="form-group m-b-sm">
+                                    <label class="col-sm-3 control-label">Manufacturer no.</label>
+                                    <div class="col-sm-9">
+                                      <p class="form-control-static " >90N3GY1A4N2D27VL151</p>
+                                    </div>
+                                </div>
+                                <div class="form-group m-b-sm" >
+                                    <label class="col-sm-3 control-label">Manufacturer</label>
+                                    <div class="col-sm-9">
+                                      <p class="form-control-static ">ASUS Computer</p>
+                                    </div>
+                                </div>
+                                <div class="form-group m-b-sm " >
+                                    <label class="col-sm-3 control-label">EAN</label>
+                                    <div class="col-sm-9">
+                                      <p class="form-control-static ">5053072776354</p>
+                                    </div>
+                                </div>
+                                <div class="form-group m-b-sm" >
+                                    <label class="col-sm-3 control-label">Catalog</label>
+                                    <div class="col-sm-9">
+                                      <p class="form-control-static ">Laptops</p>
+                                    </div>
+                                </div>
+                                <div class="form-group m-b-sm " >
+                                    <label class="col-sm-3 control-label">Contracts</label>
+                                    <div class="col-sm-9">
+                                      <p class="form-control-static ">Laptops</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-			        <div class="panel-body">
-			    	    <div class="form-horizontal">
-			    	        <div class="form-group m-b-sm">
-			    	         	<label class="col-sm-3 control-label">Laptops</label>
-			    	         	
-			    	        </div>
-			    	        <div class="form-group " >
-			    	         	<label class="col-sm-3 control-label">Laptops</label>
-			    	         	
-			    	        </div>
-			    	        
-			    	    </div>
-		        	</div>
-			      </div>
-			    </div>
-
-			    <div class="col-sm-3">
-			      <div class="panel panel-default">
-			        <div class="panel-heading font-bold">Price
-			        	<a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
-			        </div>
-			        <div class="panel-body">
-			    	    <div class="form-horizontal">
-			    	        <div class="form-group m-b-sm">
-			    	         	<label class="col-sm-6 control-label">549.00 EUR/1 </label>
-			    	         	
-			    	        </div>
-			    	        <div class="form-group " >
-			    	         	<label class="col-sm-6 control-label">549.00 EUR/1</label>
-			    	         	
-			    	        </div>
-			    	        
-			    	    </div>
-		        	</div>
-			      </div>
-			    </div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-3">
-			      <div class="panel panel-default">
-			        <div class="panel-heading font-bold">Classification</div>
-			        <div class="panel-body">
-			    	    <div class="form-horizontal">
-			    	        <div class="form-group m-b-sm">
-			    	         	<label class="col-sm-6 control-label">basic </label>
-			    	         	
-			    	        </div>
-			    	        <div class="form-group m-b-sm">
-			    	         	<label class="col-sm-6 control-label">basic </label>
-			    	         	
-			    	        </div>
-			    	        <div class="form-group m-b-sm">
-			    	         	<label class="col-sm-6 control-label">basic </label>
-			    	         	
-			    	        </div>
-			    	        <div class="form-group " >
-			    	         	<label class="col-sm-6 control-label">eClass 5.1.3</label>
-			    	         	
-			    	        </div>
-			    	        
-			    	    </div>
-		        	</div>
-			      </div>
-			    </div>
+                <div class="col-sm-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Product View</div>
+                        <div class="panel-body">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                  <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">ng-src="{{editproduct.documents[0].path}}"
+                                      <img ng-src="{{editproduct.documents[2].path}}"   data-holder-rendered="true">
+                                    </div>
+                                    <div class="item">
+                                      <img ng-src="{{editproduct.documents[3].path}}" data-holder-rendered="true">
+                                    </div>
+                                    <div class="item">
+                                      <img ng-src="{{editproduct.documents[0].path}}" data-holder-rendered="true">
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-			    <div class="col-sm-3">
-			      	<div class="panel panel-default">
-			        	<div class="panel-heading font-bold">Classification Group
-			        		<a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
-			        	</div>
-			        	<div class="panel-body">
-				    	    <div class="form-horizontal">
-				    	        <div class="form-group m-b-sm">
-				    	         	<label class="col-sm-6 control-label">Text </label>
-				    	         	
-				    	        </div>
-				    	        <div class="form-group m-b-sm">
-				    	         	<label class="col-sm-6 control-label">productfield </label>
-				    	         	
-				    	        </div>
-				    	        <div class="form-group m-b-sm">
-				    	         	<label class="col-sm-6 control-label">document </label>
-				    	         	
-				    	        </div>
-				    	        <div class="form-group " >
-				    	         	<label class="col-sm-6 control-label">Notebooks</label>
-				    	         	
-				    	        </div>
-				    	        
-				    	    </div>
-		        		</div>
-			      	</div>
-			    </div>
-			</div>
+            <div class="row" >
+                <div class="col-sm-3">
+                  <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Contract           
+                        <a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group m-b-sm">
+                                <label class="col-sm-3 control-label">Laptops</label>
+                                
+                            </div>
+                            <div class="form-group " >
+                                <label class="col-sm-3 control-label">Laptops</label>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Price
+                        <a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group m-b-sm">
+                                <label class="col-sm-6 control-label">549.00 EUR/1 </label>
+                                
+                            </div>
+                            <div class="form-group " >
+                                <label class="col-sm-6 control-label">549.00 EUR/1</label>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                  <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Classification</div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group m-b-sm">
+                                <label class="col-sm-6 control-label">basic </label>
+                                
+                            </div>
+                            <div class="form-group m-b-sm">
+                                <label class="col-sm-6 control-label">basic </label>
+                                
+                            </div>
+                            <div class="form-group m-b-sm">
+                                <label class="col-sm-6 control-label">basic </label>
+                                
+                            </div>
+                            <div class="form-group " >
+                                <label class="col-sm-6 control-label">eClass 5.1.3</label>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading font-bold">Classification Group
+                            <a class="btn btn-xs btn-primary pull-right"  ><i class="glyphicon glyphicon-pencil"></i></a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-horizontal">
+                                <div class="form-group m-b-sm">
+                                    <label class="col-sm-6 control-label">Text </label>
+                                    
+                                </div>
+                                <div class="form-group m-b-sm">
+                                    <label class="col-sm-6 control-label">productfield </label>
+                                    
+                                </div>
+                                <div class="form-group m-b-sm">
+                                    <label class="col-sm-6 control-label">document </label>
+                                    
+                                </div>
+                                <div class="form-group " >
+                                    <label class="col-sm-6 control-label">Notebooks</label>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </span>
 
 
