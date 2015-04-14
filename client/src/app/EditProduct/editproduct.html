@@ -368,21 +368,21 @@
                                 <td>
                                     <div class="form-inline">
                                         <input type="text" class="input-sm" ng-model="search.classificationId">
-                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+                                        <button class="btn btn-default btn-xs" ng-click="search.classificationId=''"><i class="glyphicon glyphicon-remove"></i>
                                         </button>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-inline">
                                         <input type="text" class="input-sm" ng-model="search.classificationGroupId">
-                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button class="btn btn-default btn-xs" ng-click="search.classificationGroupId=''"><i class="glyphicon glyphicon-remove"></i></button>
                                     </div>
                                 </td>
 
                                 <td>
                                     <div class="form-inline">
                                         <input type="text" class="input-sm" ng-model="search.variantId">
-                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
                                     </div>
                                 </td>
 
@@ -390,14 +390,14 @@
                                     <div class="form-inline">
                                         <div class="tdwidth" isteven-multi-select input-model="cgoptions" output-model="output" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
                                         </div>
-                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button class="btn btn-default btn-xs" ng-click="search.classificationId=''"><i class="glyphicon glyphicon-remove"></i></button>
                                     </div>
                                 </td>
              -->
                                 <td>
                                     <div class="form-inline">
                                         <input type="text" class="input-sm" ng-model="search.orderNo">
-                                        <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button class="btn btn-default btn-xs" ng-click="search.orderNo=''"><i class="glyphicon glyphicon-remove"></i></button>
                                     </div>
                                 </td>
                                 <td></td>
@@ -694,8 +694,7 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm tdwidth" ng-model="search.attribute">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
-                            </button>
+                            <button class="btn btn-default btn-xs" ng-click="search.attribute=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
@@ -710,14 +709,14 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.variantId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td ng-hide="select.atrcolhide.indexOf('language')>=0">
                         <div class="form-inline">
                             <input type="text" class="input-sm tdwidth" ng-model="search.languageId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.languageId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
@@ -726,7 +725,7 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm tdwidth" ng-model="search.value">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.value=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
@@ -734,14 +733,14 @@
                     <td ng-hide="select.atrcolhide.indexOf('order')>=0">
                         <div class="form-inline">
                             <input type="text" class="input-sm tdwidth" ng-model="search.orderNro">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.orderNro=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td ng-hide="select.atrcolhide.indexOf('status')>=0">
                         <div class="form-inline">
                             <input type="text" class="input-sm tdwidth" ng-model="search.statusId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.statusId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
@@ -781,7 +780,7 @@
             </tfoot>
 
         </table>
-        <div class="row">
+        <div class="row m-b-20">
             <div class="col-sm-12">
 
                 <div class="  col-sm-3">
@@ -792,7 +791,7 @@
             </div>
         </div>
     </div>
-    <div class="row m-t-20">
+    <div class="row ">
         <div class="col-sm-4 m-b-20 ">
             <button class="btn btn-primary" ng-click="attvar=true">New Attribute</button>
             <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
@@ -1017,7 +1016,7 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm dtdwidth" ng-model="search.path">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+                            <button class="btn btn-default btn-xs" ><i class="glyphicon glyphicon-remove"></i>
                             </button>
                         </div>
                     </td>
@@ -1033,28 +1032,28 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.variantId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm dtdwidth" ng-model="search.documentViewTypeId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.documentViewTypeId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm dtdwidth" ng-model="search.languageId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.languageId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm dtdwidth" ng-model="search.description">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.description=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
@@ -1063,7 +1062,7 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm dtdwidth" ng-model="search.orderNo">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.orderNo=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
@@ -1316,7 +1315,7 @@
                     <!-- <td>
                                     <div class="form-inline">
                                         <input type="text" class="input-sm" ng-model="search.contractId">
-                                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+                                            <button class="btn btn-default btn-xs" ><i class="glyphicon glyphicon-remove"></i>
                                             </button>
                                     </div>
                                 </td> -->
@@ -1332,28 +1331,28 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.variantId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.info">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.info=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.description">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.description=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.validFromQuantity">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.validFromQuantity=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
@@ -1361,56 +1360,56 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.priceTypeId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.priceTypeId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.priceUnit">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.priceUnit=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.currencyId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.currencyId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.validFrom">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.validFrom=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.validTo">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.validTo=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.statusId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.statusId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.type">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.type=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.unitOfMeasureId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.unitOfMeasureId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
                     <td></td>
@@ -1814,27 +1813,27 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.variantId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.extClassificationId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.extClassificationId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.extClassificationGroupId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.extClassificationGroupId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.descShort">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.descShort=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
                     <td></td>
@@ -1886,7 +1885,7 @@
                             </div> -->
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Variant ID</label>
+                    <label class="col-sm-4 control-label">Variant ID</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="" ng-model="cproduct.variantId" ng-readonly="true" />
                     </div>
@@ -2376,7 +2375,7 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.productId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i>
+                            <button class="btn btn-default btn-xs" ng-click="search.productId=''"><i class="glyphicon glyphicon-remove"></i>
                             </button>
                         </div>
                     </td>
@@ -2392,70 +2391,70 @@
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.typeId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.typeId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.productId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.productId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.Description">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.Description=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.statusId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.statusId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.syncTypeId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.syncTypeId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.seqNo">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.seqNo=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.quantity">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.quantity=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.selectionGroupId">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.selectionGroupId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.isMandatory">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.isMandatory=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
                             <input type="text" class="input-sm" ng-model="search.isDefaultSelected">
-                            <button class="btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default btn-xs" ng-click="search.isDefaultSelected=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
