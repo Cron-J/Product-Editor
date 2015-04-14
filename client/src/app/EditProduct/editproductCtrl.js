@@ -748,6 +748,30 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 		window.open('http://classificationattribute-44842.onmodulus.net/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
 	}
 
+    // $scope.editAttribute = function(id){
+    //     $http.get('/getConfig')
+    //     .then(function(result) {
+    //           $scope.result = result.data;
+    //             editAttribute1(id);
+
+    //         })
+    //         .catch(function(err) {
+    //             console.log('error')
+    //         })
+    // }
+
+    // var editAttribute1 = function(id){
+    //     $http.get($scope.result +'/getClassificationAttributeHost/')
+    //          .then(function(result) {
+    //           $scope.result = result.data;
+    //           window.open($scope.result+'/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
+                
+    //         })
+    //         .catch(function(err) {
+    //             console.log('error')
+    //         })
+    // }
+
     }
 ]);
 
