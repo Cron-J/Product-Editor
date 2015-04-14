@@ -678,7 +678,7 @@
 						                   <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
 						               </a>
                     </th>
-
+                    <th>Channel</th>
                     <th>Action</th>
 
                 </tr>
@@ -753,6 +753,16 @@
                     <td ng-hide="select.atrcolhide.indexOf('order')>=0" editable model="editproduct.attributeValues[$index].orderNro"><span>{{atrdata.orderNro}}</span></td>
 
                     <td ng-hide="select.atrcolhide.indexOf('status')>=0">{{atrdata.statusId}}</td>
+                    <td>
+                        <span class="ng-scope"> 
+                                        <script type="text/ng-template" id="myModalContent9.html">
+                                          <div ng-include="'app/EditProduct/channeldetailsmodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openChannelDetails('lg',atrdata)">Channel
+                                        <!-- <span class="glyphicon glyphicon-search"></span> -->
+                        </button>
+                        </span>
+                    </td>
                     <td>
 			            <button class="btn btn-primary btn-xs" ng-click="editAttribute(atrdata.attribute)">Edit</button>
                     </td>

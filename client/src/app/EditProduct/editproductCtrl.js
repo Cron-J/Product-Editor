@@ -11,7 +11,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         $scope.updateitem = function(editproduct) {
             $http.put('/updateProduct/' + editproduct._id, editproduct)
                 .success(function(status, data) {
-                    console.log(data);
                 });
 
         }
@@ -131,12 +130,18 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.createNew = {};
         }
 
-         $scope.newAttribute = function(createNewAttribute) {
+        $scope.newAttribute = function(createNewAttribute) {
            createNewAttribute.channels = $scope.channels;
             $scope.editproduct.attributeValues.push(createNewAttribute);
             $scope.updateitem($scope.editproduct);
             // $scope.createNew = {};
         }
+
+        // $scope.seeChannel = function() {
+        //     $scope.editproduct.attributeValues.push(createNewAttribute);
+        //     $scope.updateitem($scope.editproduct);
+        //     // $scope.createNew = {};
+        // }
 
 
         // check Uncheck check boxes
@@ -620,6 +625,23 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.contacts.splice(index, 1);
         };
 
+        $scope.openChannelDetails = function(size,data) {
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent9.html',
+                    controller: ChannelDetailsModalInstanceCtrl,
+                    size: size,
+                    resolve: {
+                        channel_details:function(){
+                            return data;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function(variant_data) {
+                    $scope[resmodel].variantId = variant_data.variantId;
+                });
+        }
+
         //search variant
 
         $scope.openVariant = function(size,which,resmodel) {
@@ -692,7 +714,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 modalInstance.result.then(function(attributedata) {
                 	// $scope.attributeDetails = attributedata;
                 	$scope.doc = attributedata;
-                    console.log('attr',$scope.doc);
                 	$scope.doc.attribute = attributedata._id;
                     deferred.resolve(attributedata);
                 },
@@ -754,7 +775,6 @@ var VariantModalInstanceCtrl = function($scope, $modalInstance, $http, $location
 
     $scope.getVariant = function(cid) {
         $modalInstance.close(cid);
-        console.log(cid);
     }
       
 
@@ -794,7 +814,6 @@ var ModalInstanceCtrl = function($scope, $modalInstance, $http, $location) {
 
     $scope.getClassification = function(cid) {
         $modalInstance.close(cid);
-        console.log(cid);
     }
 
 
@@ -1222,7 +1241,6 @@ var ChannelModalInstanceCtrl = function($scope, $modalInstance, $http, $location
 $scope.openChannelModal =function(){
     $controller('EditProductCtrl',{$scope : testCtrl1ViewModel ,$modalInstance:$modalInstance});
     testCtrl1ViewModel.openAttribute().then(function(){
-        console.log(testCtrl1ViewModel);
          $scope.channelinfo.attribute=testCtrl1ViewModel.doc.attributeId;
          $scope.channelinfo.attributeid=testCtrl1ViewModel.doc.attribute;
     })
@@ -1242,3 +1260,17 @@ $scope.addChannelRow = function(channel_info){
 
 
 }
+
+
+var ChannelDetailsModalInstanceCtrl = function($scope, $modalInstance, $http, $location,channel_details) {
+    var getDetails = function() {
+        $scope.getChannelDetails = channel_details.channels;
+    }
+    $scope.cancel = function() {
+
+        $modalInstance.dismiss('cancel');
+
+    };
+
+    getDetails();
+};

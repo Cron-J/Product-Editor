@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="defModalHead">ClassificationGroup Search</h4>
+</div>
+<div class="modal-body">
+
+    <div class="page-content-wrap">
+       <div class="modal-body" style="overflow: auto;">
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="col-sm-12">
+							<div>
+								<div ng-show="getChannelDetails.length == 0">
+									<p>No records found</p>
+								</div>
+								<table class="table table-stripped custom-table" ng-show="getChannelDetails.length > 0">
+									<thead>
+									    <th>Attribute</th>
+										<th>Channels</th>
+										<th>Language</th>
+										<th>Value</th>
+
+									</thead>
+				                     <tbody>
+										<tr ng-repeat="channeldata in getChannelDetails">
+										<td >{{channeldata.attribute}}</td>
+										<td ng-repeat="channels in channeldata.channel">{{channels}}</td>
+										<td >{{channeldata.value}}</td>
+										<td >{{channeldata.language}}</td>
+										<!-- <td >{{classdata.classificationId}}</td> -->
+										</tr>
+									</tbody>
+									<tfoot>
+										<td colspan="6">
+											<div class="pagination pull-right">
+												<ul>
+													<li ng-class="{disabled: currentPage == 0}">
+														<a href ng-click="prevPage()">« Prev</a>
+													</li>
+													<li ng-repeat="n in range(groupItems.length)" ng-class="{active: n == currentPage}"ng-click="setPage()">
+													<a href ng-show="n >= min && n < max" ng-bind="n + 1">1</a>
+													</li>
+													<li ng-class="{disabled: currentPage == groupItems.length - 1}">
+														<a href ng-click="nextPage()">Next »</a>
+													</li>
+												</ul>
+											</div>
+										</td>
+									</tfoot>
+							    </table>
+							</div>		
+						</div>
+					</div>
+				</div>		
+			</div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="cancel()">Close</button>
+</div>
