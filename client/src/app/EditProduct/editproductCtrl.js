@@ -759,10 +759,12 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 //variant modal controller
 
 var VariantModalInstanceCtrl = function($scope, $modalInstance, $http, $location,data) {
-    var searchVariants = function() {
+    $scope.searchVariants = function(requestdata) {
         var a={};
         var b=data;
         a[b]=true;
+        if(requestdata)
+            a['variantId'] = requestdata.variantId;
         $http.post('/getVariants',a)
             .then(function(result) {
                 $scope.getVariantsList = result.data;
@@ -776,15 +778,14 @@ var VariantModalInstanceCtrl = function($scope, $modalInstance, $http, $location
     $scope.getVariant = function(cid) {
         $modalInstance.close(cid);
     }
-      
-
+    
     $scope.cancel = function() {
 
         $modalInstance.dismiss('cancel');
 
     };
 
-    searchVariants();
+    // searchVariants();
 };
 //modal for classification
 var ModalInstanceCtrl = function($scope, $modalInstance, $http, $location) {
