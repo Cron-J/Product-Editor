@@ -1,12 +1,12 @@
 myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
     '$http', '$location', 'growl', '$modal', '$routeParams', '$filter',
-    'blockUI','$q',
+    'blockUI','$q','uiGridConstants',
     function($scope, $rootScope, $http, $location,
-        growl, $modal, $routeParams, blockUI, $filter,$q) {
+        growl, $modal, $routeParams, blockUI, $filter,$q,uiGridConstants) {
 
 
 
-
+       
 
         $scope.updateitem = function(editproduct) {
             $http.put('/updateProduct/' + editproduct._id, editproduct)
@@ -24,7 +24,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $http.get(urlBase + $routeParams.id)
                 .then(function(result) {
                     $scope.editproduct = result.data;
-
+                     $scope.gridOptions.data = $scope.editproduct.attributeValues;
                 })
                 .catch(function(err) {
                     console.log('error')
@@ -190,6 +190,39 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         $scope.hidecol = function(x) {
             $scope.select.atrcolhide=angular.copy(x);
         }
+
+        // ui-grid
+
+       $scope.gridOptions = {
+        };
+
+          $scope.gridOptions.columnDefs = [
+            { name: '_id'},
+            { name: 'Attribute',enableCellEdit: false},
+            { field: 'Value' }
+            // { name: 'Value'}
+           
+          ];
+
+
+        // $scope.gridOptions2 = {
+        //     enableSorting: true,
+        //     columnDefs: [ 
+        //       { field: 'Attribute' },
+              // { field: 'Variant' },
+              // { field: 'Language' },
+              // { field: 'Value' },
+              // { field: 'Order No.' },
+              // { field: 'Status' }
+          //   ],
+          //   onRegisterApi: function( gridApi ) {
+          //     $scope.grid2Api = gridApi;
+          //   }
+          // };
+          
+          
+             
+            
 
 
 

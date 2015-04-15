@@ -612,11 +612,37 @@
 
             </tab>
 
-<tab heading="Attributes">
-    <div class=" m-t-25">
+    <tab heading="Attributes">
+        <div class=" m-t-25">
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
 
-        <div class="row m-b-20">
+
+{{gridOptions.data}}
+
+
+        <div class="grid" ui-grid="gridOptions" ui-grid-move-columns ui-grid-edit></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <div class="row m-b-20">
             <div class="col-md-2">
                 <select multiple ng-model="atrcolhide" ng-options="">
                     <option value=""></option>
@@ -631,13 +657,13 @@
             </div>
 
 
-        </div>
+        </div> -->
 
 
 
 
 
-        <table class="table table-stripped table-bordered custom-table">
+        <!-- <table class="table table-stripped table-bordered custom-table">
             <tbody>
 
                 <tr>
@@ -698,13 +724,7 @@
                         </div>
                     </td>
 
-                    <!-- <td ng-hide="select.atrcolhide.indexOf('variant')>=0">
-                        <div class="form-inline ">
-                            <div isteven-multi-select input-model="attroptions" output-model="attributeop" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
-                            </div>
-                            <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td> -->
+                    
 
                     <td>
                         <div class="form-inline">
@@ -764,7 +784,7 @@
                                           <div ng-include="'app/EditProduct/channeldetailsmodal.html'"></div>
                                         </script>
                                         <button class="btn btn-primary btn-xs" ng-click="openChannelDetails('lg',atrdata)"> <span class="glyphicon glyphicon-list-alt"></span>
-                        <!-- <span class="glyphicon glyphicon-search"></span> -->
+                        
                         </button>
                         </span>
                     </td>
@@ -779,7 +799,7 @@
                 </td>
             </tfoot>
 
-        </table>
+        </table> -->
         <div class="row m-b-20">
             <div class="col-sm-12">
 
