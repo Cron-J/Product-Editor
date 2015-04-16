@@ -367,8 +367,8 @@
                                 <td></td>
                                 <td>
                                     <div class="form-inline">
-                                        <input type="text" class="input-sm" ng-model="search.classificationId">
-                                        <button class="btn btn-default btn-xs" ng-click="search.classificationId=''"><i class="glyphicon glyphicon-remove"></i>
+                                        <input type="text" class="input-sm" style="width:80px;" ng-model="search.classificationId">
+                                        <button class="btn btn-default btn-xs"  ng-click="search.classificationId=''"><i class="glyphicon glyphicon-remove"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -396,7 +396,7 @@
              -->
                                 <td>
                                     <div class="form-inline">
-                                        <input type="text" class="input-sm" ng-model="search.orderNo">
+                                        <input type="text" style="width:50px;" class="input-sm" ng-model="search.orderNo">
                                         <button class="btn btn-default btn-xs" ng-click="search.orderNo=''"><i class="glyphicon glyphicon-remove"></i></button>
                                     </div>
                                 </td>
@@ -1061,7 +1061,7 @@
                     <td></td>
                     <td>
                         <div class="form-inline">
-                            <input type="text" class="input-sm dtdwidth" ng-model="search.path">
+                            <input type="text" style="width:60px" class="input-sm dtdwidth" ng-model="search.path">
                             <button class="btn btn-default btn-xs" ><i class="glyphicon glyphicon-remove"></i>
                             </button>
                         </div>
@@ -1077,28 +1077,42 @@
  -->
                     <td>
                         <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.variantId">
+                            <input type="text" style="width:70px" class="input-sm" ng-model="search.variantId">
                             <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
-                            <input type="text" class="input-sm dtdwidth" ng-model="search.documentViewTypeId">
+                            <select name="type" class="form-control m-b"  ng-model="search.documentViewTypeId">
+                                <option value=""></option>
+                                <option value="Atmosphere">Atmosphere</option>
+                                <option value="BackView">BackView</option>
+                                <option value="FrontView">FrontView</option>
+                            </select>
+                            <!-- <input type="text" style="width:70px" class="input-sm dtdwidth" ng-model="search.documentViewTypeId"> -->
                             <button class="btn btn-default btn-xs" ng-click="search.documentViewTypeId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
-                            <input type="text" class="input-sm dtdwidth" ng-model="search.languageId">
+                            <select name="language" class="form-control m-b" ng-model="search.languageId">
+                                <option value=""></option>
+                                <option value="de">de</option>
+                                <option value="en">en</option>
+                                <option value="es">es</option>
+                                <option value="fr">fr</option>
+                                <option value="jp">jp</option>
+                            </select>
+                            
                             <button class="btn btn-default btn-xs" ng-click="search.languageId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
 
                     <td>
                         <div class="form-inline">
-                            <input type="text" class="input-sm dtdwidth" ng-model="search.description">
+                            <input type="text" class="input-sm dtdwidth" style="width:80px" ng-model="search.description">
                             <button class="btn btn-default btn-xs" ng-click="search.description=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
@@ -1107,7 +1121,7 @@
 
                     <td>
                         <div class="form-inline">
-                            <input type="text" class="input-sm dtdwidth" ng-model="search.orderNo">
+                            <input type="text" class="input-sm dtdwidth" style="width:45px" ng-model="search.orderNo">
                             <button class="btn btn-default btn-xs" ng-click="search.orderNo=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>
@@ -1115,26 +1129,26 @@
                     <td></td>
                 </tr>
 
-                <tr ng-click="editdoc(ddata)" class="hoverptr" ng-repeat="ddata in editproduct.documents | orderBy:sortType:sortReverse  | filter:search:strict | filter:variantdoc[0]:strict">
+                <tr  ng-repeat="ddata in editproduct.documents | orderBy:sortType:sortReverse  | filter:search:strict | filter:variantdoc[0]:strict">
 
                     <td class="check-box">
                         <input type="checkbox" value="{{ddata._id}}" ng-checked="ddata.checked" ng-model="ddata.checked">
                     </td>
-                    <td class="hoverptr">{{ddata.path}}</td>
-                    <td class="hoverptr">{{ddata.variantId}}</td>
-                    <td class="hoverptr">{{ddata.documentViewTypeId}}</td>
-                    <td class="hoverptr">{{ddata.languageId}}</td>
-                    <td class="hoverptr">{{ddata.description}}</td>
-                    <td class="hoverptr">{{ddata.orderNo}}</td>
-                    <td class="hoverptr">
-                        <button class="btn btn-primary btn-xs">Edit</button>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.path}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.variantId}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.documentViewTypeId}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.languageId}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.description}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.orderNo}}</td>
+                    <td>
+                        <button class="btn btn-primary btn-xs" ng-click="editdoc(ddata)">Edit</button>
                     </td>
                 </tr>
             </tbody>
             <tfoot>
-                <td colspan="8">
+                
                     <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
-                </td>
+                
             </tfoot>
         </table>
     </div>
@@ -1170,7 +1184,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Language</label>
-                    <div class="col-sm-1">
+                    <div class="col-sm-3">
                         <select name="language" class="form-control m-b" ng-model="doc.languageId">
                             <option value="de">de</option>
                             <option value="en">en</option>
@@ -1183,7 +1197,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">View Type</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                         <select name="type" class="form-control m-b" ng-model="doc.documentViewTypeId">
                             <option value="Atmosphere">Atmosphere</option>
                             <option value="BackView">BackView</option>
@@ -1194,7 +1208,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Order No.</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-3">
                         <input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="docform.orderno.$invalid">Invalid:
                                         <span ng-show="docform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
@@ -1207,7 +1221,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Description </label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-8">
                         <textarea type="text" name="description" class="form-control" ng-model="doc.description" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/"></textarea>
                         <span class="error" ng-show="docform.description.$invalid">Invalid:
                                         <span ng-show="docform.description.$error.minlength">Description should be minimum of 0 characters</span>
@@ -1258,12 +1272,12 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-
-                    <div class="col-sm-offset-1  col-sm-3">
-                        <button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
-                        <button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Cancel</button>
-                    </div>
-
+                    <td>
+                        <div class="col-sm-offset-1  col-sm-3">
+                            <button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
+                            <button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Cancel</button>
+                        </div>
+                    </td>
                 </div>
             </div>
 
@@ -1376,7 +1390,7 @@
 
                     <td>
                         <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.variantId">
+                            <input type="text" style="width:40px" class="input-sm" ng-model="search.variantId">
                             <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
                     </td>

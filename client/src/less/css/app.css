@@ -7,10 +7,17 @@
 .pagination ul>li:last-child>a,.pagination ul>li:last-child>span{-webkit-border-radius:0 3px 3px 0;-moz-border-radius:0 3px 3px 0;border-radius:0 3px 3px 0;}
 .pagination-centered{text-align:center;}
 .pagination-right{text-align:right;}
+
 .hoverptr:hover{
    cursor: pointer;
-   background: #f3f3f3;
+   /*background: #f3f3f3;*/
  }
+
+tr:hover{
+	background: #f3f3f3;
+}
+
+
  /****************** Customized *****************/
  .form-panel{
  	margin-top: 30px;
@@ -213,7 +220,7 @@ th{
 .error{
 	color:red;
 }
-
+/*
 .tdwidth{
   width: 83%;
   display: inline;
@@ -225,7 +232,7 @@ th{
   display: inline;
 }
 
-
+*/
 .ui-input-text{
    outline: none;
 text-align: left;
