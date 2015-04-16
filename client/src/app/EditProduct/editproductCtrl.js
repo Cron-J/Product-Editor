@@ -193,17 +193,74 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         // ui-grid
 
-       $scope.gridOptions = {
-        };
+       $scope.gridOptions = {};
 
           $scope.gridOptions.columnDefs = [
-            { name: '_id'},
-            { name: 'Attribute',enableCellEdit: false},
-            { field: 'Value' }
-            // { name: 'Value'}
-           
-          ];
+            { name:"Attribute",field: 'attribute',enableCellEdit: false},
+            { name:"Value",field: 'value' },
+            { name:"Variant",field: 'variantId',enableCellEdit: false},
+            { name:"Language",field: 'languageId',enableCellEdit: false },
+            { name:"Order No.",field: 'orderNro' },
+            // { name:"Status",field: 'statusId', editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
+            //     selectOptions: [ { value : '080', label : '080 error' },
+            //                      { value : '090', label : '090 warning' },
+            //                      { value : '100', label : '100 new' },
+            //                      { value : '105', label : '105 changed' },
+            //                      { value : '200', label : '200 checked' },
+            //                      { value : '225', label : '225 translate' },
+            //                      { value : '250', label : '250 Translation needed' },
+            //                      { value : '275', label : '275 Translation in progress' },
+            //                      { value : '300', label : '300 waiting' },
+            //                      { value : '350', label : '350 translate' },
+            //                      { value : '400', label : '400 confirmed' },
+            //                      { value : '420', label : '420 Immediate' },
+            //                      { value : '700', label : '700 temporary' },
+            //                      { value : '800', label : '800 deleted' }
+            //                       ]}
 
+
+
+            { name:"statusId",field: 'statusId', editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
+                    editDropdownOptionsArray: [
+                                          { status: '080 error'                  , id: '080'     },
+                                          { status: '090 warning'                , id: '090'        },
+                                          { status: '100 new'                    , id: '100'    },
+                                          { status: '105 changed'                , id: '105'        },
+                                          { status: '200 checked'                , id: '200'         },
+                                          { status: '225 translate'              , id: '225'              },
+                                          { status: '250 Translation needed'     , id: '250'       },
+                                          { status: '275 Translation in progress', id: '275'             },
+                                          { status: '300 waiting'                , id: '300'            },
+                                          { status: '350 translate '             , id: '350'             },
+                                          { status: '400 confirmed'              , id: '400'                 },
+                                          { status: '420 Immediate'              , id: '420'            },
+                                          { status: '700 temporary'              , id: '700'              },
+                                          { status: '800 deleted'                , id: '800'               }
+                                        ] }
+
+
+            ];
+
+
+
+            // .filter('mapStatus', function() {
+            //   var sizeHash = {
+                
+            //     080    : '080 error'                  ,
+            //     090    : '090 warning'                ,
+            //     100    : '100 new'                    ,
+            //     105    : '105 changed'                ,
+            //     200    : '200 checked'                ,
+            //     225    : '225 translate'              ,
+            //     250    : '250 Translation needed'     ,
+            //     275    : '275 Translation in progress',
+            //     300    : '300 waiting'                ,
+            //     350    : '350 translate '             ,
+            //     400    : '400 confirmed'              ,
+            //     420    : '420 Immediate'              ,
+            //     700    : '700 temporary'              ,
+            //     800    : '800 deleted'                
+            //   };
 
         // $scope.gridOptions2 = {
         //     enableSorting: true,

@@ -617,10 +617,11 @@
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
 
 
-{{gridOptions.data}}
 
 
-        <div class="grid" ui-grid="gridOptions" ui-grid-move-columns ui-grid-edit></div>
+
+
+        <div class="grid" ui-grid="gridOptions" ui-grid-move-columns ui-grid-edit ui-grid-resize-columns ui-grid-pinning></div>
 
 
 
@@ -663,7 +664,7 @@
 
 
 
-        <!-- <table class="table table-stripped table-bordered custom-table">
+        <table class="table table-stripped table-bordered custom-table">
             <tbody>
 
                 <tr>
@@ -780,12 +781,12 @@
                     <td ng-hide="select.atrcolhide.indexOf('status')>=0">{{atrdata.statusId}}</td>
                     <td>
                         <span class="ng-scope"> 
-                                        <script type="text/ng-template" id="myModalContent9.html">
-                                          <div ng-include="'app/EditProduct/channeldetailsmodal.html'"></div>
-                                        </script>
-                                        <button class="btn btn-primary btn-xs" ng-click="openChannelDetails('lg',atrdata)"> <span class="glyphicon glyphicon-list-alt"></span>
-                        
-                        </button>
+                            <script type="text/ng-template" id="myModalContent9.html">
+                              <div ng-include="'app/EditProduct/channeldetailsmodal.html'"></div>
+                            </script>
+                            <button class="btn btn-primary btn-xs" ng-click="openChannelDetails('lg',atrdata)">
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                            </button>
                         </span>
                     </td>
                     <td>
@@ -799,7 +800,7 @@
                 </td>
             </tfoot>
 
-        </table> -->
+        </table>
         <div class="row m-b-20">
             <div class="col-sm-12">
 
@@ -873,7 +874,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-4 control-label">StatusId</label>
                     <div class="col-sm-7">
                         <input type="number" name="statusId" class="form-control" ng-model="doc.statusId" ng-minlength="0" ng-maxlength="50">
@@ -883,6 +884,32 @@
                         <span ng-show="attrform.statusId.$error.number">Enter only digit</span>
                         </span>
 
+                    </div>
+                </div> -->
+
+                
+
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Status</label>
+                    <div class="col-sm-7">
+                        <select name="language" class="form-control m-b" ng-model="doc.statusId">
+                            <option value=""></option>
+                            <option value="080">080 error</option>
+                            <option value="090">090 warning</option>
+                            <option value="100">100 new</option>
+                            <option value="105">105 changed</option>
+                            <option value="200">200 checked</option>
+                            <option value="225">225 translate</option>
+                            <option value="250">250 Translation needed</option>
+                            <option value="275">275 Translation in progress</option>
+                            <option value="300">300 waiting</option>
+                            <option value="350">350 translate</option>
+                            <option value="400">400 confirmed</option>
+                            <option value="420">420 Immediate</option>
+                            <option value="700">700 temporary</option>
+                            <option value="800">800 deleted</option>
+                        </select>
                     </div>
                 </div>
 
