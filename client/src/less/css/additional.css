@@ -626,6 +626,6 @@ h2 {
 }
 
 .form-group{
-	overflow: auto;
+	overflow: hidden;
 }
 /* #### END: CUSTOM STYLES FOR PIMX ########################################################################### */

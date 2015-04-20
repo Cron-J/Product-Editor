@@ -14,9 +14,9 @@ var productRelation = {
     /**
      * Identifier of related product.
      */
-    relatedProductId: [{
+    relatedProductId: {
         type: String
-    }],
+    },
 
     /**
      * Translated descriptions of ProductRelation.

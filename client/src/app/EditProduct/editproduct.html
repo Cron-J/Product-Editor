@@ -20,6 +20,18 @@
         <div class="col-sm-12 m-b-20">
             
             <h3> <img  style="width:50px;" ng-src="{{editproduct.documents[0].path}}"/> {{editproduct.mfgProductId}}</h3>
+            <div class="form-group">
+                <label for="inputEmail3" style="width:11%" class="row col-sm-1 control-label">Product ID : </label>
+                <div class="col-sm-10">
+                  <p>{{editproduct.productId}}</p>
+                </div>
+            </div> 
+            <div class="form-group">
+                <label for="inputEmail3" class="row col-sm-1 control-label">Status : </label>
+                <div class="col-sm-10">
+                  <p>{{editproduct.statusId}}</p>
+                </div>
+            </div>    
 
             <button class="btn btn-primary pull-right" ng-click="showhidepreview()" >Preview</button>
         </div>
@@ -324,7 +336,7 @@
 
                 <div class=" m-t-25">
 
-                    <table class="table table-stripped  custom-table">
+                    <table class="table table-stripped custom-table">
                         <tbody>
                             <tr>
                                 <th class="check-box"><span id="selectall" ng-click="selectAllcBoxes()"><input type="checkbox" ></span> </th>
@@ -367,7 +379,7 @@
                                 <td></td>
                                 <td>
                                     
-                                        <div class="input-group" style="width:60%;margin-left:20%;">
+                                        <div class="input-group" style="width:70%;margin-left:16%;">
                                           <input type="text" class="form-control" ng-model="search.classificationId" style="height:22px;">
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-xs" ng-click="search.classificationId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
@@ -377,7 +389,7 @@
                                 </td>
                                 <td>
                                     
-                                        <div class="input-group" style="width:58%;margin-left:20%;">
+                                        <div class="input-group" style="width:70%;margin-left:16%;">
                                           <input type="text" class="form-control" ng-model="search.classificationGroupId" style="height:22px;">
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-xs" ng-click="search.classificationGroupId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
@@ -388,7 +400,7 @@
 
                                 <td>
                                     
-                                        <div class="input-group" style="width:40%;margin-left:31%;">
+                                        <div class="input-group" style="width:70%;margin-left:16%;">
                                           <input type="text" class="form-control" ng-model="search.variantId" style="height:22px;">
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-xs" ng-click="search.variantId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
@@ -399,7 +411,7 @@
 
                                 <td>
                                     
-                                        <div class="input-group" style="width:44%;margin-left:30%;">
+                                        <div class="input-group" style="width:50%;margin-left:27%;">
                                           <input type="text" class="form-control" ng-model="search.orderNo" style="height:22px;">
                                           <span class="input-group-btn">
                                             <button class="btn btn-default btn-xs" ng-click="search.orderNo=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
@@ -1018,7 +1030,7 @@
 <tab heading="Document">
     <div class=" m-t-25">
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
-        <table class="table table-stripped custom-table">
+        <table class="table table-stripped  custom-table">
             <tbody>
                 <tr>
                     <th class="check-box">
@@ -1075,14 +1087,6 @@
                         </div><!-- /input-group -->
                     </td>
 
-                    <!-- <td>
-                        <div class="form-inline">
-                            <div class="dtdwidth" isteven-multi-select input-model="docoptions" output-model="variantdoc" button-label="variantId" item-label="variantId" tick-property="ticked" helper-elements="filter" selection-mode="single" output-properties="variantId">
-                            </div>
-                            <button class="btn btn-default btn-xs" ng-click="output=null;"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
- -->
                     <td>
                         <div class="input-group" style="width:60%;margin-left:20%;">
                             <input type="text" class="form-control" ng-model="search.variantId" style="height:22px;">
@@ -1322,75 +1326,76 @@
             <tbody>
                 <tr>
                     <th class="check-box">
-                        <input type="checkbox" id="selectall" ng-click="selectAllpriceCBoxes()"> </th>
-                    <!-- <th>
-                                    <a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Contract
-                                        <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
-                                </th> -->
-
+                        <input type="checkbox" id="selectall" ng-click="selectAllpriceCBoxes()"> 
+                    </th>
+                    
                     <th>
                         <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-                                        <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                            <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
 
-                    <th><a ng-click="sortType = 'info'; sortReverse = !sortReverse">Info
-                                        <span ng-show="sortType == 'info' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'info' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    
+                    <th>
+                        <a ng-click="sortType = 'description'; sortReverse = !sortReverse">Description
+                            <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'description'; sortReverse = !sortReverse">Description
-                                        <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'validFromQuantity'; sortReverse = !sortReverse">From Quantity
+                            <span ng-show="sortType == 'validFromQuantity' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'validFromQuantity' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'validFromQuantity'; sortReverse = !sortReverse">From Quantity
-                                        <span ng-show="sortType == 'validFromQuantity' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'validFromQuantity' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'netPrice'; sortReverse = !sortReverse">price
+                            <span ng-show="sortType == 'netPrice' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'netPrice' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'priceTypeId'; sortReverse = !sortReverse">Price
-                                        <span ng-show="sortType == 'priceTypeId' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'priceTypeId' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'priceUnit'; sortReverse = !sortReverse">Price Unit
+                            <span ng-show="sortType == 'priceUnit' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'priceUnit' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'priceUnit'; sortReverse = !sortReverse">Price Unit
-                                        <span ng-show="sortType == 'priceUnit' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'priceUnit' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'currencyId'; sortReverse = !sortReverse">Currency
+                            <span ng-show="sortType == 'currencyId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'currencyId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'currencyId'; sortReverse = !sortReverse">Currency
-                                        <span ng-show="sortType == 'currencyId' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'currencyId' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'validFrom'; sortReverse = !sortReverse">Valid From
+                            <span ng-show="sortType == 'validFrom' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'validFrom' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'validFrom'; sortReverse = !sortReverse">Valid From
-                                        <span ng-show="sortType == 'validFrom' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'validFrom' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'validTo'; sortReverse = !sortReverse">Valid To
+                            <span ng-show="sortType == 'validTo' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'validTo' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'validTo'; sortReverse = !sortReverse">Valid To
-                                        <span ng-show="sortType == 'validTo' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'validTo' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
+                            <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
-                                        <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'priceTypeId'; sortReverse = !sortReverse">Type
+                            <span ng-show="sortType == 'priceTypeId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'priceTypeId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
-                    <th><a ng-click="sortType = 'path'; sortReverse = !sortReverse">Type
-                                        <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
-                    </th>
-                    <th><a ng-click="sortType = 'unitOfMeasureId'; sortReverse = !sortReverse">UoM
-                                        <span ng-show="sortType == 'unitOfMeasureId' && !sortReverse" class="fa fa-caret-down"></span>
-                                        <span ng-show="sortType == 'unitOfMeasureId' && sortReverse" class="fa fa-caret-up"></span>
-                                    </a>
+                    <th>
+                        <a ng-click="sortType = 'unitOfMeasureId'; sortReverse = !sortReverse">UoM
+                            <span ng-show="sortType == 'unitOfMeasureId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'unitOfMeasureId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
                     </th>
                     <th>Actions</th>
                 </tr>
@@ -1400,86 +1405,193 @@
                     <td></td>
                     
                     <td>
-                        <div class="form-inline">
-                            <input type="text" style="width:40px" class="input-sm" ng-model="search.variantId">
-                            <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                              <input type="text" class="form-control" ng-model="search.variantId" style="height:22px;width:75px;">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.variantId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </td>
+
+
+                    <td>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                              <input type="text" class="form-control" ng-model="search.description" style="height:22px;width:125px;">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.description=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
                         </div>
                     </td>
 
                     <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.info">
-                            <button class="btn btn-default btn-xs" ng-click="search.info=''"><i class="glyphicon glyphicon-remove"></i></button>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                              <input type="text" class="form-control" ng-model="search.validFromQuantity" style="height:22px;width:102px;">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.validFromQuantity=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
                         </div>
                     </td>
 
                     <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.description">
-                            <button class="btn btn-default btn-xs" ng-click="search.description=''"><i class="glyphicon glyphicon-remove"></i></button>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                              <input type="text" class="form-control" ng-model="search.netPrice" style="height:22px;width:80px;">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.netPrice=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
                         </div>
                     </td>
 
                     <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.validFromQuantity">
-                            <button class="btn btn-default btn-xs" ng-click="search.validFromQuantity=''"><i class="glyphicon glyphicon-remove"></i></button>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                              <input type="text" class="form-control" ng-model="search.priceUnit" style="height:22px;width:70px;">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.priceUnit=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
                         </div>
                     </td>
 
                     <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.priceTypeId">
-                            <button class="btn btn-default btn-xs" ng-click="search.priceTypeId=''"><i class="glyphicon glyphicon-remove"></i></button>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <select name="language" class="form-control m-b" ng-model="search.currencyId" style="height:22px;width:65px;padding: 0px;">
+                                    <option value=""></option>
+                                    <option value="CHF">CHF</option>
+                                    <option value="EUR" selected="selected">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                    <option value="JPY">JPY</option>
+                                    <option value="NZD">NZD</option>
+                                    <option value="USD">USD</option>
+                                </select>
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.currencyId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
+                        </div>
+                    <td>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                              <input type="text" class="form-control" ng-model="search.validFrom" style="height:22px;width:102px;">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.validFrom=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
                         </div>
                     </td>
 
                     <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.priceUnit">
-                            <button class="btn btn-default btn-xs" ng-click="search.priceUnit=''"><i class="glyphicon glyphicon-remove"></i></button>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                              <input type="text" class="form-control" ng-model="search.validTo" style="height:22px;width:102px;">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.validTo=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
+                        </div>
+                    <td>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <select  class="form-control m-b" ng-model="search.statusId" style="height:22px;width:102px;padding: 0px;">
+                                    <option value="" ></option>
+                                    <option value="35">080 error</option>
+                                    <option value="36">090 warning</option>
+                                    <option value="37">100 new</option>
+                                    <option value="71">105 changed</option>
+                                    <option value="39">110 unchanged</option>
+                                    <option value="38" selected="selected">400 confirmed</option>
+                                    <option value="60">700 temporary</option>
+                                    <option value="40">800 deleted</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-xs" ng-click="search.statusId=''" type="button">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                </span>
+                            </div><!-- /input-group -->
                         </div>
                     </td>
 
                     <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.currencyId">
-                            <button class="btn btn-default btn-xs" ng-click="search.currencyId=''"><i class="glyphicon glyphicon-remove"></i></button>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                              <input type="text" class="form-control" ng-model="search.type" style="height:22px;width:102px;">
+                              <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.type=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                              </span>
+                            </div><!-- /input-group -->
                         </div>
                     </td>
 
                     <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.validFrom">
-                            <button class="btn btn-default btn-xs" ng-click="search.validFrom=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.validTo">
-                            <button class="btn btn-default btn-xs" ng-click="search.validTo=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.statusId">
-                            <button class="btn btn-default btn-xs" ng-click="search.statusId=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.type">
-                            <button class="btn btn-default btn-xs" ng-click="search.type=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.unitOfMeasureId">
-                            <button class="btn btn-default btn-xs" ng-click="search.unitOfMeasureId=''"><i class="glyphicon glyphicon-remove"></i></button>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <select  class="form-control m-b" ng-model="search.unitOfMeasureId" style="height:22px;width:70px;  padding: 0px;">
+                                    <option value=""></option>
+                                    <option value="2P">kB</option>
+                                    <option value="4L">MB</option>
+                                    <option value="A86">GHz</option>
+                                    <option value="A99">bit</option>
+                                    <option value="AD">B</option>
+                                    <option value="AMH">Ah</option>
+                                    <option value="AMP">A</option>
+                                    <option value="ANN">a</option>
+                                    <option value="B10">bit/s</option>
+                                    <option value="BAR">bar</option>
+                                    <option value="C26">ms</option>
+                                    <option value="C31">mW</option>
+                                    <option value="C62">piece</option>
+                                    <option value="CEL">°C</option>
+                                    <option value="CMK">cm²</option>
+                                    <option value="CMQ">m³</option>
+                                    <option value="CMT">cm</option>
+                                    <option value="DAY">d</option>
+                                    <option value="DD">°</option>
+                                    <option value="EA">each</option>
+                                    <option value="GB">GB</option>
+                                    <option value="GM">g/m</option>
+                                    <option value="GRM">g</option>
+                                    <option value="HTZ">Hz</option>
+                                    <option value="HUR">h</option>
+                                    <option value="KEL">K</option>
+                                    <option value="KGM">kg</option>
+                                    <option value="KTM">km</option>
+                                    <option value="KVT">kV</option>
+                                    <option value="KWH">kWh</option>
+                                    <option value="KWT">kW</option>
+                                    <option value="LTR">Litre</option>
+                                    <option value="MAW">MW</option>
+                                    <option value="MGM">mg</option>
+                                    <option value="MIN">min</option>
+                                    <option value="MLT">ml</option>
+                                    <option value="MMT">mm</option>
+                                    <option value="MON">month</option>
+                                    <option value="MTR">m</option>
+                                    <option value="MTS">m/s</option>
+                                    <option value="P1">%</option>
+                                    <option value="PCE">piece</option>
+                                    <option value="PK">PK</option>
+                                    <option value="PR">pair</option>
+                                    <option value="SEC">s</option>
+                                    <option value="ST">ST</option>
+                                    <option value="WEE">week</option>
+                                    <option value="WTT">watt</option>
+                                    <option value="ZOL">Zoll</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-xs" ng-click="search.unitOfMeasureId=''" type="button">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                </span>
+                            </div><!-- /input-group -->
                         </div>
                     </td>
 
@@ -1493,17 +1605,15 @@
                         <input type="checkbox" value="{{pdata._id}}" ng-checked="pdata.checked" ng-model="pdata.checked">
                     </td>
                     <td>{{pdata.variantId}}</td>
-                    <td>{{pdata.contractId}}</td>
-                    <td>{{pdata.info}}</td>
                     <td>{{pdata.description}}</td>
                     <td>{{pdata.validFromQuantity}}</td>
-                    <td>{{pdata.priceTypeId}}</td>
+                    <td>{{pdata.netPrice}}</td>
                     <td>{{pdata.priceUnit}}</td>
                     <td>{{pdata.currencyId}}</td>
                     <td>{{pdata.validFrom}}</td>
                     <td>{{pdata.validTo}}</td>
                     <td>{{pdata.statusId}}</td>
-                    <td>{{pdata.}}</td>
+                    <td>{{pdata.priceTypeId}}</td>
                     <td>{{pdata.unitOfMeasureId}}</td>
 
 
@@ -1530,16 +1640,6 @@
         <div class="row m-t-25 " ng-show="pricevar">
 
             <div class="col-sm-6">
-                <!-- <div class="form-group">
-                                <label class="col-sm-5 control-label"> Contract </label>
-                                <div class="col-sm-7">
-                                    <input type="number" name="contract" class="form-control" ng-model="price.contractId">
-                                    <span class="error" ng-show="priceform.contract.$invalid">Invalid:
-                                        <span ng-show="priceform.contract.$error.maxlength">Product catalog should be maximum of 50 characters</span>
-                                        <span ng-show="priceform.contract.$error.pattern">Product catalog won't allow special characters</span>
-                                    </span>
-                                </div>
-                            </div> -->
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Variant ID</label>
@@ -1875,62 +1975,50 @@
                 <tr>
                     <td></td>
                     <td>
-                        <div class="input-group" style="width:50%;margin-left:20%;">
-                            <input type="text" class="form-control" ng-model="search.orderNo" style="height:22px;padding:0px">
+                        <div class="input-group" style="width:46%;margin-left:28%;">
+                            <input type="text" class="form-control" ng-model="search.variantId" style="height:22px;padding:0px">
                             <span class="input-group-btn">
-                                <button class="btn btn-default btn-xs" ng-click="search.orderNo=''" type="button">
+                                <button class="btn btn-default btn-xs" ng-click="search.variantId=''" type="button">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </button>
                             </span>
                         </div><!-- /input-group -->
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.variantId">
-                            <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
+                        
                     </td>
 
                     <td>
-                        <div class="input-group" style="width:50%;margin-left:20%;">
-                            <input type="text" class="form-control" ng-model="search.orderNo" style="height:22px;padding:0px">
+                        <div class="input-group" style="width:50%;margin-left:23%;">
+                            <input type="text" class="form-control" ng-model="search.extClassificationId" style="height:22px;padding:0px">
                             <span class="input-group-btn">
-                                <button class="btn btn-default btn-xs" ng-click="search.orderNo=''" type="button">
+                                <button class="btn btn-default btn-xs" ng-click="search.extClassificationId=''" type="button">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </button>
                             </span>
                         </div><!-- /input-group -->
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.extClassificationId">
-                            <button class="btn btn-default btn-xs" ng-click="search.extClassificationId=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
+                        
                     </td>
                     <td>
-                        <div class="input-group" style="width:50%;margin-left:20%;">
-                            <input type="text" class="form-control" ng-model="search.orderNo" style="height:22px;padding:0px">
+                        <div class="input-group" style="width:40%;margin-left:27%;">
+                            <input type="text" class="form-control" ng-model="search.extClassificationGroupId" style="height:22px;padding:0px">
                             <span class="input-group-btn">
-                                <button class="btn btn-default btn-xs" ng-click="search.orderNo=''" type="button">
+                                <button class="btn btn-default btn-xs" ng-click="search.extClassificationGroupId=''" type="button">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </button>
                             </span>
                         </div><!-- /input-group -->
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.extClassificationGroupId">
-                            <button class="btn btn-default btn-xs" ng-click="search.extClassificationGroupId=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
+                        
                     </td>
 
                     <td>
-                        <div class="input-group" style="width:50%;margin-left:20%;">
-                            <input type="text" class="form-control" ng-model="search.orderNo" style="height:22px;padding:0px">
+                        <div class="input-group" style="width:54%;margin-left:23%;">
+                            <input type="text" class="form-control" ng-model="search.descShort" style="height:22px;padding:0px">
                             <span class="input-group-btn">
-                                <button class="btn btn-default btn-xs" ng-click="search.orderNo=''" type="button">
+                                <button class="btn btn-default btn-xs" ng-click="search.descShort=''" type="button">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </button>
                             </span>
                         </div><!-- /input-group -->
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.descShort">
-                            <button class="btn btn-default btn-xs" ng-click="search.descShort=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
+                        
                     </td>
                     <td></td>
                 </tr>
@@ -2391,10 +2479,8 @@
                     <th class="check-box">
                         <input type="checkbox" id="selectall" ng-click="selectAllprelationCBoxes()"> </th>
                     <th>
-                        <a ng-click="sortType = 'productId'; sortReverse = !sortReverse">Product ID/Description
-                            <span ng-show="sortType == 'productId' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'productId' && sortReverse" class="fa fa-caret-up"></span>
-                        </a>
+                        Product ID/Description
+                        
                     </th>
                     <th>
                         <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
@@ -2409,15 +2495,15 @@
                         </a>
                     </th>
                     <th>
-                        <a ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Product ID
-                            <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+                        <a ng-click="sortType = 'relatedProductId'; sortReverse = !sortReverse">Product ID
+                            <span ng-show="sortType == 'relatedProductId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'relatedProductId' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </th>
                     <th>
-                        <a ng-click="sortType = 'Description'; sortReverse = !sortReverse">Description
-                            <span ng-show="sortType == 'Description' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'Description' && sortReverse" class="fa fa-caret-up"></span>
+                        <a ng-click="sortType = 'descriptions'; sortReverse = !sortReverse">Description
+                            <span ng-show="sortType == 'descriptions' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'descriptions' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </th>
                     <th>
@@ -2468,17 +2554,15 @@
 
                 <tr>
                     <td></td>
-                    <td></td>
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.productId" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.productId" style="height:22px;width:108px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.productId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-6 -->
-                        
                     </td>
 
                     <td>
@@ -2495,7 +2579,7 @@
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.typeId" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.typeId" style="height:22px;width:90px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.typeId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -2519,7 +2603,7 @@
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.Description" style="height:22px;width:150px;">
+                              <input type="text" class="form-control" ng-model="search.Description" style="height:22px;width:140px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.Description=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -2530,7 +2614,7 @@
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.statusId" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.statusId" style="height:22px;width:70px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.statusId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -2541,7 +2625,7 @@
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.syncTypeId" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.syncTypeId" style="height:22px;width:52px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.syncTypeId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -2552,7 +2636,7 @@
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.seqNo" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.seqNo" style="height:22px;width:42px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.seqNo=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -2574,7 +2658,7 @@
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.selectionGroupId" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.selectionGroupId" style="height:22px;width:45px;padding: 0px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.selectionGroupId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -2583,44 +2667,61 @@
                     </td>
 
                     <td>
-                        <input type="checkbox" ng-model="search.isMandatory"> 
-                        
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <select name="status" class="form-control m-b" ng-model="search.isMandatory" style="height:22px;width:50px; padding: 0px;">
+                                    <option value=""></option>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-xs" ng-click="search.isMandatory=''" type="button">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
                     </td>
-    <!-- 
+
+
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.isDefaultSelected" style="height:22px;width:102px;">
-                              <span class="input-group-btn">
-                                <button class="btn btn-default btn-xs" ng-click="search.isDefaultSelected=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
-                              </span>
+                                <select name="status" class="form-control m-b" ng-model="search.isDefaultSelected" style="height:22px;width:50px;  padding: 0px;">
+                                    <option value=""></option>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-xs" ng-click="search.isDefaultSelected=''" type="button">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </button>
+                                </span>
                             </div>
                         </div>
-                    </td> -->
-
-                    <td> <input type="checkbox" ng-model="search.isDefaultSelected"> </td>
-                    <td><button class="btn btn-primary btn-xs">Edit</button></td>
+                    </td>
+                    <td></td>
                 </tr>
 
 
-                <tr ng-click="editprelation(prdata)" class="hoverptr" ng-repeat="prdata in editproduct.productRelations track by $index |orderBy:sortType:sortReverse  | filter:search:strict | filter:varelation[0]:strict  ">
+                <tr  ng-repeat="prdata in editproduct.productRelations track by $index |orderBy:sortType:sortReverse  | filter:search:strict | filter:varelation[0]:strict  ">
 
                     <td class="check-box">
                         <input type="checkbox" value="{{prdata._id}}" ng-checked="prdata.checked" ng-model="prdata.checked">
                     </td>
-                    <td>{{editproduct.productId}}</td>
-                    <td>{{prdata.variantId}}</td>
-                    <td>{{prdata.typeId}}</td>
-                    <td></td>
-                    <td>{{prdata.Description}}</td>
-                    <td>{{prdata.statusId}}</td>
-                    <td>{{prdata.syncTypeId}}</td>
-                    <td>{{prdata.seqNo}}</td>
-                    <td>{{prdata.quantity}}</td>
-                    <td>{{prdata.selectionGroupId}}</td>
-                    <td>{{prdata.isMandatory}}</td>
-                    <td>{{prdata.isDefaultSelected}}</td>
-                    <td></td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{editproduct.productId}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.variantId}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.typeId}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.relatedProductId}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.Description}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.statusId}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.syncTypeId}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.seqNo}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.quantity}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.selectionGroupId}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.isMandatory}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.isDefaultSelected}}</td>
+                    <td ng-click="editprelation(prdata)"><button class="btn btn-primary btn-xs">Edit</td>
                 </tr>
             </tbody>
             <tfoot>

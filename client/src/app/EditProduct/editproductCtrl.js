@@ -630,8 +630,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                     if (relationdata._id == value._id) {
                         $scope.editproduct.productRelations[key] = relationdata;
                         $scope.updateitem($scope.editproduct);
-
-
                     }
 
                 });
@@ -645,6 +643,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                     }]
                 };
                 $scope.selectedlang = ['en'];
+                $scope.prelation={};
             }
 
         }
