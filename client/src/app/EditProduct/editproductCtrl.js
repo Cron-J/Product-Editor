@@ -1,30 +1,43 @@
+
 myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
     '$http', '$location', 'growl', '$modal', '$routeParams', '$filter',
-    'blockUI','$q','uiGridConstants',
+    'blockUI','$q','uiGridConstants','$timeout',
     function($scope, $rootScope, $http, $location,
-        growl, $modal, $routeParams, blockUI, $filter,$q,uiGridConstants) {
+        growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout) {
 
 
 
        
 
         $scope.updateitem = function(editproduct) {
-            $http.put('/updateProduct/' + editproduct._id, editproduct)
+            var product=angular.copy(editproduct)
+            delete product._id;
+            $http.put('/updateProduct/' + editproduct._id, product)
                 .success(function(status, data) {
-                });
+            });
 
+        }
+
+        $scope.updategrid=function(){
+            $scope.editproduct.attributeValues=$scope.data;
+            $scope.updateitem($scope.editproduct);
         }
 
         $scope.cancel = function() {
             $location.path('/');
         }
+       
 
         var init = function() {
             var urlBase = '/getProduct/';
             $http.get(urlBase + $routeParams.id)
                 .then(function(result) {
                     $scope.editproduct = result.data;
-                     $scope.gridOptions.data = $scope.editproduct.attributeValues;
+                    // console.log('product attribute',$scope.editproduct.attributeValues)
+                     //$scope.gridOptions.data = $scope.editproduct.attributeValues;
+                     // console.log('jCat',$scope.editproduct.attributeValues);
+                    
+                    editAttribute();
                 })
                 .catch(function(err) {
                     console.log('error')
@@ -133,6 +146,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         $scope.newAttribute = function(createNewAttribute) {
            createNewAttribute.channels = $scope.channels;
             $scope.editproduct.attributeValues.push(createNewAttribute);
+
             $scope.updateitem($scope.editproduct);
             $scope.doc = {};
         }
@@ -190,93 +204,233 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         $scope.hidecol = function(x) {
             $scope.select.atrcolhide=angular.copy(x);
         }
+        /*get module linkup url*/
+        var editAttribute = function(id){
+        $http.get('/getConfig')
+        .then(function(result) {
+              $scope.moduleLinkupUrl = result.data;
+              getAttributeData();
+            })
+            .catch(function(err) {
+                console.log('error')
+            })
+        }
+        
 
         // ui-grid
+        $scope.showChannel=function(channelIndex){
+            
+            var channels=$scope.data[channelIndex].channels;
+            var modalInstance = $modal.open({
+              templateUrl: 'channelContent.html',
+              controller: 'ChannelCtrl',
+              size:'lg',
+              resolve: {
+                channel_details: function () {
+                  return channels;
+                }
+              }
+            });
 
+            modalInstance.result.then(function (getChannelDetails) {
+                console.log(getChannelDetails)
+                console.log('delete it',$scope.data)
+                $scope.data[channelIndex].channels=getChannelDetails;
+              
+            }, function () {
+              console.log('error');
+            });
+
+        }
+       var attribute_ids=[];
        $scope.gridOptions = {};
+       var attributeField='<button type="button" ng-show="grid.appScope.data[rowRenderIndex].button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="grid.appScope.openAttributes(rowRenderIndex)">\
+                                <span class="glyphicon glyphicon-plus"></span>\
+                            </button>\
+                            <span ng-hide="grid.appScope.data[rowRenderIndex].button">{{grid.appScope.data[rowRenderIndex].attributeId}}</span>'
+        $scope.gridOptions={
+            enableFiltering: true,
+            enableGridMenu : true,
+            enableRowSelection: true,
+            enableSelectAll: true,
+            lateBoundColumns :true,
+            selectionRowHeaderWidth: 50,
 
-          $scope.gridOptions.columnDefs = [
-            { name:"Attribute",field: 'attribute',enableCellEdit: false},
-            { name:"Value",field: 'value' },
-            { name:"Variant",field: 'variantId',enableCellEdit: false},
-            { name:"Language",field: 'languageId',enableCellEdit: false },
-            { name:"Order No.",field: 'orderNro' },
-            // { name:"Status",field: 'statusId', editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
-            //     selectOptions: [ { value : '080', label : '080 error' },
-            //                      { value : '090', label : '090 warning' },
-            //                      { value : '100', label : '100 new' },
-            //                      { value : '105', label : '105 changed' },
-            //                      { value : '200', label : '200 checked' },
-            //                      { value : '225', label : '225 translate' },
-            //                      { value : '250', label : '250 Translation needed' },
-            //                      { value : '275', label : '275 Translation in progress' },
-            //                      { value : '300', label : '300 waiting' },
-            //                      { value : '350', label : '350 translate' },
-            //                      { value : '400', label : '400 confirmed' },
-            //                      { value : '420', label : '420 Immediate' },
-            //                      { value : '700', label : '700 temporary' },
-            //                      { value : '800', label : '800 deleted' }
-            //                       ]}
+    
+            // rowHeight: 35,
+            // infiniteScrollRowsFromEnd: 50,
+            // infiniteScrollUp: true,
+            infiniteScrollDown: true,
+            columnDefs : [
+            { displayName:"Attribute",field: 'attributeId',cellTemplate: attributeField,enableCellEdit: false, filter: {placeholder: 'Search Attribute'},width:'10%'},
+            { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
+            { displayName:"Type",field: 'types',filter: { placeholder: 'Search Types'} },
+            { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'} },
+            { displayName:"Value",field: 'value' ,filter: {placeholder: 'Search Value'}},
+            { displayName:"Status Ids", field:"statusId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
+                cellFilter: 'formatStatus',
+                filter: {  placeholder: 'Search Order No', type: uiGridConstants.filter.SELECT,
+                selectOptions: [{ label: '080 error'                  , value: '080'},
+                            { label: '090 warning'                , value: '090'},
+                            { label: '100 new'                    , value: '100'},
+                            { label: '105 changed'                , value: '105'},
+                            { label: '200 checked'                , value: '200'},
+                            { label: '225 translate'              , value: '225'},
+                            { label: '250 Translation needed'     , value: '250'},
+                            { label: '275 Translation in progress', value: '275'},
+                            { label: '300 waiting'                , value: '300'},
+                            { label: '350 translate '             , value: '350'},
+                            { label: '400 confirmed'              , value: '400'},
+                            { label: '420 Immediate'              , value: '420'},
+                            { label: '700 temporary'              , value: '700'},
+                            { label: '800 deleted'                , value: '800'}
+                            ]
+                },
+                editDropdownOptionsArray: [{ status: '080 error'                  , id: '080'},
+                                          { status: '090 warning'                , id: '090'},
+                                          { status: '100 new'                    , id: '100'},
+                                          { status: '105 changed'                , id: '105'},
+                                          { status: '200 checked'                , id: '200'},
+                                          { status: '225 translate'              , id: '225'},
+                                          { status: '250 Translation needed'     , id: '250'},
+                                          { status: '275 Translation in progress', id: '275'},
+                                          { status: '300 waiting'                , id: '300'},
+                                          { status: '350 translate '             , id: '350'},
+                                          { status: '400 confirmed'              , id: '400'},
+                                          { status: '420 Immediate'              , id: '420'},
+                                          { status: '700 temporary'              , id: '700'},
+                                          { status: '800 deleted'                , id: '800'}
+                                        ] },
 
-
-
-            { name:"statusId",field: 'statusId', editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
-                    editDropdownOptionsArray: [
-                                          { status: '080 error'                  , id: '080'     },
-                                          { status: '090 warning'                , id: '090'        },
-                                          { status: '100 new'                    , id: '100'    },
-                                          { status: '105 changed'                , id: '105'        },
-                                          { status: '200 checked'                , id: '200'         },
-                                          { status: '225 translate'              , id: '225'              },
-                                          { status: '250 Translation needed'     , id: '250'       },
-                                          { status: '275 Translation in progress', id: '275'             },
-                                          { status: '300 waiting'                , id: '300'            },
-                                          { status: '350 translate '             , id: '350'             },
-                                          { status: '400 confirmed'              , id: '400'                 },
-                                          { status: '420 Immediate'              , id: '420'            },
-                                          { status: '700 temporary'              , id: '700'              },
-                                          { status: '800 deleted'                , id: '800'               }
-                                        ] }
-
-
-            ];
-
-
-
-            // .filter('mapStatus', function() {
-            //   var sizeHash = {
+            { displayName:"Uom",field: 'unitOfMeasure',filter: { placeholder: 'Search Uom'} },
+            
+            { displayName:"Language", field:"languageId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'language',
+        
+                filter: {  placeholder: 'Search language', type: uiGridConstants.filter.SELECT,
+                selectOptions: [{ label: 'de', value: 'de'},
+                                { label: 'en', value: 'en'},
+                                { label: 'es', value: 'es'},
+                                { label: 'fr', value: 'fr'},
+                                { label: 'jp', value: 'jp'}
+                            ]
+                },
+                editDropdownOptionsArray: [ { language: 'de', id: 'de'},
+                                            { language: 'en', id: 'en'},
+                                            { language: 'es', id: 'es'},
+                                            { language: 'fr', id: 'fr'},
+                                            { language: 'jp', id: 'jp'}
+                                        ] },
+            { displayName:"Variant Id",field: 'variantId' ,filter: {placeholder: 'Search variant id'}},
+            { displayName:"Channels",field: 'channels', cellTemplate:'<button class="btn btn-primary btn-xs centered" ng-click="grid.appScope.showChannel(rowRenderIndex)"><span class="glyphicon glyphicon-list-alt"></span></button>' , filter: { placeholder: 'Search channel'} },
+            
                 
-            //     080    : '080 error'                  ,
-            //     090    : '090 warning'                ,
-            //     100    : '100 new'                    ,
-            //     105    : '105 changed'                ,
-            //     200    : '200 checked'                ,
-            //     225    : '225 translate'              ,
-            //     250    : '250 Translation needed'     ,
-            //     275    : '275 Translation in progress',
-            //     300    : '300 waiting'                ,
-            //     350    : '350 translate '             ,
-            //     400    : '400 confirmed'              ,
-            //     420    : '420 Immediate'              ,
-            //     700    : '700 temporary'              ,
-            //     800    : '800 deleted'                
-            //   };
+                
 
-        // $scope.gridOptions2 = {
-        //     enableSorting: true,
-        //     columnDefs: [ 
-        //       { field: 'Attribute' },
-              // { field: 'Variant' },
-              // { field: 'Language' },
-              // { field: 'Value' },
-              // { field: 'Order No.' },
-              // { field: 'Status' }
-          //   ],
-          //   onRegisterApi: function( gridApi ) {
-          //     $scope.grid2Api = gridApi;
-          //   }
-          // };
+
+
+            ],
+            data: 'data',
+            onRegisterApi: function(gridApi){
+                gridApi.infiniteScroll.on.needLoadMoreData($scope, $scope.getDataDown);
+                gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, $scope.getDataUp);
+                $scope.gridApi = gridApi;
+            }
+        };
+
+         $scope.data = [];
+        var attribute_ids=[];
+          $scope.firstPage = 0;
+          $scope.lastPage = 0;
+          var rowtoshow=12;
+
           
+          $scope.getFirstData = function() {
+            console.log('attributeValue',$scope.editproduct.attributeValues);
+            var promise = $q.defer();
+            var curr_attributeValues=[];
+             $scope.attributeValues=angular.copy($scope.editproduct.attributeValues);
+             curr_attributeValues=$scope.attributeValues.slice($scope.lastPage*rowtoshow,($scope.lastPage+1)*rowtoshow);
+             angular.forEach(curr_attributeValues,function(value,key){
+                attribute_ids.push(value._id);
+             })
+            
+            $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":attribute_ids})
+            .success(function(data) {
+            angular.forEach(curr_attributeValues,function(val,key){
+                angular.forEach(data,function(val1,key1){
+                    if(val._id==val1._id){
+                        var object = angular.extend({}, val, val1);
+                        curr_attributeValues[key]=object;
+                    }
+                })
+            })
+
+              var attrdata = curr_attributeValues;
+              $scope.data = $scope.data.concat(attrdata);
+              promise.resolve();
+            });
+            return promise.promise;
+          };
+          
+          $scope.getDataDown = function() {
+            if($scope.data.length<$scope.editproduct.attributeValues.length){
+             var promise = $q.defer();
+             var attribute_ids=[];
+             $scope.lastPage++;
+             var curr_attributeValues=[];
+             curr_attributeValues=$scope.attributeValues.slice($scope.lastPage*rowtoshow,($scope.lastPage+1)*rowtoshow);
+             angular.forEach(curr_attributeValues,function(value,key){
+                attribute_ids.push(value._id);
+             })
+
+            $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":attribute_ids})
+            .success(function(data) {
+                console.log('d',data);
+              angular.forEach(curr_attributeValues,function(val,key){
+                angular.forEach(data,function(val1,key1){
+                    if(val._id==val1._id){
+                        var object = angular.extend({}, val, val1);
+                        curr_attributeValues[key]=object;
+                    }
+                })
+            })
+              var attrdata = curr_attributeValues;
+              $scope.gridApi.infiniteScroll.saveScrollPercentage();
+              $scope.data = $scope.data.concat(attrdata);
+              $scope.gridApi.infiniteScroll.dataLoaded($scope.firstPage > 0, $scope.lastPage < 4).then(function() {}).then(function() {
+                promise.resolve();
+              });
+            })
+            .error(function(error) {
+              $scope.gridApi.infiniteScroll.dataLoaded();
+              promise.reject();
+            });
+            return promise.promise;
+            }
+          };
+
+          $scope.getPage = function(data, page) {
+            var res = [];
+            for (var i = (page * rowtoshow); i < (page + 1) * rowtoshow && i < data.length; ++i) {
+              res.push(data[i]);
+            }
+            return res;
+          };
+
+          function getAttributeData(){
+            $scope.getFirstData().then(function(){
+            $timeout(function() {
+              // timeout needed to allow digest cycle to complete,and grid to finish ingesting the data
+              // you need to call resetData once you've loaded your data if you want to enable scroll up,
+              // it adjusts the scroll position down one pixel so that we can generate scroll up events 
+              $scope.gridApi.infiniteScroll.resetScroll( $scope.firstPage > 0, $scope.lastPage < 4 );
+            });
+          });
+          }
+
+          $scope.addNewAttribute=function(){
+            $scope.data.unshift({button:true});
+          }
           
              
             
@@ -804,7 +958,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 modalInstance.result.then(function(attributedata) {
                 	// $scope.attributeDetails = attributedata;
                 	$scope.doc = attributedata;
-                	$scope.doc.attribute = attributedata._id;
+
+                	$scope.doc.attribute = attributedata.attributeId;
                     deferred.resolve(attributedata);
                 },
             function() {
@@ -815,6 +970,19 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             });
             return deferred.promise;
             }
+
+            $scope.openAttributes= function(index) {
+                 $scope.openAttribute('lg').then(function(data){
+                    $scope.data[index].attributeId=data.attributeId;
+                    $scope.data[index].button=false;
+                    $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":[data._id]})
+                    .success(function(data) {
+                      angular.extend($scope.data[index],data);
+                    })
+                    .error(function(error) {
+                        console.log(error)
+                    })
+            })}
 
 
        // Add channel
@@ -838,17 +1006,16 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 		window.open('http://classificationattribute-44842.onmodulus.net/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
 	}
 
-    // $scope.editAttribute = function(id){
+    // var editAttribute = function(id){
     //     $http.get('/getConfig')
     //     .then(function(result) {
-    //           $scope.result = result.data;
-    //             editAttribute1(id);
-
+    //           $scope.moduleLinkupUrl = result.data;
     //         })
     //         .catch(function(err) {
     //             console.log('error')
     //         })
     // }
+    
 
     // var editAttribute1 = function(id){
     //     $http.get($scope.result +'/getClassificationAttributeHost/')
@@ -1389,3 +1556,40 @@ var ChannelDetailsModalInstanceCtrl = function($scope, $modalInstance, $http, $l
 
     getDetails();
 };
+
+myApp.controller('ChannelCtrl', function ($scope, $modalInstance,channel_details,$controller) {
+  $scope.getChannelDetails = channel_details;
+  $scope.channeldata={};
+  $scope.showPagination=true;
+  var testCtrl1ViewModel = $scope.$new();
+  $scope.searchAttributes=function(){
+    $controller('EditProductCtrl',{$scope : testCtrl1ViewModel ,$modalInstance:$modalInstance});
+    testCtrl1ViewModel.openAttribute().then(function(data){
+         $scope.channeldata.attribute=data.attributeId;
+    })
+  }
+  $scope.addChannel=function(){
+    $scope.showChannelField=true;
+    $scope.channeldata={attribute:'',channel:[{key:''}],language:'en',value:''};
+  }
+  $scope.addChannelName=function(){
+    $scope.channeldata.channel.push({key:''})
+  }
+  $scope.addChannelToList=function(){
+    $scope.showChannelField=false;
+    $scope.getChannelDetails.push($scope.channeldata)
+  }
+  $scope.ok = function () {
+    angular.forEach($scope.channeldata.channel,function(vals,keys){
+        
+        $scope.channeldata.channel[keys]=vals.key;
+    });
+    console.log($scope.channeldata.channel);
+    $modalInstance.close($scope.getChannelDetails);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+
+});

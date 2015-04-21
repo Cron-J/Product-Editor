@@ -23,13 +23,15 @@
 				                     <tbody>
 										<tr ng-repeat="channeldata in getChannelDetails track by $index">
 										<td >{{channeldata.attribute}}</td>
-										<td ng-repeat="channels in channeldata.channel">{{channels}}</td>
+										<td >
+										<span ng-repeat="channels in channeldata.channel">{{channels.key || channels}}<span ng-if="!$last">, </span></span>
+										</td>
+										<td >{{channeldata.language}} </td>
 										<td >{{channeldata.value}}</td>
-										<td >{{channeldata.language}}</td>
 										<!-- <td >{{classdata.classificationId}}</td> -->
 										</tr>
 									</tbody>
-									<tfoot>
+									<tfoot ng-if="!showPagination">
 										<td colspan="6">
 											<div class="pagination pull-right">
 												<ul>
@@ -50,10 +52,80 @@
 							</div>		
 						</div>
 					</div>
-				</div>		
+				</div>
+				<div class="row" ng-show="showChannelField">
+					<div class="form-group">
+                                <label class="col-sm-3 control-label">Attribute Id </label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="mf" ng-model="channeldata.attribute" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+                                    <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
+                                    <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mf.$error.pattern">Manufacturer  won't allow special characters</span>
+                                    </span>
+                                </div>
+                                <div class="col-sm-1">
+                        			<span class="ng-scope"> 
+                                        <button class="btn btn-primary btn-xs" ng-click="searchAttributes('lg')">
+                                            <span class="glyphicon glyphicon-search"></span>
+                        				</button>
+                        			</span>
+                    			</div>
+
+                    </div>
+                    <div class="form-group">
+                                <label class="col-sm-3 control-label">channel </label>
+                                <div class="col-sm-5" >
+                                	<div class="col-sm-12 padding-l-r-zero" ng-class="{'margin-bottom15':!$last}" ng-repeat="channelsinfo in channeldata.channel track by $index">
+                        				
+	                                    <input type="text" class="form-control"  name="mf" ng-model="channelsinfo.key" >
+                        				
+	                                    
+                                	</div>
+                                </div>
+                                <div class="col-sm-2 ">
+                                	<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="addChannelName()">
+                                		<span class="glyphicon glyphicon-plus"></span>
+                                	</button>
+                                </div>
+
+                    </div>
+                    <div class="form-group">
+                                <label class="col-sm-3 control-label">language </label>
+                                <div class="col-sm-5">
+                                	 <select name="language" class="form-control m-b" ng-model="channeldata.language">
+			                            <option value="de">de</option>
+			                            <option value="en">en</option>
+			                            <option value="es">es</option>
+			                            <option value="fr">fr</option>
+			                            <option value="jp">jp</option>
+			                        </select>
+                                    
+                                </div>
+
+                    </div>
+                    <div class="form-group">
+                                <label class="col-sm-3 control-label">Value </label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="mf" ng-model="channeldata.value" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+                                    <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
+                                    <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mf.$error.pattern">Manufacturer  won't allow special characters</span>
+                                    </span>
+                                </div>
+
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="addChannelToList()">Add</button>
+
+                    </div>
+				</div>	
 			</div>
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="cancel()">Close</button>
+	 <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="addChannel()">Add more Channel</button>
+	 <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="ok()">Ok</button>
+    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="cancel()">Cancel</button>
 </div>

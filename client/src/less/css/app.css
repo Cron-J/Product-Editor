@@ -234,3 +234,15 @@ border: none;
     height:100%;
 }
 
+.centered{
+  margin: 0 auto;
+  display: block;
+}
+.padding-l-r-zero{
+  padding-right: 0px; 
+  padding-left: 0px;
+}
+.margin-bottom15{
+	margin-bottom: 15px;
+}
+
