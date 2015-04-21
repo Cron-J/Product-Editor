@@ -114,6 +114,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.createNew = {};
         }
 
+        $scope.cancelGrp = function(){
+            $scope.showvar = false;
+        }
+
 
         $scope.editvar = false;
 
@@ -124,6 +128,12 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             // }
             $scope.editvar = true;
             $scope.showvar = false;
+        }
+
+        $scope.canceleditGrp = function(data) {
+            
+            $scope.editvar = false;
+
         }
 
         // $scope.$watch('output.mk',function(){
@@ -247,7 +257,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
        var attributeField='<button type="button" ng-show="grid.appScope.data[rowRenderIndex].button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="grid.appScope.openAttributes(rowRenderIndex)">\
                                 <span class="glyphicon glyphicon-plus"></span>\
                             </button>\
-                            <span ng-hide="grid.appScope.data[rowRenderIndex].button">{{grid.appScope.data[rowRenderIndex].attributeId}}</span>'
+                            <span ng-hide="grid.appScope.data[rowRenderIndex].button">{{grid.appScope.data[rowRenderIndex].attribute}}</span>'
         $scope.gridOptions={
             enableFiltering: true,
             enableGridMenu : true,
@@ -262,7 +272,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             // infiniteScrollUp: true,
             infiniteScrollDown: true,
             columnDefs : [
-            { displayName:"Attribute",field: 'attributeId',cellTemplate: attributeField,enableCellEdit: false, filter: {placeholder: 'Search Attribute'},width:'10%'},
+            { displayName:"Attribute",field: 'attribute',cellTemplate: attributeField,enableCellEdit: false, filter: {placeholder: 'Search Attribute'},width:'10%'},
             { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
             { displayName:"Type",field: 'types',filter: { placeholder: 'Search Types'} },
             { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'} },
@@ -449,6 +459,13 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         }
 
+        $scope.canceldoc = function() {
+
+            $scope.docvar = false;
+            
+
+        }
+        
 
         $scope.savedoc = function(docdata) {
 
@@ -541,6 +558,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         }
 
+        $scope.cancelprice = function() {
+
+            $scope.pricevar = false;
+        }
 
         // Accordion tab
 
@@ -633,7 +654,11 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         }
 
 
+        $scope.cancelcproduct = function() {
 
+            $scope.cproductvar = false;
+
+        }
 
         $scope.savecproduct = function(cproductdata) {
 
@@ -723,9 +748,14 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             }
             $scope.selectedlang = ['en'];
 
-
         }
 
+        $scope.cancelrelation = function() {
+
+            $scope.nproductvar = false;
+            
+
+        }
 
         $scope.addlang = function() {
             var lang = ['en', 'es', 'fr', 'de'];
@@ -784,8 +814,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                     if (relationdata._id == value._id) {
                         $scope.editproduct.productRelations[key] = relationdata;
                         $scope.updateitem($scope.editproduct);
-
-
                     }
 
                 });
@@ -799,6 +827,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                     }]
                 };
                 $scope.selectedlang = ['en'];
+                $scope.prelation={};
             }
 
         }
@@ -973,7 +1002,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
             $scope.openAttributes= function(index) {
                  $scope.openAttribute('lg').then(function(data){
-                    $scope.data[index].attributeId=data.attributeId;
+                    $scope.data[index].attribute=data.attributeId;
                     $scope.data[index].button=false;
                     $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":[data._id]})
                     .success(function(data) {

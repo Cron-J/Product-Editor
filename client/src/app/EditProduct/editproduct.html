@@ -615,168 +615,11 @@
     <tab heading="Attributes">
         <div class=" m-t-25">
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
+
             <div class="grid m-b-20" ui-grid="gridOptions" ui-grid-move-columns ui-grid-edit ui-grid-resize-columns ui-grid-pinning  ui-grid-grouping ui-grid-infinite-scroll ui-grid-selection>
                 
             </div>
 
-        <!-- <div class="row m-b-20">
-            <div class="col-md-2">
-                <select multiple ng-model="atrcolhide" ng-options="">
-                    <option value=""></option>
-                    <option value="variant">Variant</option>
-                    <option value="language">Language</option>
-                    <option value="status">Status</option>
-                    <option value="order">Order</option>
-                </select>
-            </div>
-            <div class="col-md-1">
-                <button class="btn btn-primary" ng-click="hidecol(atrcolhide)"> Hide </button>
-            </div>
-
-
-        </div> -->
-
-
-
-
-
-        <!-- <table class="table table-stripped table-bordered custom-table">
-            <tbody>
-
-                <tr>
-                    <th>
-                        <a ng-click="sortType = 'classificationId'; sortReverse = !sortReverse">Attribute
-                                           <span ng-show="sortType == 'classificationId' && !sortReverse" class="fa fa-caret-down"></span>
-                                           <span ng-show="sortType == 'classificationId' && sortReverse" class="fa fa-caret-up"></span>
-                                       </a>
-                    </th>
-
-                    <th ng-hide="select.atrcolhide.indexOf('variant')>=0">
-                        <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
-                                           <span ng-show="sortType == 'variantId' && !sortReverse" class="fa fa-caret-down"></span>
-                                           <span ng-show="sortType == 'variantId' && sortReverse" class="fa fa-caret-up"></span>
-                                       </a>
-                    </th>
-
-                    <th ng-hide="select.atrcolhide.indexOf('language')>=0">
-                        <a ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
-                                           <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
-                                           <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
-                                       </a>
-                    </th>
-
-                    <th>
-                        <a ng-click="sortType = 'value'; sortReverse = !sortReverse">Value
-                                           <span ng-show="sortType == 'value' && !sortReverse" class="fa fa-caret-down"></span>
-                                           <span ng-show="sortType == 'value' && sortReverse" class="fa fa-caret-up"></span>
-                                       </a>
-                    </th>
-
-                    <th ng-hide="select.atrcolhide.indexOf('order')>=0">
-                        <a ng-click="sortType = 'orderNro'; sortReverse = !sortReverse">Order No.
-                                           <span ng-show="sortType == 'orderNro' && !sortReverse" class="fa fa-caret-down"></span>
-                                           <span ng-show="sortType == 'orderNro' && sortReverse" class="fa fa-caret-up"></span>
-                                       </a>
-                    </th>
-
-
-
-                    <th ng-hide="select.atrcolhide.indexOf('status')>=0">
-                        <a ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
-                                           <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
-                                           <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
-                                       </a>
-                    </th>
-                    <th>Channel</th>
-                    <th>Action</th>
-
-                </tr>
-
-                <tr>
-
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm tdwidth" ng-model="search.attribute">
-                            <button class="btn btn-default btn-xs" ng-click="search.attribute=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    
-
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm" ng-model="search.variantId">
-                            <button class="btn btn-default btn-xs" ng-click="search.variantId=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <td ng-hide="select.atrcolhide.indexOf('language')>=0">
-                        <div class="form-inline">
-                            <input type="text" class="input-sm tdwidth" ng-model="search.languageId">
-                            <button class="btn btn-default btn-xs" ng-click="search.languageId=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-
-
-                    <td>
-                        <div class="form-inline">
-                            <input type="text" class="input-sm tdwidth" ng-model="search.value">
-                            <button class="btn btn-default btn-xs" ng-click="search.value=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-
-                    <td ng-hide="select.atrcolhide.indexOf('order')>=0">
-                        <div class="form-inline">
-                            <input type="text" class="input-sm tdwidth" ng-model="search.orderNro">
-                            <button class="btn btn-default btn-xs" ng-click="search.orderNro=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <td ng-hide="select.atrcolhide.indexOf('status')>=0">
-                        <div class="form-inline">
-                            <input type="text" class="input-sm tdwidth" ng-model="search.statusId">
-                            <button class="btn btn-default btn-xs" ng-click="search.statusId=''"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-                    </td>
-
-                    <td>
-
-                    </td>
-                </tr>
-
-
-                <tr ng-repeat="atrdata in editproduct.attributeValues | orderBy:sortType:sortReverse  | filter:search:strict | filter:attributeop[0]:strict track by $index">
-                    <td>{{atrdata.attribute}}</td>
-                    <td ng-hide="select.atrcolhide.indexOf('variant')>=0">{{atrdata.variantId}}</td>
-                    <td ng-hide="select.atrcolhide.indexOf('language')>=0">{{atrdata.languageId}}</td>
-                    <td editable model="editproduct.attributeValues[$index].value"><span>{{atrdata.value}}</span></td>
-                    <td ng-hide="select.atrcolhide.indexOf('order')>=0" editable model="editproduct.attributeValues[$index].orderNro"><span>{{atrdata.orderNro}}</span></td>
-
-                    <td ng-hide="select.atrcolhide.indexOf('status')>=0">{{atrdata.statusId}}</td>
-                    <td>
-                        <span class="ng-scope"> 
-                            <script type="text/ng-template" id="myModalContent9.html">
-                              <div ng-include="'app/EditProduct/channeldetailsmodal.html'"></div>
-                            </script>
-                            <button class="btn btn-primary btn-xs" ng-click="openChannelDetails('lg',atrdata)">
-                                <span class="glyphicon glyphicon-list-alt"></span>
-                            </button>
-                        </span>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary btn-xs" ng-click="editAttribute(atrdata.attribute)">Edit</button>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <td colspan="7">
-                    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
-                </td>
-            </tfoot>
-
-        </table> -->
             <div class="row m-b-20">
                 <div class="col-sm-12">
 
@@ -790,202 +633,30 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row ">
-            <div class="col-sm-4 m-b-20 ">
-                <button class="btn btn-primary" ng-click="addNewAttribute()">New Attribute</button>
-                <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
-            </div>
-        </div> -->
+   <!--  <div class="row ">
+        <div class="col-sm-4 m-b-20 ">
+            <button class="btn btn-primary" ng-click="attvar=true">New Attribute</button>
+            <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
+        </div>
+    </div> -->
+
+     <script type="text/ng-template" id="channelContent.html">
+       <div ng-include="'app/EditProduct/channeldetailsmodal.html'"></div>
+     </script>
+
+      <script type="text/ng-template" id="myModalContent6.html">
+                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                        </script>
+      <script type="text/ng-template" id="myModalContent2.html">
+                                          <div ng-include="'app/EditProduct/attributemodal.html'"></div>
+                                        </script>
 
 
     <!-- Display this section on clicking new button -->
 
 
-        <div class="row m-t-25 " ng-show="attvar">
-            <form name="attrform" novalidate>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label"> Attribute Id </label>
-                        <div class="col-sm-6">
-                            <input type="text" name="attributeid" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.attributeId" ng-readonly='true' required/>
-                            <span class="error" ng-show="attrform.attributeid.$invalid && attrform.attributeid.$dirty">Invalid:
-                                            <span ng-show="attrform.attributeid.$error.required">AttributeId is required</span>
-                            <span ng-show="attrform.attributeid.$error.minlength">AttributeId should be minimum of 0 characters</span>
-                            <span ng-show="attrform.attributeid.$error.maxlength">AttributeId should be maximum of 50 characters</span>
-                            <span ng-show="attrform.attributeid.$error.pattern">AttributeId won't allow special characters</span>
-                            </span>
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
-                                            <script type="text/ng-template" id="myModalContent2.html">
-                                              <div ng-include="'app/EditProduct/attributemodal.html'"></div>
-                                            </script>
-                                            <button class="btn btn-primary btn-xs" ng-click="openAttribute('lg')">
-                                                      <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Language</label>
-                        <div class="col-sm-7">
-                            <select name="language" class="form-control m-b" ng-model="doc.languageId">
-                                <option value="de">de</option>
-                                <option value="en">en</option>
-                                <option value="es">es</option>
-                                <option value="fr">fr</option>
-                                <option value="jp">jp</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Order No.</label>
-                        <div class="col-sm-7">
-                            <input type="number" name="orderno" class="form-control" ng-model="doc.orderNro" ng-minlength="0" ng-maxlength="50">
-                            <span class="error" ng-show="attrform.orderno.$invalid">Invalid:
-                                            <span ng-show="attrform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
-                            <span ng-show="attrform.orderno.$error.maxlength">Order No. should be maximum of 50 digit</span>
-                            <span ng-show="attrform.orderno.$error.number">Enter only digit</span>
-                            </span>
-
-                        </div>
-                    </div>
-
-                    <!-- <div class="form-group">
-                        <label class="col-sm-4 control-label">StatusId</label>
-                        <div class="col-sm-7">
-                            <input type="number" name="statusId" class="form-control" ng-model="doc.statusId" ng-minlength="0" ng-maxlength="50">
-                            <span class="error" ng-show="attrform.statusId.$invalid">Invalid:
-                                            <span ng-show="attrform.statusId.$error.minlength">Order No. should be minimum of 0 digit</span>
-                            <span ng-show="attrform.statusId.$error.maxlength">Order No. should be maximum of 50 digit</span>
-                            <span ng-show="attrform.statusId.$error.number">Enter only digit</span>
-                            </span>
-
-                        </div>
-                    </div> -->
-
-                    
-
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Status</label>
-                        <div class="col-sm-7">
-                            <select name="language" class="form-control m-b" ng-model="doc.statusId">
-                                <option value=""></option>
-                                <option value="080">080 error</option>
-                                <option value="090">090 warning</option>
-                                <option value="100">100 new</option>
-                                <option value="105">105 changed</option>
-                                <option value="200">200 checked</option>
-                                <option value="225">225 translate</option>
-                                <option value="250">250 Translation needed</option>
-                                <option value="275">275 Translation in progress</option>
-                                <option value="300">300 waiting</option>
-                                <option value="350">350 translate</option>
-                                <option value="400">400 confirmed</option>
-                                <option value="420">420 Immediate</option>
-                                <option value="700">700 temporary</option>
-                                <option value="800">800 deleted</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">Value</label>
-                        <div class="col-sm-7">
-                            <input type="text" name="description" class="form-control" ng-model="doc.value" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" />
-                            <span class="error" ng-show="attrform.description.$invalid">Invalid:
-                                            <span ng-show="attrform.description.$error.minlength">Value should be minimum of 0 characters</span>
-                            <span ng-show="attrform.description.$error.maxlength">Value should be maximum of 50 characters</span>
-                            <span ng-show="attrform.description.$error.pattern">Value won't allow special characters</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Variant ID</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
-                        </div>
-                        <div class="col-sm-1">
-                            <span class="ng-scope"> 
-                                            <script type="text/ng-template" id="myModalContent6.html">
-                                              <div ng-include="'app/EditProduct/variantmodal.html'"></div>
-                                            </script>
-                                            <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantAttributeValues','doc')">
-                                                      <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><b>Channel Value Options</b></h3>
-                        </div>
-                        <div class="panel-body">
-
-                            <table class="table table-stripped custom-table">
-                                <thead class="active">
-                                    <tr>
-                                        <th style="width:20%;">Attribute</th>
-                                        <th style="width:35%;">Value</th>
-                                        <th style="width:20%;">Language</th>
-                                        <th style="width:25%;">Channels</th>
-                                        <th style="width:25%;">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- ngRepeat: avo in attribute.valueOptions -->
-                                    <tr ng-repeat="channelOption in channels">
-                                        <td class="custom-row ">{{channelOption.attribute}}</td>
-                                        <td class="custom-row ">{{channelOption.value}} </td>
-                                        <td class="custom-row ">{{channelOption.language}}</td>
-                                        <td class="custom-row ">{{channelOption.channel}}</td>
-                                        <td>
-                                            <!-- ngIf: page!='view' -->
-                                            <button type="button" class="btn btn-primary btn-xs ng-scope" data-toggle="modal" ng-click="editValueOption(avo, $index)" style="position: relative;bottom: 6px;">Edit
-                                            </button>
-                                            <!-- end ngIf: page!='view' -->
-                                            <!-- ngIf: page!='view' -->
-                                            <button type="button" class="btn btn-primary btn-xs ">Delete
-                                            </button>
-                                            <!-- end ngIf: page!='view' -->
-                                            <!-- ngIf: page=='view' -->
-                                        </td>
-                                    </tr>
-                                    <!-- end ngRepeat: avo in attribute.valueOptions -->
-                                </tbody>
-                            </table>
-
-                            <!-- Button trigger modal -->
-
-                            <script type="text/ng-template" id="myModalContent8.html">
-                                <div ng-include="'app/EditProduct/channelmodal.html'"></div>
-                            </script>
-                            <button class="btn btn-primary btn-xs" ng-click="addChannel('lg')">
-                                + Add Channel
-                            </button>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-
-                        <div class="col-sm-offset-2  col-sm-3">
-                            <button class="btn btn-primary" type="submit" ng-click="newAttribute(doc);">Save</button>
-                            <button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Cancel</button>
-                        </div>
-
-                    </div>
-                </div>
-
-            </form>
-
-        </div>
-    </tab>
+   
+</tab>
 
 <tab heading="Document">
     <div class=" m-t-25">
@@ -3127,6 +2798,3 @@
 
 
 
- <script type="text/ng-template" id="channelContent.html">
-       <div ng-include="'app/EditProduct/channeldetailsmodal.html'"></div>
-</script>
