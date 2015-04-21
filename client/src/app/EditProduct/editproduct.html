@@ -2559,7 +2559,58 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                     <td>
                         <div class="col-lg-6">
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.typeId" style="height:22px;width:90px;">
+                                <select name="relation" class="form-control m-b" ng-model="search.typeId" style="height:22px;width:165px;padding:0px">
+                                    <option value="Beleuchtung_source">Beleuchtung (source)</option>
+                                    <option value="Beleuchtung_target">Beleuchtung (target)</option>
+                                    <option value="Elektro_source">Elektro (source)</option>
+                                    <option value="Elektro_target">Elektro (target)</option>
+                                    <option value="Fahrdienste_source">Fahrdienste (source)</option>
+                                    <option value="Fahrdienste_target">Fahrdienste (target)</option>
+                                    <option value="Hostessen_source">Hostessen (source)</option>
+                                    <option value="Hostessen_target">Hostessen (target)</option>
+                                    <option value="Peripherals_source">Peripherals (source)</option>
+                                    <option value="Peripherals_target">Peripherals (target)</option>
+                                    <option value="Reinigung_source">Reinigung (source)</option>
+                                    <option value="Reinigung_target">Reinigung (target)</option>
+                                    <option value="Services_source">Services (source)</option>
+                                    <option value="Services_target">Services (target)</option>
+                                    <option value="Wachdienste_source">Wachdienste (source)</option>
+                                    <option value="Wachdienste_target">Wachdienste (target)</option>
+                                    <option value="Warranty_source">Warranty (source)</option>
+                                    <option value="Warranty_target">Warranty (target)</option>
+                                    <option value="accessories_source">is accessories for</option>
+                                    <option value="accessories_target">is accessories of</option>
+                                    <option value="accessory_source">is accessory for</option>
+                                    <option value="accessory_target">is accessory of</option>
+                                    <option value="consists_of_source">has component</option>
+                                    <option value="consists_of_target">is component for</option>
+                                    <option value="diff_orderunit_source">has different orderunit</option>
+                                    <option value="diff_orderunit_target">is different orderunit for</option>
+                                    <option value="followup_source">is successor of</option>
+                                    <option value="followup_target">is predecessor of</option>
+                                    <option value="kit_item_source">has kit item</option>
+                                    <option value="kit_item_target">is kit item of</option>
+                                    <option value="mandatory_source">has mandatory article</option>
+                                    <option value="mandatory_target">is mandatory article from</option>
+                                    <option value="others_source">other relation</option>
+                                    <option value="others_target">other relation</option>
+                                    <option value="part_of_source">is part of</option>
+                                    <option value="part_of_target">is part for</option>
+                                    <option value="replaces_source">replaces (source)</option>
+                                    <option value="replaces_target">replaces (target)</option>
+                                    <option value="select_source">has select article</option>
+                                    <option value="select_target">is select article from</option>
+                                    <option value="service_source">has service</option>
+                                    <option value="service_target">is service for</option>
+                                    <option value="similar_source">similar article</option>
+                                    <option value="similar_target">similar article</option>
+                                    <option value="sparepart_source">has sparepart</option>
+                                    <option value="sparepart_target">is sparepart for</option>
+                                    <option value="substitute_source">has substitute</option>
+                                    <option value="substitute_target">is substitute of</option>
+                                    <option value="variant_source">is master for</option>
+                                    <option value="variant_target">is variant of</option>
+                                </select>
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.typeId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
