@@ -559,9 +559,7 @@
 
 
                             <div class="col-sm-offset-3  col-sm-3">
-                                <button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid ||  
-                                                
-                                                assignGrpForm.cgId.$dirty && assignGrpForm.cgId.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
+                                <button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
                                 <button class="btn btn-primary" ng-click="cancelGrp()">Cancel</button>
                             </div>
 
@@ -635,7 +633,8 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <div class=" col-sm-offset-2 col-sm-2">
-                                    <button class="btn btn-primary" ng-click="updateitem(editproduct)">Save</button>
+                                    <button class="btn btn-primary" ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||  
+myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)">Save</button>
                                     <button class="btn btn-primary" ng-click="canceleditGrp()">Cancel</button>
                                 </div>
                             </div>
@@ -1283,7 +1282,7 @@
                 <div class="col-sm-9">
                     <td>
                         <div class="col-sm-offset-2  col-sm-3">
-                            <button class="btn btn-primary" type="submit" ng-click="savedoc(doc);">Save</button>
+                            <button class="btn btn-primary" type="submit" ng-disabled="docform.$invalid" ng-click="savedoc(doc);">Save</button>
                             <button class="btn btn-primary" type="submit" ng-click="canceldoc();">Cancel</button>
                         </div>
                     </td>
@@ -1895,7 +1894,7 @@
                 <div class="col-sm-12">
 
                     <div class="col-sm-offset-2  col-sm-3">
-                        <button class="btn btn-primary" type="submit" ng-click="saveprice(price);">Save</button>
+                        <button class="btn btn-primary" type="submit" ng-disabled="priceform.$invalid" ng-click="saveprice(price);">Save</button>
                         <button class="btn btn-primary" type="submit" ng-click="cancelprice();">Cancel</button>
                     </div>
 
@@ -2438,7 +2437,7 @@
                 <div class="col-sm-12">
 
                     <div class="col-sm-offset-2  col-sm-3">
-                        <button class="btn btn-primary" type="submit" ng-click="savecproduct(cproduct);">Save</button>
+                        <button class="btn btn-primary" type="submit" ng-disabled="assortform.$invalid" ng-click="savecproduct(cproduct);">Save</button>
                         <button class="btn btn-primary" type="submit" ng-click="cancelcproduct();">Cancel</button>
                     </div>
 
@@ -3074,7 +3073,7 @@
                 <div class="col-sm-12">
 
                     <div class="col-sm-offset-2  col-sm-3">
-                        <button class="btn btn-primary" type="submit" ng-click="saverelation(prelation);">Save</button>
+                        <button class="btn btn-primary" type="submit" ng-disabled="relationform.$invalid" ng-click="saverelation(prelation);">Save</button>
                         <button class="btn btn-primary" type="submit" ng-click="cancelrelation();">Cancel</button>
                     </div>
 
