@@ -253,3 +253,7 @@ border: none;
 	margin-bottom: 15px;
 }
 
+.zindex{
+  overflow: visible;
+  z-index: -999;
+}

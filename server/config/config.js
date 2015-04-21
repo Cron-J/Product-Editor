@@ -2,7 +2,7 @@ module.exports = {
     server: {
         
             host: '0.0.0.0',
-            port: 8000
+            port: 8080
     },
     database: {
         host: '127.0.0.1',
@@ -16,6 +16,6 @@ module.exports = {
         subdirectory: "/supplier"    
   },
   host: {
-    ModuleLinkup: 'http://sushant-PC:8081' 
+    ModuleLinkup:'http://modulus-linkup-45480.onmodulus.net'
   }
 };
