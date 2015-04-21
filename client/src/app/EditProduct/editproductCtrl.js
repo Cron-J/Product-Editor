@@ -101,6 +101,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.createNew = {};
         }
 
+        $scope.cancelGrp = function(){
+            $scope.showvar = false;
+        }
+
 
         $scope.editvar = false;
 
@@ -111,6 +115,12 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             // }
             $scope.editvar = true;
             $scope.showvar = false;
+        }
+
+        $scope.canceleditGrp = function(data) {
+            
+            $scope.editvar = false;
+
         }
 
         // $scope.$watch('output.mk',function(){
@@ -295,6 +305,13 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         }
 
+        $scope.canceldoc = function() {
+
+            $scope.docvar = false;
+            
+
+        }
+        
 
         $scope.savedoc = function(docdata) {
 
@@ -387,6 +404,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         }
 
+        $scope.cancelprice = function() {
+
+            $scope.pricevar = false;
+        }
 
         // Accordion tab
 
@@ -479,7 +500,11 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         }
 
 
+        $scope.cancelcproduct = function() {
 
+            $scope.cproductvar = false;
+
+        }
 
         $scope.savecproduct = function(cproductdata) {
 
@@ -569,9 +594,14 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             }
             $scope.selectedlang = ['en'];
 
-
         }
 
+        $scope.cancelrelation = function() {
+
+            $scope.nproductvar = false;
+            
+
+        }
 
         $scope.addlang = function() {
             var lang = ['en', 'es', 'fr', 'de'];
