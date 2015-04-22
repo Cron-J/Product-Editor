@@ -2,7 +2,6 @@
 
 // dependencies
 var mongoose = require('mongoose'),
-    timestamps = require('mongoose-timestamp'),
     Schema = mongoose.Schema,
     constants = require('../Utility/constants').constants,
     validator = require('mongoose-validators'),
@@ -214,6 +213,20 @@ var ProductSchema = new Schema({
         type: String
     },
 
+    /**
+     * Product creation timestamp.
+     */
+    createdAt: {
+        type: Date
+    },
+
+    /**
+     * Product updation timestamp.
+     */
+    updatedAt: {
+        type: Date
+    },
+
 
     /**
      * Set of {@link Product2ClassificationGroup}s.
@@ -273,14 +286,10 @@ ProductSchema.pre('save', function(next) {
     next();
 });
 
-/**
- * Date when the Product was created.
- * Date when the Product was changed last time.
- */
-ProductSchema.plugin(timestamps);
-
 
 ProductSchema.statics.createProduct = function(product, callback) {
+    product.createdAt = new Date();
+    product.updatedAt = new Date();
     this.create(product, callback);
 };
 
@@ -295,6 +304,8 @@ ProductSchema.statics.getProductById = function(id, callback) {
 };
 
 ProductSchema.statics.updateProduct = function(id, product, callback) {
+    if( product.createdAt ) { delete product.createdAt; }
+    product.updatedAt = new Date();
     this.update({
         '_id': id
     }, product, callback);
