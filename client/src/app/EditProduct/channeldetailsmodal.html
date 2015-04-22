@@ -57,7 +57,7 @@
 					<div class="form-group">
                                 <label class="col-sm-3 control-label">Attribute Id </label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" name="mf" ng-model="channeldata.attribute" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+                                    <input type="text" class="form-control" name="mf" ng-model="channeldata.attribute" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/" ng-disabled="true">
                                     <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
                                     <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
                                     <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
@@ -117,7 +117,13 @@
 
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="addChannelToList()">Add</button>
+                    	<div class="col-sm-offset-3">
+                    		<div class="col-sm-1">
+                    			<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addChannelToList()">Add</button>
+                    		</div>
+                    		
+                    	</div>
+                        
 
                     </div>
 				</div>	
@@ -125,7 +131,7 @@
     </div>
 </div>
 <div class="modal-footer">
-	 <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="addChannel()">Add more Channel</button>
-	 <button type="button" class="btn btn-Primary" data-dismiss="modal" ng-click="ok()">Ok</button>
-    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+	 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addChannel()">Add more Channel</button>
+	 <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="ok()">Ok</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="cancel()">Cancel</button>
 </div>
