@@ -33,6 +33,7 @@ exports.searchVariant = {
 
 exports.updateVariant = {
     handler: function(request, reply) {
+        if(request.payload._id) delete request.payload._id;
         Variant.updateVariant(request.params.id, request.payload, function(err, result) {
             if (!err) {
                 return reply(result);
