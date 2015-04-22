@@ -1,26 +1,30 @@
 
 myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
     '$http', '$location', 'growl', '$modal', '$routeParams', '$filter',
-    'blockUI','$q','uiGridConstants','$timeout','$interval',
+    'blockUI','$q','uiGridConstants','$timeout','$interval','getProductData',
     function($scope, $rootScope, $http, $location,
-        growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval) {
+        growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData) {
 
 
-
-       
-
-        $scope.updateitem = function(editproduct) {
+        $scope.updateitem = function(editproduct,type) {
             var product=angular.copy(editproduct)
             delete product._id;
             $http.put('/updateProduct/' + editproduct._id, product)
                 .success(function(status, data) {
-            });
+                    if(type!=='delete'){
+                    growl.addSuccessMessage('Attribute list updated succesfully');
+                }
+                    if(type=='delete'){
+                        growl.addSuccessMessage('Attribute deleted succesfully');
+
+                    }
+                 });
 
         }
 
-        $scope.updategrid=function(){
+        $scope.updategrid=function(type){
             $scope.editproduct.attributeValues=$scope.data;
-            $scope.updateitem($scope.editproduct);
+            $scope.updateitem($scope.editproduct,type);
         }
 
         $scope.cancel = function() {
@@ -29,15 +33,18 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
        
 
         var init = function() {
+            $scope.variantAttrList=[];
             var urlBase = '/getProduct/';
             $http.get(urlBase + $routeParams.id)
                 .then(function(result) {
                     $scope.editproduct = result.data;
-                    // console.log('product attribute',$scope.editproduct.attributeValues)
-                     //$scope.gridOptions.data = $scope.editproduct.attributeValues;
-                     // console.log('jCat',$scope.editproduct.attributeValues);
+                    getProductData.getVariantAttrList().then(function(data){
+                        angular.forEach(data.data,function(value,key){
+                            $scope.variantAttrList.push({label:value.variantId,value:value.variantId})
+                        });
+                        editAttribute();
+                    })
                     
-                    editAttribute();
                 })
                 .catch(function(err) {
                     console.log('error')
@@ -272,9 +279,9 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             // infiniteScrollUp: true,
             infiniteScrollDown: true,
             columnDefs : [
-            { displayName:"Attribute",field: 'attribute',cellTemplate: attributeField,enableCellEdit: false, filter: {placeholder: 'Search Attribute'},width:'10%'},
+            { displayName:"Attribute",field: 'attribute',cellTemplate: '<div class="ui-grid-cell-contents"  ng-dblclick="grid.appScope.openAttributes(rowRenderIndex)" title="TOOLTIP">{{COL_FIELD }}</div>',enableCellEdit: false, filter: {placeholder: 'Search Attribute'},width:'10%'},
             { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
-            { displayName:"Type",field: 'types',filter: { placeholder: 'Search Types'} },
+            { displayName:"Type",field: 'types[0]',filter: { placeholder: 'Search Types'} },
             { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'} },
             { displayName:"Value",field: 'value' ,filter: {placeholder: 'Search Value'}},
             { displayName:"Status Ids", field:"statusId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
@@ -330,7 +337,13 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                                             { language: 'fr', id: 'fr'},
                                             { language: 'jp', id: 'jp'}
                                         ] },
-            { displayName:"Variant Id",field: 'variantId' ,filter: {placeholder: 'Search variant id'}},
+            // { displayName:"Variant Id",field: 'variantId' ,filter: {placeholder: 'Search variant id'}},
+            { displayName:"Variant Id", field:"variantId",filter: {placeholder: 'Search variant id'}, editableCellTemplate: 'ui-grid/dropdownEditor',editDropdownIdLabel:'value', editDropdownValueLabel: 'label',
+                // cellFilter: 'formatStatus',
+                filter: {  placeholder: 'Search variant', type: uiGridConstants.filter.SELECT, 
+                selectOptions : $scope.variantAttrList},
+                
+            editDropdownOptionsArray : $scope.variantAttrList},
             { displayName:"Channels",field: 'channels', cellTemplate:'<button class="btn btn-primary btn-xs centered" ng-click="grid.appScope.showChannel(rowRenderIndex)"><span class="glyphicon glyphicon-list-alt"></span></button>' , filter: { placeholder: 'Search channel'} },
             
                 
@@ -347,7 +360,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 $interval( function() {
                     $scope.gridApi.core.handleWindowResize();
                 }, 10, 100);
-
             }
         };
 
@@ -365,14 +377,14 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
              $scope.attributeValues=angular.copy($scope.editproduct.attributeValues);
              curr_attributeValues=$scope.attributeValues.slice($scope.lastPage*rowtoshow,($scope.lastPage+1)*rowtoshow);
              angular.forEach(curr_attributeValues,function(value,key){
-                attribute_ids.push(value._id);
+                attribute_ids.push(value.attribute);
              })
             
             $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":attribute_ids})
             .success(function(data) {
             angular.forEach(curr_attributeValues,function(val,key){
                 angular.forEach(data,function(val1,key1){
-                    if(val._id==val1._id){
+                    if(val.attribute==val1.attributeId){
                         var object = angular.extend({}, val, val1);
                         curr_attributeValues[key]=object;
                     }
@@ -394,7 +406,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
              var curr_attributeValues=[];
              curr_attributeValues=$scope.attributeValues.slice($scope.lastPage*rowtoshow,($scope.lastPage+1)*rowtoshow);
              angular.forEach(curr_attributeValues,function(value,key){
-                attribute_ids.push(value._id);
+                attribute_ids.push(value.attribute);
              })
 
             $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":attribute_ids})
@@ -402,7 +414,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 console.log('d',data);
               angular.forEach(curr_attributeValues,function(val,key){
                 angular.forEach(data,function(val1,key1){
-                    if(val._id==val1._id){
+                    if(val.attribute==val1.attributeId){
                         var object = angular.extend({}, val, val1);
                         curr_attributeValues[key]=object;
                     }
@@ -449,7 +461,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             angular.forEach($scope.gridApi.selection.getSelectedRows(), function (data, index) {
                 $scope.data.splice($scope.data.lastIndexOf(data), 1);
             });
-            $scope.updategrid();
+            $scope.updategrid('delete');
           }
 
           $scope.resizewindow=function(){
@@ -457,7 +469,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 $scope.gridApi.core.handleWindowResize();
               }, 10, 500);
           }
-             
+          $scope.test=function(grid,row){
+            console.log('mk')
+          }
+          
             
 
 
