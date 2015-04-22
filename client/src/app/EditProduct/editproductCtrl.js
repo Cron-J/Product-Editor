@@ -1,9 +1,9 @@
 
 myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
     '$http', '$location', 'growl', '$modal', '$routeParams', '$filter',
-    'blockUI','$q','uiGridConstants','$timeout',
+    'blockUI','$q','uiGridConstants','$timeout','$interval',
     function($scope, $rootScope, $http, $location,
-        growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout) {
+        growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval) {
 
 
 
@@ -257,7 +257,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
        var attributeField='<button type="button" ng-show="grid.appScope.data[rowRenderIndex].button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="grid.appScope.openAttributes(rowRenderIndex)">\
                                 <span class="glyphicon glyphicon-plus"></span>\
                             </button>\
-                            <span ng-hide="grid.appScope.data[rowRenderIndex].button">{{grid.appScope.data[rowRenderIndex].attribute}}</span>'
+                            <span ng-hide="grid.appScope.data[rowRenderIndex].button">{{grid.appScope.data[rowRenderIndex].attribute}}</span>';
         $scope.gridOptions={
             enableFiltering: true,
             enableGridMenu : true,
@@ -344,6 +344,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 gridApi.infiniteScroll.on.needLoadMoreData($scope, $scope.getDataDown);
                 gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, $scope.getDataUp);
                 $scope.gridApi = gridApi;
+                $interval( function() {
+                    $scope.gridApi.core.handleWindowResize();
+                }, 10, 100);
+
             }
         };
 
@@ -441,7 +445,18 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
           $scope.addNewAttribute=function(){
             $scope.data.unshift({button:true});
           }
-          
+          $scope.deleteAttribute=function(){
+            angular.forEach($scope.gridApi.selection.getSelectedRows(), function (data, index) {
+                $scope.data.splice($scope.data.lastIndexOf(data), 1);
+            });
+            $scope.updategrid();
+          }
+
+          $scope.resizewindow=function(){
+             $interval( function() {
+                $scope.gridApi.core.handleWindowResize();
+              }, 10, 500);
+          }
              
             
 
@@ -1587,7 +1602,7 @@ var ChannelDetailsModalInstanceCtrl = function($scope, $modalInstance, $http, $l
 };
 
 myApp.controller('ChannelCtrl', function ($scope, $modalInstance,channel_details,$controller) {
-  $scope.getChannelDetails = channel_details;
+  $scope.getChannelDetails = channel_details ? channel_details: [];
   $scope.channeldata={};
   $scope.showPagination=true;
   var testCtrl1ViewModel = $scope.$new();

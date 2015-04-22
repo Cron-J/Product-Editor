@@ -645,21 +645,22 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
 
             </tab>
 
-    <tab heading="Attributes">
-        <div class=" m-t-25">
+    <tab heading="Attributes" ng-click="resizewindow();">
+        <div class=" m-t-25 zindexgrid">
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
 
-            <div class="grid m-b-20" ui-grid="gridOptions" ui-grid-move-columns ui-grid-edit ui-grid-resize-columns ui-grid-pinning  ui-grid-grouping ui-grid-infinite-scroll ui-grid-selection>
+            <div class="grid m-b-20 tzindex" ui-grid="gridOptions" ui-grid-move-columns ui-grid-edit ui-grid-resize-columns ui-grid-pinning  ui-grid-grouping ui-grid-infinite-scroll ui-grid-selection>
                 
             </div>
 
-            <div class=" zindex col-sm-4">
+            
+        </div>
+        <div class=" zindex col-sm-4">
                         <button class="btn btn-primary" type="submit" ng-click="updategrid();">Save</button>
                         <button class="btn btn-primary" ng-click="addNewAttribute()">New Attribute</button>
-                        <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
+                        <button class="btn btn-primary" ng-click="deleteAttribute()">Delete Selected</button>
 
                     </div>
-        </div>
    <!--  <div class="row ">
         <div class="col-sm-4 m-b-20 ">
             <button class="btn btn-primary" ng-click="attvar=true">New Attribute</button>

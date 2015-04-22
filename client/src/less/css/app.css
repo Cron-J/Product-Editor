@@ -255,5 +255,10 @@ border: none;
 
 .zindex{
   overflow: visible;
-  z-index: -999;
+  z-index: 0;
 }
+
+  /* transform: translateZ(0); */
+  .tzindex{
+  	transform: none!important;
+  }
