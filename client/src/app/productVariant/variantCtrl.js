@@ -1,9 +1,9 @@
 myApp.controller('variantCtrl', [ '$scope','$rootScope', 
  '$http','$location','growl','$modal','$routeParams','$filter',
- 'blockUI',
+ 'blockUI','$q',
  function($scope,$rootScope, $http, $location,
-  growl, $modal, $routeParams, blockUI,$filter){
-
+  growl, $modal, $routeParams, blockUI,$filter,$q){
+$scope.newvariant={};
   $scope.create = function(variantinfo){
 
    $http.post('/createVariant',variantinfo)
@@ -22,7 +22,62 @@ myApp.controller('variantCtrl', [ '$scope','$rootScope',
 
   }
 
+var AttributeCtrl = function($scope, $modalInstance, $http, $location,$modal) {
+    $scope.searchAttribute = function(reqData) {
+        $http.get('/getConfig')
+            .then(function(result) {
+                $scope.result = result.data;
+                postAttribute(reqData);
 
+            })
+            .catch(function(err) {
+                console.log('error')
+            })
+    }
+
+    var postAttribute = function(rqstData) {
+        $http.post($scope.result + '/api/attributeSearch', rqstData)
+            .then(function(result) {
+                $scope.attrdetails = result.data;
+                $scope.currentPage = 0;
+        $scope.groupToPages();
+            })
+            .catch(function(err) {
+                console.log('error')
+            })
+    }
+
+    $scope.groupToPages = function () {
+      $scope.groupItems = [];
+      $scope.filteredItems = $scope.attrdetails;
+      $scope.filtered();
+    };
+    $scope.itemsPerPage=5;
+    $scope.min = 0;
+    $scope.max =5;
+    // $scope.groupToPages();
+    $scope.getAttribute = function(cid) {
+        $modalInstance.close(cid);
+    }
+    $scope.cancel = function() {
+
+        $modalInstance.dismiss('cancel');
+
+    }
+    $scope.filtered = function () {
+      if($scope.filteredItems){
+        for (var i = 0; i < $scope.filteredItems.length; i++) {
+          if (i % $scope.itemsPerPage === 0) {
+            $scope.groupItems[Math.floor(i / $scope.itemsPerPage)] = [ $scope.filteredItems[i] ];
+          }
+          else {
+            $scope.groupItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
+          }
+        }
+      }   
+  };
+
+}
   $scope.updatevariant = function(editedvariant) {
 
 
@@ -32,6 +87,21 @@ myApp.controller('variantCtrl', [ '$scope','$rootScope',
                 });
 
         }
+
+
+$scope.cancelvariant = function(){
+
+    $scope.showvar=false;
+
+}
+
+
+$scope.cancelupvariant = function(){
+
+    $scope.editvar=false;
+
+}
+
 
   $scope.cancel = function(){
    $location.path('/');
@@ -73,6 +143,60 @@ myApp.controller('variantCtrl', [ '$scope','$rootScope',
 
 
   }
+
+
+
+$scope.openAttribute= function(size) {
+                 var deferred = $q.defer();
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent2.html',
+                    controller: AttributeCtrl,
+                    size: size
+                });
+                modalInstance.result.then(function(attributedata) {
+                  // $scope.attributeDetails = attributedata;
+                  $scope.doc = attributedata;
+
+                  $scope.doc.attribute = attributedata.attributeId;
+                    deferred.resolve(attributedata);
+                },
+            function() {
+                // $scope.editProfile=editProfileBeforeCancle;
+                // $log.info('Modal dismissed at: ' + new Date());
+                    deferred.reject('rjected');
+                
+            });
+            return deferred.promise;
+            }
+
+
+
+
+            $scope.openAttributes= function(type) {
+
+                 $scope.openAttribute('lg').then(function(data){
+
+
+                  if(type == 'new')
+                      $scope.newvariant.attributes=data.attributeId;
+                    
+                    else
+                      $scope.editvariant.attributes=data.attributeId;
+                    })
+                    .catch(function(error) {
+                        console.log(error)
+                    })
+            }
+
+            
+
+
+
+
+
+
+
+
 
 
 
