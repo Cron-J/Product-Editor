@@ -1,27 +1,24 @@
 
-myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
-    '$http', '$location', 'growl', '$modal', '$routeParams', '$filter',
-    'blockUI','$q','uiGridConstants','$timeout','$interval','getProductData',
-    function($scope, $rootScope, $http, $location,
-        growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData) {
-
-
+myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location', 'growl', '$modal', '$routeParams', '$filter','blockUI','$q','uiGridConstants','$timeout','$interval','getProductData',
+    function($scope, $rootScope, $http, $location, growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData) {
+        
+        /*update or add product data*/
         $scope.updateitem = function(editproduct,type) {
-            var product=angular.copy(editproduct)
-            delete product._id;
-            $http.put('/updateProduct/' + editproduct._id, product)
-                .success(function(status, data) {
+            getProductData.updateProduct(editproduct)
+                .then(function(data){
                     if(type!=='delete'){
-                    growl.addSuccessMessage('Attribute list updated succesfully');
-                }
+                        growl.addSuccessMessage('Attribute list updated succesfully');
+                    }
                     if(type=='delete'){
                         growl.addSuccessMessage('Attribute deleted succesfully');
-
                     }
-                 });
+                })
+                .catch(function(error){
 
+                })
         }
 
+        /*sub program of update or add product data in the case of ui-grid*/
         $scope.updategrid=function(type){
             $scope.editproduct.attributeValues=$scope.data;
             $scope.updateitem($scope.editproduct,type);
@@ -30,69 +27,44 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         $scope.cancel = function() {
             $location.path('/');
         }
-       
 
+       /*get product data*/
         var init = function() {
             $scope.variantAttrList=[];
-            var urlBase = '/getProduct/';
-            $http.get(urlBase + $routeParams.id)
-                .then(function(result) {
-                    $scope.editproduct = result.data;
-                    getProductData.getVariantAttrList().then(function(data){
-                        angular.forEach(data.data,function(value,key){
-                            $scope.variantAttrList.push({label:value.variantId,value:value.variantId})
-                        });
-                        editAttribute();
-                    })
-                    
+            $q.all([getProductData.getProducts($routeParams.id)
+                .then(function(data){
+                    $scope.editproduct = data.data;
+                }),
+                getProductData.getVariantAttrList($routeParams.id)
+                .then(function(data){
+                    angular.forEach(data.data,function(value,key){
+                        $scope.variantAttrList.push({label:value.variantId,value:value.variantId})
+                    });
                 })
-                .catch(function(err) {
-                    console.log('error')
-                })
-
-
+            ])
+            .then(function(values){
+                editAttribute();
+            })
         }
-
 
         init();
 
-        
-
-
-        // $scope.fetchProductData = function(){
-
-        // 	$scope.editproduct = getProductDataFactory.getlocalData();
-
-        // }
-
-
         // Preview Button Show hide
-
         $scope.previewvar = true;
-
-
         $scope.showhidepreview = function() {
-
             $scope.previewvar = false;
-
-
-
         }
 
-        // datepicker
+        /*datepicker initializer */
 
         $scope.date = {
             startDate: null,
             endDate: null
         };
-
         $scope.opened = {};
-
         $scope.open = function($event) {
-
             $event.preventDefault();
             $event.stopPropagation();
-
             $scope.opened = {};
             $scope.opened[$event.target.id] = true;
         };
@@ -104,11 +76,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
         $scope.sortType = 'name'; // set the default sort type
         $scope.sortReverse = false; // set the default sort order
         $scope.search = ''; // set the default search/filter term
-
-
-
-
-
 
         // Product classification
 
@@ -125,34 +92,17 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.showvar = false;
         }
 
-
         $scope.editvar = false;
 
         $scope.editGrp = function(data) {
             $scope.editrow = data;
-            // if(data.variantId){
-            // 	$scope.editrow.variantId=parseInt(data.variantId);
-            // }
             $scope.editvar = true;
             $scope.showvar = false;
         }
 
         $scope.canceleditGrp = function(data) {
-            
             $scope.editvar = false;
-
         }
-
-        // $scope.$watch('output.mk',function(){
-        // 	if($scope.output.mk.length>0)
-        // 	// $scope.search.variantId=$scope.output.mk[0].variantId;
-        // })
-        $scope.test = function() {
-            console.log('sdsd');
-        }
-
-
-
 
         $scope.newClsfnidGrp = function(createNewGrp) {
             $scope.editproduct.classificationGroupAssociations.push(angular.copy(createNewGrp));
@@ -168,21 +118,12 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.doc = {};
         }
 
-        // $scope.seeChannel = function() {
-        //     $scope.editproduct.attributeValues.push(createNewAttribute);
-        //     $scope.updateitem($scope.editproduct);
-        //     // $scope.createNew = {};
-        // }
-
 
         // check Uncheck check boxes
-
 
         $scope.isAll = false;
 
         $scope.selectAllcBoxes = function() {
-
-
             if ($scope.isAll === false) {
                 angular.forEach($scope.editproduct.classificationGroupAssociations, function(checkbox) {
                     checkbox.checked = true;
@@ -233,8 +174,9 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             })
         }
         
+/*ui-grid implementation*/
 
-        // ui-grid
+        /*popup modal for show and add channel*/
         $scope.showChannel=function(channelIndex){
             
             var channels=$scope.data[channelIndex].channels;
@@ -250,8 +192,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             });
 
             modalInstance.result.then(function (getChannelDetails) {
-                console.log(getChannelDetails)
-                console.log('delete it',$scope.data)
                 $scope.data[channelIndex].channels=getChannelDetails;
               
             }, function () {
@@ -259,12 +199,15 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             });
 
         }
-       var attribute_ids=[];
-       $scope.gridOptions = {};
-       var attributeField='<button type="button" ng-show="grid.appScope.data[rowRenderIndex].button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="grid.appScope.openAttributes(rowRenderIndex)">\
-                                <span class="glyphicon glyphicon-plus"></span>\
-                            </button>\
-                            <span ng-hide="grid.appScope.data[rowRenderIndex].button">{{grid.appScope.data[rowRenderIndex].attribute}}</span>';
+        /*initilize ui-grid data*/
+
+        $scope.data = [];
+        var attribute_ids=[];
+        $scope.firstPage = 0;
+        $scope.lastPage = 0;
+        var rowtoshow=12;
+
+        /*ui-grid option and column decription*/
         $scope.gridOptions={
             enableFiltering: true,
             enableGridMenu : true,
@@ -272,22 +215,21 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             enableSelectAll: true,
             lateBoundColumns :true,
             selectionRowHeaderWidth: 50,
-
-    
             // rowHeight: 35,
             // infiniteScrollRowsFromEnd: 50,
             // infiniteScrollUp: true,
             infiniteScrollDown: true,
             columnDefs : [
-            { displayName:"Attribute",field: 'attribute',cellTemplate: '<div class="ui-grid-cell-contents"  ng-dblclick="grid.appScope.openAttributes(rowRenderIndex)" title="TOOLTIP">{{COL_FIELD }}</div>',enableCellEdit: false, filter: {placeholder: 'Search Attribute'},width:'10%'},
-            { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
-            { displayName:"Type",field: 'types[0]',filter: { placeholder: 'Search Types'} },
-            { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'} },
-            { displayName:"Value",field: 'value' ,filter: {placeholder: 'Search Value'}},
-            { displayName:"Status Ids", field:"statusId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
-                cellFilter: 'formatStatus',
-                filter: {  placeholder: 'Search Order No', type: uiGridConstants.filter.SELECT,
-                selectOptions: [{ label: '080 error'                  , value: '080'},
+                { displayName:"Attribute",field: 'attribute',cellTemplate: '<div class="ui-grid-cell-contents"  ng-dblclick="grid.appScope.openAttributes(rowRenderIndex)" title="TOOLTIP">{{COL_FIELD }}</div>',enableCellEdit: false, filter: {placeholder: 'Search Attribute'}},
+                { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
+                { displayName:"Type",field: 'types[0]',filter: { placeholder: 'Search Types'} },
+                { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'} },
+                { displayName:"Value",field: 'value' ,filter: {placeholder: 'Search Value'}},
+                { displayName:"Status Ids", field:"statusId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
+                    cellFilter: 'formatStatus',
+                    filter: {  placeholder: 'Search Order No', type: uiGridConstants.filter.SELECT,
+                        selectOptions: [
+                            { label: '080 error', value: '080'},
                             { label: '090 warning'                , value: '090'},
                             { label: '100 new'                    , value: '100'},
                             { label: '105 changed'                , value: '105'},
@@ -301,56 +243,56 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                             { label: '420 Immediate'              , value: '420'},
                             { label: '700 temporary'              , value: '700'},
                             { label: '800 deleted'                , value: '800'}
-                            ]
+                        ]
+                    },
+                    editDropdownOptionsArray: [
+                        { status: '080 error'                  , id: '080'},
+                        { status: '090 warning'                , id: '090'},
+                        { status: '100 new'                    , id: '100'},
+                        { status: '105 changed'                , id: '105'},
+                        { status: '200 checked'                , id: '200'},
+                        { status: '225 translate'              , id: '225'},
+                        { status: '250 Translation needed'     , id: '250'},
+                        { status: '275 Translation in progress', id: '275'},
+                        { status: '300 waiting'                , id: '300'},
+                        { status: '350 translate '             , id: '350'},
+                        { status: '400 confirmed'              , id: '400'},
+                        { status: '420 Immediate'              , id: '420'},
+                        { status: '700 temporary'              , id: '700'},
+                        { status: '800 deleted'                , id: '800'}
+
+                    ]
                 },
-                editDropdownOptionsArray: [{ status: '080 error'                  , id: '080'},
-                                          { status: '090 warning'                , id: '090'},
-                                          { status: '100 new'                    , id: '100'},
-                                          { status: '105 changed'                , id: '105'},
-                                          { status: '200 checked'                , id: '200'},
-                                          { status: '225 translate'              , id: '225'},
-                                          { status: '250 Translation needed'     , id: '250'},
-                                          { status: '275 Translation in progress', id: '275'},
-                                          { status: '300 waiting'                , id: '300'},
-                                          { status: '350 translate '             , id: '350'},
-                                          { status: '400 confirmed'              , id: '400'},
-                                          { status: '420 Immediate'              , id: '420'},
-                                          { status: '700 temporary'              , id: '700'},
-                                          { status: '800 deleted'                , id: '800'}
-                                        ] },
 
-            { displayName:"Uom",field: 'unitOfMeasure',filter: { placeholder: 'Search Uom'} },
-            
-            { displayName:"Language", field:"languageId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'language',
-        
-                filter: {  placeholder: 'Search language', type: uiGridConstants.filter.SELECT,
-                selectOptions: [{ label: 'de', value: 'de'},
-                                { label: 'en', value: 'en'},
-                                { label: 'es', value: 'es'},
-                                { label: 'fr', value: 'fr'},
-                                { label: 'jp', value: 'jp'}
-                            ]
+                { displayName:"Uom",field: 'unitOfMeasure',filter: { placeholder: 'Search Uom'} },
+                
+                { displayName:"Language", field:"languageId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'language',
+                    filter: {  placeholder: 'Search language', type: uiGridConstants.filter.SELECT,
+                        selectOptions: [
+                            { label: 'de', value: 'de'},
+                            { label: 'en', value: 'en'},
+                            { label: 'es', value: 'es'},
+                            { label: 'fr', value: 'fr'},
+                            { label: 'jp', value: 'jp'}
+                        ]
+                    },
+                    editDropdownOptionsArray: [
+                        { language: 'de', id: 'de'},
+                        { language: 'en', id: 'en'},
+                        { language: 'es', id: 'es'},
+                        { language: 'fr', id: 'fr'},
+                        { language: 'jp', id: 'jp'}
+
+                    ] 
                 },
-                editDropdownOptionsArray: [ { language: 'de', id: 'de'},
-                                            { language: 'en', id: 'en'},
-                                            { language: 'es', id: 'es'},
-                                            { language: 'fr', id: 'fr'},
-                                            { language: 'jp', id: 'jp'}
-                                        ] },
-            // { displayName:"Variant Id",field: 'variantId' ,filter: {placeholder: 'Search variant id'}},
-            { displayName:"Variant Id", field:"variantId",filter: {placeholder: 'Search variant id'}, editableCellTemplate: 'ui-grid/dropdownEditor',editDropdownIdLabel:'value', editDropdownValueLabel: 'label',
-                // cellFilter: 'formatStatus',
-                filter: {  placeholder: 'Search variant', type: uiGridConstants.filter.SELECT, 
-                selectOptions : $scope.variantAttrList},
-                
-            editDropdownOptionsArray : $scope.variantAttrList},
-            { displayName:"Channels",field: 'channels', cellTemplate:'<button class="btn btn-primary btn-xs centered" ng-click="grid.appScope.showChannel(rowRenderIndex)"><span class="glyphicon glyphicon-list-alt"></span></button>' , filter: { placeholder: 'Search channel'} },
-            
-                
-                
+                { displayName:"Variant Id", field:"variantId",filter: {placeholder: 'Search variant id'}, editableCellTemplate: 'ui-grid/dropdownEditor',editDropdownIdLabel:'value', editDropdownValueLabel: 'label',
+                    filter: { placeholder: 'Search variant', type: uiGridConstants.filter.SELECT, 
+                              selectOptions : $scope.variantAttrList
+                            },
+                    editDropdownOptionsArray : $scope.variantAttrList
+                },
 
-
-
+                { displayName:"Channels",field: 'channels', cellTemplate:'<button class="btn btn-primary btn-xs centered" ng-click="grid.appScope.showChannel(rowRenderIndex)"><span class="glyphicon glyphicon-list-alt"></span></button>' , filter: { placeholder: 'Search channel'} },
             ],
             data: 'data',
             onRegisterApi: function(gridApi){
@@ -363,15 +305,9 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             }
         };
 
-         $scope.data = [];
-        var attribute_ids=[];
-          $scope.firstPage = 0;
-          $scope.lastPage = 0;
-          var rowtoshow=12;
-
-          
+         
+        /*load ui-grid data at first time*/
           $scope.getFirstData = function() {
-            console.log('attributeValue',$scope.editproduct.attributeValues);
             var promise = $q.defer();
             var curr_attributeValues=[];
              $scope.attributeValues=angular.copy($scope.editproduct.attributeValues);
@@ -397,7 +333,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             });
             return promise.promise;
           };
-          
+
+        /*load ui-grid data at after first time*/
           $scope.getDataDown = function() {
             if($scope.data.length<$scope.editproduct.attributeValues.length){
              var promise = $q.defer();
@@ -411,7 +348,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
             $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":attribute_ids})
             .success(function(data) {
-                console.log('d',data);
               angular.forEach(curr_attributeValues,function(val,key){
                 angular.forEach(data,function(val1,key1){
                     if(val.attribute==val1.attributeId){
@@ -469,48 +405,27 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 $scope.gridApi.core.handleWindowResize();
               }, 10, 500);
           }
-          $scope.test=function(grid,row){
-            console.log('mk')
-          }
           
-            
-
-
-
         // Document Tab
 
 
         $scope.docvar = false;
-
         $scope.createdoc = function() {
-
             $scope.docvar = true;
             $scope.doc = {};
-
         }
 
         $scope.canceldoc = function() {
-
             $scope.docvar = false;
-            
-
         }
         
 
         $scope.savedoc = function(docdata) {
-
-            // $scope.editproduct.documents.push(angular.copy(docdata));
-            // $scope.updateitem($scope.editproduct);
-            // console.log($scope.editproduct);
             if (docdata._id) {
                 angular.forEach($scope.editproduct.documents, function(value, key) {
-
                     if (docdata._id == value._id) {
                         $scope.editproduct.documents[key] = docdata;
                         $scope.updateitem($scope.editproduct);
-
-                        // console.log($scope.editproduct.documents);
-                        // console.log($scope.editproduct);
                     }
 
                 });
@@ -522,16 +437,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         }
 
-
-
         $scope.editdoc = function(editdocdata) {
-
             $scope.docvar = true;
-
             $scope.doc = angular.copy(editdocdata);
         }
-
-
 
         $scope.isdocAll = false;
 
@@ -552,8 +461,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             }
         }
 
-
-
         // delete list
         $scope.deletedoc = function() {
             for (var i = $scope.editproduct.documents.length - 1; i >= 0; i--) {
@@ -564,13 +471,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.doc = {};
 
         }
-
-        // $scope.selectedRow = function (id, value) {
-        // 	console.log('//////////', id);
-        // 	if(value) 
-        // 		$scope.selectedId = id;
-        // }
-
 
         // Document tab function End
 
@@ -603,9 +503,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         $scope.saveprice = function(pricedata) {
 
-            // $scope.editproduct.documents.push(angular.copy(docdata));
-            // $scope.updateitem($scope.editproduct);
-            // console.log($scope.editproduct);
             if (pricedata._id) {
                 angular.forEach($scope.editproduct.prices, function(value, key) {
 
@@ -692,9 +589,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
         $scope.savecproduct = function(cproductdata) {
 
-            // $scope.editproduct.documents.push(angular.copy(docdata));
-            // $scope.updateitem($scope.editproduct);
-            // console.log($scope.editproduct);
             if (cproductdata._id) {
                 angular.forEach($scope.editproduct.contractedProducts, function(value, key) {
 
@@ -826,18 +720,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                         }
                     })
                 })
-                
-                
         }
-
-
-
 
         $scope.saverelation = function(relationdata) {
 
-            // $scope.editproduct.documents.push(angular.copy(docdata));
-            // $scope.updateitem($scope.editproduct);
-            // console.log($scope.editproduct);
             if (relationdata._id) {
                 angular.forEach($scope.editproduct.productRelations, function(value, key) {
 
@@ -861,20 +747,13 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             }
 
         }
-
-
-
         $scope.editprelation = function(editcproductdata) {
 
             $scope.nproductvar = true;
             $scope.selectedlang=[];
             $scope.prelation = angular.copy(editcproductdata);
             $scope.editlang();
-
         }
-
-
-
 
         $scope.deleteprelation = function() {
             for (var i = $scope.editproduct.productRelations.length - 1; i >= 0; i--) {
@@ -928,22 +807,22 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
             $scope.contacts.splice(index, 1);
         };
 
-        $scope.openChannelDetails = function(size,data) {
-                var modalInstance = $modal.open({
-                    templateUrl: 'myModalContent9.html',
-                    controller: ChannelDetailsModalInstanceCtrl,
-                    size: size,
-                    resolve: {
-                        channel_details:function(){
-                            return data;
-                        }
-                    }
-                });
+        // $scope.openChannelDetails = function(size,data) {
+        //         var modalInstance = $modal.open({
+        //             templateUrl: 'myModalContent9.html',
+        //             controller: ChannelDetailsModalInstanceCtrl,
+        //             size: size,
+        //             resolve: {
+        //                 channel_details:function(){
+        //                     return data;
+        //                 }
+        //             }
+        //         });
 
-                modalInstance.result.then(function(variant_data) {
-                    $scope[resmodel].variantId = variant_data.variantId;
-                });
-        }
+        //         modalInstance.result.then(function(variant_data) {
+        //             $scope[resmodel].variantId = variant_data.variantId;
+        //         });
+        // }
 
         //search variant
 
@@ -1032,7 +911,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
             $scope.openAttributes= function(index) {
                  $scope.openAttribute('lg').then(function(data){
-                    console.log('a',data)
                     $scope.data[index].attribute=data.attribute;
                     $scope.data[index].button=false;
                     $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":[data.attribute]})
@@ -1062,33 +940,9 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
                 });
         }
 //Edit Attribute
-	$scope.editAttribute = function(id){
-		window.open('http://classificationattribute-44842.onmodulus.net/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
-	}
-
-    // var editAttribute = function(id){
-    //     $http.get('/getConfig')
-    //     .then(function(result) {
-    //           $scope.moduleLinkupUrl = result.data;
-    //         })
-    //         .catch(function(err) {
-    //             console.log('error')
-    //         })
-    // }
-    
-
-    // var editAttribute1 = function(id){
-    //     $http.get($scope.result +'/getClassificationAttributeHost/')
-    //          .then(function(result) {
-    //           $scope.result = result.data;
-    //           window.open($scope.result+'/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
-                
-    //         })
-    //         .catch(function(err) {
-    //             console.log('error')
-    //         })
-    // }
-
+    	$scope.editAttribute = function(id){
+    		window.open('http://classificationattribute-44842.onmodulus.net/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
+    	}
     }
 ]);
 
@@ -1228,9 +1082,7 @@ var ModalInstanceCtrl = function($scope, $modalInstance, $http, $location) {
 		$scope.groupToPages();
 
     $scope.cancel = function() {
-
         $modalInstance.dismiss('cancel');
-
     };
 };
 
@@ -1263,14 +1115,12 @@ var ClassificationGroupCtrl = function($scope, $modalInstance, $http, $location,
                 $scope.classificationGroupdetails = result.data;
                  $scope.currentPage = 0;
 				 $scope.groupToPages();
-
             })
             .catch(function(err) {
                 console.log('error')
             })
     }
-
-        $scope.range = function (start, end) {
+    $scope.range = function (start, end) {
 			var ret = [];
 			if (!end) {
 				end = start;
@@ -1604,18 +1454,20 @@ $scope.addChannelRow = function(channel_info){
 }
 
 
-var ChannelDetailsModalInstanceCtrl = function($scope, $modalInstance, $http, $location,channel_details) {
-    var getDetails = function() {
-        $scope.getChannelDetails = channel_details.channels;
-    }
-    $scope.cancel = function() {
+// var ChannelDetailsModalInstanceCtrl = function($scope, $modalInstance, $http, $location,channel_details) {
+//     var getDetails = function() {
+//         $scope.getChannelDetails = channel_details.channels;
+//     }
+//     $scope.cancel = function() {
 
-        $modalInstance.dismiss('cancel');
+//         $modalInstance.dismiss('cancel');
 
-    };
+//     };
 
-    getDetails();
-};
+//     getDetails();
+// };
+
+/*popup modal for view and add channel of an attribute*/
 
 myApp.controller('ChannelCtrl', function ($scope, $modalInstance,channel_details,$controller) {
   $scope.getChannelDetails = channel_details ? channel_details: [];
@@ -1644,7 +1496,6 @@ myApp.controller('ChannelCtrl', function ($scope, $modalInstance,channel_details
         
         $scope.channeldata.channel[keys]=vals.key;
     });
-    console.log($scope.channeldata.channel);
     $modalInstance.close($scope.getChannelDetails);
   };
 
