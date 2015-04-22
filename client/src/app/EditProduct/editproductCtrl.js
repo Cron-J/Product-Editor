@@ -1032,11 +1032,12 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope',
 
             $scope.openAttributes= function(index) {
                  $scope.openAttribute('lg').then(function(data){
-                    $scope.data[index].attribute=data.attributeId;
+                    console.log('a',data)
+                    $scope.data[index].attribute=data.attribute;
                     $scope.data[index].button=false;
-                    $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":[data._id]})
+                    $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":[data.attribute]})
                     .success(function(data) {
-                      angular.extend($scope.data[index],data);
+                      angular.extend($scope.data[index],data[0]);
                     })
                     .error(function(error) {
                         console.log(error)
