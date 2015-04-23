@@ -51,7 +51,7 @@
                         
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Product ID</label>
+                                <label class="col-sm-4 control-label">Product ID*</label>
                                 <div class="col-sm-4">
                                     <input type="text" name="pid" class="form-control" ng-model="editproduct.productId"  ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" required>
                                     <span class="error" ng-show="masterdata.pid.$dirty">Invalid:
@@ -462,9 +462,27 @@
 
                 <div class="row m-t-25" ng-show="showvar">
                     <form name="assignGrpForm" novalidate>
-                        <div class="col-sm-8">
+                        <div class="col-sm-6">
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Variant ID</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" />
+                                </div>
+                                <div class="col-sm-1">
+                                    <span class="ng-scope"> 
+                                        <script type="text/ng-template" id="myModalContent6.html">
+                                            <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','createNew')">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
                             <div class="form-group ">
-                                <label class="col-sm-3 control-label">Classification </label>
+                                <label class="col-sm-3 control-label">Classification* </label>
                                 <div class="col-sm-9">
                                     <div class="row">
                                         <div class="col-md-4" >
@@ -497,8 +515,8 @@
                             </div>
                             
                             <div class="form-group" style="margin-bottom:16px;">
-                                <label class="col-sm-3 control-label">Classification Group</label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-3 control-label">Classification Group*</label>
+                                <div class="col-sm-6">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true">
@@ -539,26 +557,18 @@
                             </div>
                             
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Variant ID</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" />
-                                </div>
-                                <div class="col-sm-1">
-                                    <span class="ng-scope"> 
-                                        <script type="text/ng-template" id="myModalContent6.html">
-                                            <div ng-include="'app/EditProduct/variantmodal.html'"></div>
-                                        </script>
-                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','createNew')">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
+                                <label class="col-sm-3 control-label">Order No.</label>
+                                <div class="col-sm-4">
+                                    <input type="number" name="order_no" class="form-control" ng-model="createNew.orderNo">
+                                    <span class="error" ng-show="editGrpForm.order_no.$invalid">Invalid:Only Number is allowed
+                                                </span>
                                 </div>
                             </div>
+                            
 
 
 
-
-                            <div class="col-sm-offset-3  col-sm-3">
+                            <div class="col-sm-offset-3  col-sm-4">
                                 <button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
                                 <button class="btn btn-primary" ng-click="cancelGrp()">Cancel</button>
                             </div>
@@ -574,14 +584,31 @@
                         <div class="col-sm-6">
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Classification </label>
+                                <label class="col-sm-4 control-label">Variant ID</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="" ng-model="editrow.variantId" ng-readonly="true" />
+                                </div>
+                                <div class="col-sm-1">
+                                    <span class="ng-scope"> 
+                                                <script type="text/ng-template" id="myModalContent6.html">
+                                                  <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                                </script>
+                                                <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','editrow')">
+                                                          <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Classification* </label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" ng-model="editrow.classificationId" ng-disabled="true">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Classification Group</label>
+                                <label class="col-sm-4 control-label">Classification Group*</label>
                                 <div class="col-sm-8">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -602,24 +629,6 @@
                                                 </span>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Variant ID</label>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="" ng-model="editrow.variantId" ng-readonly="true" />
-                                </div>
-                                <div class="col-sm-1">
-                                    <span class="ng-scope"> 
-                                                <script type="text/ng-template" id="myModalContent6.html">
-                                                  <div ng-include="'app/EditProduct/variantmodal.html'"></div>
-                                                </script>
-                                                <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantClassificationGroupAssociations','editrow')">
-                                                          <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                    </span>
-                                </div>
-                            </div>
-
                         </div>
                     </form>
                     <div class="row">
@@ -632,9 +641,9 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <div class=" col-sm-offset-2 col-sm-2">
+                                <div class=" col-sm-offset-2 col-sm-4">
                                     <button class="btn btn-primary" ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||  
-myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)">Save</button>
+                                        myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)">Save</button>
                                     <button class="btn btn-primary" ng-click="canceleditGrp()">Cancel</button>
                                 </div>
                             </div>
@@ -859,6 +868,23 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
         <form name="docform" novalidate>
             <div class="col-sm-6">
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">Variant ID</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
+                    </div>
+                    <div class="col-sm-1">
+                        <span class="ng-scope"> 
+                                    <script type="text/ng-template" id="myModalContent6.html">
+                                      <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                    </script>
+                                    <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantDocAssociation','doc')">
+                                              <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-3 control-label"> Path </label>
                     <div class="col-sm-7">
                         <textarea type="text" name="path" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.path"></textarea>
@@ -933,23 +959,6 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                     <label class="col-sm-3 control-label">Valid To</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Variant ID</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
-                    </div>
-                    <div class="col-sm-1">
-                        <span class="ng-scope"> 
-                                    <script type="text/ng-template" id="myModalContent6.html">
-                                      <div ng-include="'app/EditProduct/variantmodal.html'"></div>
-                                    </script>
-                                    <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantDocAssociation','doc')">
-                                              <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                        </span>
                     </div>
                 </div>
 
@@ -1302,7 +1311,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
             <div class="col-sm-6">
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Variant ID</label>
+                    <label class="col-sm-3 control-label">Variant ID</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="" ng-model="price.variantId" ng-readonly="true" />
                     </div>
@@ -1319,7 +1328,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> Description </label>
+                    <label class="col-sm-3 control-label"> Description </label>
                     <div class="col-sm-8">
                         <input type="string" name="description" class="form-control" ng-model="price.description" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="priceform.description.$invalid">Invalid:
@@ -1331,7 +1340,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> From Quantity </label>
+                    <label class="col-sm-3 control-label"> From Quantity* </label>
                     <div class="col-sm-4">
                         <input type="number" name="quantity" class="form-control" ng-model="price.validFromQuantity" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.quantity.$invalid">Invalid:
@@ -1343,9 +1352,9 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> Price </label>
+                    <label class="col-sm-3 control-label"> Price* </label>
                     <div class="col-sm-4">
-                        <input type="text" name="price" class="form-control" ng-model="price.priceTypeId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                        <input type="text" name="price" class="form-control" ng-model="price.netPrice" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="priceform.price.$invalid">Invalid:
                                         <span ng-show="priceform.price.$error.minlength">Price should be minimum of 0 character</span>
                         <span ng-show="priceform.price.$error.maxlength">Price should be maximum of 50 character</span>
@@ -1355,9 +1364,9 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> Fix Net price </label>
+                    <label class="col-sm-3 control-label"> Fix Net price* </label>
                     <div class="col-sm-4">
-                        <input type="number" name="fix_price" class="form-control" ng-model="price.netPrice" ng-minlength="0" ng-maxlength="50" required>
+                        <input type="number" name="fix_price" class="form-control" ng-model="price.fixNetPrice" ng-minlength="0" ng-maxlength="50" required>
                         <span class="error" ng-show="priceform.fix_price.$invalid && priceform.fix_price.$dirty">Invalid:
                                         <span ng-show="priceform.fix_price.$error.required">Fix Net price is required</span>
                         <span ng-show="priceform.fix_price.$error.minlength">Fix Net price should be minimum of 0 digit</span>
@@ -1368,7 +1377,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> VAT Percentage </label>
+                    <label class="col-sm-3 control-label"> VAT Percentage </label>
                     <div class="col-sm-3">
                         <input type="number" name="vatper" class="form-control" ng-model="price.vatPercentage" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.vatper.$invalid">Invalid:
@@ -1380,7 +1389,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> is Preferred </label>
+                    <label class="col-sm-3 control-label"> is Preferred </label>
                     <div class="col-sm-3">
                         <input type="checkbox" name="ispref" ng-model="price.isPreferred" required>
                         <span class="error" ng-show="priceform.ispref.$invalid && priceform.pcid.$dirty">Invalid:
@@ -1391,7 +1400,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"> Price Unit </label>
+                    <label class="col-sm-3 control-label"> Price Unit </label>
                     <div class="col-sm-2">
                         <input type="number" name="priceunit" class="form-control" ng-model="price.priceUnit" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.priceunit.$invalid">Invalid:
@@ -1403,8 +1412,8 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Currency</label>
-                    <div class="col-sm-2">
+                    <label class="col-sm-3 control-label">Currency</label>
+                    <div class="col-sm-3">
                         <select name="language" class="form-control m-b" ng-model="price.currencyId">
                             <option value="CHF">CHF</option>
                             <option value="EUR" selected="selected">EUR</option>
@@ -1417,7 +1426,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Valid From</label>
+                    <label class="col-sm-3 control-label">Valid From</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="price.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                     </div>
@@ -1425,15 +1434,15 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
 
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Valid To</label>
+                    <label class="col-sm-3 control-label">Valid To</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="price.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Status</label>
-                    <div class="col-sm-5">
+                    <label class="col-sm-3 control-label">Status</label>
+                    <div class="col-sm-3">
                         <select name="language" class="form-control m-b" ng-model="price.statusId">
                             <option value="35">080 error</option>
                             <option value="36">090 warning</option>
@@ -1447,19 +1456,19 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                     </div>
                 </div>
 
-                <!-- <div class="form-group">
-                                <label class="col-sm-4 control-label">Type</label>
+                <div class="form-group">
+                                <label class="col-sm-3 control-label">Price Type</label>
                                 <div class="col-sm-8">
                                     <select name="language" class="form-control m-b" ng-model="price.priceTypeId">
                                         <option value="default" >Default</option>
                                         <option value="list">the list price of the product</option>
                                     </select>
                                 </div>
-                            </div> -->
+                            </div>
 
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">Unit of Measure</label>
+                    <label class="col-sm-3 control-label">Unit of Measure</label>
                     <div class="col-sm-2">
                         <select name="language" class="form-control m-b" ng-model="price.unitOfMeasureId">
                             <option value=""></option>
@@ -1525,7 +1534,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                             Additional Information<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                         </accordion-heading>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label"> List Price </label>
+                            <label class="col-sm-3 control-label"> List Price </label>
                             <div class="col-sm-2">
                                 <input type="number" name="listprice" class="form-control" ng-model="price.listPrice" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="priceform.listprice.$invalid">Invalid:
@@ -1537,7 +1546,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-4 control-label"> Gross Price </label>
+                            <label class="col-sm-3 control-label"> Gross Price </label>
                             <div class="col-sm-3">
                                 <input type="number" name="grossprice" class="form-control" ng-model="price.grossPrice" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="priceform.grossprice.$invalid">Invalid:
@@ -1549,7 +1558,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-4 control-label"> Prod Id Ext For Uom </label>
+                            <label class="col-sm-3 control-label"> Prod Id Ext For Uom </label>
                             <div class="col-sm-3">
                                 <input type="text" name="pridforum" class="form-control" ng-model="price.productIdExtensionForUoM" ng-minlength="0" ng-maxlength="50" ng-pattern=" /^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="priceform.pridforum.$invalid">Invalid:
@@ -2454,10 +2463,10 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
 
     <form name="relationform" novalidate>
         <div class="row m-t-25 " ng-show="nproductvar">
-            <div class="col-sm-9">
+            <div class="col-sm-6">
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Variant ID</label>
+                    <label class="col-sm-4 control-label">Variant ID</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="" ng-model="prelation.variantId" ng-readonly="true" />
                     </div>
@@ -2474,7 +2483,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> Product </label>
+                    <label class="col-sm-4 control-label"> Product </label>
                     <div class="col-sm-4">
                         <input type="string" name="contract" class="form-control" ng-model="editproduct.productId" ng-disabled="true">
                         <span class="error" ng-show="relationform.contract.$invalid">Invalid:
@@ -2486,7 +2495,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> Related Product </label>
+                    <label class="col-sm-4 control-label"> Related Product </label>
                     <div class="col-sm-4">
                         <input type="text" name="relatedproduct" class="form-control" ng-model="prelation.relatedProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
                         <span class="error" ng-show="relationform.relatedproduct.$invalid">Invalid:
@@ -2498,7 +2507,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Relation</label>
+                    <label class="col-sm-4 control-label">Relation</label>
                     <div class="col-sm-5">
                         <select name="relation" class="form-control m-b" ng-model="prelation.typeId" size=6>
                             <option value="Beleuchtung_source">Beleuchtung (source)</option>
@@ -2556,7 +2565,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <label class="control-label"> Description </label>
                     </div>
 
@@ -2566,7 +2575,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                                     </span>
 
                         <span class="row col-sm-11" ng-repeat="langdes in prelation.descriptions">
-                                        <div class=" row col-sm-3 m-b-10">
+                                        <div class=" row col-sm-5 m-b-10">
                                             <select name="status" class="form-control m-b" ng-model="langdes.language" ng-change="changeoption($index,langdes.language,'{{langdes.language}}')">
                                                 <option ng-if="langdes.language=='de'|| selectedlang.indexOf('de')==-1" value="de">de</option>
                                                 <option ng-if="langdes.language=='en'|| selectedlang.indexOf('en')==-1" value="en">en</option>
@@ -2575,7 +2584,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                                             </select>
                                         </div>
 
-                                        <div class="col-sm-8 m-b-10">
+                                        <div class="col-sm-7 m-b-10">
                                            <input type="text" name="price" class="form-control" ng-model="langdes.description" >
                                         </div>
 
@@ -2587,7 +2596,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> Status </label>
+                    <label class="col-sm-4 control-label"> Status </label>
                     <div class="col-sm-3">
                         <select name="status" class="form-control m-b" ng-model="prelation.statusId">
                             <option value="29">100 new</option>
@@ -2600,7 +2609,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> Sync Type ID </label>
+                    <label class="col-sm-4 control-label"> Sync Type ID </label>
                     <div class="col-sm-3">
                         <input type="text" name="syncid" class="form-control" ng-model="prelation.syncTypeId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="relationform.syncid.$invalid">Invalid:
@@ -2612,7 +2621,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> Seq No </label>
+                    <label class="col-sm-4 control-label"> Seq No </label>
                     <div class="col-sm-2">
                         <input type="text" name="seqno" class="form-control" ng-model="prelation.seqNo" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
                         <span class="error" ng-show="relationform.seqno.$invalid">Invalid:
@@ -2624,7 +2633,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> Quantity </label>
+                    <label class="col-sm-4 control-label"> Quantity </label>
                     <div class="col-sm-2">
                         <input type="number" name="quantity" class="form-control" ng-model="prelation.quantity" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="relationform.quantity.$invalid">Invalid:
@@ -2636,7 +2645,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> Selection Group Id </label>
+                    <label class="col-sm-4 control-label"> Selection Group Id </label>
                     <div class="col-sm-3">
                         <input type="text" name="slgroupid" class="form-control" ng-model="prelation.selectionGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                         <span class="error" ng-show="relationform.slgroupid.$invalid">Invalid:
@@ -2648,30 +2657,30 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> is Mandatory </label>
+                    <label class="col-sm-4 control-label"> is Mandatory </label>
                     <div class="col-sm-7">
                         <input type="checkbox" name="price" ng-model="prelation.isMandatory">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> Is Default Selected </label>
+                    <label class="col-sm-4 control-label"> Is Default Selected </label>
                     <div class="col-sm-7">
                         <input type="checkbox" name="price" ng-model="prelation.isDefaultSelected">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Valid From</label>
-                    <div class="col-sm-4">
+                    <label class="col-sm-4 control-label">Valid From</label>
+                    <div class="col-sm-3">
                         <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                     </div>
                 </div>
 
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Valid To</label>
-                    <div class="col-sm-4">
+                    <label class="col-sm-4 control-label">Valid To</label>
+                    <div class="col-sm-3">
                         <input type="text" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                     </div>
                 </div>
@@ -2685,7 +2694,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                             Udx Info<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                         </accordion-heading>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxText 1 </label>
+                            <label class="col-sm-4 control-label"> UdxText 1 </label>
                             <div class="col-sm-5">
                                 <input type="text" name="udxtext1" class="form-control" ng-model="prelation.udxText1" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udxtext1.$invalid">Invalid:
@@ -2697,7 +2706,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxText 2 </label>
+                            <label class="col-sm-4 control-label"> UdxText 2 </label>
                             <div class="col-sm-5">
                                 <input type="text" name="udxtext2" class="form-control" ng-model="prelation.udxText2" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udxtext2.$invalid">Invalid:
@@ -2709,7 +2718,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxText 3 </label>
+                            <label class="col-sm-4 control-label"> UdxText 3 </label>
                             <div class="col-sm-5">
                                 <input type="text" name="udxtext3" class="form-control" ng-model="prelation.udxText3" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udxtext3.$invalid">Invalid:
@@ -2721,7 +2730,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxNum 1 </label>
+                            <label class="col-sm-4 control-label"> UdxNum 1 </label>
                             <div class="col-sm-5">
                                 <input type="number" name="udxnum1" class="form-control" ng-model="prelation.udxNum1" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="relationform.udxnum1.$invalid">Invalid:
@@ -2733,7 +2742,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxNum 2 </label>
+                            <label class="col-sm-4 control-label"> UdxNum 2 </label>
                             <div class="col-sm-5">
                                 <input type="number" name="udxnum2" class="form-control" ng-model="prelation.udxNum2" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="relationform.udxnum2.$invalid">Invalid:
@@ -2745,7 +2754,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxNum 3 </label>
+                            <label class="col-sm-4 control-label"> UdxNum 3 </label>
                             <div class="col-sm-5">
                                 <input type="number" name="udexnum3" class="form-control" ng-model="prelation.udxNum3" ng-minlength="0" ng-maxlength="50">
                                 <span class="error" ng-show="relationform.udexnum3.$invalid">Invalid:
@@ -2757,7 +2766,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxSortKey 1 </label>
+                            <label class="col-sm-4 control-label"> UdxSortKey 1 </label>
                             <div class="col-sm-3">
                                 <input type="text" name="udx1" class="form-control" ng-model="prelation.udxSortKey1" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udx1.$invalid">Invalid:
@@ -2769,7 +2778,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxSortKey 2 </label>
+                            <label class="col-sm-4 control-label"> UdxSortKey 2 </label>
                             <div class="col-sm-3">
                                 <input type="text" name="udx2" class="form-control" ng-model="prelation.udxSortKey2" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udx2.$invalid">Invalid:
@@ -2781,7 +2790,7 @@ myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)"
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"> UdxSortKey 3 </label>
+                            <label class="col-sm-4 control-label"> UdxSortKey 3 </label>
                             <div class="col-sm-3">
                                 <input type="text" name="udx3" class="form-control" ng-model="prelation.udxSortKey3" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
                                 <span class="error" ng-show="relationform.udx3.$invalid">Invalid:

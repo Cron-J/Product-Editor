@@ -33,16 +33,16 @@
 								<table class="table table-stripped custom-table" ng-show="details.length > 0">
 									<thead>
 										<tr>
-										<th>Classification ID</th>
-										<th>Description</th>
-										<th>Orderno</th>
+											<th class="text-left">Classification ID</th>
+											<th class="text-left">Description</th>
+											<th class="text-right">Orderno</th>
 										</tr>
 									</thead>
 				                    <tbody>
 										<tr ng-click="getClassification(classdata)" class="hoverptr" ng-repeat="classdata in pagedItems[currentPage]">
-										<td >{{classdata.classificationId}}</td>
-										<td >{{classdata.descriptions.descShort[0].description}}</td>
-										<td >{{classdata.orderNo}}</td>
+										<td class="text-left">{{classdata.classificationId}}</td>
+										<td class="text-left">{{classdata.descriptions.descShort[0].description}}</td>
+										<td class="text-right">{{classdata.orderNo}}</td>
 										</tr>
 									</tbody>
 									<tfoot>
