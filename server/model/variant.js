@@ -8,6 +8,7 @@ var variant = {
     variantId: {
         type: String,
         unique: true,
+        sparse: true,
         required: true
     },
 

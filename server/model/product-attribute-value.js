@@ -20,11 +20,17 @@ var productAttributeValue = {
     },
 
     /**
-     * String representation of value.
+     * String representation of value or expression.
      */
     value: {
-        type: String,
-        required: true
+        type: String
+    },
+
+    /**
+     * Javascript Expression which could be evaluated to get value.
+     */
+    valueExpression: {
+        type: String
     },
 
     /**

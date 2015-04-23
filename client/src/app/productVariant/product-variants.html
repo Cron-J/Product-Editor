@@ -1,4 +1,4 @@
-<div class="row" ng-controller="variantCtrl">
+<div class="row">
   <div class="row col-sm-12">
     <div class="col-sm-7">
       <!-- <h1>Product Editor</h1> -->
@@ -35,7 +35,7 @@
 
         </tr>
 
-        <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in product.variants | orderBy:sortType:sortReverse ">
+        <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in tabledata | orderBy:sortType:sortReverse ">
           <td>{{vdata.variantId}}</td>
           <td></td>
         </tr>
@@ -81,7 +81,7 @@
           </div>
           <div class="col-sm-2">
             <button type="button" class="btn btn-primary btn-xs ng-scope" data-dismiss="modal" 
-              ng-click="openAttributes('new')">   
+              ng-click="addAttributes('new')">   
               <span class="glyphicon glyphicon-search"></span> 
             </button>
           </div>
@@ -185,7 +185,7 @@
         </div>
         <div class="col-sm-2">
             <button type="button" class="btn btn-primary btn-xs ng-scope" data-dismiss="modal" 
-              ng-click="openAttributes('edit')">   
+              ng-click="addAttributes('edit')">   
               <span class="glyphicon glyphicon-search"></span> 
             </button>
           </div>

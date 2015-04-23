@@ -17,6 +17,10 @@ myApp.factory('getProductData', ['$http','$location',function($http,$location){
     	return $http.put('/updateProduct/' + editproduct._id, product)
     }
 
+    product.searchVariant=function(variantdata){
+       return $http.post('/getVariants',variantdata);
+    }
+
     
     return product;
 
