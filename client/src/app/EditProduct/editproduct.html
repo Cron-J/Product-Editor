@@ -1352,6 +1352,18 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">Price Type *</label>
+                    <div class="col-sm-6">
+                        <select name="language" class="form-control m-b" ng-model="price.priceTypeId" required>
+                            <option value="default" >Default</option>
+                            <option value="list">the list price of the product</option>
+                            <option value="list">the gross price of the product</option>
+                             <option value="list">the fix net price of the product</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-3 control-label"> Price* </label>
                     <div class="col-sm-4">
                         <input type="text" name="price" class="form-control" ng-model="price.netPrice" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
@@ -1363,7 +1375,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-3 control-label"> Fix Net price* </label>
                     <div class="col-sm-4">
                         <input type="number" name="fix_price" class="form-control" ng-model="price.fixNetPrice" ng-minlength="0" ng-maxlength="50" required>
@@ -1374,7 +1386,7 @@
                         <span ng-show="priceform.fix_price.$error.number">Enter only digit </span>
                         </span>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label"> VAT Percentage </label>
@@ -1401,7 +1413,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label"> Price Unit </label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input type="number" name="priceunit" class="form-control" ng-model="price.priceUnit" ng-minlength="0" ng-maxlength="50">
                         <span class="error" ng-show="priceform.priceunit.$invalid">Invalid:
                                         <span ng-show="priceform.priceunit.$error.minlength">Price Unit should be minimum of 0 digit</span>
@@ -1442,7 +1454,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Status</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <select name="language" class="form-control m-b" ng-model="price.statusId">
                             <option value="35">080 error</option>
                             <option value="36">090 warning</option>
@@ -1456,20 +1468,23 @@
                     </div>
                 </div>
 
+
                 <div class="form-group">
-                                <label class="col-sm-3 control-label">Price Type</label>
-                                <div class="col-sm-8">
-                                    <select name="language" class="form-control m-b" ng-model="price.priceTypeId">
-                                        <option value="default" >Default</option>
-                                        <option value="list">the list price of the product</option>
-                                    </select>
-                                </div>
+                            <label class="col-sm-3 control-label"> Prod Id Ext For Uom </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="pridforum" class="form-control" ng-model="price.productIdExtensionForUoM" ng-minlength="0" ng-maxlength="50" ng-pattern=" /^[a-zA-Z0-9\s]+$/">
+                                <span class="error" ng-show="priceform.pridforum.$invalid">Invalid:
+                                                <span ng-show="priceform.pridforum.$error.minlength">Prod Id Ext For Uom should be minimum of 0 cahracter</span>
+                                <span ng-show="priceform.pridforum.$error.maxlength">Prod Id Ext For Uom should be maximum of 25 cahracters</span>
+                                <span ng-show="priceform.pridforum.$error.pattern">Prod Id Ext For Uom should not allow special character </span>
+                                </span>
                             </div>
+                        </div>
 
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Unit of Measure</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <select name="language" class="form-control m-b" ng-model="price.unitOfMeasureId">
                             <option value=""></option>
                             <option value="2P">kB</option>
@@ -1525,53 +1540,6 @@
                     </div>
                 </div>
 
-
-
-                <accordion close-others="oneAtATime">
-
-                    <accordion-group is-open="status.open">
-                        <accordion-heading>
-                            Additional Information<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                        </accordion-heading>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"> List Price </label>
-                            <div class="col-sm-2">
-                                <input type="number" name="listprice" class="form-control" ng-model="price.listPrice" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="priceform.listprice.$invalid">Invalid:
-                                                <span ng-show="priceform.listprice.$error.minlength">List Price should be minimum of 0 digit</span>
-                                <span ng-show="priceform.listprice.$error.maxlength">List Price should be maximum of 50 digit</span>
-                                <span ng-show="priceform.listprice.$error.number">Enter only digit </span>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"> Gross Price </label>
-                            <div class="col-sm-3">
-                                <input type="number" name="grossprice" class="form-control" ng-model="price.grossPrice" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="priceform.grossprice.$invalid">Invalid:
-                                                <span ng-show="priceform.grossprice.$error.minlength">Gross Price should be minimum of 0 digit</span>
-                                <span ng-show="priceform.grossprice.$error.maxlength">Gross Price should be maximum of 50 digit</span>
-                                <span ng-show="priceform.grossprice.$error.number">Enter only digit </span>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"> Prod Id Ext For Uom </label>
-                            <div class="col-sm-3">
-                                <input type="text" name="pridforum" class="form-control" ng-model="price.productIdExtensionForUoM" ng-minlength="0" ng-maxlength="50" ng-pattern=" /^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="priceform.pridforum.$invalid">Invalid:
-                                                <span ng-show="priceform.pridforum.$error.minlength">Prod Id Ext For Uom should be minimum of 0 cahracter</span>
-                                <span ng-show="priceform.pridforum.$error.maxlength">Prod Id Ext For Uom should be maximum of 25 cahracters</span>
-                                <span ng-show="priceform.pridforum.$error.pattern">Prod Id Ext For Uom should not allow special character </span>
-                                </span>
-                            </div>
-                        </div>
-
-                    </accordion-group>
-
-                </accordion>
 
             </div>
 
@@ -2826,6 +2794,8 @@
     </form>
 
 </tab>
+
+
 </tabset>
 
 
