@@ -6,10 +6,20 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         $scope.updateitem = function(editproduct,type) {
             getProductData.updateProduct(editproduct)
                 .then(function(data){
-                    if(type!=='delete'){
+                    if(type=='New_Variant'){
+                        $scope.product.Variants.push($scope.newvariant)
+                        growl.addSuccessMessage('Variant created succesfully');
+                        $scope.newvariant=null;
+                    }
+                    else if(type=='Edit_Variant'){
+                        $scope.product.Variants.indexOf($scope.editvariant)
+                        growl.addSuccessMessage('Variant created succesfully');
+                        
+                    }
+                    else if(type!=='delete'){
                         growl.addSuccessMessage('Attribute list updated succesfully');
                     }
-                    if(type=='delete'){
+                    else if(type=='delete'){
                         growl.addSuccessMessage('Attribute deleted succesfully');
                     }
                 })
@@ -792,6 +802,41 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             }
         }
 
+        /*Variant Tab Code*/
+
+        $scope.searchvariant = function(variantdata){
+            getProductData.searchVariant(variantdata)
+               .then(function (data,status){
+                    $scope.tabledata= data;
+                })
+               .catch(function(error){
+                    console.log(error);
+               })
+          }
+
+        $scope.assignvariant = function (){
+             $scope.showvar=true;
+             $scope.editvar=false;
+             $scope.createNew={};
+        }
+
+        $scope.addAttributes= function(type) {
+            $scope.openAttribute('lg').then(function(data){
+                if(type == 'new'){
+                    //$scope.newvariant.attributes=data.attributeId;
+                }
+                else{
+                    //$scope.editvariant.attributes=data.attributeId;
+                }
+            })
+            .catch(function(error) {
+                console.log(error)
+            })
+        }
+        $scope.addNewVariant=function(){
+            $scope.updateitem($scope.editproduct,'New_Variant');
+        }
+
         // add remove description text box
 
 
@@ -982,7 +1027,9 @@ var VariantModalInstanceCtrl = function($scope, $modalInstance, $http, $location
 
     // searchVariants();
 };
-//modal for classification
+
+
+//modal controller for classification
 var ModalInstanceCtrl = function($scope, $modalInstance, $http, $location) {
     $scope.searchClassification = function(reqData) {
         $http.get('/getConfig')
@@ -1086,7 +1133,8 @@ var ModalInstanceCtrl = function($scope, $modalInstance, $http, $location) {
     };
 };
 
-//modal for classificationGroup
+
+//modal Controller for classificationGroup
 var ClassificationGroupCtrl = function($scope, $modalInstance, $http, $location, cid_detail) {
     $scope.cIdDetail = {
         "classificationRef": cid_detail._id
@@ -1197,6 +1245,8 @@ var ClassificationGroupCtrl = function($scope, $modalInstance, $http, $location,
     };
     _scope.init();
 };
+
+
 
 
 //controller for Attribute modal
