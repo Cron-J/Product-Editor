@@ -7,15 +7,11 @@
   </div>
 
   <div class="row col-sm-12 form-group ">
-    <div class="col-sm-2">
-      <label class="control-label">Search variant</label>
+    
+    <div class="col-sm-3 pull-right">
+      <input type="text" class="form-control" name="attributeSectionId" ng-model="searchvData.$" placeholder="Search">
     </div>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" name="attributeSectionId" ng-model="searchvData.variantId">
-    </div>
-    <div class="col-sm-2">
-      <button class="btn btn-primary" ng-click="searchvariant(searchvData)">Search</button>
-    </div>
+   
   </div>
 
   <div class="row col-sm-12">
@@ -35,7 +31,7 @@
 
         </tr>
 
-        <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in tabledata | orderBy:sortType:sortReverse ">
+        <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in editproduct.variants | filter:searchvData | orderBy:sortType:sortReverse ">
           <td>{{vdata.variantId}}</td>
           <td></td>
         </tr>
@@ -152,7 +148,7 @@
 
 
         <div class="col-sm-offset-5  col-sm-12">
-          <button class="btn btn-primary" type="submit" ng-click="create(newvariant)">Create</button>
+          <button class="btn btn-primary" type="submit" ng-click="addNewVariant(newvariant)">Create</button>
           <button class="btn btn-primary" ng-click="cancelvariant()">Cancel</button>
         </div>
 

@@ -3,6 +3,7 @@ myApp.controller('variantCtrl', [ '$scope','$rootScope',
  'blockUI','$q',
  function($scope,$rootScope, $http, $location,
   growl, $modal, $routeParams, blockUI,$filter,$q){
+  
 $scope.newvariant={};
   $scope.create = function(variantinfo){
 

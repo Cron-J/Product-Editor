@@ -3,17 +3,17 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
     function($scope, $rootScope, $http, $location, growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData) {
         
         /*update or add product data*/
+        $scope.variantAttrList=[];
         $scope.updateitem = function(editproduct,type) {
             getProductData.updateProduct(editproduct)
                 .then(function(data){
                     if(type=='New_Variant'){
-                        $scope.product.Variants.push($scope.newvariant)
                         growl.addSuccessMessage('Variant created succesfully');
                         $scope.newvariant=null;
                     }
                     else if(type=='Edit_Variant'){
-                        $scope.product.Variants.indexOf($scope.editvariant)
-                        growl.addSuccessMessage('Variant created succesfully');
+                        // $scope.product.variants.indexOf($scope.editvariant)
+                        growl.addSuccessMessage('Variant updated succesfully');
                         
                     }
                     else if(type!=='delete'){
@@ -22,6 +22,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                     else if(type=='delete'){
                         growl.addSuccessMessage('Attribute deleted succesfully');
                     }
+
+                    updateVariantList();
                 })
                 .catch(function(error){
 
@@ -40,21 +42,25 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
 
        /*get product data*/
         var init = function() {
-            $scope.variantAttrList=[];
+            
             $q.all([getProductData.getProducts($routeParams.id)
                 .then(function(data){
                     $scope.editproduct = data.data;
-                }),
-                getProductData.getVariantAttrList($routeParams.id)
-                .then(function(data){
-                    angular.forEach(data.data,function(value,key){
-                        $scope.variantAttrList.push({label:value.variantId,value:value.variantId})
-                    });
+                     updateVariantList();
                 })
             ])
             .then(function(values){
                 editAttribute();
             })
+        }
+        var updateVariantList=function(){
+            $scope.variantAttrList.length=0;
+            angular.forEach($scope.editproduct.variants,function(value,key){
+                if(value.hasVariantAttributeValues==true){
+                    $scope.variantAttrList.push({label:value.variantId,value:value.variantId})
+                }
+            })
+
         }
 
         init();
@@ -803,7 +809,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         }
 
         /*Variant Tab Code*/
-
+        $scope.newvariant={};
+        $scope.editvariant
         $scope.searchvariant = function(variantdata){
             getProductData.searchVariant(variantdata)
                .then(function (data,status){
@@ -823,22 +830,34 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         $scope.addAttributes= function(type) {
             $scope.openAttribute('lg').then(function(data){
                 if(type == 'new'){
-                    //$scope.newvariant.attributes=data.attributeId;
+                    console.log('mk',data)
+                    $scope.newvariant.attributes=data.attribute;
                 }
                 else{
-                    //$scope.editvariant.attributes=data.attributeId;
+                    $scope.editvariant.attributes=data.attribute;
                 }
             })
             .catch(function(error) {
                 console.log(error)
             })
         }
-        $scope.addNewVariant=function(){
+        $scope.addNewVariant=function(newvariant){
+            $scope.editproduct.variants.push(newvariant);
             $scope.updateitem($scope.editproduct,'New_Variant');
+            $scope.showvar=false;
+        }
+
+        $scope.updatevariant=function(){
+            $scope.updateitem($scope.editproduct,'Edit_Variant');
+            $scope.editvar=false;
         }
 
         // add remove description text box
-
+        $scope.editvariants = function (data){
+            $scope.editvariant=data;
+            $scope.editvar=true;
+            $scope.showvar=false;
+        }
 
         $scope.addContact = function() {
             $scope.contacts.push({
