@@ -3,6 +3,16 @@
 var channel = {
 
     /**
+     * Id for channel.
+     */
+    channelId: {
+        type: String,
+        unique: true,
+        sparse: true,
+        required: true
+    },
+
+    /**
      * String representation of atrribute name to be specified in channel.
      */
     attribute: {
