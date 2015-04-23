@@ -1,7 +1,6 @@
 // Load modules
 
 var Product = require('./controller/product'),
-	Variant = require('./controller/variant'),
     Static    = require('./static');
 
 // API Server Endpoints
@@ -13,9 +12,6 @@ exports.endpoints = [
     
     { method: 'GET', path: '/getProduct/{id}', config: Product.getProductById },
     { method: 'PUT', path: '/updateProduct/{id}', config: Product.updateProduct },
-    { method: 'POST', path: '/createVariant', config: Variant.createVariant },
-    { method: 'POST', path: '/getVariants', config: Variant.searchVariant },
-    { method: 'PUT', path: '/updateVariant/{id}', config: Variant.updateVariant },
     { method: 'GET', path: '/getConfig', config: Product.getHostFromConfig }
 ];
 

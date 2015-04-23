@@ -256,7 +256,12 @@ var ProductSchema = new Schema({
     /**
      * Set of {@link ProductDocAssociation}s.
      */
-    documents: [ProductDocAssociation]
+    documents: [ProductDocAssociation],
+
+    /**
+     * Set of {@link Variant}s.
+     */
+    variants: [Variant]
 
 });
 

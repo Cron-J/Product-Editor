@@ -1,13 +1,6 @@
 'use strict';
 
-// dependencies
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    constants = require('../Utility/constants').constants,
-    validator = require('mongoose-validators');
-
-
-var VariantSchema = new Schema({
+var variant = {
 
     /**
      * Id for varient.
@@ -15,8 +8,7 @@ var VariantSchema = new Schema({
     variantId: {
         type: String,
         unique: true,
-        required: true,
-        validate: [ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
+        required: true
     },
 
     /**
@@ -81,24 +73,7 @@ var VariantSchema = new Schema({
         default: false
     }
 
-});
-
-VariantSchema.statics.createVariant = function(varient, callback) {
-    this.create(varient, callback);
 };
-
-VariantSchema.statics.searchVariant = function(query, callback) {
-    this.find(query, callback);
-};
-
-VariantSchema.statics.updateVariant = function(id, variant, callback) {
-    this.update({
-        '_id': id
-    }, variant, callback);
-};
-
-// export
-var variant = mongoose.model('variant', VariantSchema);
 
 /** export schema */
 module.exports = {
