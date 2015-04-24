@@ -336,7 +336,7 @@
 
             </tab>
 
-            <tab heading="Classification">
+            <tab heading="Classification" ng-click="updateVariantList('hasVariantClassificationGroupAssociations')">
 
                 <div class=" m-t-25">
 
@@ -467,9 +467,12 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Variant ID</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" />
+                                    <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
+                                    <select class="form-control" name="" ng-model="createNew.variantId" ng-options="item.value as item.label for item in hasVariantClassificationGroupAssociations">
+                                        <option value="" style="display:none"></option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-1">
+                                <!-- <div class="col-sm-1">
                                     <span class="ng-scope"> 
                                         <script type="text/ng-template" id="myModalContent6.html">
                                             <div ng-include="'app/EditProduct/variantmodal.html'"></div>
@@ -478,7 +481,7 @@
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="form-group ">
@@ -585,10 +588,16 @@
 
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Variant ID</label>
-                                <div class="col-sm-3">
+                                <!-- <div class="col-sm-3">
                                     <input type="text" class="form-control" name="" ng-model="editrow.variantId" ng-readonly="true" />
+                                </div> -->
+                                <div class="col-sm-3">
+                                    
+                                    <select class="form-control" name="" ng-model="editrow.variantId" ng-options="item.value as item.label for item in hasVariantClassificationGroupAssociations">
+                                        <option value="" style="display:none"></option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-1">
+                                <!-- <div class="col-sm-1">
                                     <span class="ng-scope"> 
                                                 <script type="text/ng-template" id="myModalContent6.html">
                                                   <div ng-include="'app/EditProduct/variantmodal.html'"></div>
@@ -597,7 +606,7 @@
                                                           <span class="glyphicon glyphicon-search"></span>
                                     </button>
                                     </span>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="form-group">
@@ -695,7 +704,7 @@
    
     </tab>
 
-<tab heading="Document">
+<tab heading="Document" ng-click="updateVariantList('hasVariantDocAssociation')">
     <div class=" m-t-25">
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
         <table class="table table-stripped  custom-table">
@@ -870,9 +879,12 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Variant ID</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name="" ng-model="doc.variantId" ng-readonly="true" />
+                                    <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
+                        <select class="form-control" name="" ng-model="doc.variantId" ng-options="item.value as item.label for item in hasVariantDocAssociation">
+                            <option value="" style="display:none"></option>
+                        </select>
                     </div>
-                    <div class="col-sm-1">
+                    <!-- <div class="col-sm-1">
                         <span class="ng-scope"> 
                                     <script type="text/ng-template" id="myModalContent6.html">
                                       <div ng-include="'app/EditProduct/variantmodal.html'"></div>
@@ -881,7 +893,7 @@
                                               <span class="glyphicon glyphicon-search"></span>
                                     </button>
                         </span>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="form-group">
@@ -988,7 +1000,7 @@
 
 </tab>
 
-<tab heading="Price">
+<tab heading="Price" ng-click="updateVariantList('hasVariantPrices')">
     <div class=" m-t-25">
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
         <table class="table table-stripped custom-table ">
@@ -1313,9 +1325,12 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Variant ID</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name="" ng-model="price.variantId" ng-readonly="true" />
+                                    <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
+                        <select class="form-control" name="" ng-model="price.variantId" ng-options="item.value as item.label for item in hasVariantPrices">
+                            <option value="" style="display:none"></option>
+                        </select>
                     </div>
-                    <div class="col-sm-1">
+                    <!-- <div class="col-sm-1">
                         <span class="ng-scope"> 
                                         <script type="text/ng-template" id="myModalContent6.html">
                                           <div ng-include="'app/EditProduct/variantmodal.html'"></div>
@@ -1324,7 +1339,7 @@
                                                   <span class="glyphicon glyphicon-search"></span>
                         </button>
                         </span>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="form-group">
@@ -1566,7 +1581,7 @@
 
 </tab>
 
-<tab heading="Assortment">
+<tab heading="Assortment" ng-click="updateVariantList('hasVariantContractedProducts')">
 
     <div class=" m-t-25">
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
@@ -1708,10 +1723,16 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Variant ID</label>
-                    <div class="col-sm-3">
+                    <!-- <div class="col-sm-3">
                         <input type="text" class="form-control" name="" ng-model="cproduct.variantId" ng-readonly="true" />
+                    </div> -->
+                    <div class="col-sm-3">
+                                    <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
+                        <select class="form-control" name="" ng-model="cproduct.variantId" ng-options="item.value as item.label for item in hasVariantContractedProducts">
+                            <option value="" style="display:none"></option>
+                        </select>
                     </div>
-                    <div class="col-sm-1">
+                    <!-- <div class="col-sm-1">
                         <span class="ng-scope"> 
                                         <script type="text/ng-template" id="myModalContent6.html">
                                           <div ng-include="'app/EditProduct/variantmodal.html'"></div>
@@ -1720,7 +1741,7 @@
                                                   <span class="glyphicon glyphicon-search"></span>
                         </button>
                         </span>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="form-group">
@@ -2108,7 +2129,7 @@
 
 </tab>
 
-<tab heading="Relation">
+<tab heading="Relation" ng-click="updateVariantList('hasVariantProductRelation')">
 
     <div class=" m-t-25">
         <!-- <b>Found {{filteredItems.length}} entries</b> -->
@@ -2435,10 +2456,16 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Variant ID</label>
-                    <div class="col-sm-3">
+                    <!-- <div class="col-sm-3">
                         <input type="text" class="form-control" name="" ng-model="prelation.variantId" ng-readonly="true" />
+                    </div> -->
+                    <div class="col-sm-4">
+                    
+                        <select class="form-control" name="" ng-model="prelation.variantId" ng-options="item.value as item.label for item in hasVariantProductRelation">
+                            <option value="" style="display:none"></option>
+                        </select>
                     </div>
-                    <div class="col-sm-1">
+                    <!-- <div class="col-sm-1">
                         <span class="ng-scope"> 
                                         <script type="text/ng-template" id="myModalContent6.html">
                                           <div ng-include="'app/EditProduct/variantmodal.html'"></div>
@@ -2447,7 +2474,7 @@
                                         <span class="glyphicon glyphicon-search"></span>
                         </button>
                         </span>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="form-group">
@@ -2796,7 +2823,7 @@
 </tab>
 
 
-<tab heading="Variant">
+<tab heading="Variant" >
 
     <div ng-include="'app/productVariant/product-variants.html'"></div>
 </tab>

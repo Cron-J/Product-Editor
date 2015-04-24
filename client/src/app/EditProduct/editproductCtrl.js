@@ -23,7 +23,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                         growl.addSuccessMessage('Attribute deleted succesfully');
                     }
 
-                    updateVariantList();
+                    //$scope.updateVariantList();
                 })
                 .catch(function(error){
 
@@ -45,21 +45,29 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             
             $q.all([getProductData.getProducts($routeParams.id)
                 .then(function(data){
+
                     $scope.editproduct = data.data;
-                     updateVariantList();
+                    console.log('$scope.editproduct',$scope.editproduct)
+                     $scope.updateVariantList('hasVariantAttributeValues');
                 })
             ])
             .then(function(values){
                 editAttribute();
             })
         }
-        var updateVariantList=function(){
-            $scope.variantAttrList.length=0;
-            angular.forEach($scope.editproduct.variants,function(value,key){
-                if(value.hasVariantAttributeValues==true){
-                    $scope.variantAttrList.push({label:value.variantId,value:value.variantId})
-                }
-            })
+        $scope.hasVariantAttributeValues=[];
+        /*generic code for showing variant in each tab*/
+         $scope.updateVariantList=function(variantType){
+             $scope[variantType] ? $scope[variantType].length=0 :$scope[variantType]=[];
+             //$scope[variantType].length=0;
+            //$scope.mk.length=0;
+                angular.forEach($scope.editproduct.variants,function(value,key){
+                    if(value[variantType]==true){
+                        $scope[variantType].push({label:value.variantId,value:value.variantId})
+                    }
+                })
+           
+            
 
         }
 
@@ -303,9 +311,9 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                 },
                 { displayName:"Variant Id", field:"variantId",filter: {placeholder: 'Search variant id'}, editableCellTemplate: 'ui-grid/dropdownEditor',editDropdownIdLabel:'value', editDropdownValueLabel: 'label',
                     filter: { placeholder: 'Search variant', type: uiGridConstants.filter.SELECT, 
-                              selectOptions : $scope.variantAttrList
+                              selectOptions : $scope.hasVariantAttributeValues
                             },
-                    editDropdownOptionsArray : $scope.variantAttrList
+                    editDropdownOptionsArray : $scope.hasVariantAttributeValues
                 },
 
                 { displayName:"Channels",field: 'channels', cellTemplate:'<button class="btn btn-primary btn-xs centered" ng-click="grid.appScope.showChannel(rowRenderIndex)"><span class="glyphicon glyphicon-list-alt"></span></button>' , filter: { placeholder: 'Search channel'} },
@@ -851,6 +859,10 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             $scope.updateitem($scope.editproduct,'Edit_Variant');
             $scope.editvar=false;
         }
+
+        
+
+
 
         // add remove description text box
         $scope.editvariants = function (data){
