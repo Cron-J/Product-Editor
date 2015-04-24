@@ -1,0 +1,290 @@
+ <div class=" m-t-25">
+        <!-- <b>Found {{filteredItems.length}} entries</b> -->
+        <table class="table table-stripped  custom-table">
+            <tbody>
+                <tr>
+                    <th class="check-box">
+                        <input id="selectall" ng-click="selectAlldocCBoxes()" type="checkbox"> </th>
+                    <th>
+                        <a ng-click="sortType = 'path'; sortReverse = !sortReverse">Path
+                                        <span ng-show="sortType == 'path' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'path' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+
+                    <th>
+                        <a ng-click="sortType = 'variantId'; sortReverse = !sortReverse">Variant
+                            <span ng-show="sortType =='variantId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType =='variantId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+
+                    <th>
+                        <a ng-click="sortType = 'documentViewTypeId'; sortReverse = !sortReverse">View Type
+                                        <span ng-show="sortType == 'documentViewTypeId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'documentViewTypeId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Language
+                                        <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Description
+                                        <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortType = 'languageId'; sortReverse = !sortReverse">Order No.
+                                        <span ng-show="sortType == 'languageId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'languageId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="input-group" style="width:60%;margin-left:20%;">
+                            <input type="text" class="form-control" ng-model="search.path" style="height:22px;">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.path=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </td>
+
+                    <td>
+                        <div class="input-group" style="width:60%;margin-left:20%;">
+                            <input type="text" class="form-control" ng-model="search.variantId" style="height:22px;">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.variantId=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div><!-- /input-group -->
+                        
+                    </td>
+
+                    <td>
+                        <div class="input-group" style="width:80%;margin-left:11%; ">
+                            <select name="type" class="form-control m-b"  ng-model="search.documentViewTypeId" style="height:22px;padding:0px">
+                                <option value=""></option>
+                                <option value="Atmosphere">Atmosphere</option>
+                                <option value="BackView">BackView</option>
+                                <option value="FrontView">FrontView</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.documentViewTypeId=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </td>
+
+                    <td>
+                        <div class="input-group" style="width:45%;margin-left:28%;">
+                            <select name="language" class="form-control m-b" ng-model="search.languageId" style="height:22px;padding:0px">
+                                <option value=""></option>
+                                <option value="de">de</option>
+                                <option value="en">en</option>
+                                <option value="es">es</option>
+                                <option value="fr">fr</option>
+                                <option value="jp">jp</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.languageId=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div><!-- /input-group -->
+                    </td>
+
+                    <td>
+                        <div class="input-group" style="width:90%;margin-left:5%;">
+                            <input type="text" class="form-control" ng-model="search.description" style="height:22px;">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.description=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="input-group" style="width:50%;margin-left:24%;">
+                            <input type="text" class="form-control" ng-model="search.orderNo" style="height:22px;padding:0px">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.orderNo=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div><!-- /input-group -->
+                        
+                    </td>
+
+                    <td></td>
+                </tr>
+
+                <tr  ng-repeat="ddata in editproduct.documents | orderBy:sortType:sortReverse  | filter:search:strict | filter:variantdoc[0]:strict">
+
+                    <td class="check-box">
+                        <input type="checkbox" value="{{ddata._id}}" ng-checked="ddata.checked" ng-model="ddata.checked">
+                    </td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.path}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.variantId}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.documentViewTypeId}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.languageId}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.description}}</td>
+                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.orderNo}}</td>
+                    <td>
+                        <button class="btn btn-primary btn-xs" ng-click="editdoc(ddata)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot >
+                <td colspan="8">
+                    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+                </td>
+                    
+            </tfoot>
+        </table>
+    </div>
+
+
+    <div class="row ">
+        <div class="col-sm-4 m-b-20 ">
+            <button class="btn btn-primary" ng-click="createdoc()">New Document</button>
+            <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
+        </div>
+    </div>
+
+
+    <!-- Display this section on clicking new button -->
+
+
+    <div class="row m-t-25 " ng-show="docvar">
+        <form name="docform" novalidate>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Variant ID</label>
+                    <div class="col-sm-3">
+                                    <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
+                        <select class="form-control" name="" ng-model="doc.variantId" ng-options="item.value as item.label for item in hasVariantDocAssociation">
+                            <option value="" style="display:none"></option>
+                        </select>
+                    </div>
+                    <!-- <div class="col-sm-1">
+                        <span class="ng-scope"> 
+                                    <script type="text/ng-template" id="myModalContent6.html">
+                                      <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                    </script>
+                                    <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantDocAssociation','doc')">
+                                              <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                        </span>
+                    </div> -->
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"> Path </label>
+                    <div class="col-sm-7">
+                        <textarea type="text" name="path" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.path"></textarea>
+                        <!-- <span class="error" ng-show="docform.url.$invalid">Invalid:Provide valid url
+                                    </span> -->
+                        <span class="error" ng-show="docform.path.$invalid">Invalid:
+                                        <span ng-show="docform.path.$error.minlength">Path should be minimum of 0 characters</span>
+                        <span ng-show="docform.path.$error.maxlength">Path should be maximum of 50 characters</span>
+                        <span ng-show="docform.path.$error.pattern">Path won't allow special characters</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Language</label>
+                    <div class="col-sm-3">
+                        <select name="language" class="form-control m-b" ng-model="doc.languageId">
+                            <option value="de">de</option>
+                            <option value="en">en</option>
+                            <option value="es">es</option>
+                            <option value="fr">fr</option>
+                            <option value="jp">jp</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">View Type</label>
+                    <div class="col-sm-4">
+                        <select name="type" class="form-control m-b" ng-model="doc.documentViewTypeId">
+                            <option value="Atmosphere">Atmosphere</option>
+                            <option value="BackView">BackView</option>
+                            <option value="FrontView">FrontView</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Order No.</label>
+                    <div class="col-sm-3">
+                        <input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
+                        <span class="error" ng-show="docform.orderno.$invalid">Invalid:
+                                        <span ng-show="docform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
+                        <span ng-show="docform.orderno.$error.maxlength">Order No. should be maximum of 50 digit</span>
+                        <span ng-show="docform.orderno.$error.number">Enter only digit</span>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Description </label>
+                    <div class="col-sm-8">
+                        <textarea type="text" name="description" class="form-control" ng-model="doc.description" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/"></textarea>
+                        <span class="error" ng-show="docform.description.$invalid">Invalid:
+                                        <span ng-show="docform.description.$error.minlength">Description should be minimum of 0 characters</span>
+                        <span ng-show="docform.description.$error.maxlength">Description should be maximum of 50 characters</span>
+                        <span ng-show="docform.description.$error.pattern">Description won't allow special characters</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Valid From</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Valid To</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div ng-include="'app/partials/_auditInfo.html'"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <td>
+                        <div class="col-sm-offset-2  col-sm-3">
+                            <button class="btn btn-primary" type="submit" ng-disabled="docform.$invalid" ng-click="savedoc(doc);">Save</button>
+                            <button class="btn btn-primary" type="submit" ng-click="canceldoc();">Cancel</button>
+                        </div>
+                    </td>
+                </div>
+            </div>
+
+        </form>
+
+    </div>

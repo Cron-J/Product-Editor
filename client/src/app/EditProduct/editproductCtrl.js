@@ -161,9 +161,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             }, function () {
               
             });
-          
 
-            
         }
 
 

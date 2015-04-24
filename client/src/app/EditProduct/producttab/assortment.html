@@ -1,0 +1,542 @@
+<div class=" m-t-25">
+        <!-- <b>Found {{filteredItems.length}} entries</b> -->
+        <table class="table table-stripped custom-table ">
+            <tbody>
+                <tr>
+                    <th class="check-box">
+                        <input type="checkbox" id="selectall" ng-click="selectAllcproductCBoxes()"> </th>
+                    <!-- <th>
+                                    <a  ng-click="sortType = 'contractId'; sortReverse = !sortReverse">Contract
+                                        <span ng-show="sortType == 'contractId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'contractId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                                </th>  -->
+
+                    <th>
+                        <a ng-click="sortType = 'VariantId'; sortReverse = !sortReverse">Variant
+                                        <span ng-show="sortType == 'VariantId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'VariantId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+
+                    <th>
+                        <a ng-click="sortType = 'extClassificationId'; sortReverse = !sortReverse">Ext Classification Id
+                                        <span ng-show="sortType == 'extClassificationId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'extClassificationId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortType = 'extClassificationGroupId'; sortReverse = !sortReverse">Ext Classification Group Id
+                                        <span ng-show="sortType == 'extClassificationGroupId' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'extClassificationGroupId' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortType = 'descShort'; sortReverse = !sortReverse">Ext Short description
+                                        <span ng-show="sortType == 'descShort' && !sortReverse" class="fa fa-caret-down"></span>
+                                        <span ng-show="sortType == 'descShort' && sortReverse" class="fa fa-caret-up"></span>
+                                    </a>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="input-group" style="width:46%;margin-left:28%;">
+                            <input type="text" class="form-control" ng-model="search.variantId" style="height:22px;padding:0px">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.variantId=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div><!-- /input-group -->
+                        
+                    </td>
+
+                    <td>
+                        <div class="input-group" style="width:50%;margin-left:23%;">
+                            <input type="text" class="form-control" ng-model="search.extClassificationId" style="height:22px;padding:0px">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.extClassificationId=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div><!-- /input-group -->
+                        
+                    </td>
+                    <td>
+                        <div class="input-group" style="width:40%;margin-left:27%;">
+                            <input type="text" class="form-control" ng-model="search.extClassificationGroupId" style="height:22px;padding:0px">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.extClassificationGroupId=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div><!-- /input-group -->
+                        
+                    </td>
+
+                    <td>
+                        <div class="input-group" style="width:54%;margin-left:23%;">
+                            <input type="text" class="form-control" ng-model="search.descShort" style="height:22px;padding:0px">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" ng-click="search.descShort=''" type="button">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </span>
+                        </div><!-- /input-group -->
+                        
+                    </td>
+                    <td></td>
+                </tr>
+
+
+                <tr  ng-repeat="cprodata in editproduct.contractedProducts | orderBy:sortType:sortReverse  | filter:search:strict | filter:vassortment[0]:strict ">
+                    <td>
+                        <input type="checkbox" value="{{cprodata._id}}" ng-checked="cprodata.checked" ng-model="cprodata.checked">
+                    </td>
+                    <td ng-click="editcproduct(cprodata)" class="hoverptr">{{cprodata.variantId}}</td>
+                    <!-- <td >{{cprodata.contractId}}</td> -->
+                    <td ng-click="editcproduct(cprodata)" class="hoverptr">{{cprodata.extClassificationId}}</td>
+                    <td ng-click="editcproduct(cprodata)" class="hoverptr">{{cprodata.extClassificationGroupId}}</td>
+                    <td ng-click="editcproduct(cprodata)" class="hoverptr">{{cprodata.descShort}}</td>
+                    <td>
+                        <button class="btn btn-primary btn-xs" ng-click="editcproduct(cprodata)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <td colspan="10">
+                    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+                </td>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="row ">
+        <div class="col-sm-4 m-b-20 ">
+            <button class="btn btn-primary" ng-click="newcproduct()">New Contracted Product</button>
+            <button class="btn btn-primary" ng-click="deletecproduct()">Delete Selected</button>
+        </div>
+    </div>
+
+
+    <form name="assortform" novalidate>
+        <div class="row m-t-25 " ng-show="cproductvar">
+            <div class="col-sm-6">
+                <!-- <div class="form-group">
+                                <label class="col-sm-5 control-label"> Contract </label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="contract" class="form-control" ng-model="cproduct.contractId" required>
+                                    <span class="error" ng-show="assortform.pcid.$invalid">Invalid:
+                                        <span ng-show="assortform.pcid.$error.maxlength">Product catalog should be maximum of 50 characters</span>
+                                        <span ng-show="assortform.pcid.$error.pattern">Product catalog won't allow special characters</span>
+                                    </span>
+                                </div>
+                            </div> -->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Variant ID</label>
+                    <!-- <div class="col-sm-3">
+                        <input type="text" class="form-control" name="" ng-model="cproduct.variantId" ng-readonly="true" />
+                    </div> -->
+                    <div class="col-sm-3">
+                                    <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
+                        <select class="form-control" name="" ng-model="cproduct.variantId" ng-options="item.value as item.label for item in hasVariantContractedProducts">
+                            <option value="" style="display:none"></option>
+                        </select>
+                    </div>
+                    <!-- <div class="col-sm-1">
+                        <span class="ng-scope"> 
+                                        <script type="text/ng-template" id="myModalContent6.html">
+                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
+                                        </script>
+                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantContractedProducts','cproduct')">
+                                                  <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div> -->
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"> Status </label>
+                    <div class="col-sm-3">
+                        <select name="language" class="form-control m-b" ng-model="cproduct.status">
+                            <option value=""></option>
+                            <option value="72">105 changed</option>
+                            <option value="57">400 active</option>
+                            <option value="56">600 archive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"> Ext Product Id </label>
+                    <div class="col-sm-5">
+                        <input type="string" name="extpid" class="form-control" ng-model="cproduct.extproductid" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                        <span class="error" ng-show="assortform.extpid.$invalid">Invalid:
+                                        <span ng-show="assortform.extpid.$error.minlength">Ext Product Id should be minimum of 0 characters</span>
+                        <span ng-show="assortform.extpid.$error.maxlength">Ext Product Id should be maximum of 50 characters</span>
+                        <span ng-show="assortform.extpid.$error.pattern">Ext Product Id won't allow special characters</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"> Ext Classification Id </label>
+                    <div class="col-sm-5">
+                        <input type="text" name="extclassificationid" class="form-control" ng-model="cproduct.extClassificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                        <span class="error" ng-show="assortform.extclassificationid.$invalid">Invalid:
+                                        <span ng-show="assortform.extclassificationid.$error.minlength">Ext Classification Id should be minimum of 0 characters</span>
+                        <span ng-show="assortform.extclassificationid.$error.maxlength">Ext Classification Id should be maximum of 50 characters</span>
+                        <span ng-show="assortform.extclassificationid.$error.pattern">Ext Classification Id won't allow special characters</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"> Ext Classification Group Id </label>
+                    <div class="col-sm-5">
+                        <input type="text" name="classificationgid" class="form-control" ng-model="cproduct.extClassificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                        <span class="error" ng-show="assortform.classificationgid.$invalid">Invalid:
+                                        <span ng-show="assortform.classificationgid.$error.minlength">Ext Classification Group Id should be minimum of 0 characters</span>
+                        <span ng-show="assortform.classificationgid.$error.maxlength">Ext Classification Group Id should be maximum of 50 characters</span>
+                        <span ng-show="assortform.classificationgid.$error.pattern">Ext Classification Group Id won't allow special characters</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label"> Ext Short description </label>
+                    <div class="col-sm-7">
+                        <input type="text" name="shortdesc" class="form-control" ng-model="cproduct.descShort" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                        <span class="error" ng-show="assortform.shortdesc.$invalid">Invalid:
+                                        <span ng-show="assortform.shortdesc.$error.minlength">Ext Short description should be minimum of 0 characters</span>
+                        <span ng-show="assortform.shortdesc.$error.maxlength">Ext Short description should be maximum of 50 characters</span>
+                        <span ng-show="assortform.shortdesc.$error.pattern">Ext Short description won't allow special characters</span>
+                        </span>
+                    </div>
+                </div>
+
+                <accordion close-others="oneAtATime">
+
+                    <accordion-group is-open="status.open">
+                        <accordion-heading>
+                            Additional Information<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                        </accordion-heading>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> AltExtProductId </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="altextproid" class="form-control" ng-model="cproduct.altExtProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                <span class="error" ng-show="assortform.altextproid.$invalid">Invalid:
+                                                <span ng-show="assortform.altextproid.$error.minlength">AltExtProductId should be minimum of 0 characters</span>
+                                <span ng-show="assortform.altextproid.$error.maxlength">AltExtProductId should be maximum of 50 characters</span>
+                                <span ng-show="assortform.altextproid.$error.pattern">AltExtProductId won't allow special characters</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Long description </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="ldesc" class="form-control" ng-model="cproduct.descLong" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                <span class="error" ng-show="assortform.ldesc.$invalid">Invalid:
+                                                <span ng-show="assortform.ldesc.$error.minlength">Long description should be minimum of 0 characters</span>
+                                <span ng-show="assortform.ldesc.$error.maxlength">Long description should be maximum of 50 characters</span>
+                                <span ng-show="assortform.ldesc.$error.pattern">Long description won't allow special characters</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> ExtGlAccountId </label>
+                            <div class="col-sm-4">
+                                <input type="string" name="extglid" class="form-control" ng-model="cproduct.extGLAccountId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
+                                <span class="error" ng-show="assortform.extglid.$invalid">Invalid:
+                                                <span ng-show="assortform.extglid.$error.minlength">ExtGlAccountId should be minimum of 0 characters</span>
+                                <span ng-show="assortform.extglid.$error.maxlength">ExtGlAccountId should be maximum of 50 characters</span>
+                                <span ng-show="assortform.extglid.$error.pattern">ExtGlAccountId won't allow special characters</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Quantity Interval </label>
+                            <div class="col-sm-2">
+                                <input type="number" name="qunatityinterval" class="form-control" ng-model="cproduct.quantityInterval" ng-minlength="0" ng-maxlength="50">
+                                <span class="error" ng-show="assortform.qunatityinterval.$invalid">Invalid:
+                                                <span ng-show="assortform.qunatityinterval.$error.minlength">Quantity Interval should be minimum of 0 digit</span>
+                                <span ng-show="assortform.qunatityinterval.$error.maxlength">Quantity Interval should be maximum of 50 digit</span>
+                                <span ng-show="assortform.qunatityinterval.$error.number">Enter only digit</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Max Quantity </label>
+                            <div class="col-sm-3">
+                                <input type="number" name="maxquantity" class="form-control" ng-model="cproduct.maxQuantity" ng-minlength="0" ng-maxlength="50">
+                                <span class="error" ng-show="assortform.maxquantity.$invalid">Invalid:
+                                                <span ng-show="assortform.maxquantity.$error.minlength">Max Quantity should be minimum of 0 digit</span>
+                                <span ng-show="assortform.maxquantity.$error.maxlength">Max Quantity should be maximum of 50 digit</span>
+                                <span ng-show="assortform.maxquantity.$error.number">Enter only digit</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Min Quantity </label>
+                            <div class="col-sm-3">
+                                <input type="number" name="minquantity" class="form-control" ng-model="cproduct.minQuantity" ng-minlength="0" ng-maxlength="50">
+                                <span class="error" ng-show="assortform.minquantity.$invalid">Invalid:
+                                                <span ng-show="assortform.minquantity.$error.minlength">Min Quantity should be minimum of 0 digit</span>
+                                <span ng-show="assortform.minquantity.$error.maxlength">Min Quantity should be maximum of 50 digit</span>
+                                <span ng-show="assortform.minquantity.$error.number">Enter only digit</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> LeadtimeInDays </label>
+                            <div class="col-sm-2">
+                                <input type="number" name="leadtimedays" class="form-control" ng-model="cproduct.grossPrice" ng-minlength="0" ng-maxlength="50">
+                                <span class="error" ng-show="assortform.leadtimedays.$invalid">Invalid:
+                                                <span ng-show="assortform.leadtimedays.$error.minlength">LeadtimeInDays should be minimum of 0 digit</span>
+                                <span ng-show="assortform.leadtimedays.$error.maxlength">LeadtimeInDays should be maximum of 50 digit</span>
+                                <span ng-show="assortform.leadtimedays.$error.number">Enter only digit</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Sales UnitOfMeasure </label>
+                            <div class="col-sm-2">
+                                <select name="language" class="form-control m-b" ng-model="cproduct.salesUnitOfMeasureId">
+                                    <option value=""></option>
+                                    <option value="2P">kB</option>
+                                    <option value="4L">MB</option>
+                                    <option value="A86">GHz</option>
+                                    <option value="A99">bit</option>
+                                    <option value="AD">B</option>
+                                    <option value="AMH">Ah</option>
+                                    <option value="AMP">A</option>
+                                    <option value="ANN">a</option>
+                                    <option value="B10">bit/s</option>
+                                    <option value="BAR">bar</option>
+                                    <option value="C26">ms</option>
+                                    <option value="C31">mW</option>
+                                    <option value="C62">piece</option>
+                                    <option value="CEL">°C</option>
+                                    <option value="CMK">cm²</option>
+                                    <option value="CMQ">m³</option>
+                                    <option value="CMT">cm</option>
+                                    <option value="DAY">d</option>
+                                    <option value="DD">°</option>
+                                    <option value="EA">each</option>
+                                    <option value="GB">GB</option>
+                                    <option value="GM">g/m</option>
+                                    <option value="GRM">g</option>
+                                    <option value="HTZ">Hz</option>
+                                    <option value="HUR">h</option>
+                                    <option value="KEL">K</option>
+                                    <option value="KGM">kg</option>
+                                    <option value="KTM">km</option>
+                                    <option value="KVT">kV</option>
+                                    <option value="KWH">kWh</option>
+                                    <option value="KWT">kW</option>
+                                    <option value="LTR">Litre</option>
+                                    <option value="MAW">MW</option>
+                                    <option value="MGM">mg</option>
+                                    <option value="MIN">min</option>
+                                    <option value="MLT">ml</option>
+                                    <option value="MMT">mm</option>
+                                    <option value="MON">month</option>
+                                    <option value="MTR">m</option>
+                                    <option value="MTS">m/s</option>
+                                    <option value="P1">%</option>
+                                    <option value="PCE">piece</option>
+                                    <option value="PK">PK</option>
+                                    <option value="PR">pair</option>
+                                    <option value="SEC">s</option>
+                                    <option value="ST">ST</option>
+                                    <option value="WEE">week</option>
+                                    <option value="WTT">watt</option>
+                                    <option value="ZOL">Zoll</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Discount </label>
+                            <div class="col-sm-8">
+                                <input type="number" name="discount" class="form-control" ng-model="cproduct.discount" ng-minlength="0" ng-maxlength="50">
+                                <span class="error" ng-show="assortform.discount.$invalid">Invalid:
+                                                <span ng-show="assortform.discount.$error.minlength">Discount should be minimum of 0 digit</span>
+                                <span ng-show="assortform.discount.$error.maxlength">Discount should be maximum of 50 digit</span>
+                                <span ng-show="assortform.discount.$error.number">Enter only digit</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Visibility</label>
+                            <div class="col-sm-2">
+                                <select name="visibility" class="form-control m-b" ng-model="cproduct.visibility">
+                                    <option value="-1">exclude</option>
+                                    <option value="0">neutral</option>
+                                    <option value="1">include</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Status Date </label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="price.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                            </div>
+                        </div>
+
+                    </accordion-group>
+
+
+                    <accordion-group is-open="status.close">
+                        <accordion-heading>
+                            Contract Amount<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                        </accordion-heading>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Cost </label>
+                            <div class="col-sm-3">
+                                <input type="number" name="cost" class="form-control" ng-model="cproduct.cost" ng-minlength="0" ng-maxlength="50">
+                                <span class="error" ng-show="assortform.cost.$invalid">Invalid:
+                                                <span ng-show="assortform.cost.$error.minlength">Cost should be minimum of 0 digit</span>
+                                <span ng-show="assortform.cost.$error.maxlength">Cost should be maximum of 50 digit</span>
+                                <span ng-show="assortform.cost.$error.number">Enter only digit</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Currency</label>
+                            <div class="col-sm-3">
+                                <select name="language" class="form-control m-b" ng-model="cproduct.currencyId">
+                                    <option value=""></option>
+                                    <option value="CHF">CHF</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                    <option value="JPY">JPY</option>
+                                    <option value="NZD">NZD</option>
+                                    <option value="USD">USD</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label"> Amount </label>
+                            <div class="col-sm-2">
+                                <input type="number" name="amount" class="form-control" ng-model="cproduct.ammount" ng-minlength="0" ng-maxlength="50">
+                                <span class="error" ng-show="assortform.amount.$invalid">Invalid:
+                                                <span ng-show="assortform.amount.$error.minlength">Amount should be minimum of 0 digit</span>
+                                <span ng-show="assortform.amount.$error.maxlength">Amount should be maximum of 50 digit</span>
+                                <span ng-show="assortform.amount.$error.number">Not vallid number</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Unit of Measure</label>
+                            <div class="col-sm-3">
+                                <select name="language" class="form-control m-b" ng-model="cproduct.unitOfMeasureId">
+                                    <option value=""></option>
+                                    <option value="2P">kB</option>
+                                    <option value="4L">MB</option>
+                                    <option value="A86">GHz</option>
+                                    <option value="A99">bit</option>
+                                    <option value="AD">B</option>
+                                    <option value="AMH">Ah</option>
+                                    <option value="AMP">A</option>
+                                    <option value="ANN">a</option>
+                                    <option value="B10">bit/s</option>
+                                    <option value="BAR">bar</option>
+                                    <option value="C26">ms</option>
+                                    <option value="C31">mW</option>
+                                    <option value="C62">piece</option>
+                                    <option value="CEL">°C</option>
+                                    <option value="CMK">cm²</option>
+                                    <option value="CMQ">m³</option>
+                                    <option value="CMT">cm</option>
+                                    <option value="DAY">d</option>
+                                    <option value="DD">°</option>
+                                    <option value="EA">each</option>
+                                    <option value="GB">GB</option>
+                                    <option value="GM">g/m</option>
+                                    <option value="GRM">g</option>
+                                    <option value="HTZ">Hz</option>
+                                    <option value="HUR">h</option>
+                                    <option value="KEL">K</option>
+                                    <option value="KGM">kg</option>
+                                    <option value="KTM">km</option>
+                                    <option value="KVT">kV</option>
+                                    <option value="KWH">kWh</option>
+                                    <option value="KWT">kW</option>
+                                    <option value="LTR">Litre</option>
+                                    <option value="MAW">MW</option>
+                                    <option value="MGM">mg</option>
+                                    <option value="MIN">min</option>
+                                    <option value="MLT">ml</option>
+                                    <option value="MMT">mm</option>
+                                    <option value="MON">month</option>
+                                    <option value="MTR">m</option>
+                                    <option value="MTS">m/s</option>
+                                    <option value="P1">%</option>
+                                    <option value="PCE">piece</option>
+                                    <option value="PK">PK</option>
+                                    <option value="PR">pair</option>
+                                    <option value="SEC">s</option>
+                                    <option value="ST">ST</option>
+                                    <option value="WEE">week</option>
+                                    <option value="WTT">watt</option>
+                                    <option value="ZOL">Zoll</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Time Period</label>
+                            <div class="col-sm-3">
+                                <select name="timeperiod" class="form-control m-b" ng-model="cproduct.timePeriod">
+                                    <option value=""></option>
+                                    <option value="week">week</option>
+                                    <option value="month">month</option>
+                                    <option value="quarter">quarter</option>
+                                    <option value="half-year">half-year</option>
+                                    <option value="year">year</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </accordion-group>
+
+                </accordion>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div ng-include="'app/partials/_auditInfo.html'"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="col-sm-offset-2  col-sm-3">
+                        <button class="btn btn-primary" type="submit" ng-disabled="assortform.$invalid" ng-click="savecproduct(cproduct);">Save</button>
+                        <button class="btn btn-primary" type="submit" ng-click="cancelcproduct();">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
