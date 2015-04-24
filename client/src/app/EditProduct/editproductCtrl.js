@@ -142,6 +142,30 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             $scope.doc = {};
         }
 
+        /*Search Product*/
+        $scope.searchProduct=function(size,productKey){
+             var modalInstance = $modal.open({
+              templateUrl: 'productsearch.html',
+              controller: 'SearchProductCtrl',
+              size: size,
+              resolve: {
+                SearchProductKey: function () {
+                  return productKey;
+                }
+              }
+            });
+
+            modalInstance.result.then(function (choosedProduct) {
+                $scope.prelation= $scope.prelation ? $scope.prelation : {};
+              $scope.prelation.relatedProductId = choosedProduct.productId;
+            }, function () {
+              
+            });
+          
+
+            
+        }
+
 
         // check Uncheck check boxes
 
@@ -1584,4 +1608,31 @@ myApp.controller('ChannelCtrl', function ($scope, $modalInstance,channel_details
     $modalInstance.dismiss('cancel');
   };
 
+});
+
+
+myApp.controller('SearchProductCtrl', function ($scope, $modalInstance, SearchProductKey,getProductData) {
+
+
+  function init(){
+    getProductData.searchProduct(SearchProductKey)
+        .then(function (data) {
+            $scope.productList=data.data;
+            //$scope.totalItems = $scope.productList.length;
+            // $scope.itemsPerPage = 10;
+            // $scope.currentPage = 1;
+        })
+        .catch(function(error){
+            console.log('error');
+        })
+  }
+
+  $scope.chooseProduct = function (choosedProduct) {
+    $modalInstance.close(choosedProduct);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+  init();
 });

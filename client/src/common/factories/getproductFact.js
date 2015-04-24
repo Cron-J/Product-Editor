@@ -18,7 +18,10 @@ myApp.factory('getProductData', ['$http','$location',function($http,$location){
     }
 
     product.searchVariant=function(variantdata){
-       return $http.post('/getVariants',variantdata);
+        return $http.post('/getVariants',variantdata);
+    }
+    product.searchProduct = function (searchData) {
+        return $http.post('/searchProduct', searchData);
     }
 
     

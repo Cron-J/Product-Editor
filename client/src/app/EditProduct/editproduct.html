@@ -488,7 +488,7 @@
                                 <label class="col-sm-3 control-label">Classification* </label>
                                 <div class="col-sm-9">
                                     <div class="row">
-                                        <div class="col-md-4" >
+                                        <div class="col-md-4">
                                             <input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true" required>
                                             <span class="error" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid">    Invalid:
                                                 <span ng-show="assignGrpForm.classificationid.$error.required">Tell us your Classification</span>
@@ -500,6 +500,15 @@
 
                                         <div class="col-md-4">
                                             <input type="text" class="form-control" name="" ng-model="description.descShort[0].description" ng-readonly="true" />
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <span class=""> 
+                                        
+                                            <button class="btn btn-primary btn-xs" ng-click="createNew.classificationId=''; description.descShort[0].description=''; classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId=''">
+                                              <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            </span>
                                         </div>
 
                                         <div class="col-sm-2">
@@ -535,10 +544,10 @@
                                         </div>
                                         <div class="col-sm-1">
                                             <span class="ng-scope"> 
-                                                        <script type="text/ng-template" id="myModalContent1.html">
+                                                       <!--  <script type="text/ng-template" id="myModalContent1.html">
                                                           <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
-                                                        </script>
-                                                        <button class="btn btn-primary btn-xs" ng-click="classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId=''">
+                                                        </script> -->
+                                                        <button class="btn btn-primary btn-xs" ng-click="createNew.classificationId=''; description.descShort[0].description=''; classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId=''">
                                                                   <span class="glyphicon glyphicon-remove"></span>
                                             </button>
                                             </span>
@@ -2499,6 +2508,12 @@
                         <span ng-show="relationform.relatedproduct.$error.pattern">Related Product won't allow special characters</span>
                         </span>
                     </div>
+                    <div class="col-sm-1">
+                        <button class="btn btn-primary btn-xs " ng-click="searchProduct('lg',prelation.relatedProductId)">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                                            
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -2831,6 +2846,82 @@
 
 </tabset>
 
+<script type="text/ng-template" id="productsearch.html">
+        <div class="modal-header">
+            <div class="row">
+            <div class="col-sm-4">
+                <h3 class="modal-title">Product List</h3>
+            </div>
+            
+            <div class="col-sm-4 pull-right">
+                <input type="text" class="form-control" name="attributeSectionId" ng-model="searchData.$" placeholder="Search product">
+            </div>
+            </div>
+        </div>
+        <div class="row col-sm-12">
+        <!-- <b>Found {{filteredItems.length}} entries</b> -->
+        <table class="table table-stripped custom-table">
+            <tbody>
+                <tr>
+
+
+                    <th>
+                        <a  ng-click="sortType = 'productId'; sortReverse = !sortReverse">Product-ID
+                            <span ng-show="sortType == 'productId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'productId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+
+                    <th>
+                        <a  ng-click="sortType = 'supplierId'; sortReverse = !sortReverse">Supplier
+                            <span ng-show="sortType == 'supplierId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'supplierId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a  ng-click="sortType = 'mfgProductName'; sortReverse = !sortReverse">Name
+                            <span ng-show="sortType == 'mfgProductName' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'mfgProductName' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a  ng-click="sortType = 'unitOfMeasureId'; sortReverse = !sortReverse">UoM
+                            <span ng-show="sortType == 'unitOfMeasureId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'unitOfMeasureId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a  ng-click="sortType = 'mfgProductId'; sortReverse = !sortReverse">Man.Product ID
+                            <span ng-show="sortType == 'mfgProductId' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'mfgProductId' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>Status</th>
+                </tr>
+
+                <tr  ng-repeat="product in productList | orderBy:sortType:sortReverse  | filter:searchData"  ng-click="chooseProduct(product);">
+                    
+                    <td  class="hoverptr">{{product.productId}}</td>
+                    <td  class="hoverptr">{{product.supplierId}}</td>
+                    <td  class="hoverptr">{{product.mfgProductName}}</td>
+                    <td  class="hoverptr">{{product.unitOfMeasureId}}</td>
+                    <td  class="hoverptr">{{product.mfgProductId}}</td>
+                    <td >Status</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <td colspan="7">
+                    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+                </td>
+            </tfoot>
+        </table>
+    </div>
+
+        <div class="modal-footer">
+            
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
 
 </div>
 

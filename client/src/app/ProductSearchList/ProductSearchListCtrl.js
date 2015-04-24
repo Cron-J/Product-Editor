@@ -1,8 +1,8 @@
 myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope', 
 	'$http','$location','growl','$modal','$routeParams','$filter',
-	'blockUI',
+	'blockUI','getProductData',
 	function($scope,$rootScope, $http, $location,
-		growl, $modal, $routeParams,$filter, blockUI){
+		growl, $modal, $routeParams,$filter, blockUI,getProductData){
 
 		// $scope.tempvar =true;
 
@@ -34,13 +34,16 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
   		};
 
 		$scope.searchProduct = function (searchData) {
-            $http.post('/searchProduct', searchData)
-                .success(function (data, status) {
-                    $scope.tabledatas=data;
+            getProductData.searchProduct(searchData)
+            	.then(function (data) {
+                    $scope.tabledatas=data.data;
                     $scope.totalItems = $scope.tabledatas.length;
-                    $scope.itemsPerPage = 10
+                    $scope.itemsPerPage = 10;
   					$scope.currentPage = 1;
-             });
+             	})
+             	.catch(function(error){
+             		console.log('error');
+             	})
 
      	$scope.$watch('currentPage + itemsPerPage', function(){ 
      	if($scope.tabledatas){
