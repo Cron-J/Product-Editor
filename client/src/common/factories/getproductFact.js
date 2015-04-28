@@ -23,6 +23,14 @@ myApp.factory('getProductData', ['$http','$location',function($http,$location){
     product.searchProduct = function (searchData) {
         return $http.post('/searchProduct', searchData);
     }
+     product.getConfig = function () {
+        return $http.get('/getConfig');
+    }
+    product.getAttribute=function(url,searchdata){
+        searchdata=searchdata ? searchdata: "";
+        return $http.post(url+'/api/attributeSearch',{sectionRef: searchdata});
+    }
+    
 
     
     return product;

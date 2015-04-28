@@ -262,3 +262,84 @@ border: none;
   .tzindex{
   	transform: none!important;
   }
+
+
+
+/* Hack - Autocomplete */
+.ngCell {
+  overflow: visible;
+}
+
+.ngCell .typeaheadcontainer {
+  display: table; margin-right: auto; margin-left: auto;width:95%  
+}
+
+.ngCell .typeaheadcontrol {
+ /*  width:100% */
+}
+
+
+/*<=validation styles>*/
+
+input.ng-invalid.ng-dirty {
+    background-color:#EDC5D1;
+}
+
+/*<#validation styles>*/
+/*.ngCell {
+  overflow: visible;
+}*/
+.typeah ul{
+position: absolute !important;
+}
+.searchbox{
+display: inline-flex;
+}
+
+
+/*input#attribute{
+background-image:url(../../assets/img/search.png);
+background-repeat:no-repeat;
+background-size: 12px 12px;
+
+/*border:1px solid #DADADA;*/
+  /*background-position: 95%;
+  padding: 0 19px 0 0;*/
+
+
+/* For Mozilla Web Browser*/
+}*/
+
+.ui-grid-menu-button {
+  right: 8px;
+  top: initial;
+  }
+ .ui-grid-cell{
+  overflow: visible;
+ }
+
+ .ui-grid-cell .dropdown-toggle{
+   padding:2px 10px;
+  /* background-image: linear-gradient(to bottom, #367cb3 0%, #2e6b99 100%);
+  background-repeat: repeat-x;
+  border-color: #2e6b99;
+  text-shadow: 0px -1px 1px #2e6b99;
+  font-weight: bold;
+  box-shadow: inset 0px -2px 0px rgba(0,0,0,.2);
+  color:#fff;*/
+ }
+ /*.multiselect-parent{
+    z-index: 999;
+ }*/
+ .searchtext{
+  font-size: 12px;
+  cursor: pointer;
+ }
+ #my-search {
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+}

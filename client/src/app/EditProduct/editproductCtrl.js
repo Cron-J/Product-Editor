@@ -4,6 +4,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         
         /*update or add product data*/
         $scope.variantAttrList=[];
+        $scope.channelData=[];
         $scope.updateitem = function(editproduct,type) {
             getProductData.updateProduct(editproduct)
                 .then(function(data){
@@ -46,9 +47,21 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             $q.all([getProductData.getProducts($routeParams.id)
                 .then(function(data){
 
-                    $scope.editproduct = data.data;
+                    $scope.editproduct = angular.copy(data.data);
+                    $scope.dupeditproduct = angular.copy(data.data);
                     console.log('$scope.editproduct',$scope.editproduct)
+                    angular.forEach($scope.editproduct.attributeValues,function(values,keys){
+                        angular.forEach(values.channels,function(value,key){
+                         $scope.channelData.push(value);
+                        })
+                    })
                      $scope.updateVariantList('hasVariantAttributeValues');
+                }),getProductData.getConfig()
+                    .then(function(data){
+                    $scope.conigUrl = data.data;
+                    getProductData.getAttribute($scope.conigUrl,"").then(function(info){
+                        $scope.attrInfo=info.data;
+                    })
                 })
             ])
             .then(function(values){
@@ -245,8 +258,110 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             });
 
         }
+        $scope.changeValue=function(index,val){
+            console.log(index,val);
+            $scope.data[index].attribute=val;
+        }
         /*initilize ui-grid data*/
-
+    // $scope.states=[
+    //           {
+    //               "id": 1,
+    //               "name": "Alabama",
+    //               "abbreviation": "AL"
+    //           },
+    //           {
+    //               "id": 2,
+    //               "name": "Alaska",
+    //               "abbreviation": "AK"
+    //           },
+    //           {
+    //               "id": 3,
+    //               "name": "American Samoa",
+    //               "abbreviation": "AS"
+    //           },
+    //           {
+    //               "id": 4,
+    //               "name": "Arizona",
+    //               "abbreviation": "AZ"
+    //           },
+    //           {
+    //               "id": 39,
+    //               "name": "North Dakota",
+    //               "abbreviation": "ND"
+    //           },
+    //           {
+    //               "id": 40,
+    //               "name": "Northern Mariana Islands",
+    //               "abbreviation": "MP"
+    //           },
+    //           {
+    //               "id": 41,
+    //               "name": "Ohio",
+    //               "abbreviation": "OH"
+    //           },
+    //           {
+    //               "id": 42,
+    //               "name": "Oklahoma",
+    //               "abbreviation": "OK"
+    //           },
+    //           {
+    //               "id": 43,
+    //               "name": "Oregon",
+    //               "abbreviation": "OR"
+    //           },
+    //           {
+    //               "id": 44,
+    //               "name": "Palau",
+    //               "abbreviation": "PW"
+    //           },
+    //           {
+    //               "id": 45,
+    //               "name": "Pennsylvania",
+    //               "abbreviation": "PA"
+    //           },
+    //           {
+    //               "id": 46,
+    //               "name": "Puerto Rico",
+    //               "abbreviation": "PR"
+    //           },
+    //           {
+    //               "id": 47,
+    //               "name": "Rhode Island",
+    //               "abbreviation": "RI"
+    //           },
+    //           {
+    //               "id": 48,
+    //               "name": "South Carolina",
+    //               "abbreviation": "SC"
+    //           },
+    //           ]
+  
+    $scope.example1model = []; $scope.example1data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}];
+$scope.template1='<div class="typeah searchbox" ><input id="attribute" type="text" style="border: none;" '+
+                                            'class="typeaheadcontrol "' +
+                                            'ng-class="\'colt\' + col.index"'+
+                                            'ng-model="MODEL_COL_FIELD"' +
+                                            'typeahead="attr.attributeId as attr.attributeId for attr in grid.appScope.attrInfo | filter:$viewValue | limitTo:8" ' +
+                                            
+                                            ' ng-change="grid.appScope.onSelect($item, $model, $label,grid.appScope.data[rowRenderIndex].attribute,rowRenderIndex)"'+
+                                            // 'ui-grid-editor'+
+                                            'typeahead-on-select="grid.appScope.onSelect($item, $model, $label,grid.appScope.data[rowRenderIndex].attribute,rowRenderIndex)"'+
+                                            
+                                            
+                                            
+                                            '/>'+
+                                            '<sub><span id="my-search" class="glyphicon glyphicon-search searchtext" ng-click="grid.appScope.openAttributes(rowRenderIndex)"></span></sub>'+
+                                            // '<span class="glyphicon glyphicon-search " ng-click="grid.appScope.openAttributes(rowRenderIndex)" aria-hidden="true"></span>'+
+                                            '</div>';
+//         $scope.modernBrowsers = [
+//     { icon: "<img src=[..]/opera.png.. />",               name: "Opera",              maker: "(Opera Software)",        ticked: true  },
+//     { icon: "<img src=[..]/internet_explorer.png.. />",   name: "Internet Explorer",  maker: "(Microsoft)",             ticked: false },
+//     { icon: "<img src=[..]/firefox-icon.png.. />",        name: "Firefox",            maker: "(Mozilla Foundation)",    ticked: true  },
+//     { icon: "<img src=[..]/safari_browser.png.. />",      name: "Safari",             maker: "(Apple)",                 ticked: false },
+//     { icon: "<img src=[..]/chrome.png.. />",              name: "Chrome",             maker: "(Google)",                ticked: true  }
+// ];
+// $scope.outputBrowsers=[]
+$scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', externalIdProp: ''};
         $scope.data = [];
         var attribute_ids=[];
         $scope.firstPage = 0;
@@ -266,7 +381,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             // infiniteScrollUp: true,
             infiniteScrollDown: true,
             columnDefs : [
-                { displayName:"Attribute",field: 'attribute',cellTemplate: '<div class="ui-grid-cell-contents"  ng-dblclick="grid.appScope.openAttributes(rowRenderIndex)" title="TOOLTIP">{{COL_FIELD }}</div>',enableCellEdit: false, filter: {placeholder: 'Search Attribute'}},
+                { displayName:"Attribute",field: 'attribute',cellTemplate: '<div class="ui-grid-cell-contents"  title="TOOLTIP">{{COL_FIELD }}</div>',editableCellTemplate: $scope.template1, enableCellEdit: true, filter: {placeholder: 'Search Attribute'}},
                 { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
                 { displayName:"Type",field: 'types[0]',filter: { placeholder: 'Search Types'} },
                 { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'} },
@@ -338,7 +453,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                     editDropdownOptionsArray : $scope.hasVariantAttributeValues
                 },
 
-                { displayName:"Channels",field: 'channels', cellTemplate:'<button class="btn btn-primary btn-xs centered" ng-click="grid.appScope.showChannel(rowRenderIndex)"><span class="glyphicon glyphicon-list-alt"></span></button>' , filter: { placeholder: 'Search channel'} },
+                { displayName:"Channels",field: 'channels',enableCellEdit:false, cellTemplate: "<div><form name=\"inputForms\"><div ng-click=\"grid.appScope.incerasezIndex();\" ng-class=\"'colt' + col.uid\" style=\"z-index: 99;\" ng-dropdown-multiselect=\"\" options=\"grid.appScope.channelData\" selected-model=\"grid.appScope.data[rowRenderIndex].channels\" extra-settings=\"grid.appScope.example4settings\">   ></select></form></div><div style=\"display:inline-block\"></div>"
+                    , filter: { placeholder: 'Search channel'} },
             ],
             data: 'data',
             onRegisterApi: function(gridApi){
@@ -369,6 +485,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                     if(val.attribute==val1.attributeId){
                         var object = angular.extend({}, val, val1);
                         curr_attributeValues[key]=object;
+                        curr_attributeValues.channels=curr_attributeValues.channels ?curr_attributeValues.channels :[];
                     }
                 })
             })
@@ -437,7 +554,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
           }
 
           $scope.addNewAttribute=function(){
-            $scope.data.unshift({button:true});
+            $scope.data.unshift({button:true,channels:[]});
           }
           $scope.deleteAttribute=function(){
             angular.forEach($scope.gridApi.selection.getSelectedRows(), function (data, index) {
@@ -451,6 +568,31 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                 $scope.gridApi.core.handleWindowResize();
               }, 10, 500);
           }
+
+          $scope.onSelect=function(item,model,label,data,index){
+            //$scope.data[index].attribute=label;
+            var k=0;
+                $scope.editproduct.attributeValues
+                angular.forEach($scope.dupeditproduct.attributeValues,function(val,key){
+                    if(val.attribute==data){
+                        k=1;
+                        $scope.data[index]=angular.copy($scope.dupeditproduct.attributeValues[key]);
+                    }
+                })
+                if(k==0){
+                    $scope.data[index]={attribute:data,channels:[]};
+                }
+
+                $http.post($scope.moduleLinkupUrl+'/api/attributeList',{"attributeIds":[data]})
+                    .success(function(data) {
+                        if(data.length!=0){
+                            angular.extend($scope.data[index],data[0]);
+                        }
+                       
+                            
+                    })
+          }
+          
           
         // Document Tab
 

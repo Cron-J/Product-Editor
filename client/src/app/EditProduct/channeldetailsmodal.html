@@ -55,6 +55,22 @@
 				</div>
 				<div class="row" ng-show="showChannelField">
 					<div class="form-group">
+								
+                                <label class="col-sm-3 control-label">Channel Id </label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="mf" ng-model="channeldata.channelId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+                                    <span class="error" ng-show="masterdata.mf.$invalid">Invalid:
+                                    <span ng-show="masterdata.mf.$error.minlength">Manufacturer  should be minimum of 0 characters</span>
+                                    <span ng-show="masterdata.mf.$error.maxlength">Manufacturer  should be maximum of 50 characters</span>
+                                    <span ng-show="masterdata.mf.$error.pattern">Manufacturer  won't allow special characters</span>
+                                    </span>
+                                </div>
+                                
+
+                    </div>
+
+					<div class="form-group">
+
                                 <label class="col-sm-3 control-label">Attribute Id </label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" name="mf" ng-model="channeldata.attribute" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/" ng-disabled="true">
