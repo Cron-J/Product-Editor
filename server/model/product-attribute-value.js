@@ -1,7 +1,5 @@
 'use strict';
 
-var Channel = require('./channel').Channel;
-
 var productAttributeValue = {
 
     /**
@@ -57,7 +55,9 @@ var productAttributeValue = {
     /**
      * Each attribute value can have multiple channels.
      */
-    channels: [Channel]
+    channels: [{
+        type: String
+    }]
 
 };
 

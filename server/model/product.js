@@ -1,7 +1,7 @@
 'use strict';
 
 // dependencies
-var mongoose = require('mongoose'),
+var mongoose = require('../config/db').Mongoose,
     Schema = mongoose.Schema,
     constants = require('../Utility/constants').constants,
     validator = require('mongoose-validators'),
@@ -22,7 +22,6 @@ var mongoose = require('mongoose'),
  * Advanced and detailed information, such as an arbitrary number of prices, product
  * descriptions in different languages, and related documents are maintained in separate classes.</p>
  *
- * @author Alexander Pyrkh
  */
 var ProductSchema = new Schema({
     /**
