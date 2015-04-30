@@ -31,15 +31,15 @@
 								<div ng-show="attrsectiondetails.length == 0">
 									<p>No records found</p>
 								</div>
-								<table class="table table-stripped custom-table" ng-show="attrsectiondetails.length > 0">
+								<table class="table table-bordered table-hover custom-table form-panel" ng-show="attrsectiondetails.length > 0">
 									<thead>
-										<th>AttributeSection ID</th>
-										<th>Description</th>
+										<th style="width: 25%">AttributeSection ID</th>
+										<th style="width: 60%">Description</th>
 									</thead>
 				                     <tbody>
 										<tr ng-click="getAttributeSection(attrsectiondata)" class="hoverptr" ng-repeat="attrsectiondata in groupItems[currentPage]">
-											<td >{{attrsectiondata.attributeSectionId}}</td>
-											<td >{{attrsectiondata.descriptions[0].description}}</td>
+											<td style="width: 25%">{{attrsectiondata.attributeSectionId}}</td>
+											<td style="width: 60%">{{attrsectiondata.descriptions[0].description}}</td>
 										</tr>
 									</tbody>
 									<tfoot>

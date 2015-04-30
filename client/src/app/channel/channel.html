@@ -1,0 +1,81 @@
+<div class="row" ng-controller="ChannelCtrl" >
+   <div class="row col-sm-12">
+      <div class="col-sm-7">
+         <h1>Channel</h1>
+      </div>
+   </div>
+   <div class="row col-sm-12 mar-t-35">
+      <div class="col-sm-4 ">
+         <button class="btn btn-primary" ng-click="createNewChannel()">Create New Channel </button>
+      </div>
+   </div>
+   <div class="row col-sm-12 mar-t-35" ng-show="showChannel">
+      <div class="form-group">
+         <label class="col-sm-3 control-label">Tenant Id </label>
+         <div class="col-sm-5">
+            <input type="text" class="form-control" name="mf" ng-model="channeldata.tenantId" >
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-3 control-label">Channel Id </label>
+         <div class="col-sm-5">
+            <input type="text" class="form-control" name="mf" ng-model="channeldata.channelId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-3 control-label">Attribute Id </label>
+         <div class="col-sm-5">
+            <input type="text" class="form-control" name="mf" ng-model="channeldata.attribute" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/" ng-disabled="true">
+         </div>
+         <div class="col-sm-1">
+            <span class="ng-scope"> 
+            <button class="btn btn-primary btn-xs" ng-click="searchAttributes('lg')">
+            <span class="glyphicon glyphicon-search"></span>
+            </button>
+            </span>
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-3 control-label">channel </label>
+         <div class="col-sm-5" >
+            <div class="col-sm-12 padding-l-r-zero" ng-class="{'margin-bottom15':!$last}" ng-repeat="channelsinfo in channeldata.channel track by $index">		
+               <input type="text" class="form-control"  name="mf" ng-model="channelsinfo.key" >
+            </div>
+         </div>
+         <div class="col-sm-2 ">
+            <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="addChannelName()">
+            <span class="glyphicon glyphicon-plus"></span>
+            </button>
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-3 control-label">language </label>
+         <div class="col-sm-5">
+            <select name="language" class="form-control m-b" ng-model="channeldata.language">
+               <option value="de">de</option>
+               <option value="en">en</option>
+               <option value="es">es</option>
+               <option value="fr">fr</option>
+               <option value="jp">jp</option>
+            </select>
+         </div>
+      </div>
+      <div class="form-group">
+         <label class="col-sm-3 control-label">Value </label>
+         <div class="col-sm-5">
+            <input type="text" class="form-control" name="mf" ng-model="channeldata.value" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
+         </div>
+      </div>
+      <div class="form-group">
+         <div class="col-sm-offset-3">
+            <div class="col-sm-1">
+               <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNewChannel(channeldata)">Add</button>
+            </div>
+         </div>
+      </div>
+   </div>
+
+    <script type="text/ng-template" id="myModalContent2.html">
+      <div ng-include="'app/EditProduct/attributemodal.html'"></div>
+    </script>
+</div>

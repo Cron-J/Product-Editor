@@ -20,12 +20,14 @@
   <link rel="stylesheet" href="less/css/xeditable.css"/>
   <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css">
   <link rel="stylesheet" href="common/daterange.css"/>
-  <link rel="stylesheet" href="less/css/select.css"/>
+  <!-- <link rel="stylesheet" href="less/css/select.css"/> -->
   <link rel="stylesheet" href="less/css/selectize.css"/>
   <link rel="stylesheet" href="less/css/fa/css/fa.css"/>
     
   <link rel="stylesheet" href="less/css/ui-grid-unstable.css"/>
-<link rel="stylesheet" href="less/css/isteven-multi-select.css"/>
+  <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css"/>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+  
 
   <link rel="stylesheet" href="less/css/app.css"/>
  <!-- <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css"> -->
@@ -54,6 +56,7 @@
   <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
   <script src="less/js/lodash.js"></script>
   <script src="bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-select/dist/select.min.js"></script>
   <script src="less/js/angular-ui-tree.js"></script>
   <script src="less/js/bootstrap.js"></script>
   <script src="less/js/select2.js"></script>
@@ -80,6 +83,7 @@
 <!-- Variant Controller -->
 
   <script src="app/productVariant/variantCtrl.js"></script>
+  <script type="text/javascript" src="app/channel/channel.js"></script>
 
 
 
@@ -113,6 +117,20 @@
 
   <!-- filter -->
   <script src="common/filter/filter.js"></script>
+
+  <!--
+    IE8 support, see AngularJS Internet Explorer Compatibility http://docs.angularjs.org/guide/ie
+    For Firefox 3.6, you will also need to include jQuery and ECMAScript 5 shim
+  -->
+  <!--[if lt IE 9]>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+    <script>
+      document.createElement('ui-select');
+      document.createElement('ui-select-match');
+      document.createElement('ui-select-choices');
+    </script>
+  <![endif]-->
 
 </html>
 

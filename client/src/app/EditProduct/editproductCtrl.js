@@ -50,11 +50,14 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                     $scope.editproduct = angular.copy(data.data);
                     $scope.dupeditproduct = angular.copy(data.data);
                     console.log('$scope.editproduct',$scope.editproduct)
-                    angular.forEach($scope.editproduct.attributeValues,function(values,keys){
-                        angular.forEach(values.channels,function(value,key){
-                         $scope.channelData.push(value);
-                        })
+                    getProductData.getChannels($scope.editproduct.tenantId).then(function(data){
+                        $scope.channelData=data.data;
                     })
+                    // angular.forEach($scope.editproduct.attributeValues,function(values,keys){
+                    //     angular.forEach(values.channels,function(value,key){
+                    //      $scope.channelData.push(value);
+                    //     })
+                    // })
                      $scope.updateVariantList('hasVariantAttributeValues');
                 }),getProductData.getConfig()
                     .then(function(data){
@@ -262,79 +265,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             console.log(index,val);
             $scope.data[index].attribute=val;
         }
-        /*initilize ui-grid data*/
-    // $scope.states=[
-    //           {
-    //               "id": 1,
-    //               "name": "Alabama",
-    //               "abbreviation": "AL"
-    //           },
-    //           {
-    //               "id": 2,
-    //               "name": "Alaska",
-    //               "abbreviation": "AK"
-    //           },
-    //           {
-    //               "id": 3,
-    //               "name": "American Samoa",
-    //               "abbreviation": "AS"
-    //           },
-    //           {
-    //               "id": 4,
-    //               "name": "Arizona",
-    //               "abbreviation": "AZ"
-    //           },
-    //           {
-    //               "id": 39,
-    //               "name": "North Dakota",
-    //               "abbreviation": "ND"
-    //           },
-    //           {
-    //               "id": 40,
-    //               "name": "Northern Mariana Islands",
-    //               "abbreviation": "MP"
-    //           },
-    //           {
-    //               "id": 41,
-    //               "name": "Ohio",
-    //               "abbreviation": "OH"
-    //           },
-    //           {
-    //               "id": 42,
-    //               "name": "Oklahoma",
-    //               "abbreviation": "OK"
-    //           },
-    //           {
-    //               "id": 43,
-    //               "name": "Oregon",
-    //               "abbreviation": "OR"
-    //           },
-    //           {
-    //               "id": 44,
-    //               "name": "Palau",
-    //               "abbreviation": "PW"
-    //           },
-    //           {
-    //               "id": 45,
-    //               "name": "Pennsylvania",
-    //               "abbreviation": "PA"
-    //           },
-    //           {
-    //               "id": 46,
-    //               "name": "Puerto Rico",
-    //               "abbreviation": "PR"
-    //           },
-    //           {
-    //               "id": 47,
-    //               "name": "Rhode Island",
-    //               "abbreviation": "RI"
-    //           },
-    //           {
-    //               "id": 48,
-    //               "name": "South Carolina",
-    //               "abbreviation": "SC"
-    //           },
-    //           ]
+        
+    
   
     $scope.example1model = []; $scope.example1data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}];
 $scope.template1='<div class="typeah searchbox" ><input id="attribute" type="text" style="border: none;" '+
@@ -346,21 +278,11 @@ $scope.template1='<div class="typeah searchbox" ><input id="attribute" type="tex
                                             ' ng-change="grid.appScope.onSelect($item, $model, $label,grid.appScope.data[rowRenderIndex].attribute,rowRenderIndex)"'+
                                             // 'ui-grid-editor'+
                                             'typeahead-on-select="grid.appScope.onSelect($item, $model, $label,grid.appScope.data[rowRenderIndex].attribute,rowRenderIndex)"'+
-                                            
-                                            
-                                            
                                             '/>'+
                                             '<sub><span id="my-search" class="glyphicon glyphicon-search searchtext" ng-click="grid.appScope.openAttributes(rowRenderIndex)"></span></sub>'+
                                             // '<span class="glyphicon glyphicon-search " ng-click="grid.appScope.openAttributes(rowRenderIndex)" aria-hidden="true"></span>'+
                                             '</div>';
-//         $scope.modernBrowsers = [
-//     { icon: "<img src=[..]/opera.png.. />",               name: "Opera",              maker: "(Opera Software)",        ticked: true  },
-//     { icon: "<img src=[..]/internet_explorer.png.. />",   name: "Internet Explorer",  maker: "(Microsoft)",             ticked: false },
-//     { icon: "<img src=[..]/firefox-icon.png.. />",        name: "Firefox",            maker: "(Mozilla Foundation)",    ticked: true  },
-//     { icon: "<img src=[..]/safari_browser.png.. />",      name: "Safari",             maker: "(Apple)",                 ticked: false },
-//     { icon: "<img src=[..]/chrome.png.. />",              name: "Chrome",             maker: "(Google)",                ticked: true  }
-// ];
-// $scope.outputBrowsers=[]
+
 $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', externalIdProp: ''};
         $scope.data = [];
         var attribute_ids=[];
@@ -453,7 +375,21 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                     editDropdownOptionsArray : $scope.hasVariantAttributeValues
                 },
 
-                { displayName:"Channels",field: 'channels',enableCellEdit:false, cellTemplate: "<div><form name=\"inputForms\"><div ng-click=\"grid.appScope.incerasezIndex();\" ng-class=\"'colt' + col.uid\" style=\"z-index: 99;\" ng-dropdown-multiselect=\"\" options=\"grid.appScope.channelData\" selected-model=\"grid.appScope.data[rowRenderIndex].channels\" extra-settings=\"grid.appScope.example4settings\">   ></select></form></div><div style=\"display:inline-block\"></div>"
+                { displayName:"Channels",field: 'channels',enableCellEdit:false, minWidth: 300,
+                 cellTemplate: '<div>'+
+                                    '<form name="inputForms">'+
+                                        '<div ng-class=" \'colt\' + col.uid">'+
+                                            '<ui-select multiple ng-model="grid.appScope.data[rowRenderIndex].channels" theme="select2" ng-disabled="disabled" style="width: 100%;">'+
+                                                '<ui-select-match placeholder="Select person...">'+
+                                                    '{{$item.channelId}}'+
+                                                '</ui-select-match>'+
+                                                '<ui-select-choices repeat="channel.channelId as channel in grid.appScope.channelData | propsFilter: {channelId: $select.search} ">'+
+                                                    '<div ng-bind-html="channel.channelId | highlight: $select.search"></div>'+
+                                                '</ui-select-choices>'+
+                                            '</ui-select>'+
+                                        '</div>'+
+                                    '</form>'+
+                                '</div>'
                     , filter: { placeholder: 'Search channel'} },
             ],
             data: 'data',
@@ -466,6 +402,8 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 }, 10, 100);
             }
         };
+
+
 
          
         /*load ui-grid data at first time*/
@@ -1714,41 +1652,41 @@ $scope.addChannelRow = function(channel_info){
 
 /*popup modal for view and add channel of an attribute*/
 
-myApp.controller('ChannelCtrl', function ($scope, $modalInstance,channel_details,$controller) {
-  $scope.getChannelDetails = channel_details ? channel_details: [];
-  $scope.channeldata={};
-  $scope.showPagination=true;
-  var testCtrl1ViewModel = $scope.$new();
-  $scope.searchAttributes=function(){
-    $controller('EditProductCtrl',{$scope : testCtrl1ViewModel ,$modalInstance:$modalInstance});
-    testCtrl1ViewModel.openAttribute().then(function(data){
-         $scope.channeldata.attribute=data.attributeId;
-    })
-  }
-  $scope.addChannel=function(){
-    $scope.showChannelField=true;
-    $scope.channeldata={attribute:'',channel:[{key:''}],language:'en',value:''};
-  }
-  $scope.addChannelName=function(){
-    $scope.channeldata.channel.push({key:''})
-  }
-  $scope.addChannelToList=function(){
-    $scope.showChannelField=false;
-    $scope.getChannelDetails.push($scope.channeldata)
-  }
-  $scope.ok = function () {
-    angular.forEach($scope.channeldata.channel,function(vals,keys){
+// myApp.controller('ChannelCtrl', function ($scope, $modalInstance,channel_details,$controller) {
+//   $scope.getChannelDetails = channel_details ? channel_details: [];
+//   $scope.channeldata={};
+//   $scope.showPagination=true;
+//   var testCtrl1ViewModel = $scope.$new();
+//   $scope.searchAttributes=function(){
+//     $controller('EditProductCtrl',{$scope : testCtrl1ViewModel ,$modalInstance:$modalInstance});
+//     testCtrl1ViewModel.openAttribute().then(function(data){
+//          $scope.channeldata.attribute=data.attributeId;
+//     })
+//   }
+//   $scope.addChannel=function(){
+//     $scope.showChannelField=true;
+//     $scope.channeldata={attribute:'',channel:[{key:''}],language:'en',value:''};
+//   }
+//   $scope.addChannelName=function(){
+//     $scope.channeldata.channel.push({key:''})
+//   }
+//   $scope.addChannelToList=function(){
+//     $scope.showChannelField=false;
+//     $scope.getChannelDetails.push($scope.channeldata)
+//   }
+//   $scope.ok = function () {
+//     angular.forEach($scope.channeldata.channel,function(vals,keys){
         
-        $scope.channeldata.channel[keys]=vals.key;
-    });
-    $modalInstance.close($scope.getChannelDetails);
-  };
+//         $scope.channeldata.channel[keys]=vals.key;
+//     });
+//     $modalInstance.close($scope.getChannelDetails);
+//   };
 
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
+//   $scope.cancel = function () {
+//     $modalInstance.dismiss('cancel');
+//   };
 
-});
+// });
 
 
 myApp.controller('SearchProductCtrl', function ($scope, $modalInstance, SearchProductKey,getProductData) {

@@ -123,7 +123,7 @@ tr:hover{
  }
  .search-buttons{
  	margin-bottom: 20px;
- 	margin-top: 25px;
+ 	margin-top: 31px;
  }
  .table-pagination{
  	margin:0;
@@ -209,13 +209,13 @@ tr:hover{
 }
 
 
-td{
+/*td{
 	text-align: center;
 }
 
 th{
 	text-align: center;
-}
+}*/
 
 .error{
 	color:red;
@@ -342,4 +342,17 @@ background-size: 12px 12px;
         transform: scaleX(-1);
         filter: FlipH;
         -ms-filter: "FlipH";
+}
+.select2-search-field input{
+  border: none;
+}
+ul.select2-choices{
+  border:none ! important;
+}
+
+/*.ui-grid-cell { display : table-cell; height: auto !important; overflow:visible; position: static; padding-top: 0px; } 
+.ui-grid-row { display : table-row; height: auto !important; position: static; } 
+.ui-grid-cell-contents{ height: auto !important; white-space: normal; overflow:visible; }*/
+.mar-t-35{
+  margin-top: 35px;
 }

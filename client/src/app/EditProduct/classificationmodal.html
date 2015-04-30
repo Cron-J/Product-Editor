@@ -30,19 +30,19 @@
 								<div ng-show="details.length == 0">
 									<p>No records found</p>
 								</div>
-								<table class="table table-stripped custom-table" ng-show="details.length > 0">
+								<table class="table table-bordered table-hover custom-table form-panel" ng-show="details.length > 0">
 									<thead>
 										<tr>
-											<th class="text-left">Classification ID</th>
-											<th class="text-left">Description</th>
-											<th class="text-right">Orderno</th>
+											<th style="width: 25%" class="text-left">Classification ID</th>
+											<th style="width: 50%" class="text-left">Description</th>
+											<th style="width: 15%" class="text-right">Orderno</th>
 										</tr>
 									</thead>
 				                    <tbody>
 										<tr ng-click="getClassification(classdata)" class="hoverptr" ng-repeat="classdata in pagedItems[currentPage]">
-										<td class="text-left">{{classdata.classificationId}}</td>
-										<td class="text-left">{{classdata.descriptions.descShort[0].description}}</td>
-										<td class="text-right">{{classdata.orderNo}}</td>
+										<td  style="width: 25%" class="text-left">{{classdata.classificationId}}</td>
+										<td  style="width: 50%" class="text-left">{{classdata.descriptions.descShort[0].description}}</td>
+										<td style="width: 15%" class="text-right">{{classdata.orderNo}}</td>
 										</tr>
 									</tbody>
 									<tfoot>

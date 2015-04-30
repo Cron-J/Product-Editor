@@ -6,8 +6,8 @@ var Boom = require('boom'),
 exports.createChannel = {
     handler: function(request, reply) {
         Channel.createChannel(request.payload, function(err, response) {
-            if (!err) reply(response);
-            else reply(Boom.forbidden(err));
+            if (!err) return reply(response);
+            else return reply(Boom.forbidden(err));
         });
     }
 };

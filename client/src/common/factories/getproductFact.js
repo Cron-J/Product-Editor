@@ -20,15 +20,26 @@ myApp.factory('getProductData', ['$http','$location',function($http,$location){
     product.searchVariant=function(variantdata){
         return $http.post('/getVariants',variantdata);
     }
+
     product.searchProduct = function (searchData) {
         return $http.post('/searchProduct', searchData);
     }
+
      product.getConfig = function () {
         return $http.get('/getConfig');
     }
+
     product.getAttribute=function(url,searchdata){
         searchdata=searchdata ? searchdata: "";
         return $http.post(url+'/api/attributeSearch',{sectionRef: searchdata});
+    }
+
+    product.createChannel=function(data){
+        return $http.post('/createChannel',data);
+    }
+
+    product.getChannels=function(tenantId){
+        return $http.get('/getChannel/'+tenantId);
     }
     
 

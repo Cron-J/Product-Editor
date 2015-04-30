@@ -59,15 +59,15 @@
 								<div ng-show="attrdetails.length == 0">
 									<p>No records found</p>
 								</div>
-								<table class="table table-stripped custom-table" ng-show="attrdetails.length > 0">
+								<table class="table table-bordered table-hover custom-table form-panel" ng-show="attrdetails.length > 0">
 									<thead>
-										<th>Attribute ID</th>
-										<th>Description</th>
+										<th style="width: 25%">Attribute ID</th>
+										<th style="width: 60%">Description</th>
 									</thead>
 				                     <tbody>
 										<tr ng-click="getAttribute(attrdata)" class="hoverptr" ng-repeat="attrdata in groupItems[currentPage]">
-											<td >{{attrdata.attributeId}}</td>
-											<td >{{attrdata.descriptions.descShort[0].description}}</td>
+											<td style="width: 25%">{{attrdata.attributeId}}</td>
+											<td style="width: 60%">{{attrdata.descriptions.descShort[0].description}}</td>
 										</tr>
 									</tbody>
 									<tfoot>
