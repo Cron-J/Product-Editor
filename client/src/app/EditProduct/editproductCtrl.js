@@ -8,7 +8,11 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         $scope.updateitem = function(editproduct,type) {
             getProductData.updateProduct(editproduct)
                 .then(function(data){
-                    if(type=='New_Variant'){
+                    if(type=='masterdata'){
+                        growl.addSuccessMessage('Master data is succesfully updated.');
+                        $scope.msubmitted
+                    }
+                    else if(type=='New_Variant'){
                         growl.addSuccessMessage('Variant created succesfully');
                         $scope.newvariant=null;
                     }
@@ -117,6 +121,12 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         $scope.sortReverse = false; // set the default sort order
         $scope.search = ''; // set the default search/filter term
 
+        /*master Data*/
+        $scope.updateMasterData=function(form,editproduct){
+            $scope.msubmitted=true;
+            if(form.$valid)
+                $scope.updateitem(editproduct,'masterdata')
+        }
         // Product classification
 
 
@@ -144,10 +154,37 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             $scope.editvar = false;
         }
 
-        $scope.newClsfnidGrp = function(createNewGrp) {
-            $scope.editproduct.classificationGroupAssociations.push(angular.copy(createNewGrp));
-            $scope.updateitem($scope.editproduct);
-            $scope.createNew = {};
+        $scope.newClsfnidGrp = function(form,createNewGrp) {
+            $scope.csubmitted=true;
+            if(form.$valid){
+                $scope.editproduct.classificationGroupAssociations.push(angular.copy(createNewGrp));
+                getProductData.updateProduct($scope.editproduct)
+                .then(function(data){
+                    $scope.csubmitted=false;
+                   $scope.createNew = {};
+                   growl.addSuccessMessage('You have successfully assigned new Group.');
+                })
+                .catch(function(error){
+                    console.log('error');
+                })
+    
+                
+            }
+               
+        }
+
+        $scope.updateGroup=function(form){
+            $scope.cesubmitted=true;
+            if(form.$valid){
+                getProductData.updateProduct($scope.editproduct)
+                .then(function(data){
+                    $scope.cesubmitted=false;
+                   growl.addSuccessMessage('You have successfully updated Group.');
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+            }
         }
 
         $scope.newAttribute = function(createNewAttribute) {
@@ -375,7 +412,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                     editDropdownOptionsArray : $scope.hasVariantAttributeValues
                 },
 
-                { displayName:"Channels",field: 'channels',enableCellEdit:false, minWidth: 300,
+                { displayName:"Channels",field: 'channels',enableCellEdit:false, minWidth: 300,enableColumnResizing: false,
                  cellTemplate: '<div>'+
                                     '<form name="inputForms">'+
                                         '<div ng-class=" \'colt\' + col.uid">'+
@@ -383,7 +420,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                                                 '<ui-select-match placeholder="Select person...">'+
                                                     '{{$item.channelId}}'+
                                                 '</ui-select-match>'+
-                                                '<ui-select-choices repeat="channel.channelId as channel in grid.appScope.channelData | propsFilter: {channelId: $select.search} ">'+
+                                                '<ui-select-choices repeat="channel.channelId as channel in grid.appScope.channelData | propsFilter: {channelId: $select.search}  ">'+
                                                     '<div ng-bind-html="channel.channelId | highlight: $select.search"></div>'+
                                                 '</ui-select-choices>'+
                                             '</ui-select>'+
@@ -546,21 +583,39 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
         }
         
 
-        $scope.savedoc = function(docdata) {
-            if (docdata._id) {
-                angular.forEach($scope.editproduct.documents, function(value, key) {
-                    if (docdata._id == value._id) {
-                        $scope.editproduct.documents[key] = docdata;
-                        $scope.updateitem($scope.editproduct);
-                    }
+        $scope.savedoc = function(form,docdata) {
+            $scope.dsubmitted=true;
+            if(form.$valid){
+                if (docdata._id) {
+                    angular.forEach($scope.editproduct.documents, function(value, key) {
+                        if (docdata._id == value._id) {
+                            $scope.editproduct.documents[key] = docdata;
+                             getProductData.updateProduct($scope.editproduct)
+                                .then(function(data){
+                                    $scope.dsubmitted=false;
+                                   growl.addSuccessMessage('Document is updated succesfully.')
+                                })
+                                .catch(function(error){
+                                    console.log(error);
+                                })
+                        }
 
-                });
-            } else {
-                $scope.editproduct.documents.push(angular.copy(docdata));
-                $scope.updateitem($scope.editproduct);
-                $scope.doc = {};
+                    });
+                } else {
+                    $scope.editproduct.documents.push(angular.copy(docdata));
+                    
+                    getProductData.updateProduct($scope.editproduct)
+                            .then(function(data){
+                               $scope.doc = {};
+                               $scope.dsubmitted=false;
+                               growl.addSuccessMessage('Document is created succesfully.')
+
+                            })
+                            .catch(function(error){
+                                console.log(error);
+                            })
+                }
             }
-
         }
 
         $scope.editdoc = function(editdocdata) {
@@ -627,25 +682,42 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
 
 
 
-        $scope.saveprice = function(pricedata) {
-
-            if (pricedata._id) {
+        $scope.saveprice = function(form,pricedata) {
+            $scope.psubmitted=true;
+            if(form.$valid){
+                if (pricedata._id) {
                 angular.forEach($scope.editproduct.prices, function(value, key) {
 
                     if (pricedata._id == value._id) {
                         $scope.editproduct.prices[key] = pricedata;
-                        $scope.updateitem($scope.editproduct);
+                        //$scope.updateitem($scope.editproduct);
+                        getProductData.updateProduct($scope.editproduct)
+                            .then(function(data){
+                               growl.addSuccessMessage('Price is updated succesfully.')
+                               $scope.psubmitted=false;
+                            })
+                            .catch(function(error){
+                                console.log(error);
+                            })
 
 
                     }
 
                 });
-            } else {
-                $scope.editproduct.prices.push(angular.copy(pricedata));
-                $scope.updateitem($scope.editproduct);
-                $scope.price = {};
+                } else {
+                    $scope.editproduct.prices.push(angular.copy(pricedata));
+                     getProductData.updateProduct($scope.editproduct)
+                            .then(function(data){
+                               $scope.price = {};
+                               growl.addSuccessMessage('Price is Created succesfully.')
+                               $scope.psubmitted=false;
+                               form.$setPristine();
+                            })
+                            .catch(function(error){
+                                console.log(error);
+                            })
+                }
             }
-
         }
 
 
@@ -1022,7 +1094,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
             }
         // search classification modal
 
-        $scope.openClassification = function(size) {
+        $scope.openClassification = function(size,type) {
                 var modalInstance = $modal.open({
                     templateUrl: 'myModalContent.html',
                     controller: ModalInstanceCtrl,
@@ -1035,17 +1107,21 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 modalInstance.result.then(function(cid) {
                     $scope.description = cid.descriptions;
                     $scope.classification_id = cid;
-                    $scope.createNew = {
-                        "classificationId": cid.classificationId,
-                        "classificationRef": cid._id
-
-                    }
+                    $scope[type] = $scope[type] ? $scope[type] : {};
+                    $scope[type].classificationId= cid.classificationId;
+                    $scope[type].classificationRef= cid._id;
+                    $scope[type].classificationGroupId='';
+                    
                 });
             }
 
         //search classificationGroup
 
-        $scope.openClassificationGroup = function(size) {
+        $scope.openClassificationGroup = function(size,type) {
+                if(!$scope.classification_id){
+                    growl.addErrorMessage('Please add Classification field first');
+                    return;
+                }
                 var modalInstance = $modal.open({
                     templateUrl: 'myModalContent1.html',
                     controller: ClassificationGroupCtrl,
@@ -1058,9 +1134,13 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 });
                 modalInstance.result.then(function(cid) {
                     $scope.classificationGroupDescription = cid.descriptions;
-                    $scope.createNew.classificationGroupId = cid.classificationGroupId;
+                    $scope[type].classificationGroupId = cid.classificationGroupId;
                 });
             };
+
+        $scope.clearClassificationID=function(){
+            $scope.classification_id=null;
+        }
 
 //Attribute search modal 
 
@@ -1693,7 +1773,7 @@ myApp.controller('SearchProductCtrl', function ($scope, $modalInstance, SearchPr
 
 
   function init(){
-    getProductData.searchProduct(SearchProductKey)
+    getProductData.searchProduct()
         .then(function (data) {
             $scope.productList=data.data;
             //$scope.totalItems = $scope.productList.length;

@@ -192,14 +192,10 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label"> Path </label>
                     <div class="col-sm-7">
-                        <textarea type="text" name="path" class="form-control" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-model="doc.path"></textarea>
+                        <textarea type="text" name="path" class="form-control" ng-model="doc.path"></textarea>
                         <!-- <span class="error" ng-show="docform.url.$invalid">Invalid:Provide valid url
                                     </span> -->
-                        <span class="error" ng-show="docform.path.$invalid">Invalid:
-                                        <span ng-show="docform.path.$error.minlength">Path should be minimum of 0 characters</span>
-                        <span ng-show="docform.path.$error.maxlength">Path should be maximum of 50 characters</span>
-                        <span ng-show="docform.path.$error.pattern">Path won't allow special characters</span>
-                        </span>
+                        
                     </div>
                 </div>
 
@@ -231,9 +227,7 @@
                     <label class="col-sm-3 control-label">Order No.</label>
                     <div class="col-sm-3">
                         <input type="number" name="orderno" class="form-control" ng-model="doc.orderNo" ng-minlength="0" ng-maxlength="50">
-                        <span class="error" ng-show="docform.orderno.$invalid">Invalid:
-                                        <span ng-show="docform.orderno.$error.minlength">Order No. should be minimum of 0 digit</span>
-                        <span ng-show="docform.orderno.$error.maxlength">Order No. should be maximum of 50 digit</span>
+                        <span class="error" ng-show="dsubmitted && docform.orderno.$invalid">Invalid:
                         <span ng-show="docform.orderno.$error.number">Enter only digit</span>
                         </span>
 
@@ -243,19 +237,15 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Description </label>
                     <div class="col-sm-8">
-                        <textarea type="text" name="description" class="form-control" ng-model="doc.description" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/"></textarea>
-                        <span class="error" ng-show="docform.description.$invalid">Invalid:
-                                        <span ng-show="docform.description.$error.minlength">Description should be minimum of 0 characters</span>
-                        <span ng-show="docform.description.$error.maxlength">Description should be maximum of 50 characters</span>
-                        <span ng-show="docform.description.$error.pattern">Description won't allow special characters</span>
-                        </span>
+                        <textarea type="text" name="description" class="form-control" ng-model="doc.description"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Valid From</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                        <input type="text" name="from" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)"  close-text="Close">
+                        <span class="error"  ng-show="dsubmitted && docform.from.$invalid">Invalid Date</span>
                     </div>
                 </div>
 
@@ -263,7 +253,8 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Valid To</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                        <input type="text" name="to" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="doc.validTo" is-open="opened.dateTo" min-date="doc.validFrom" date-disabled="disabled(date, mode)"  close-text="Close">
+                        <span class="error" ng-show="dsubmitted && docform.to.$invalid">Invalid Date</span>
                     </div>
                 </div>
 
@@ -278,7 +269,7 @@
                 <div class="col-sm-9">
                     <td>
                         <div class="col-sm-offset-2  col-sm-3">
-                            <button class="btn btn-primary" type="submit" ng-disabled="docform.$invalid" ng-click="savedoc(doc);">Save</button>
+                            <button class="btn btn-primary" type="submit" ng-click="savedoc(docform,doc);">Save</button>
                             <button class="btn btn-primary" type="submit" ng-click="canceldoc();">Cancel</button>
                         </div>
                     </td>

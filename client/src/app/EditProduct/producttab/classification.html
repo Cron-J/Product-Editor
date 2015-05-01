@@ -149,12 +149,9 @@
                                 <div class="col-sm-9">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true" required>
-                                            <span class="error" ng-show="assignGrpForm.classificationid.$dirty && assignGrpForm.classificationid.$invalid">    Invalid:
+                                            <input type="text" name="classificationid" class="form-control" ng-model="createNew.classificationId"  ng-readonly="true" required>
+                                            <span class="error" ng-show="csubmitted && assignGrpForm.classificationid.$invalid">    Invalid:
                                                 <span ng-show="assignGrpForm.classificationid.$error.required">Tell us your Classification</span>
-                                                <span ng-show="assignGrpForm.classificationid.$error.minlength">Classification should be minimum of 0 characters</span>
-                                                <span ng-show="assignGrpForm.classificationid.$error.maxlength">Classification should be maximum of 50 characters</span>
-                                                <span ng-show="assignGrpForm.classificationid.$error.pattern">Classification won't allow special characters</span>
                                             </span>
                                         </div>
 
@@ -165,7 +162,7 @@
                                         <div class="col-sm-1">
                                             <span class=""> 
                                         
-                                            <button class="btn btn-primary btn-xs" ng-click="createNew.classificationId=''; description.descShort[0].description=''; classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId=''">
+                                            <button class="btn btn-primary btn-xs" ng-click="createNew.classificationId=''; description.descShort[0].description=''; classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId='';clearClassificationID()">
                                               <span class="glyphicon glyphicon-remove"></span>
                                             </button>
                                             </span>
@@ -176,7 +173,7 @@
                                                 <script type="text/ng-template" id="myModalContent.html">
                                                   <div ng-include="'app/EditProduct/classificationmodal.html'">
                                                 </script>
-                                                <button class="btn btn-primary btn-xs" ng-click="openClassification('lg')">
+                                                <button class="btn btn-primary btn-xs" ng-click="openClassification('lg','createNew')">
                                                     <span class="glyphicon glyphicon-search"></span>
                                                 </button>
                                                 </span>
@@ -191,12 +188,9 @@
                                 <div class="col-sm-6">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/" ng-readonly="true">
-                                            <span class="error" ng-show="assignGrpForm.cgId.$dirty && assigrpForm.cgId.$invalid">Invalid:
-                                                    <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
-                                            <span ng-show="assignGrpForm.cgId.$error.minlength">Classification Group should be minimum of 0 characters</span>nG
-                                            <span ng-show="assignGrpForm.cgId.$error.maxlength">Classification Group should be maximum of 50 characters</span>
-                                            <span ng-show="assignGrpForm.cgId.$error.pattern">Classification Group won't allow special characters</span>
+                                            <input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId"  ng-readonly="true" required>
+                                            <span class="error" ng-show="csubmitted && assignGrpForm.cgId.$invalid">Invalid:
+                                            <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
                                             </span>
                                         </div>
                                         <div class="col-sm-4">
@@ -207,7 +201,7 @@
                                                        <!--  <script type="text/ng-template" id="myModalContent1.html">
                                                           <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
                                                         </script> -->
-                                                        <button class="btn btn-primary btn-xs" ng-click="createNew.classificationId=''; description.descShort[0].description=''; classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId=''">
+                                                        <button class="btn btn-primary btn-xs" ng-click="createNew.classificationId=''; description.descShort[0].description=''; classificationGroupDescription.descShort[0].description='';createNew.classificationGroupId='';clearClassificationID();">
                                                                   <span class="glyphicon glyphicon-remove"></span>
                                             </button>
                                             </span>
@@ -217,7 +211,7 @@
                                                         <script type="text/ng-template" id="myModalContent1.html">
                                                           <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
                                                         </script>
-                                                        <button class="btn btn-primary btn-xs" ng-click="openClassificationGroup('lg')">
+                                                        <button class="btn btn-primary btn-xs" ng-click="openClassificationGroup('lg','createNew')">
                                                                   <span class="glyphicon glyphicon-search"></span>
                                             </button>
                                             </span>
@@ -232,16 +226,14 @@
                                 <label class="col-sm-3 control-label">Order No.</label>
                                 <div class="col-sm-4">
                                     <input type="number" name="order_no" class="form-control" ng-model="createNew.orderNo">
-                                    <span class="error" ng-show="editGrpForm.order_no.$invalid">Invalid:Only Number is allowed
-                                                </span>
+                                    <span class="error" ng-show="csubmitted && assignGrpForm.order_no.$invalid">Invalid:Only Number is allowed
+                                     </span>
                                 </div>
                             </div>
                             
 
-
-
                             <div class="col-sm-offset-3  col-sm-4">
-                                <button class="btn btn-primary" type="submit" ng-disabled="assignGrpForm.$invalid" ng-click="newClsfnidGrp(createNew)">Assign</button>
+                                <button class="btn btn-primary" type="submit" ng-click="newClsfnidGrp(assignGrpForm,createNew)">Assign</button>
                                 <button class="btn btn-primary" ng-click="cancelGrp()">Cancel</button>
                             </div>
 
@@ -256,7 +248,7 @@
                         <div class="col-sm-6">
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Variant ID</label>
+                                <label class="col-sm-3 control-label">Variant ID</label>
                                 <!-- <div class="col-sm-3">
                                     <input type="text" class="form-control" name="" ng-model="editrow.variantId" ng-readonly="true" />
                                 </div> -->
@@ -279,31 +271,89 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Classification* </label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" ng-model="editrow.classificationId" ng-disabled="true">
+                                <label class="col-sm-3 control-label">Classification* </label>
+                                <div class="col-sm-9">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="text" name="classificationid" class="form-control" ng-model="editrow.classificationId"  ng-readonly="true" required>
+                                            <span class="error" ng-show="cesubmitted  && editGrpForm.classificationid.$invalid">    Invalid:
+                                                <span ng-show="editGrpForm.classificationid.$error.required">Tell us your Classification</span>
+                                                
+                                            </span>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" name="" ng-model="description.descShort[0].description" ng-readonly="true" />
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <span class=""> 
+                                        
+                                            <button class="btn btn-primary btn-xs" ng-click="editrow.classificationId=''; description.descShort[0].description=''; classificationGroupDescription.descShort[0].description='';editrow.classificationGroupId='';clearClassificationID()">
+                                              <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            </span>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <span class="ng-scope"> 
+                                                <script type="text/ng-template" id="myModalContent.html">
+                                                  <div ng-include="'app/EditProduct/classificationmodal.html'">
+                                                </script>
+                                                <button class="btn btn-primary btn-xs" ng-click="openClassification('lg','editrow')">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                </button>
+                                                </span>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Classification Group*</label>
-                                <div class="col-sm-8">
+                                <label class="col-sm-3 control-label">Classification Group*</label>
+                                <div class="col-sm-6">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" ng-disabled="true" ng-model="editrow.classificationGroupId">
+                                        <div class="col-sm-4">
+                                            <input type="text" name="cgId" class="form-control" ng-model="editrow.classificationGroupId" ng-readonly="true" required>
+                                            <span class="error" ng-show="cesubmitted && assigrpForm.cgId.$invalid">Invalid:
+                                            <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
+                                            
+                                            </span>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" ng-disabled="true">
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" name="" ng-model="classificationGroupDescription.descShort[0].description" ng-readonly="true" />
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <span class="ng-scope"> 
+                                                       <!--  <script type="text/ng-template" id="myModalContent1.html">
+                                                          <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
+                                                        </script> -->
+                                                        <button class="btn btn-primary btn-xs" ng-click="editrow.classificationId=''; description.descShort[0].description=''; classificationGroupDescription.descShort[0].description='';editrow.classificationGroupId='';clearClassificationID();">
+                                                                  <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <span class="ng-scope"> 
+                                                        <script type="text/ng-template" id="myModalContent1.html">
+                                                          <div ng-include="'app/EditProduct/classificationgroupmodal.html'"></div>
+                                                        </script>
+                                                        <button class="btn btn-primary btn-xs" ng-click="openClassificationGroup('lg','editrow')">
+                                                                  <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Order No.</label>
-                                <div class="col-sm-8">
+                                <label class="col-sm-3 control-label">Order No.</label>
+                                <div class="col-sm-4">
                                     <input type="number" name="order_no" class="form-control" ng-model="editrow.orderNo">
-                                    <span class="error" ng-show="editGrpForm.order_no.$invalid">Invalid:Only Number is allowed
+                                    <span class="error" ng-show="cesubmitted && editGrpForm.order_no.$invalid">Invalid:Only Number is allowed
                                                 </span>
                                 </div>
                             </div>
@@ -321,9 +371,10 @@
                             <div class="form-group">
                                 <div class=" col-sm-offset-2 col-sm-4">
                                     <button class="btn btn-primary" ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||  
-                                        myForm.email.$dirty && myForm.email.$invalid" ng-click="updateitem(editproduct)">Save</button>
+                                        myForm.email.$dirty && myForm.email.$invalid" ng-click="updateGroup(editGrpForm)">Save</button>
                                     <button class="btn btn-primary" ng-click="canceleditGrp()">Cancel</button>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
