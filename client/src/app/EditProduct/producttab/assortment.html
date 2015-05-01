@@ -129,7 +129,7 @@
                                 <label class="col-sm-5 control-label"> Contract </label>
                                 <div class="col-sm-7">
                                     <input type="text" name="contract" class="form-control" ng-model="cproduct.contractId" required>
-                                    <span class="error" ng-show="assortform.pcid.$invalid">Invalid:
+                                    <span class="error" ng-show="assortform.pcid.$invalid && asubmitted">Invalid:
                                         <span ng-show="assortform.pcid.$error.maxlength">Product catalog should be maximum of 50 characters</span>
                                         <span ng-show="assortform.pcid.$error.pattern">Product catalog won't allow special characters</span>
                                     </span>
@@ -161,7 +161,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Status </label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <select name="language" class="form-control m-b" ng-model="cproduct.status">
                             <option value=""></option>
                             <option value="72">105 changed</option>
@@ -174,48 +174,32 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Ext Product Id </label>
                     <div class="col-sm-5">
-                        <input type="string" name="extpid" class="form-control" ng-model="cproduct.extproductid" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                        <span class="error" ng-show="assortform.extpid.$invalid">Invalid:
-                                        <span ng-show="assortform.extpid.$error.minlength">Ext Product Id should be minimum of 0 characters</span>
-                        <span ng-show="assortform.extpid.$error.maxlength">Ext Product Id should be maximum of 50 characters</span>
-                        <span ng-show="assortform.extpid.$error.pattern">Ext Product Id won't allow special characters</span>
-                        </span>
+                        <input type="string" name="extpid" class="form-control" ng-model="editproduct.extproductid">
+                       
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Ext Classification Id </label>
                     <div class="col-sm-5">
-                        <input type="text" name="extclassificationid" class="form-control" ng-model="cproduct.extClassificationId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                        <span class="error" ng-show="assortform.extclassificationid.$invalid">Invalid:
-                                        <span ng-show="assortform.extclassificationid.$error.minlength">Ext Classification Id should be minimum of 0 characters</span>
-                        <span ng-show="assortform.extclassificationid.$error.maxlength">Ext Classification Id should be maximum of 50 characters</span>
-                        <span ng-show="assortform.extclassificationid.$error.pattern">Ext Classification Id won't allow special characters</span>
-                        </span>
+                        <input type="text" name="extclassificationid" class="form-control" ng-model="cproduct.extClassificationId" >
+                        
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Ext Classification Group Id </label>
                     <div class="col-sm-5">
-                        <input type="text" name="classificationgid" class="form-control" ng-model="cproduct.extClassificationGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                        <span class="error" ng-show="assortform.classificationgid.$invalid">Invalid:
-                                        <span ng-show="assortform.classificationgid.$error.minlength">Ext Classification Group Id should be minimum of 0 characters</span>
-                        <span ng-show="assortform.classificationgid.$error.maxlength">Ext Classification Group Id should be maximum of 50 characters</span>
-                        <span ng-show="assortform.classificationgid.$error.pattern">Ext Classification Group Id won't allow special characters</span>
-                        </span>
+                        <input type="text" name="classificationgid" class="form-control" ng-model="cproduct.extClassificationGroupId" >
+                        
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Ext Short description </label>
                     <div class="col-sm-7">
-                        <input type="text" name="shortdesc" class="form-control" ng-model="cproduct.descShort" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                        <span class="error" ng-show="assortform.shortdesc.$invalid">Invalid:
-                                        <span ng-show="assortform.shortdesc.$error.minlength">Ext Short description should be minimum of 0 characters</span>
-                        <span ng-show="assortform.shortdesc.$error.maxlength">Ext Short description should be maximum of 50 characters</span>
-                        <span ng-show="assortform.shortdesc.$error.pattern">Ext Short description won't allow special characters</span>
-                        </span>
+                        <input type="text" name="shortdesc" class="form-control" ng-model="cproduct.descShort">
+                        
                     </div>
                 </div>
 
@@ -228,46 +212,32 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> AltExtProductId </label>
                             <div class="col-sm-3">
-                                <input type="text" name="altextproid" class="form-control" ng-model="cproduct.altExtProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="assortform.altextproid.$invalid">Invalid:
-                                                <span ng-show="assortform.altextproid.$error.minlength">AltExtProductId should be minimum of 0 characters</span>
-                                <span ng-show="assortform.altextproid.$error.maxlength">AltExtProductId should be maximum of 50 characters</span>
-                                <span ng-show="assortform.altextproid.$error.pattern">AltExtProductId won't allow special characters</span>
-                                </span>
+                                <input type="text" name="altextproid" class="form-control" ng-model="cproduct.altExtProductId" >
+                                
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Long description </label>
                             <div class="col-sm-8">
-                                <input type="text" name="ldesc" class="form-control" ng-model="cproduct.descLong" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="assortform.ldesc.$invalid">Invalid:
-                                                <span ng-show="assortform.ldesc.$error.minlength">Long description should be minimum of 0 characters</span>
-                                <span ng-show="assortform.ldesc.$error.maxlength">Long description should be maximum of 50 characters</span>
-                                <span ng-show="assortform.ldesc.$error.pattern">Long description won't allow special characters</span>
-                                </span>
+                                <input type="text" name="ldesc" class="form-control" ng-model="cproduct.descLong" >
+                                
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> ExtGlAccountId </label>
                             <div class="col-sm-4">
-                                <input type="string" name="extglid" class="form-control" ng-model="cproduct.extGLAccountId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="assortform.extglid.$invalid">Invalid:
-                                                <span ng-show="assortform.extglid.$error.minlength">ExtGlAccountId should be minimum of 0 characters</span>
-                                <span ng-show="assortform.extglid.$error.maxlength">ExtGlAccountId should be maximum of 50 characters</span>
-                                <span ng-show="assortform.extglid.$error.pattern">ExtGlAccountId won't allow special characters</span>
-                                </span>
+                                <input type="string" name="extglid" class="form-control" ng-model="cproduct.extGLAccountId" >
+                                
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Quantity Interval </label>
-                            <div class="col-sm-2">
-                                <input type="number" name="qunatityinterval" class="form-control" ng-model="cproduct.quantityInterval" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="assortform.qunatityinterval.$invalid">Invalid:
-                                                <span ng-show="assortform.qunatityinterval.$error.minlength">Quantity Interval should be minimum of 0 digit</span>
-                                <span ng-show="assortform.qunatityinterval.$error.maxlength">Quantity Interval should be maximum of 50 digit</span>
+                            <div class="col-sm-3">
+                                <input type="number" name="qunatityinterval" class="form-control" ng-model="cproduct.quantityInterval" >
+                                <span class="error" ng-show="assortform.qunatityinterval.$invalid && asubmitted">Invalid:
                                 <span ng-show="assortform.qunatityinterval.$error.number">Enter only digit</span>
                                 </span>
                             </div>
@@ -276,10 +246,8 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Max Quantity </label>
                             <div class="col-sm-3">
-                                <input type="number" name="maxquantity" class="form-control" ng-model="cproduct.maxQuantity" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="assortform.maxquantity.$invalid">Invalid:
-                                                <span ng-show="assortform.maxquantity.$error.minlength">Max Quantity should be minimum of 0 digit</span>
-                                <span ng-show="assortform.maxquantity.$error.maxlength">Max Quantity should be maximum of 50 digit</span>
+                                <input type="number" name="maxquantity" class="form-control" ng-model="cproduct.maxQuantity" >
+                                <span class="error" ng-show="assortform.maxquantity.$invalid && asubmitted">Invalid:
                                 <span ng-show="assortform.maxquantity.$error.number">Enter only digit</span>
                                 </span>
                             </div>
@@ -288,30 +256,28 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Min Quantity </label>
                             <div class="col-sm-3">
-                                <input type="number" name="minquantity" class="form-control" ng-model="cproduct.minQuantity" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="assortform.minquantity.$invalid">Invalid:
-                                                <span ng-show="assortform.minquantity.$error.minlength">Min Quantity should be minimum of 0 digit</span>
-                                <span ng-show="assortform.minquantity.$error.maxlength">Min Quantity should be maximum of 50 digit</span>
+                                <input type="number" name="minquantity" class="form-control" ng-model="cproduct.minQuantity" >
+                                <span class="error" ng-show="assortform.minquantity.$invalid && asubmitted">Invalid:
+                            
                                 <span ng-show="assortform.minquantity.$error.number">Enter only digit</span>
                                 </span>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="col-sm-4 control-label"> LeadtimeInDays </label>
                             <div class="col-sm-2">
-                                <input type="number" name="leadtimedays" class="form-control" ng-model="cproduct.grossPrice" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="assortform.leadtimedays.$invalid">Invalid:
-                                                <span ng-show="assortform.leadtimedays.$error.minlength">LeadtimeInDays should be minimum of 0 digit</span>
-                                <span ng-show="assortform.leadtimedays.$error.maxlength">LeadtimeInDays should be maximum of 50 digit</span>
+                                <input type="number" name="leadtimedays" class="form-control" ng-model="cproduct.grossPrice" >
+                                <span class="error" ng-show="assortform.leadtimedays.$invalid && asubmitted">Invalid:
+                                
                                 <span ng-show="assortform.leadtimedays.$error.number">Enter only digit</span>
                                 </span>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Sales UnitOfMeasure </label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <select name="language" class="form-control m-b" ng-model="cproduct.salesUnitOfMeasureId">
                                     <option value=""></option>
                                     <option value="2P">kB</option>
@@ -369,11 +335,10 @@
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Discount </label>
-                            <div class="col-sm-8">
-                                <input type="number" name="discount" class="form-control" ng-model="cproduct.discount" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="assortform.discount.$invalid">Invalid:
-                                                <span ng-show="assortform.discount.$error.minlength">Discount should be minimum of 0 digit</span>
-                                <span ng-show="assortform.discount.$error.maxlength">Discount should be maximum of 50 digit</span>
+                            <div class="col-sm-3">
+                                <input type="number" name="discount" class="form-control" ng-model="cproduct.discount" >
+                                <span class="error" ng-show="assortform.discount.$invalid && asubmitted">Invalid:
+                            
                                 <span ng-show="assortform.discount.$error.number">Enter only digit</span>
                                 </span>
                             </div>
@@ -381,7 +346,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Visibility</label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <select name="visibility" class="form-control m-b" ng-model="cproduct.visibility">
                                     <option value="-1">exclude</option>
                                     <option value="0">neutral</option>
@@ -393,7 +358,8 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label">Status Date </label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="price.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                                <input type="text" name="statusdate" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="price.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" close-text="Close">
+                                <span class="error" ng-show="assortform.statusdate.$invalid && asubmitted">Invalid: Status date.</span>
                             </div>
                         </div>
 
@@ -407,10 +373,8 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Cost </label>
                             <div class="col-sm-3">
-                                <input type="number" name="cost" class="form-control" ng-model="cproduct.cost" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="assortform.cost.$invalid">Invalid:
-                                                <span ng-show="assortform.cost.$error.minlength">Cost should be minimum of 0 digit</span>
-                                <span ng-show="assortform.cost.$error.maxlength">Cost should be maximum of 50 digit</span>
+                                <input type="number" name="cost" class="form-control" ng-model="cproduct.cost" >
+                                <span class="error" ng-show="assortform.cost.$invalid && asubmitted">Invalid:
                                 <span ng-show="assortform.cost.$error.number">Enter only digit</span>
                                 </span>
                             </div>
@@ -433,11 +397,9 @@
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> Amount </label>
-                            <div class="col-sm-2">
-                                <input type="number" name="amount" class="form-control" ng-model="cproduct.ammount" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="assortform.amount.$invalid">Invalid:
-                                                <span ng-show="assortform.amount.$error.minlength">Amount should be minimum of 0 digit</span>
-                                <span ng-show="assortform.amount.$error.maxlength">Amount should be maximum of 50 digit</span>
+                            <div class="col-sm-3">
+                                <input type="number" name="amount" class="form-control" ng-model="cproduct.ammount" >
+                                <span class="error" ng-show="assortform.amount.$invalid && asubmitted">Invalid:
                                 <span ng-show="assortform.amount.$error.number">Not vallid number</span>
                                 </span>
                             </div>
@@ -530,9 +492,8 @@
 
             <div class="row">
                 <div class="col-sm-12">
-
                     <div class="col-sm-offset-2  col-sm-3">
-                        <button class="btn btn-primary" type="submit" ng-disabled="assortform.$invalid" ng-click="savecproduct(cproduct);">Save</button>
+                        <button class="btn btn-primary" type="submit" ng-click="savecproduct(assortform,cproduct);">Save</button>
                         <button class="btn btn-primary" type="submit" ng-click="cancelcproduct();">Cancel</button>
                     </div>
 

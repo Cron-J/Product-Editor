@@ -12,15 +12,6 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                         growl.addSuccessMessage('Master data is succesfully updated.');
                         $scope.msubmitted
                     }
-                    else if(type=='New_Variant'){
-                        growl.addSuccessMessage('Variant created succesfully');
-                        $scope.newvariant=null;
-                    }
-                    else if(type=='Edit_Variant'){
-                        // $scope.product.variants.indexOf($scope.editvariant)
-                        growl.addSuccessMessage('Variant updated succesfully');
-                        
-                    }
                     else if(type!=='delete'){
                         growl.addSuccessMessage('Attribute list updated succesfully');
                     }
@@ -699,8 +690,6 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                             .catch(function(error){
                                 console.log(error);
                             })
-
-
                     }
 
                 });
@@ -785,25 +774,38 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
 
         }
 
-        $scope.savecproduct = function(cproductdata) {
+        $scope.savecproduct = function(form,cproductdata) {
+            $scope.asubmitted=true;
+            if(form.$valid){
+                if (cproductdata._id) {
+                    angular.forEach($scope.editproduct.contractedProducts, function(value, key) {
 
-            if (cproductdata._id) {
-                angular.forEach($scope.editproduct.contractedProducts, function(value, key) {
+                        if (cproductdata._id == value._id) {
+                            $scope.editproduct.contractedProducts[key] = cproductdata;
+                            //$scope.updateitem($scope.editproduct);
+                            getProductData.updateProduct($scope.editproduct)
+                                .then(function(data){
+                                    growl.addSuccessMessage('Contracted Product is updated successfully');
+                                })
+                                .catch(function(error){
+                                    console.log(error);
+                                })
+                        }
 
-                    if (cproductdata._id == value._id) {
-                        $scope.editproduct.contractedProducts[key] = cproductdata;
-                        $scope.updateitem($scope.editproduct);
-
-
-                    }
-
-                });
-            } else {
-                $scope.editproduct.contractedProducts.push(angular.copy(cproductdata));
-                $scope.updateitem($scope.editproduct);
-                $scope.cproduct = {};
+                    });
+                } else {
+                    $scope.editproduct.contractedProducts.push(angular.copy(cproductdata));
+                    getProductData.updateProduct($scope.editproduct)
+                                .then(function(data){
+                                    $scope.cproduct = {};
+                                    growl.addSuccessMessage('Contracted Product is created successfully');
+                                })
+                                .catch(function(error){
+                                    console.log(error);
+                                })
+                    
+                }
             }
-
         }
 
 
@@ -920,28 +922,47 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 })
         }
 
-        $scope.saverelation = function(relationdata) {
+        $scope.saverelation = function(form, relationdata) {
+            $scope.rsubmitted=true;
+            if(form.$valid){
+                if (relationdata._id) {
+                    angular.forEach($scope.editproduct.productRelations, function(value, key) {
 
-            if (relationdata._id) {
-                angular.forEach($scope.editproduct.productRelations, function(value, key) {
+                        if (relationdata._id == value._id) {
+                            $scope.editproduct.productRelations[key] = relationdata;
+                            getProductData.updateProduct($scope.editproduct)
+                                .then(function(data){
+                                    $scope.rsubmitted=false;
+                                    form.$setPristine();
+                                   growl.addSuccessMessage('You have successfully updated Product Relation.');
+                                })
+                                .catch(function(error){
+                                    console.log('error');
+                                })
+                        }
 
-                    if (relationdata._id == value._id) {
-                        $scope.editproduct.productRelations[key] = relationdata;
-                        $scope.updateitem($scope.editproduct);
-                    }
-
-                });
-            } else {
-                $scope.editproduct.productRelations.push(angular.copy(relationdata));
-                $scope.updateitem($scope.editproduct);
-                $scope.prelation = {
-                    descriptions: [{
-                        language: 'en',
-                        description: ''
-                    }]
-                };
-                $scope.selectedlang = ['en'];
-                $scope.prelation={};
+                    });
+                } else {
+                    $scope.editproduct.productRelations.push(angular.copy(relationdata));
+                    getProductData.updateProduct($scope.editproduct)
+                                .then(function(data){
+                                    $scope.rsubmitted=false;
+                                    form.$setPristine();
+                                    $scope.prelation = {
+                                        descriptions: [{
+                                            language: 'en',
+                                            description: ''
+                                        }]
+                                    };
+                                    $scope.selectedlang = ['en'];
+                                    $scope.prelation={};
+                                   growl.addSuccessMessage('You have successfully added Product Relation.');
+                                })
+                                .catch(function(error){
+                                    console.log('error');
+                                })
+                    
+                }
             }
 
         }
@@ -1023,15 +1044,44 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 console.log(error)
             })
         }
-        $scope.addNewVariant=function(newvariant){
-            $scope.editproduct.variants.push(newvariant);
-            $scope.updateitem($scope.editproduct,'New_Variant');
-            $scope.showvar=false;
+
+        $scope.customform={};
+        $scope.addNewVariant=function(form,newvariant){
+            $scope.vsubmitted=true;
+            if(form.$valid){
+                $scope.editproduct.variants.push(newvariant);
+                
+                 getProductData.updateProduct($scope.editproduct)
+                .then(function(data){
+                        growl.addSuccessMessage('Variant created succesfully');
+                        $scope.newvariant=null;
+                        $scope.showvar=false;
+                        $scope.vsubmitted=false;
+
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+                
+            }
+            
         }
 
-        $scope.updatevariant=function(){
-            $scope.updateitem($scope.editproduct,'Edit_Variant');
-            $scope.editvar=false;
+        $scope.updatevariant=function(form){
+            $scope.vsubmitted=true;
+            if(form.$valid){
+            getProductData.updateProduct($scope.editproduct)
+                .then(function(data){
+                        growl.addSuccessMessage('Variant updated succesfully');
+                        $scope.editvar=false;
+                        $scope.vsubmitted=false;
+
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+            }
+            
         }
 
         

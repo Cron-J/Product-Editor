@@ -348,23 +348,14 @@
                     <label class="col-sm-4 control-label"> Product </label>
                     <div class="col-sm-4">
                         <input type="string" name="contract" class="form-control" ng-model="editproduct.productId" ng-disabled="true">
-                        <span class="error" ng-show="relationform.contract.$invalid">Invalid:
-                                        <span ng-show="relationform.contract.$error.minlength">Product  should be minimum of 0 characters</span>
-                        <span ng-show="relationform.contract.$error.maxlength">Product  should be maximum of 50 characters</span>
-                        <span ng-show="relationform.contract.$error.pattern">Product  won't allow special characters</span>
-                        </span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Related Product </label>
                     <div class="col-sm-4">
-                        <input type="text" name="relatedproduct" class="form-control" ng-model="prelation.relatedProductId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
-                        <span class="error" ng-show="relationform.relatedproduct.$invalid">Invalid:
-                                        <span ng-show="relationform.relatedproduct.$error.minlength">Related Product should be minimum of 0 characters</span>
-                        <span ng-show="relationform.relatedproduct.$error.maxlength">Related Product should be maximum of 50 characters</span>
-                        <span ng-show="relationform.relatedproduct.$error.pattern">Related Product won't allow special characters</span>
-                        </span>
+                        <input type="text" name="relatedproduct" class="form-control" ng-model="prelation.relatedProductId" >
+                        
                     </div>
                     <div class="col-sm-1">
                         <button class="btn btn-primary btn-xs " ng-click="searchProduct('lg')">
@@ -453,7 +444,14 @@
                                         </div>
 
                                         <div class="col-sm-7 m-b-10">
-                                           <input type="text" name="price" class="form-control" ng-model="langdes.description" >
+                                           <input type="text" name="desc" class="form-control" ng-model="langdes.description" ng-minlength="0" ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9_-\s]+$/">
+
+                                            <span class="error" ng-show="relationform.desc.$invalid && rsubmitted">Invalid:
+                                            <span ng-show="relationform.desc.$error.minlength">Description should be minimum of 0 characters</span>
+                                            <span ng-show="relationform.desc.$error.maxlength">Description should be maximum of 200 characters</span>
+                                            <span ng-show="relationform.desc.$error.pattern">Description won't allow special characters other than hyphen and underscore.</span>
+                                            </span>
+
                                         </div>
 
                                         <span ng-hide="$first && prelation.descriptions.length==1" class="col-sm-1 ">
@@ -479,34 +477,25 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Sync Type ID </label>
                     <div class="col-sm-3">
-                        <input type="text" name="syncid" class="form-control" ng-model="prelation.syncTypeId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                        <span class="error" ng-show="relationform.syncid.$invalid">Invalid:
-                                        <span ng-show="relationform.syncid.$error.minlength">Sync Type ID should be minimum of 0 characters</span>
-                        <span ng-show="relationform.syncid.$error.maxlength">Sync Type ID should be maximum of 50 characters</span>
-                        <span ng-show="relationform.syncid.$error.pattern">Sync Type ID won't allow special characters</span>
-                        </span>
+                        <input type="text" name="syncid" class="form-control" ng-model="prelation.syncTypeId" >
+                        
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Seq No </label>
                     <div class="col-sm-2">
-                        <input type="text" name="seqno" class="form-control" ng-model="prelation.seqNo" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9_-]+$/">
-                        <span class="error" ng-show="relationform.seqno.$invalid">Invalid:
-                                        <span ng-show="relationform.seqno.$error.minlength">Seq No should be minimum of 0 characters</span>
-                        <span ng-show="relationform.seqno.$error.maxlength">Seq No should be maximum of 50 characters</span>
-                        <span ng-show="relationform.seqno.$error.pattern">Seq No won't allow special characters</span>
-                        </span>
+                        <input type="text" name="seqno" class="form-control" ng-model="prelation.seqNo" >
+                        
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Quantity </label>
                     <div class="col-sm-2">
-                        <input type="number" name="quantity" class="form-control" ng-model="prelation.quantity" ng-minlength="0" ng-maxlength="50">
-                        <span class="error" ng-show="relationform.quantity.$invalid">Invalid:
-                                        <span ng-show="relationform.quantity.$error.minlength">Quantity should be minimum of 0 digit</span>
-                        <span ng-show="relationform.quantity.$error.maxlength">Quantity should be maximum of 50 digit</span>
+                        <input type="number" name="quantity" class="form-control" ng-model="prelation.quantity" >
+                        <span class="error" ng-show="relationform.quantity.$invalid && rsubmitted">Invalid:
+                                        
                         <span ng-show="relationform.quantity.$error.number">Enter only digit</span>
                         </span>
                     </div>
@@ -515,12 +504,8 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Selection Group Id </label>
                     <div class="col-sm-3">
-                        <input type="text" name="slgroupid" class="form-control" ng-model="prelation.selectionGroupId" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                        <span class="error" ng-show="relationform.slgroupid.$invalid">Invalid:
-                                        <span ng-show="relationform.slgroupid.$error.minlength">Selection Group Id  should be minimum of 0 characters</span>
-                        <span ng-show="relationform.slgroupid.$error.maxlength">Selection Group Id  should be maximum of 50 characters</span>
-                        <span ng-show="relationform.slgroupid.$error.pattern">Selection Group Id  won't allow special characters</span>
-                        </span>
+                        <input type="text" name="slgroupid" class="form-control" ng-model="prelation.selectionGroupId" >
+                        
                     </div>
                 </div>
 
@@ -541,7 +526,8 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Valid From</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                        <input type="text" name="from" class="form-control date" id="dateFrom" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validFrom" is-open="opened.dateFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                        <span class="error" ng-show="relationform.from.$invalid && rsubmitted">Enter valid date.</span>
                     </div>
                 </div>
 
@@ -549,7 +535,8 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Valid To</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validTo" is-open="opened.dateTo" min-date="editproduct.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                        <input type="text" name="to" class="form-control date" id="dateTo" ng-click="open($event)" class="form-control" datepicker-popup="{{format}}" ng-model="prelation.validTo" is-open="opened.dateTo" min-date="prelation.validFrom" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+                        <span class="error" ng-show="relationform.to.$invalid && rsubmitted">Enter valid date.</span>
                     </div>
                 </div>
 
@@ -564,46 +551,33 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxText 1 </label>
                             <div class="col-sm-5">
-                                <input type="text" name="udxtext1" class="form-control" ng-model="prelation.udxText1" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="relationform.udxtext1.$invalid">Invalid:
-                                                <span ng-show="relationform.udxtext1.$error.minlength">UdxText 1 should be minimum of 0 characters</span>
-                                <span ng-show="relationform.udxtext1.$error.maxlength">UdxText 1 should be maximum of 50 characters</span>
-                                <span ng-show="relationform.udxtext1.$error.pattern">UdxText 1 won't allow special characters</span>
-                                </span>
+                                <input type="text" name="udxtext1" class="form-control" ng-model="prelation.udxText1" >
+                                
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxText 2 </label>
                             <div class="col-sm-5">
-                                <input type="text" name="udxtext2" class="form-control" ng-model="prelation.udxText2" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="relationform.udxtext2.$invalid">Invalid:
-                                                <span ng-show="relationform.udxtext2.$error.minlength">UdxText 2 should be minimum of 0 characters</span>
-                                <span ng-show="relationform.udxtext2.$error.maxlength">UdxText 2 should be maximum of 50 characters</span>
-                                <span ng-show="relationform.udxtext2.$error.pattern">UdxText 2 won't allow special characters</span>
-                                </span>
+                                <input type="text" name="udxtext2" class="form-control" ng-model="prelation.udxText2">
+                                
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxText 3 </label>
                             <div class="col-sm-5">
-                                <input type="text" name="udxtext3" class="form-control" ng-model="prelation.udxText3" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="relationform.udxtext3.$invalid">Invalid:
-                                                <span ng-show="relationform.udxtext3.$error.minlength">UdxText 3 should be minimum of 0 characters</span>
-                                <span ng-show="relationform.udxtext3.$error.maxlength">UdxText 3 should be maximum of 50 characters</span>
-                                <span ng-show="relationform.udxtext3.$error.pattern">UdxText 3 won't allow special characters</span>
-                                </span>
+                                <input type="text" name="udxtext3" class="form-control" ng-model="prelation.udxText3" >
+                                
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxNum 1 </label>
                             <div class="col-sm-5">
-                                <input type="number" name="udxnum1" class="form-control" ng-model="prelation.udxNum1" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="relationform.udxnum1.$invalid">Invalid:
-                                                <span ng-show="relationform.udxnum1.$error.minlength">UdxNum 2 should be minimum of 0 digit</span>
-                                <span ng-show="relationform.udxnum1.$error.maxlength">UdxNum 2 should be maximum of 50 digit</span>
+                                <input type="number" name="udxnum1" class="form-control" ng-model="prelation.udxNum1" >
+                                <span class="error" ng-show="relationform.udxnum1.$invalid && rsubmitted">Invalid:
+                            
                                 <span ng-show="relationform.udxnum1.$error.number">Enter only digit</span>
                                 </span>
                             </div>
@@ -612,10 +586,9 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxNum 2 </label>
                             <div class="col-sm-5">
-                                <input type="number" name="udxnum2" class="form-control" ng-model="prelation.udxNum2" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="relationform.udxnum2.$invalid">Invalid:
-                                                <span ng-show="relationform.udxnum2.$error.minlength">UdxNum 2 should be minimum of 0 digit</span>
-                                <span ng-show="relationform.udxnum2.$error.maxlength">UdxNum 2 should be maximum of 50 digit</span>
+                                <input type="number" name="udxnum2" class="form-control" ng-model="prelation.udxNum2" >
+                                <span class="error" ng-show="relationform.udxnum2.$invalid && rsubmitted">Invalid:
+                                                
                                 <span ng-show="relationform.udxnum2.$error.number">Enter only digit</span>
                                 </span>
                             </div>
@@ -624,10 +597,9 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxNum 3 </label>
                             <div class="col-sm-5">
-                                <input type="number" name="udexnum3" class="form-control" ng-model="prelation.udxNum3" ng-minlength="0" ng-maxlength="50">
-                                <span class="error" ng-show="relationform.udexnum3.$invalid">Invalid:
-                                                <span ng-show="relationform.udexnum3.$error.minlength">UdxNum 3 should be minimum of 0 digit</span>
-                                <span ng-show="relationform.udexnum3.$error.maxlength">UdxNum 3 should be maximum of 50 digit</span>
+                                <input type="number" name="udexnum3" class="form-control" ng-model="prelation.udxNum3" >
+                                <span class="error" ng-show="relationform.udexnum3.$invalid && rsubmitted">Invalid:
+                                                
                                 <span ng-show="relationform.udexnum3.$error.number">Enter only digit</span>
                                 </span>
                             </div>
@@ -636,11 +608,8 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxSortKey 1 </label>
                             <div class="col-sm-3">
-                                <input type="text" name="udx1" class="form-control" ng-model="prelation.udxSortKey1" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="relationform.udx1.$invalid">Invalid:
-                                                <span ng-show="relationform.udx1.$error.minlength">UdxSortKey 1 should be minimum of 0 characters</span>
-                                <span ng-show="relationform.udx1.$error.maxlength">UdxSortKey 1 should be maximum of 50 characters</span>
-                                <span ng-show="relationform.udx1.$error.pattern">UdxSortKey 1 won't allow special characters</span>
+                                <input type="text" name="udx1" class="form-control" ng-model="prelation.udxSortKey1">
+                                
                                 </span>
                             </div>
                         </div>
@@ -648,24 +617,16 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxSortKey 2 </label>
                             <div class="col-sm-3">
-                                <input type="text" name="udx2" class="form-control" ng-model="prelation.udxSortKey2" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="relationform.udx2.$invalid">Invalid:
-                                                <span ng-show="relationform.udx2.$error.minlength">UdxSortKey 2 should be minimum of 0 characters</span>
-                                <span ng-show="relationform.udx2.$error.maxlength">UdxSortKey 2 should be maximum of 50 characters</span>
-                                <span ng-show="relationform.udx2.$error.pattern">UdxSortKey 2 won't allow special characters</span>
-                                </span>
+                                <input type="text" name="udx2" class="form-control" ng-model="prelation.udxSortKey2" >
+                                
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-4 control-label"> UdxSortKey 3 </label>
                             <div class="col-sm-3">
-                                <input type="text" name="udx3" class="form-control" ng-model="prelation.udxSortKey3" ng-minlength="0" ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9\s]+$/">
-                                <span class="error" ng-show="relationform.udx3.$invalid">Invalid:
-                                                <span ng-show="relationform.udx3.$error.minlength">UdxSortKey 3 should be minimum of 0 characters</span>
-                                <span ng-show="relationform.udx3.$error.maxlength">UdxSortKey 3 should be maximum of 50 characters</span>
-                                <span ng-show="relationform.udx3.$error.pattern">UdxSortKey 3 won't allow special characters</span>
-                                </span>
+                                <input type="text" name="udx3" class="form-control" ng-model="prelation.udxSortKey3" >
+                                
                             </div>
                         </div>
                     </accordion-group>
@@ -683,7 +644,7 @@
                 <div class="col-sm-12">
 
                     <div class="col-sm-offset-2  col-sm-3">
-                        <button class="btn btn-primary" type="submit" ng-disabled="relationform.$invalid" ng-click="saverelation(prelation);">Save</button>
+                        <button class="btn btn-primary" type="submit" ng-click="saverelation(relationform,prelation);">Save</button>
                         <button class="btn btn-primary" type="submit" ng-click="cancelrelation();">Cancel</button>
                     </div>
 

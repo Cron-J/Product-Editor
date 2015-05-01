@@ -52,17 +52,17 @@
   </div>
 
   <!-- On clicking assign new group button -->
-
+<form name="newvariantform" novalidate>
   <div class="row m-t-25" ng-show="showvar">
-    <form name="assignGrpForm" novalidate>
+    
       <div class="col-sm-6">
         <div class="form-group">
           <label class="col-sm-5 control-label">Variant Name </label>
           <div class="col-sm-7">
             <input type="text" name="variantId" class="form-control" ng-model="newvariant.variantId" required>
-            <span style="color:red" ng-show="assignGrpForm.variantId.$dirty && assignGrpForm.variantId.$invalid"></span>
-            <span ng-show="assignGrpForm.variantId.$error.required">Required field.</span>
-
+            <span class="error" ng-show="newvariantform.variantId.$invalid && vsubmitted">
+            <span ng-show="newvariantform.variantId.$error.required">Required field.</span>
+            </span>
           </div>
 
         </div>
@@ -71,9 +71,8 @@
         <div class="form-group">
           <label class="col-sm-5 control-label">Attributes</label>
           <div class="col-sm-5">
-            <input type="text" name="attributes" class="form-control" ng-model="newvariant.attributes" required>
-            <span style="color:red" ng-show="assignGrpForm.attributes.$dirty && assignGrpForm.attributes.$invalid"></span>
-            <span ng-show="assignGrpForm.attributes.$error.required">Required field.</span>
+            <input type="text"  class="form-control" ng-model="newvariant.attributes" >
+            
           </div>
           <div class="col-sm-2">
             <button type="button" class="btn btn-primary btn-xs ng-scope" data-dismiss="modal" 
@@ -85,9 +84,7 @@
 
 
 
-      <script type="text/ng-template" id="myModalContent2.html">
-        <div ng-include="'app/EditProduct/attributemodal.html'"></div>
-      </script>
+  
 
 
 
@@ -148,103 +145,109 @@
 
 
         <div class="col-sm-offset-5  col-sm-12">
-          <button class="btn btn-primary" type="submit" ng-click="addNewVariant(newvariant)">Create</button>
+          <button class="btn btn-primary" type="submit" ng-click="addNewVariant(newvariantform,newvariant)">Create</button>
           <button class="btn btn-primary" ng-click="cancelvariant()">Cancel</button>
         </div>
-
-
       </div>
-    </form>
   </div>
+</form>
   <!-- On clicking row -->
 
-
+<form name="editvariantform" novalidate>
   <div class="row m-t-25" ng-show="editvar">
+    
+      <div class="col-sm-6">
 
-    <div class="col-sm-6">
-
-      <div class="form-group">
-        <label class="col-sm-5 control-label">Variant Name </label>
-        <div class="col-sm-7">
-          <input type="text" name="variantId" class="form-control" ng-model="editvariant.variantId" required>
-          <span style="color:red" ng-show="assignGrpForm.variantId.$dirty && assignGrpForm.variantId.$invalid"></span>
-          <span ng-show="assignGrpForm.variantId.$error.required">Required field.</span>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-sm-5 control-label">Attributes</label>
-        <div class="col-sm-5">
-          <input type="text" name="attributes" class="form-control" ng-model="editvariant.attributes" required>
-          <span style="color:red" ng-show="assignGrpForm.attributes.$dirty && assignGrpForm.attributes.$invalid"></span>
-          <span ng-show="assignGrpForm.attributes.$error.required">Required field.</span>
-        </div>
-        <div class="col-sm-2">
-            <button type="button" class="btn btn-primary btn-xs ng-scope" data-dismiss="modal" 
-              ng-click="addAttributes('edit')">   
-              <span class="glyphicon glyphicon-search"></span> 
-            </button>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Variant Name </label>
+          <div class="col-sm-7">
+            <input type="text" name="variantId" class="form-control" ng-model="editvariant.variantId" required>
+            <span class="error" ng-show="editvariantform.variantId.$invalid && vsubmitted">
+              <span ng-show="editvariantform.variantId.$error.required">Required field.</span>
+            </span>
           </div>
-      </div>
+        </div>
 
-      <div class=" form-group">
-        <div class="col-sm-5">
-          <label class="control-label ">has Variant Prices</label>
+        <div class="form-group">
+          <label class="col-sm-5 control-label">Attributes</label>
+          <div class="col-sm-5">
+            <input type="text"  class="form-control" ng-model="editvariant.attributes" >
+            
+          </div>
+          <div class="col-sm-2">
+              <button type="button" class="btn btn-primary btn-xs ng-scope" data-dismiss="modal" 
+                ng-click="addAttributes('edit')">   
+                <span class="glyphicon glyphicon-search"></span> 
+              </button>
+            </div>
         </div>
-        <div class="col-sm-7 text-left">
-          <input type="checkbox" ng-model="editvariant.hasVariantPrices">
-        </div>
-      </div>
 
-      <div class=" form-group">
-        <div class="col-sm-5">
-          <label class="control-label ">has Variant Doc Association</label>
+        <div class=" form-group">
+          <div class="col-sm-5">
+            <label class="control-label ">has Variant Prices</label>
+          </div>
+          <div class="col-sm-7 text-left">
+            <input type="checkbox" ng-model="editvariant.hasVariantPrices">
+          </div>
         </div>
-        <div class="col-sm-7 text-left">
-          <input type="checkbox" ng-model="editvariant.hasVariantDocAssociation">
-        </div>
-      </div>
 
-      <div class=" form-group">
-        <div class="col-sm-5">
-          <label class="control-label ">has Variant Product Relation</label>
+        <div class=" form-group">
+          <div class="col-sm-5">
+            <label class="control-label ">has Variant Doc Association</label>
+          </div>
+          <div class="col-sm-7 text-left">
+            <input type="checkbox" ng-model="editvariant.hasVariantDocAssociation">
+          </div>
         </div>
-        <div class="col-sm-7 text-left">
-          <input type="checkbox" ng-model="editvariant.hasVariantProductRelation">
-        </div>
-      </div>
 
-      <div class=" form-group">
-        <div class="col-sm-5">
-          <label class="control-label ">has Variant Contracted Products</label>
+        <div class=" form-group">
+          <div class="col-sm-5">
+            <label class="control-label ">has Variant Product Relation</label>
+          </div>
+          <div class="col-sm-7 text-left">
+            <input type="checkbox" ng-model="editvariant.hasVariantProductRelation">
+          </div>
         </div>
-        <div class="col-sm-7 text-left">
-          <input type="checkbox" ng-model="editvariant.hasVariantContractedProducts">
-        </div>
-      </div>
 
-      <div class=" form-group">
-        <div class="col-sm-5">
-          <label class="control-label ">has Variant Attribute Values</label>
+        <div class=" form-group">
+          <div class="col-sm-5">
+            <label class="control-label ">has Variant Contracted Products</label>
+          </div>
+          <div class="col-sm-7 text-left">
+            <input type="checkbox" ng-model="editvariant.hasVariantContractedProducts">
+          </div>
         </div>
-        <div class="col-sm-7 text-left">
-          <input type="checkbox" ng-model="editvariant.hasVariantAttributeValues">
-        </div>
-      </div>
 
-      <div class=" form-group">
-        <div class="col-sm-5">
-          <label class="control-label">has Variant Classification GroupAssociations</label>
+        <div class=" form-group">
+          <div class="col-sm-5">
+            <label class="control-label ">has Variant Attribute Values</label>
+          </div>
+          <div class="col-sm-7 text-left">
+            <input type="checkbox" ng-model="editvariant.hasVariantAttributeValues">
+          </div>
         </div>
-        <div class="col-sm-7 ">
-          <input type="checkbox" ng-model="editvariant.hasVariantClassificationGroupAssociations">
-        </div>
-      </div>
 
-      <div class="col-sm-offset-5  col-sm-12">
-        <button class="btn btn-primary" ng-click="updatevariant(editvariant)">Update</button>
-        <button class="btn btn-primary" ng-click="cancelupvariant()">Cancel</button>
+        <div class=" form-group">
+          <div class="col-sm-5">
+            <label class="control-label">has Variant Classification GroupAssociations</label>
+          </div>
+          <div class="col-sm-7 ">
+            <input type="checkbox" ng-model="editvariant.hasVariantClassificationGroupAssociations">
+          </div>
+        </div>
+
+        <div class="col-sm-offset-5  col-sm-12">
+          <button class="btn btn-primary" type="submit" ng-click="updatevariant(editvariantform)">Update</button>
+          <button class="btn btn-primary" ng-click="cancelupvariant()">Cancel</button>
+          {{editvariantform}}mk
+        </div>
       </div>
-    </div>
+   
   </div>
+   </form>
+
 </div>
+
+<script type="text/ng-template" id="myModalContent2.html">
+        <div ng-include="'app/EditProduct/attributemodal.html'"></div>
+      </script>
