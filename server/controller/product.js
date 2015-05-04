@@ -86,7 +86,16 @@ exports.updateProduct = {
     handler: function(request, reply) {
         Product.updateProduct(request.params.id, request.payload, function(err, result) {
             if (!err) {
-                return reply(result);
+                if (result == 1){
+                    Product.getProductById(request.params.id, function(err, result) {
+                        if (!err) {
+                            return reply(result);
+                        }
+                        else{
+                            return reply(Boom.forbidden(err));
+                        }
+                    })
+                }
             } else reply(Boom.forbidden(err));
         });
     }
