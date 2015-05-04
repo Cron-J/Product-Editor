@@ -84,7 +84,8 @@
                                 <td></td>
                             </tr>
 
-                            <tr ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict | filter:output[0]:strict">
+                            <!-- <tr ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict | filter:output[0]:strict"> -->
+                            <tr ng-repeat="tdata in  filtered = (editproduct.classificationGroupAssociations | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:output[0]:strict">
                                 <td class="check-box">
                                     <input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked" ng-model="tdata.checked" ng-click="itemToRemove($index)"> 
                                 </td>
@@ -104,7 +105,7 @@
                         </tbody>
                         <tfoot>
                             <td colspan="6">
-                                <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+                                <pagination total-items="editproduct.classificationGroupAssociations.length" ng-model="currentPage" class="pull-right"></pagination>
                             </td>
                         </tfoot>
                     </table>

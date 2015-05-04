@@ -129,7 +129,9 @@
                     <td></td>
                 </tr>
 
-                <tr  ng-repeat="ddata in editproduct.documents | orderBy:sortType:sortReverse  | filter:search:strict | filter:variantdoc[0]:strict">
+                <!-- <tr  ng-repeat="ddata in editproduct.documents | orderBy:sortType:sortReverse  | filter:search:strict | filter:variantdoc[0]:strict"> -->
+
+                <tr ng-repeat="ddata in  filtered = (editproduct.documents | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:variantdoc[0]:strict">
 
                     <td class="check-box">
                         <input type="checkbox" value="{{ddata._id}}" ng-checked="ddata.checked" ng-model="ddata.checked">
@@ -147,7 +149,7 @@
             </tbody>
             <tfoot >
                 <td colspan="8">
-                    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+                    <pagination total-items="editproduct.documents.length" ng-model="currentPage" class="pull-right"></pagination>
                 </td>
                     
             </tfoot>
@@ -157,7 +159,7 @@
 
     <div class="row ">
         <div class="col-sm-4 m-b-20 ">
-            <button class="btn btn-primary" ng-click="createdoc()">New Document</button>
+            <button class="btn btn-primary" ng-click="createdoc();">New Document</button>
             <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
         </div>
     </div>
@@ -269,7 +271,7 @@
                 <div class="col-sm-9">
                     <td>
                         <div class="col-sm-offset-2  col-sm-3">
-                            <button class="btn btn-primary" type="submit" ng-click="savedoc(docform,doc);">Save</button>
+                            <button class="btn btn-primary" type="submit" ng-click="savedoc(docform,doc,type);">Save</button>
                             <button class="btn btn-primary" type="submit" ng-click="canceldoc();">Cancel</button>
                         </div>
                     </td>

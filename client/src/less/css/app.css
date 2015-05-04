@@ -308,11 +308,11 @@ background-size: 12px 12px;
 
 
 /* For Mozilla Web Browser*/
-}*/
+/*}*/
 
 .ui-grid-menu-button {
   right: 8px;
-  top: initial;
+  top: initial !important;
   }
  .ui-grid-cell{
   overflow: visible;
@@ -355,4 +355,8 @@ ul.select2-choices{
 .ui-grid-cell-contents{ height: auto !important; white-space: normal; overflow:visible; }*/
 .mar-t-35{
   margin-top: 35px;
+}
+
+a{
+  cursor: pointer;
 }

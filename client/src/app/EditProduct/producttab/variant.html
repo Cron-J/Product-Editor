@@ -9,7 +9,7 @@
   <div class="row col-sm-12 form-group ">
     
     <div class="col-sm-3 pull-right">
-      <input type="text" class="form-control" name="attributeSectionId" ng-model="searchvData.$" placeholder="Search">
+      <input type="text" class="form-control" name="attributeSectionId" ng-model="search.$" placeholder="Search">
     </div>
    
   </div>
@@ -31,14 +31,17 @@
 
         </tr>
 
-        <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in editproduct.variants | filter:searchvData | orderBy:sortType:sortReverse ">
+        <!-- <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in editproduct.variants | filter:searchvData | orderBy:sortType:sortReverse "> -->
+
+        <tr ng-repeat="vdata in  filtered = (editproduct.variants | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse">
+
           <td>{{vdata.variantId}}</td>
           <td></td>
         </tr>
       </tbody>
       <tfoot>
         <td colspan="2">
-          <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+           <pagination total-items="editproduct.variants.length" ng-model="currentPage" class="pull-right"></pagination>
         </td>
       </tfoot>
     </table>
@@ -46,7 +49,7 @@
 
   <div class="row ">
     <div class="col-sm-4 ">
-      <button class="btn btn-primary" ng-click="assignvariant()">Assign New variant</button>
+      <button class="btn btn-primary" ng-click="assignvariant(newvariantform)">Assign New variant</button>
       <!-- <button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button> -->
     </div>
   </div>
@@ -57,7 +60,7 @@
     
       <div class="col-sm-6">
         <div class="form-group">
-          <label class="col-sm-5 control-label">Variant Name </label>
+          <label class="col-sm-5 control-label">Variant Name* </label>
           <div class="col-sm-7">
             <input type="text" name="variantId" class="form-control" ng-model="newvariant.variantId" required>
             <span class="error" ng-show="newvariantform.variantId.$invalid && vsubmitted">
@@ -159,7 +162,7 @@
       <div class="col-sm-6">
 
         <div class="form-group">
-          <label class="col-sm-5 control-label">Variant Name </label>
+          <label class="col-sm-5 control-label">Variant Name* </label>
           <div class="col-sm-7">
             <input type="text" name="variantId" class="form-control" ng-model="editvariant.variantId" required>
             <span class="error" ng-show="editvariantform.variantId.$invalid && vsubmitted">
@@ -239,7 +242,7 @@
         <div class="col-sm-offset-5  col-sm-12">
           <button class="btn btn-primary" type="submit" ng-click="updatevariant(editvariantform)">Update</button>
           <button class="btn btn-primary" ng-click="cancelupvariant()">Cancel</button>
-          {{editvariantform}}mk
+          
         </div>
       </div>
    

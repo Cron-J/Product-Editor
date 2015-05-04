@@ -2,6 +2,7 @@
 myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location', 'growl', '$modal', '$routeParams', '$filter','blockUI','$q','uiGridConstants','$timeout','$interval','getProductData',
     function($scope, $rootScope, $http, $location, growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData) {
         
+       
         /*update or add product data*/
         $scope.variantAttrList=[];
         $scope.channelData=[];
@@ -18,7 +19,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                     else if(type=='delete'){
                         growl.addSuccessMessage('Attribute deleted succesfully');
                     }
-
+                    $scope.noOfPages = Math.ceil($scope.editproduct.classificationGroupAssociations.length/$scope.entryLimit);
                     //$scope.updateVariantList();
                 })
                 .catch(function(error){
@@ -120,6 +121,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         }
         // Product classification
 
+        
 
         $scope.showvar = false;
 
@@ -332,10 +334,26 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
             infiniteScrollDown: true,
             columnDefs : [
                 { displayName:"Attribute",field: 'attribute',cellTemplate: '<div class="ui-grid-cell-contents"  title="TOOLTIP">{{COL_FIELD }}</div>',editableCellTemplate: $scope.template1, enableCellEdit: true, filter: {placeholder: 'Search Attribute'}},
-                { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
-                { displayName:"Type",field: 'types[0]',filter: { placeholder: 'Search Types'} },
-                { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'} },
-                { displayName:"Value",field: 'value' ,filter: {placeholder: 'Search Value'}},
+                { displayName:"Language", field:"languageId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'language', width:60,
+                    filter: {  placeholder: 'Search language', type: uiGridConstants.filter.SELECT,
+                        selectOptions: [
+                            { label: 'de', value: 'de'},
+                            { label: 'en', value: 'en'},
+                            { label: 'es', value: 'es'},
+                            { label: 'fr', value: 'fr'},
+                            { label: 'jp', value: 'jp'}
+                        ]
+                    },
+                    editDropdownOptionsArray: [
+                        { language: 'de', id: 'de'},
+                        { language: 'en', id: 'en'},
+                        { language: 'es', id: 'es'},
+                        { language: 'fr', id: 'fr'},
+                        { language: 'jp', id: 'jp'}
+
+                    ] 
+                },
+                { displayName:"Value",field: 'value' ,filter: {placeholder: 'Search Value'},width:70},
                 { displayName:"Status Ids", field:"statusId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'status',
                     cellFilter: 'formatStatus',
                     filter: {  placeholder: 'Search Order No', type: uiGridConstants.filter.SELECT,
@@ -374,35 +392,16 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
 
                     ]
                 },
-
-                { displayName:"Uom",field: 'unitOfMeasure',filter: { placeholder: 'Search Uom'} },
-                
-                { displayName:"Language", field:"languageId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'language',
-                    filter: {  placeholder: 'Search language', type: uiGridConstants.filter.SELECT,
-                        selectOptions: [
-                            { label: 'de', value: 'de'},
-                            { label: 'en', value: 'en'},
-                            { label: 'es', value: 'es'},
-                            { label: 'fr', value: 'fr'},
-                            { label: 'jp', value: 'jp'}
-                        ]
-                    },
-                    editDropdownOptionsArray: [
-                        { language: 'de', id: 'de'},
-                        { language: 'en', id: 'en'},
-                        { language: 'es', id: 'es'},
-                        { language: 'fr', id: 'fr'},
-                        { language: 'jp', id: 'jp'}
-
-                    ] 
-                },
                 { displayName:"Variant Id", field:"variantId",filter: {placeholder: 'Search variant id'}, editableCellTemplate: 'ui-grid/dropdownEditor',editDropdownIdLabel:'value', editDropdownValueLabel: 'label',
                     filter: { placeholder: 'Search variant', type: uiGridConstants.filter.SELECT, 
                               selectOptions : $scope.hasVariantAttributeValues
                             },
                     editDropdownOptionsArray : $scope.hasVariantAttributeValues
                 },
-
+                { displayName:"Uom",field: 'unitOfMeasure',filter: { placeholder: 'Search Uom'} },
+                { displayName:"Type",field: 'types[0]',filter: { placeholder: 'Search Types'} },
+                { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
+                { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'}, width:60 },
                 { displayName:"Channels",field: 'channels',enableCellEdit:false, minWidth: 300,enableColumnResizing: false,
                  cellTemplate: '<div>'+
                                     '<form name="inputForms">'+
@@ -600,6 +599,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                                $scope.doc = {};
                                $scope.dsubmitted=false;
                                growl.addSuccessMessage('Document is created succesfully.')
+                               $scope.editproduct=data.data;
 
                             })
                             .catch(function(error){
@@ -701,6 +701,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                                growl.addSuccessMessage('Price is Created succesfully.')
                                $scope.psubmitted=false;
                                form.$setPristine();
+                               $scope.editproduct=data.data;
                             })
                             .catch(function(error){
                                 console.log(error);
@@ -799,6 +800,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                                 .then(function(data){
                                     $scope.cproduct = {};
                                     growl.addSuccessMessage('Contracted Product is created successfully');
+                                    $scope.editproduct=data.data;
                                 })
                                 .catch(function(error){
                                     console.log(error);
@@ -956,6 +958,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                                     };
                                     $scope.selectedlang = ['en'];
                                     $scope.prelation={};
+                                    $scope.editproduct=data.data;
                                    growl.addSuccessMessage('You have successfully added Product Relation.');
                                 })
                                 .catch(function(error){
@@ -1024,10 +1027,11 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                })
           }
 
-        $scope.assignvariant = function (){
+        $scope.assignvariant = function (form){
              $scope.showvar=true;
              $scope.editvar=false;
-             $scope.createNew={};
+             $scope.newvariant={};
+             form.$setPristine();
         }
 
         $scope.addAttributes= function(type) {
@@ -1057,6 +1061,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                         $scope.newvariant=null;
                         $scope.showvar=false;
                         $scope.vsubmitted=false;
+                        $scope.editproduct=data.data;
 
                 })
                 .catch(function(error){
@@ -1084,6 +1089,10 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
             
         }
 
+        $scope.cancelvariant=function(){
+            $scope.showvar=false;
+            $scope.editvar=false;
+        }
         
 
 
@@ -1251,8 +1260,12 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
     	$scope.editAttribute = function(id){
     		window.open('http://classificationattribute-44842.onmodulus.net/#/attribute/' +id, '_blank', 'toolbar=0,location=0,menubar=0');
     	}
-    }
-]);
+
+        /*Pagination Code*/
+         $scope.maxSize = 10;
+         $scope.currentPage = 1;
+        
+    }]);
 
 
 //channel modal controller

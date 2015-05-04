@@ -92,7 +92,10 @@
                 </tr>
 
 
-                <tr  ng-repeat="cprodata in editproduct.contractedProducts | orderBy:sortType:sortReverse  | filter:search:strict | filter:vassortment[0]:strict ">
+                
+
+                 <tr ng-repeat="cprodata in  filtered = (editproduct.contractedProducts | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:vassortment[0]:strict">
+
                     <td>
                         <input type="checkbox" value="{{cprodata._id}}" ng-checked="cprodata.checked" ng-model="cprodata.checked">
                     </td>
@@ -108,7 +111,8 @@
             </tbody>
             <tfoot>
                 <td colspan="10">
-                    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+                    
+                    <pagination total-items="editproduct.contractedProducts.length" ng-model="currentPage" class="pull-right"></pagination>
                 </td>
             </tfoot>
         </table>

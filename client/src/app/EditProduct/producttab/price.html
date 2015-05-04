@@ -278,7 +278,9 @@
                 </tr>
 
 
-                <tr ng-click="editprice(pdata)" class="hoverptr" ng-repeat="pdata in editproduct.prices | orderBy:sortType:sortReverse  | filter:search:strict | filter:variantprice[0]:strict">
+                
+
+                <tr ng-click="editprice(pdata)" ng-repeat="pdata in  filtered = (editproduct.prices | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:variantprice[0]:strict">
                     <td class="check-box">
                         <input type="checkbox" value="{{pdata._id}}" ng-checked="pdata.checked" ng-model="pdata.checked">
                     </td>
@@ -302,7 +304,7 @@
             </tbody>
             <tfoot>
                 <td colspan="15">
-                    <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()" class="pull-right"></pagination>
+                    <pagination total-items="editproduct.prices.length" ng-model="currentPage" class="pull-right"></pagination>
                 </td>
             </tfoot>
         </table>
@@ -404,7 +406,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"> is Preferred </label>
+                    <label class="col-sm-3 control-label"> is Preferred* </label>
                     <div class="col-sm-3">
                         <input type="checkbox" name="ispref" ng-model="price.isPreferred" required><br/>
                         <span class="error" ng-show="priceform.ispref.$invalid && psubmitted ">Invalid:
@@ -426,7 +428,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Currency</label>
+                    <label class="col-sm-3 control-label">Currency*</label>
                     <div class="col-sm-3">
                         <select name="currency" class="form-control m-b" ng-model="price.currencyId" required>
                             <option value="" style="display:none;"></option>
