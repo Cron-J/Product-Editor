@@ -5,11 +5,7 @@ module.exports = {
             port: 8080
     },
     database: {
-        host: '127.0.0.1',
-        port: 27017,
-        db: 'JCatlogProductEditor',
-        username: '',
-        password: ''
+        db: 'mongodb://gaurav:cronj123@proximus.modulusmongo.net:27017/nax2asAq'
     },
     filePath: {
         directory: "/../../upload",
