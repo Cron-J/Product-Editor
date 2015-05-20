@@ -10,7 +10,7 @@ exports.endpoints = [
     { method: 'POST', path: '/createProduct', config: Product.createProduct },
     { method: 'POST', path: '/searchProduct', config: Product.searchProduct },
     { method: 'POST', path: '/exportProduct', config: Product.exportProduct },
-    { method: 'GET', path: '/getSchema', config: Product.getProductSchema },
+    { method: 'GET', path: '/getProductSchema', config: Product.getProductSchema },
     
     { method: 'GET', path: '/getProduct/{id}', config: Product.getProductById },
     { method: 'PUT', path: '/updateProduct/{id}', config: Product.updateProduct },
