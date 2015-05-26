@@ -41,7 +41,7 @@ var productAttributeValue = {
     /**
      * Attribute value Order Number. It can be used for different kind sorting.
      */
-    orderNro: {
+    orderNo: {
         type: Number
     },
 
