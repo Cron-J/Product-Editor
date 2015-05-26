@@ -127,6 +127,7 @@ exports.getProductSchema = {
                   var data1 = {};
                   data1.field = schemaPath[path].schema.paths[path1].path;
                   data1.index = schemaPath[path].schema.paths[path1]._index;
+                  if(schemaPath[path].schema.paths[path1].options != undefined && schemaPath[path].schema.paths[path1].options.required != undefined) data1.isRequired = schemaPath[path].schema.paths[path1].options.required;
                   data1.instance = schemaPath[path].schema.paths[path1].instance;
                   data.values.push(data1);
             }
