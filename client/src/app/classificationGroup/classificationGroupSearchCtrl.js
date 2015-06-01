@@ -22,7 +22,7 @@ myApp.controller('classificationGroupSearchCtrl', [ '$scope', '$http','$location
 				$scope.currentPage = 0;
 				$scope.groupToPages();
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			});
 		};
 

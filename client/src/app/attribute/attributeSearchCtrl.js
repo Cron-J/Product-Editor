@@ -57,7 +57,7 @@ myApp.controller('attributeSearchCtrl', [ '$scope', '$rootScope', '$http','$loca
 	      });
 	      return sectionList;
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			});
 		}
 
@@ -128,7 +128,7 @@ myApp.controller('attributeSearchCtrl', [ '$scope', '$rootScope', '$http','$loca
 				// Unblock the user interface
       	blockUI.stop();
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			});
 		};
 
@@ -202,11 +202,11 @@ myApp.controller('attributeSearchCtrl', [ '$scope', '$rootScope', '$http','$loca
 				if(data.statusCode !== 400){
 					$scope.searchResult.splice(index,1);
 					$scope.filtered();
-					growl.addSuccessMessage('Attribute removed Succesfully');
+					growl.success('Attribute removed Succesfully');
 				}
-				else growl.addErrorMessage(data.message);
+				else growl.error(data.message);
 			}).catch(function(error){
-				growl.addErrorMessage("oops! Something went wrong");
+				growl.error("oops! Something went wrong");
 			})
 			});
 		};
@@ -215,7 +215,7 @@ myApp.controller('attributeSearchCtrl', [ '$scope', '$rootScope', '$http','$loca
 			attributeSection.query({url:'attributeSection'}).$promise.then(function(data){
 				$scope.sectionList = data;
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			})
 		};
 

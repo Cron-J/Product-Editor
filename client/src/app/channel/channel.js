@@ -22,7 +22,8 @@ myApp.controller('ChannelCtrl',['$scope','$controller','$http','getProductData',
     });
     	getProductData.createChannel(newChannel)
     		.then(function(data){
-    			growl.addSuccessMessage('Channel added succesfully');
+    			growl.success('Channel added succesfully');
+    			$scope.createNewChannel()
     		})
     		.catch(function(error){
     			console.log(error);
