@@ -360,3 +360,8 @@ ul.select2-choices{
 a{
   cursor: pointer;
 }
+
+.grid {
+  min-width: 1000px !important;
+}
+

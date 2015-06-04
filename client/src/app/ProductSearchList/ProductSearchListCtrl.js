@@ -4,27 +4,11 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
 	function($scope,$rootScope, $http, $location,
 		growl, $modal, $routeParams,$filter, blockUI,getProductData){
 
-		// $scope.tempvar =true;
-
-
-		// $scope.showhide = function (){
-
-		//  $scope.tempvar =false;
-		// }
 
  		$scope.showeditor = function (id){
  			$location.path("/edit-product/" + id);
  		}
 		
-
-
-		// $scope.showvariants = function (id){
- 	// 		$location.path("/product-variant/" + id);
- 	// 	}
-
-
-
-
 
         $scope.maxSize = 5;
         
@@ -32,6 +16,12 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
   		$scope.pageCount = function () {
   		  return Math.ceil($scope.tabledata.length / $scope.itemsPerPage);
   		};
+
+  		$scope.reset_search =function(){
+  			$scope.searchData = {};
+  			//$scope.tabledatas = {};
+  			$scope.tabledata = {};
+  		}
 
 		$scope.searchProduct = function (searchData) {
             getProductData.searchProduct(searchData)
@@ -57,20 +47,6 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
     }
 
 
-    // $scope.getproduct = function(id){
-
-    // 	getProductDataFactory.getProduct(id);
-
-	   // $http.get('/getProduct/' + id)
-	   // .success(function (status,data){
-
-				// 	console.log(data);
-				// 	$location.path('/edit-product');
-				// });
-
-	    	
-	   //  }
-
 	$scope.updateitem = function(editproduct){
 
 
@@ -80,14 +56,6 @@ myApp.controller('ProductSearchCtrl', [ '$scope','$rootScope',
 			});
 
 		}
-
-
-		// $scope.fetchProductData = function(){
-
-		// 	$scope.editproduct = getProductDataFactory.getlocalData();
-			
-		// }
-
 
 
 
@@ -128,65 +96,5 @@ $scope.exportProduct = function(searchdata){
 }]);
 
 
-
-
-  //       $scope.range = function (start, end) {
-		// 	var ret = [];
-		// 	if (!end) {
-		// 		end = start;
-		// 		start = 0;
-		// 	}
-		// 	for (var i = start; i < end; i++) {
-		// 		ret.push(i);
-		// 	}
-		// 	return ret;
-		// };
-
-		// $scope.prevPage = function () {
-		// 	if ($scope.currentPage > 0) {
-		// 		$scope.currentPage--;
-		// 	}
-		// 	if($scope.min > 0){ 
-		// 		$scope.min--;
-		// 	}
-		// 	if($scope.max > 5){ 
-		// 		$scope.max--;
-		// 	}
-		// };
-
-		// $scope.nextPage = function () {
-		// 	if ($scope.currentPage < $scope.pagedItems.length - 1) {
-		// 		$scope.currentPage++;
-		// 	}
-		// 	$scope.limit = $scope.pagedItems.length;
-		// 	if($scope.min < $scope.limit && $scope.min <= $scope.limit - 6) {
-		// 		$scope.min++;
-		// 	}
-		// 	if($scope.max < $scope.limit && $scope.min <= $scope.limit) {
-		// 		$scope.max++;
-		// 	}
-		// };
-
-		// $scope.setPage = function () {
-		// 	$scope.currentPage = this.n;
-		// };
-
-		// $scope.groupToPages = function () {
-		// 	$scope.pagedItems = [];
-		// 	$scope.filteredItems = $scope.searchResult;
-		// 	$scope.filtered();
-		// };
-
-
-// myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
-// 	$scope.ok = function () {
-// 		$scope.item = 'yes';
-// 		$modalInstance.close($scope.item);
-// 	};
-
-// 	$scope.cancel = function () {
-// 		$modalInstance.dismiss('cancel');
-// 	};
-// });
 
 
