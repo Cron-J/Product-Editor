@@ -398,10 +398,10 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                             },
                     editDropdownOptionsArray : $scope.hasVariantAttributeValues
                 },
-                { displayName:"Uom",field: 'unitOfMeasure',filter: { placeholder: 'Search Uom'} },
-                { displayName:"Type",field: 'types[0]',filter: { placeholder: 'Search Types'} },
+                { displayName:"Uom",field: 'unitOfMeasure',enableCellEdit : false, filter: { placeholder: 'Search Uom'} },
+                { displayName:"Type",field: 'types[0]',enableCellEdit : false, filter: { placeholder: 'Search Types'} },
                 { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
-                { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'}, width:70 },
+                { displayName:"Order No.",field: 'orderNro',enableCellEdit : false, filter: { placeholder: 'Search Order No'}, width:70 },
                 { displayName:"Channels",field: 'channels',enableCellEdit:false, minWidth: 300,enableColumnResizing: false,
                  cellTemplate: '<div>'+
                                     '<form name="inputForms">'+
