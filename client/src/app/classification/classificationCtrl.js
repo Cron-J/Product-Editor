@@ -70,7 +70,7 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 					} else {
 						list.length--;
 						if(list.length ==	$scope.languageList.length)
-							growl.addWarnMessage('You are not allowed to add more than limit');
+							growl.warning('You are not allowed to add more than limit');
 					}
 				}
 			}		
@@ -95,7 +95,7 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 		$scope.changeLanguage = function (list, id) {
 			for(var i = 0; i < list.length ; i++){
 				if(list[i].description != "" && list[i].description != null && id == i){
-					growl.addWarnMessage('You have changed the language please check description');
+					growl.warning('You have changed the language please check description');
 				}
 			}
 			$scope.checkLanguage(list);
@@ -105,7 +105,7 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 				for(var i = 0; i < list.length ; i++){
 					if(list[0].language == 
 						list[1].language){
-						growl.addWarnMessage('You have selected same language more than once');
+						growl.warning('You have selected same language more than once');
 					}
 				}
 			}
@@ -146,7 +146,7 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 			}
 			tenant.get({url:'tenantOne',id:$scope.tName}).$promise.then(function(data){
 				if(data.exist == 'false'){
-					growl.addErrorMessage('Tenant is not existed, please select valid tenant');
+					growl.error('Tenant is not existed, please select valid tenant');
 				} else {
 					classification_details.tenantRef = data._id;
 					if($scope.classificationForm.$valid){
@@ -156,16 +156,16 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 						classification.save({url:'classification'}, classification_details).$promise.then(function(data){
 						$scope.classification = data;
 						if(data.statusCode != 403){
-							growl.addSuccessMessage('Classification created succesfully');
+							growl.success('Classification created succesfully');
 							$scope.classification_view(data._id);
 						} else {
-							growl.addErrorMessage(data.message);
+							growl.error(data.message);
 							$scope.classification = classification_details;
 							$scope.classification.tenantRef = {};
 							$scope.classification.tenantRef = tenRef;
 						}
 						}).catch(function(error){
-							growl.addErrorMessage('Oops! Something went wrong');
+							growl.error('Oops! Something went wrong');
 						});
 					}
 					else{
@@ -176,7 +176,7 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 					}
 				}
 			}).catch(function(error){
-				growl.addErrorMessage('Oops! Something went wrong');
+				growl.error('Oops! Something went wrong');
 			})
 		};
 
@@ -208,7 +208,7 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 			tenant.query({url:'tenants'}).$promise.then(function(data){
 				$scope.tenantList = data;
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			})
 		};
 		
@@ -234,17 +234,17 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 			}
 			tenant.get({url:'tenantOne',id:$scope.tName}).$promise.then(function(data){
 				if(data.exist == 'false'){
-					growl.addErrorMessage('Tenant is not existed, please select valid tenant');
+					growl.error('Tenant is not existed, please select valid tenant');
 				} else {
 					classification_details.tenantRef = data._id;
 					if($scope.classificationForm.$valid){
 						$scope.refactorData(classification_details);
 						getObject(classification_details);
 						classification.update({url:'classification',classification_id:id},classification_details).$promise.then(function(data){
-							growl.addSuccessMessage('Classification updated succesfully');
+							growl.success('Classification updated succesfully');
 							$scope.classification_view(id);
 						}).catch(function(error){
-							growl.addErrorMessage('oops! Something went wrong');
+							growl.error('oops! Something went wrong');
 						})
 					}
 					else{
@@ -255,7 +255,7 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 					}
 				}
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			})
 	};
 
@@ -268,7 +268,7 @@ myApp.controller('classificationCtrl', [ '$scope', '$rootScope','$http',
 			$scope.classification = data;
 			$scope.valueDetails = $scope.classification.timestamp;
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		})
 	}
 	function getObject(theObject) {

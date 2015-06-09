@@ -280,7 +280,7 @@
 
                 
 
-                <tr ng-click="editprice(pdata)" ng-repeat="pdata in  filtered = (editproduct.prices | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:variantprice[0]:strict">
+                <tr ng-click="editprice(pdata)" ng-repeat="pdata in  filtered = (editproduct.prices | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:variantprice[0]:strict" class="hoverptr">
                     <td class="check-box">
                         <input type="checkbox" value="{{pdata._id}}" ng-checked="pdata.checked" ng-model="pdata.checked">
                     </td>
@@ -290,8 +290,8 @@
                     <td>{{pdata.netPrice}}</td>
                     <td>{{pdata.priceUnit}}</td>
                     <td>{{pdata.currencyId}}</td>
-                    <td>{{pdata.validFrom}}</td>
-                    <td>{{pdata.validTo}}</td>
+                    <td>{{pdata.validFrom | date:'mediumDate'}}</td>
+                    <td>{{pdata.validTo | date:'mediumDate'}}</td>
                     <td>{{pdata.statusId}}</td>
                     <td>{{pdata.priceTypeId}}</td>
                     <td>{{pdata.unitOfMeasureId}}</td>

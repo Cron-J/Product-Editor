@@ -68,7 +68,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 			for (var i = 0; i < $scope.classificationGroup.classGrp2Attributes.length-1; i++) {
 				if($scope.classificationGroup.classGrp2Attributes[i].attributeRef.attributeId == 
 				attInfo){
-					growl.addErrorMessage('You have entered same attribute twice, please select another attribute');
+					growl.error('You have entered same attribute twice, please select another attribute');
 					$scope.setIncorrect = true;
 				} 
 			};
@@ -95,7 +95,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 	      });
 	      return attributes;
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			});
 		}
 
@@ -127,7 +127,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 	      });
 	      return parents;
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			});
 		}
 
@@ -184,7 +184,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 			classificationGroup.query({url:'getAttributes', classificationGroup_id:id}).$promise.then(function(data){
 				$scope.parentAttributesList = data;
 			}).catch(function(error){
-				growl.addErrorMessage('Oops! Something went wrong');
+				growl.error('Oops! Something went wrong');
 			});
 		}
 
@@ -203,7 +203,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 				// Unblock the user interface
       	blockUI.stop();
 			}).catch(function(error){
-				growl.addErrorMessage('Oops! Something went wrong');
+				growl.error('Oops! Something went wrong');
 			});
   	}
 
@@ -273,7 +273,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 				$scope.getDesc();
 				attributeBlock.stop();
 			}).catch(function(error){
-				growl.addErrorMessage('Oops! Something went wrong');
+				growl.error('Oops! Something went wrong');
 			});
   	}
 
@@ -290,7 +290,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 					} else {
 						list.length--;
 						if(list.length ==	$scope.languageList.length)
-							growl.addWarnMessage('You are not allowed to add more than limit');
+							growl.warning('You are not allowed to add more than limit');
 					}
 				}
 			}		
@@ -316,7 +316,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 		$scope.changeLanguage = function (list, id) {
 			for(var i = 0; i < list.length ; i++){
 				if(list[i].description != "" && list[i].description != null && id == i){
-					growl.addWarnMessage('You have changed the language please check description');
+					growl.warning('You have changed the language please check description');
 				}
 			}
 			$scope.checkLanguage(list);
@@ -326,7 +326,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 				for(var i = 0; i < list.length ; i++){
 					if(list[0].language == 
 						list[1].language){
-						growl.addWarnMessage('You have selected same language more than once');
+						growl.warning('You have selected same language more than once');
 					}
 				}
 			}
@@ -414,12 +414,12 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 				if(data.exist == 'false'){
 					$scope.getClassDetails(classificationGroup_details);
 					$scope.parentName = null;
-					growl.addErrorMessage('Please enter valid Parent Id');
+					growl.error('Please enter valid Parent Id');
 				} 
 				else if(data.subchild == 'true'){
 					$scope.getClassDetails(classificationGroup_details);
 					$scope.parentName = null;
-					growl.addErrorMessage('selected Classification Group Id can not be sub child, please enter valid Parent Id');
+					growl.error('selected Classification Group Id can not be sub child, please enter valid Parent Id');
 				}
 				else {
 					$scope.parentName = null;
@@ -460,7 +460,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 							classificationGroup.save({url:'classificationGroup'}, classificationGroup_details).$promise.then(function(data){
 							$scope.classificationGroup = data;
 							if(data.statusCode != 403){
-								growl.addSuccessMessage('Classification Group created succesfully');
+								growl.success('Classification Group created succesfully');
 							 	$scope.isSubChild = true;
 							 	$scope.classificationGroup_page();
 							 	$scope.prefill_page();
@@ -471,19 +471,19 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 								$scope.classificationGroup = angular.copy(classificationGroup_details);
 								$scope.getClassDetails(classificationGroup_details);
 								$scope.restoreAttributes(classificationGroup_details);
-								growl.addErrorMessage(data.message);
+								growl.error(data.message);
 								// $scope.classificationGroup = classificationGroup_details;
 							}
 							 
 							}).catch(function(error){
-								growl.addErrorMessage('Oops! Something went wrong');
+								growl.error('Oops! Something went wrong');
 							});
 						} 
 						else {
 							classificationGroup.update({url:'classificationGroup', id:classificationGroup_details._id}, classificationGroup_details).$promise.then(function(data){
 							$scope.classificationGroup = data;
 							if(data.statusCode != 403){
-								growl.addSuccessMessage('Classification Group updated succesfully');
+								growl.success('Classification Group updated succesfully');
 							 	$scope.isSubChild = true;
 							 	$scope.classificationGroup_page();
 							 	$scope.prefill_page();
@@ -494,11 +494,11 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 								$scope.getClassDetails(classificationGroup_details);
 								$scope.restoreAttributes(classificationGroup_details);
 								$scope.parentName = null;
-								growl.addErrorMessage(data.message);
+								growl.error(data.message);
 							}
 							 
 							}).catch(function(error){
-								growl.addErrorMessage('Oops! Something went wrong');
+								growl.error('Oops! Something went wrong');
 							});
 						}
 					}		
@@ -512,7 +512,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 				}
 			}
 		}).catch(function(error){
-			growl.addErrorMessage('Oops! Something went wrong');
+			growl.error('Oops! Something went wrong');
 		});
 	};
 
@@ -549,22 +549,22 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 		attribute.query({url:'attribute'}).$promise.then(function(data){
 			$scope.attributeList = data; 
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		});
 		classification.query({url:'classification'}).$promise.then(function(data){
 			$scope.classificationList = data;
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		});
 		classificationGroup.query({url:'classificationGroup'}).$promise.then(function(data){
 			$scope.classificationGroupList = data;
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		});
 		status.query({url:'status'}).$promise.then(function(data){
 			$scope.statusList = data;
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		});
 	};
 
@@ -627,7 +627,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 				result.descriptions.descShort[0].description;
 			}	
 		} else {
-			growl.addErrorMessage('Oops! Something went wrong');
+			growl.error('Oops! Something went wrong');
 		}
 		$scope.checkAttributeId(result);
 	}
@@ -664,7 +664,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 						if(data.exist == "true"){
 							attribute_dtls.attributeRef._id = data._id;
 							if(!valid){
-							 growl.addErrorMessage('please enter required and valid field to update new attribute');
+							 growl.error('please enter required and valid field to update new attribute');
 								$scope.invalidInfo[index] =true;
 							}
 							else{
@@ -678,16 +678,16 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 									$scope.invalidInfo[index] = false;
 									$scope.edit_flag = false;
 									$scope.rowNo = -1;
-									growl.addSuccessMessage('attribute updated');
+									growl.success('attribute updated');
 								} 
 							}
 						} else {
-							growl.addErrorMessage('Please enter valid attributeId');
+							growl.error('Please enter valid attributeId');
 							$scope.invalidInfo[index] = true;
 						}
 						
 					}).catch(function(error){
-						growl.addErrorMessage('Oops! Something went wrong');
+						growl.error('Oops! Something went wrong');
 					});
 				}
 			}
@@ -711,25 +711,25 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 								$scope.rowNo = -1;
 								$scope.showForm = false;
 								$scope.isSaved = true;
-								growl.addSuccessMessage('New attribute is added');
+								growl.success('New attribute is added');
 							}	else {
-								growl.addErrorMessage('Please enter valid and required data');
+								growl.error('Please enter valid and required data');
 								$scope.invalidInfo[index] = true;
 							}	
 						} else {
-							growl.addErrorMessage('Please enter valid attributeId');
+							growl.error('Please enter valid attributeId');
 							$scope.invalidInfo[index] = true;
 						}
 					}).catch(function(error){
-						growl.addErrorMessage('oops! Something went wrong');
+						growl.error('oops! Something went wrong');
 					});
 				} else {
-					growl.addErrorMessage('Please enter valid and required data');
+					growl.error('Please enter valid and required data');
 					$scope.invalidInfo[index] =true;
 				}
 			}
 		} else {
-			growl.addErrorMessage('You have entered same attribute twice, please select another attribute');
+			growl.error('You have entered same attribute twice, please select another attribute');
 		}
 	};
 
@@ -766,7 +766,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 			$scope.rowNo = $scope.classificationGroup.classGrp2Attributes.length - 1;
 			$scope.isSaved = false;	
 		} else {
-			growl.addErrorMessage('Please add attribute with complete valid data');
+			growl.error('Please add attribute with complete valid data');
 			$scope.aStop = false;
 		}
 			
@@ -806,7 +806,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 			$scope.currentPage = 0;
 			$scope.groupToPages();
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		});
 	}
 
@@ -838,7 +838,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 
 	$scope.delete_attribute = function(indx){
 		$scope.classificationGroup.classGrp2Attributes.splice(indx,1);
-		growl.addSuccessMessage('Attribute deleted succesfully');
+		growl.success('Attribute deleted succesfully');
 	}
 	
 	$scope.reset();
@@ -850,7 +850,7 @@ myApp.controller('classificationGroupCtrl', ['$scope', '$rootScope',
 		classificationGroup.get({url:'classificationGroup',classificationGroup_id: $scope.obj.id }).$promise.then(function(data){
 			$scope.classificationGroup = data;
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		})
 	}
 	function getObject(theObject) {

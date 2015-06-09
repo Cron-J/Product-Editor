@@ -10,14 +10,14 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
             getProductData.updateProduct(editproduct)
                 .then(function(data){
                     if(type=='masterdata'){
-                        growl.addSuccessMessage('Master data is succesfully updated.');
-                        $scope.msubmitted
+                        growl.success('Master data is succesfully updated.');
+                        $scope.msubmitted = false;
                     }
                     else if(type!=='delete'){
-                        growl.addSuccessMessage('Attribute list updated succesfully');
+                        growl.success('Attribute list updated succesfully');
                     }
                     else if(type=='delete'){
-                        growl.addSuccessMessage('Attribute deleted succesfully');
+                        growl.success('Attribute deleted succesfully');
                     }
                     $scope.noOfPages = Math.ceil($scope.editproduct.classificationGroupAssociations.length/$scope.entryLimit);
                     //$scope.updateVariantList();
@@ -155,7 +155,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                 .then(function(data){
                     $scope.csubmitted=false;
                    $scope.createNew = {};
-                   growl.addSuccessMessage('You have successfully assigned new Group.');
+                   growl.success('You have successfully assigned new Group.');
                 })
                 .catch(function(error){
                     console.log('error');
@@ -172,7 +172,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                 getProductData.updateProduct($scope.editproduct)
                 .then(function(data){
                     $scope.cesubmitted=false;
-                   growl.addSuccessMessage('You have successfully updated Group.');
+                   growl.success('You have successfully updated Group.');
                 })
                 .catch(function(error){
                     console.log(error);
@@ -334,7 +334,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
             infiniteScrollDown: true,
             columnDefs : [
                 { displayName:"Attribute",field: 'attribute',cellTemplate: '<div class="ui-grid-cell-contents"  title="TOOLTIP">{{COL_FIELD }}</div>',editableCellTemplate: $scope.template1, enableCellEdit: true, filter: {placeholder: 'Search Attribute'}},
-                { displayName:"Language", field:"languageId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'language', width:60,
+                { displayName:"Language", field:"languageId", editableCellTemplate: 'ui-grid/dropdownEditor', editDropdownValueLabel: 'language', width:90,
                     filter: {  placeholder: 'Search language', type: uiGridConstants.filter.SELECT,
                         selectOptions: [
                             { label: 'de', value: 'de'},
@@ -398,10 +398,10 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                             },
                     editDropdownOptionsArray : $scope.hasVariantAttributeValues
                 },
-                { displayName:"Uom",field: 'unitOfMeasure',filter: { placeholder: 'Search Uom'} },
-                { displayName:"Type",field: 'types[0]',filter: { placeholder: 'Search Types'} },
+                { displayName:"Uom",field: 'unitOfMeasure',enableCellEdit : false, filter: { placeholder: 'Search Uom'} },
+                { displayName:"Type",field: 'types[0]',enableCellEdit : false, filter: { placeholder: 'Search Types'} },
                 { displayName:"Section",field: 'sectionRef.attributeSectionId' ,filter: {placeholder: 'Search Section'}},
-                { displayName:"Order No.",field: 'orderNro',filter: { placeholder: 'Search Order No'}, width:60 },
+                { displayName:"Order No.",field: 'orderNro',enableCellEdit : false, filter: { placeholder: 'Search Order No'}, width:70 },
                 { displayName:"Channels",field: 'channels',enableCellEdit:false, minWidth: 300,enableColumnResizing: false,
                  cellTemplate: '<div>'+
                                     '<form name="inputForms">'+
@@ -426,7 +426,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 $scope.gridApi = gridApi;
                 $interval( function() {
                     $scope.gridApi.core.handleWindowResize();
-                }, 10, 100);
+                }, 10, 500);
             }
         };
 
@@ -531,7 +531,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
           $scope.resizewindow=function(){
              $interval( function() {
                 $scope.gridApi.core.handleWindowResize();
-              }, 10, 500);
+              }, 1000, 500);
           }
 
           $scope.onSelect=function(item,model,label,data,index){
@@ -583,7 +583,9 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                              getProductData.updateProduct($scope.editproduct)
                                 .then(function(data){
                                     $scope.dsubmitted=false;
-                                   growl.addSuccessMessage('Document is updated succesfully.')
+                                    $scope.doc = {};
+                                    $scope.docvar = false;
+                                   growl.success('Document is updated succesfully.')
                                 })
                                 .catch(function(error){
                                     console.log(error);
@@ -598,7 +600,8 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                             .then(function(data){
                                $scope.doc = {};
                                $scope.dsubmitted=false;
-                               growl.addSuccessMessage('Document is created succesfully.')
+                               $scope.docvar = false;
+                               growl.success('Document is created succesfully.')
                                $scope.editproduct=data.data;
 
                             })
@@ -684,8 +687,10 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                         //$scope.updateitem($scope.editproduct);
                         getProductData.updateProduct($scope.editproduct)
                             .then(function(data){
-                               growl.addSuccessMessage('Price is updated succesfully.')
+                               growl.success('Price is updated succesfully.')
                                $scope.psubmitted=false;
+                               $scope.pricevar = false;
+                               $scope.price = {};
                             })
                             .catch(function(error){
                                 console.log(error);
@@ -698,7 +703,8 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                      getProductData.updateProduct($scope.editproduct)
                             .then(function(data){
                                $scope.price = {};
-                               growl.addSuccessMessage('Price is Created succesfully.')
+                               $scope.pricevar = false;
+                               growl.success('Price is Created succesfully.')
                                $scope.psubmitted=false;
                                form.$setPristine();
                                $scope.editproduct=data.data;
@@ -786,7 +792,9 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                             //$scope.updateitem($scope.editproduct);
                             getProductData.updateProduct($scope.editproduct)
                                 .then(function(data){
-                                    growl.addSuccessMessage('Contracted Product is updated successfully');
+                                    $scope.cproduct = {};
+                                    $scope.cproductvar = false;
+                                    growl.success('Contracted Product is updated successfully');
                                 })
                                 .catch(function(error){
                                     console.log(error);
@@ -799,7 +807,8 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                     getProductData.updateProduct($scope.editproduct)
                                 .then(function(data){
                                     $scope.cproduct = {};
-                                    growl.addSuccessMessage('Contracted Product is created successfully');
+                                    $scope.cproductvar = false;
+                                    growl.success('Contracted Product is created successfully');
                                     $scope.editproduct=data.data;
                                 })
                                 .catch(function(error){
@@ -935,8 +944,15 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                             getProductData.updateProduct($scope.editproduct)
                                 .then(function(data){
                                     $scope.rsubmitted=false;
+                                    $scope.nproductvar = false;
                                     form.$setPristine();
-                                   growl.addSuccessMessage('You have successfully updated Product Relation.');
+                                    $scope.prelation = {
+                                        descriptions: [{
+                                            language: 'en',
+                                            description: ''
+                                        }]
+                                    };
+                                   growl.success('You have successfully updated Product Relation.');
                                 })
                                 .catch(function(error){
                                     console.log('error');
@@ -949,6 +965,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                     getProductData.updateProduct($scope.editproduct)
                                 .then(function(data){
                                     $scope.rsubmitted=false;
+                                    $scope.nproductvar = false;
                                     form.$setPristine();
                                     $scope.prelation = {
                                         descriptions: [{
@@ -959,7 +976,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                                     $scope.selectedlang = ['en'];
                                     $scope.prelation={};
                                     $scope.editproduct=data.data;
-                                   growl.addSuccessMessage('You have successfully added Product Relation.');
+                                   growl.success('You have successfully added Product Relation.');
                                 })
                                 .catch(function(error){
                                     console.log('error');
@@ -1057,7 +1074,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 
                  getProductData.updateProduct($scope.editproduct)
                 .then(function(data){
-                        growl.addSuccessMessage('Variant created succesfully');
+                        growl.success('Variant created succesfully');
                         $scope.newvariant=null;
                         $scope.showvar=false;
                         $scope.vsubmitted=false;
@@ -1077,7 +1094,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
             if(form.$valid){
             getProductData.updateProduct($scope.editproduct)
                 .then(function(data){
-                        growl.addSuccessMessage('Variant updated succesfully');
+                        growl.success('Variant updated succesfully');
                         $scope.editvar=false;
                         $scope.vsubmitted=false;
 
@@ -1178,7 +1195,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
 
         $scope.openClassificationGroup = function(size,type) {
                 if(!$scope.classification_id){
-                    growl.addErrorMessage('Please add Classification field first');
+                    growl.error('Please add Classification field first');
                     return;
                 }
                 var modalInstance = $modal.open({

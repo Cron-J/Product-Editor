@@ -33,7 +33,7 @@
 
         <!-- <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in editproduct.variants | filter:searchvData | orderBy:sortType:sortReverse "> -->
 
-        <tr ng-repeat="vdata in  filtered = (editproduct.variants | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse">
+        <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in  filtered = (editproduct.variants | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse">
 
           <td>{{vdata.variantId}}</td>
           <td></td>

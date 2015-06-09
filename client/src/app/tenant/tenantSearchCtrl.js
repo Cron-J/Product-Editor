@@ -33,7 +33,7 @@ myApp.controller('tenantSearchCtrl', [ '$scope', '$http','$location','classifica
 	      });
 	      return tenantList;
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			});
 		}
 
@@ -44,7 +44,7 @@ myApp.controller('tenantSearchCtrl', [ '$scope', '$http','$location','classifica
 				$scope.currentPage = 0;
 				$scope.groupToPages();
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			});
 		}
 
@@ -124,9 +124,9 @@ myApp.controller('tenantSearchCtrl', [ '$scope', '$http','$location','classifica
 			classification.delet({url:'classification',classification_id:id}).$promise.then(function(data){
 				$scope.searchResult.splice(index,1);
 				$scope.filtered();
-				growl.addSuccessMessage('Classification removed Succesfully');
+				growl.success('Classification removed Succesfully');
 			}).catch(function(error){
-				growl.addErrorMessage("oops! Something went wrong");
+				growl.error("oops! Something went wrong");
 			})
 			});
 		};

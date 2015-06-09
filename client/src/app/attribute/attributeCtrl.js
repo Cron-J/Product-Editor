@@ -69,7 +69,7 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 				} else {
 					list.length--;
 					if(list.length ==	$scope.languageList.length)
-						growl.addWarnMessage('You are not allowed to add more than limit');
+						growl.warning('You are not allowed to add more than limit');
 				}
 			}
 		}		
@@ -94,7 +94,7 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 	$scope.changeLanguage = function (list, id) {
 		for(var i = 0; i < list.length ; i++){
 			if(list[i].description != "" && list[i].description != null && id == i)
-				growl.addWarnMessage('You have changed the language please check description');
+				growl.warning('You have changed the language please check description');
 		}
 		$scope.checkLanguage(list);
 	}
@@ -103,7 +103,7 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 		if(list.length == $scope.languageList.length) {
 			for(var i = 0; i < list.length ; i++){
 				if(list[0].language == list[1].language)
-					growl.addWarnMessage('You have selected same language more than once');				
+					growl.warning('You have selected same language more than once');				
 			}
 		}
 	}
@@ -185,10 +185,10 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 						attribute.save({url:'attribute'}, attribute_details).$promise.then(function(data){
 							$scope.attribute = data;
 							if(data.statusCode != 403){
-								growl.addSuccessMessage('Attribute created succesfully');
+								growl.success('Attribute created succesfully');
 							 	$scope.attribute_view(data._id);
 							} else {
-								growl.addErrorMessage(data.message);
+								growl.error(data.message);
 								$scope.attribute = attribute_details;
 								if(secInfo){
 									$scope.attribute.sectionRef = secInfo;
@@ -200,7 +200,7 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 							}
 						}).catch(function(error){
 							console.log('error here',error);
-							growl.addErrorMessage('Oops! Something went wrong');
+							growl.error('Oops! Something went wrong');
 						});
 					}
 					else
@@ -211,13 +211,13 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 						});
 					}	
 				} else {
-					growl.addErrorMessage('Please enter valid section');
+					growl.error('Please enter valid section');
 				}
 			}).catch(function(error){
-					growl.addErrorMessage('oops! Something went wrong');
+					growl.error('oops! Something went wrong');
 			})
 		} else {
-			growl.addErrorMessage('Please add atleast one attribute value option');
+			growl.error('Please add atleast one attribute value option');
 		}
 	};
 
@@ -278,13 +278,13 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 		attributeSection.query({url:'attributeSection'}).$promise.then(function(data){
 			$scope.sectionList = data;
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		})
 		attribute.get({url:'getStaticData'}).$promise.then(function(data){
 			$scope.unitOfMeasures = data.measureList;
 			$scope.currencyCode = data.currencyCode;
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		})
 	};
 
@@ -364,10 +364,10 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 						else 
 							delete attribute_details.sectionRef;
 						attribute.update({url:'attribute',attribute_id:id},attribute_details).$promise.then(function(data){
-							growl.addSuccessMessage('Attribute updated Succesfully');
+							growl.success('Attribute updated Succesfully');
 							$scope.attribute_view(id);
 						}).catch(function(error){
-							growl.addErrorMessage('oops! Something went wrong');
+							growl.error('oops! Something went wrong');
 						})
 					}
 					else
@@ -378,12 +378,12 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 						});
 					}
 				}
-				else growl.addErrorMessage('Please enter valid section');
+				else growl.error('Please enter valid section');
 			}).catch(function(error){
-				growl.addErrorMessage('oops! Something went wrong');
+				growl.error('oops! Something went wrong');
 			})
 		} else {
-			growl.addErrorMessage('Please add atleast one attribute value option');
+			growl.error('Please add atleast one attribute value option');
 		}
 	};
 
@@ -440,7 +440,7 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 				}
 			} 
 		}).catch(function(error){
-			growl.addErrorMessage('oops! Something went wrong');
+			growl.error('oops! Something went wrong');
 		})
 	}
 	function getObject(theObject) {
@@ -518,7 +518,7 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 
 	$scope.deleteValueOption = function(indx){
 			$scope.attribute.valueOptions.splice(indx,1);
-			growl.addSuccessMessage('Attribute Value Option is deleted Succesfully');
+			growl.success('Attribute Value Option is deleted Succesfully');
 	}
 
 	var valid = false;
@@ -561,7 +561,7 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 			if(edit_flag == true){
 				getObject(value_details);
 				$scope.attribute.valueOptions[$scope.index] = value_details;
-				growl.addSuccessMessage('Attribute Value Option updated Succesfully');
+				growl.success('Attribute Value Option updated Succesfully');
 				$scope.index = null;
 			}
 			else {
@@ -570,11 +570,11 @@ myApp.controller('attributeCtrl', [ '$scope', '$http', '$routeParams','$location
 					$scope.attribute.valueOptions = [];
 				}
 				$scope.attribute.valueOptions.push(value_details);
-				growl.addSuccessMessage('Attribute Value Option created Succesfully');
+				growl.success('Attribute Value Option created Succesfully');
 			}
 			valid = false;
 		} else {
-			growl.addErrorMessage('Please enter required and valid fields.');
+			growl.error('Please enter required and valid fields.');
 			$scope.validModal(value_details, edit_flag);
 		}
 	}

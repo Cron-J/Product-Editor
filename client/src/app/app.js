@@ -8,9 +8,10 @@ var myApp = angular
 		'isteven-multi-select', 'xeditable','blockUI','daterangepicker','ui.bootstrap.carousel',
 		'isteven-multi-select','ui.select'])
 	.config(['$routeProvider', 'growlProvider', 'blockUIConfig', function($routeProvider, growlProvider, blockUIConfig) {
-		growlProvider.globalTimeToLive(3000);
-		growlProvider.globalEnableHtml(true);  
-		blockUIConfig.autoBlock = false;
+		 growlProvider.onlyUniqueMessages(false);  
+		 growlProvider.globalReversedOrder(true);
+		 growlProvider.globalTimeToLive(3000);
+		//blockUIConfig.autoBlock = false;
 		$routeProvider
 			/** attribute section routes*/
 
