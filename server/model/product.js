@@ -40,6 +40,7 @@ var ProductSchema = new Schema({
     productId: {
         type: String,
         unique: true,
+        required: true,
         validate:[ validator.matches(constants.idRegex), validator.isLength(0, 50) ]
     },
 
