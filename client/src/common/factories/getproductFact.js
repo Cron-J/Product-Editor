@@ -41,6 +41,14 @@ myApp.factory('getProductData', ['$http','$location',function($http,$location){
     product.getChannels=function(tenantId){
         return $http.get('/getChannel/'+tenantId);
     }
+
+    product.setSearchedData = function(data) {
+        product.searchedData = data;
+    }
+
+    product.getSearchedData = function() {
+        return product.searchedData;
+    }
     
 
     

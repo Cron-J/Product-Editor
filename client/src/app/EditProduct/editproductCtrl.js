@@ -6,7 +6,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         /*update or add product data*/
         $scope.variantAttrList=[];
         $scope.channelData=[];
-        $scope.updateitem = function(editproduct,type) {
+        $scope.updateitem = function(editproduct,type,which) {
             getProductData.updateProduct(editproduct)
                 .then(function(data){
                     if(type=='masterdata'){
@@ -17,7 +17,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                         growl.success('Attribute list updated succesfully');
                     }
                     else if(type=='delete'){
-                        growl.success('Attribute deleted succesfully');
+                        growl.success(which +' deleted succesfully');
                     }
                     $scope.noOfPages = Math.ceil($scope.editproduct.classificationGroupAssociations.length/$scope.entryLimit);
                     //$scope.updateVariantList();
@@ -28,9 +28,9 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         }
 
         /*sub program of update or add product data in the case of ui-grid*/
-        $scope.updategrid=function(type){
+        $scope.updategrid=function(type,which){
             $scope.editproduct.attributeValues=$scope.data;
-            $scope.updateitem($scope.editproduct,type);
+            $scope.updateitem($scope.editproduct,type,which);
         }
 
         $scope.cancel = function() {
@@ -235,12 +235,21 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
 
         // delete item
         $scope.deleteRow = function() {
+            var checked = false;
             for (var i = $scope.editproduct.classificationGroupAssociations.length - 1; i >= 0; i--) {
-                if ($scope.editproduct.classificationGroupAssociations[i].checked == true)
+                if ($scope.editproduct.classificationGroupAssociations[i].checked == true){
                     $scope.editproduct.classificationGroupAssociations.splice(i, 1);
+                    checked = true;
+                }
             };
-            $scope.updateitem($scope.editproduct);
-            $scope.createNew = {};
+            if(checked == true){
+                $scope.updateitem($scope.editproduct,'delete','classification group');
+                $scope.createNew = {};
+            }
+            else{
+                growl.error('Please select row to delete.');
+            }
+            
         }
 
 
@@ -522,10 +531,18 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
             $scope.data.unshift({button:true,channels:[]});
           }
           $scope.deleteAttribute=function(){
+            var checked = false;
             angular.forEach($scope.gridApi.selection.getSelectedRows(), function (data, index) {
                 $scope.data.splice($scope.data.lastIndexOf(data), 1);
+                checked = true;
             });
-            $scope.updategrid('delete');
+            if(checked == true){
+                $scope.updategrid('delete','Attribute');
+            }
+            else{
+                growl.error('Please select row to delete');
+            }
+            
           }
 
           $scope.resizewindow=function(){
@@ -638,12 +655,24 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
 
         // delete list
         $scope.deletedoc = function() {
+            var checked = false;
             for (var i = $scope.editproduct.documents.length - 1; i >= 0; i--) {
-                if ($scope.editproduct.documents[i].checked == true)
+                if ($scope.editproduct.documents[i].checked == true){
                     $scope.editproduct.documents.splice(i, 1);
+                    checked = true;
+                }
+                    
             };
-            $scope.updateitem($scope.editproduct);
-            $scope.doc = {};
+
+             if(checked == true){
+                $scope.updateitem($scope.editproduct,'delete','Document');
+                $scope.doc = {};
+            }
+            else{
+                growl.error('Please select row to delete.');
+            }
+
+            
 
         }
 
@@ -726,12 +755,24 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
 
 
         $scope.deleteprice = function() {
+            var checked = false;
             for (var i = $scope.editproduct.prices.length - 1; i >= 0; i--) {
-                if ($scope.editproduct.prices[i].checked == true)
+                if ($scope.editproduct.prices[i].checked == true){
                     $scope.editproduct.prices.splice(i, 1);
+                    checked = true;
+                }       
+                    
             };
-            $scope.updateitem($scope.editproduct);
-            $scope.price = {};
+
+            if(checked == true){
+                $scope.updateitem($scope.editproduct,'delete','Price');
+                $scope.price = {};
+            }
+            else{
+                growl.error('Please select row to delete.');
+            }
+
+            
 
         }
 
@@ -832,12 +873,23 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
 
 
         $scope.deletecproduct = function() {
+            var checked = false;
             for (var i = $scope.editproduct.contractedProducts.length - 1; i >= 0; i--) {
-                if ($scope.editproduct.contractedProducts[i].checked == true)
+                if ($scope.editproduct.contractedProducts[i].checked == true){
                     $scope.editproduct.contractedProducts.splice(i, 1);
+                    checked = true;
+                }
             };
-            $scope.updateitem($scope.editproduct);
-            $scope.cproduct = {};
+
+            if(checked == true){
+                $scope.updateitem($scope.editproduct,'delete','Contracted Product');
+                $scope.cproduct = {};
+            }
+            else{
+                growl.error('Please select row to delete.');
+            }
+
+            
 
         }
 
@@ -995,19 +1047,30 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
         }
 
         $scope.deleteprelation = function() {
+            var checked = false;
             for (var i = $scope.editproduct.productRelations.length - 1; i >= 0; i--) {
-                if ($scope.editproduct.productRelations[i].checked == true)
+                if ($scope.editproduct.productRelations[i].checked == true){
                     $scope.editproduct.productRelations.splice(i, 1);
+                    checked = true;
+                }
             };
-            $scope.updateitem($scope.editproduct);
 
-            $scope.prelation = {
-                descriptions: [{
-                    language: 'en',
-                    description: ''
-                }]
-            };
-            $scope.selectedlang = ['en'];
+            if(checked == true){
+                $scope.updateitem($scope.editproduct,'delete','Product Relation');
+
+                $scope.prelation = {
+                    descriptions: [{
+                        language: 'en',
+                        description: ''
+                    }]
+                };
+                $scope.selectedlang = ['en'];
+            }
+            else{
+                growl.error('Please select row to delete.');
+            }
+
+            
 
         }
 
@@ -1281,6 +1344,10 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
         /*Pagination Code*/
          $scope.maxSize = 10;
          $scope.currentPage = 1;
+
+         /*move to product list page with original data*/
+
+         
         
     }]);
 
