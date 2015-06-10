@@ -2,7 +2,6 @@
 
 var Boom = require('boom'),
     Product = require('../model/product').Product,
-    Synonym = require('../model/synonym').Synonym,
     fs = require('fs'),
     async = require('async'),
     json2csv = require('json2csv'),
@@ -104,10 +103,7 @@ exports.updateProduct = {
 
 exports.getProductSchema = {
   handler: function (request, reply) {
-    Synonym.getSynonyms(function(err, result) {
-        if (!err) {
             var obj = {};
-            obj['synonyms'] = result;
             obj['modelName'] = Product.modelName;
             obj['subdocument'] = [];
             obj['attributes'] = [];
@@ -142,9 +138,6 @@ exports.getProductSchema = {
           
         }
           reply(obj);
-            
-        } else reply(Boom.forbidden(err));
-    });
   }
 };
 
