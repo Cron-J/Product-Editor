@@ -4,15 +4,11 @@
       <!-- <h1>Product Editor</h1> -->
       <h3 class="m-b-50">Product Variant</h3>
     </div>
+    <div class="col-sm-3 pull-right">
+      <input type="text" class="form-control variant-search" name="attributeSectionId" ng-model="search.$" placeholder="Search">
+    </div>
   </div>
 
-  <div class="row col-sm-12 form-group ">
-    
-    <div class="col-sm-3 pull-right">
-      <input type="text" class="form-control" name="attributeSectionId" ng-model="search.$" placeholder="Search">
-    </div>
-   
-  </div>
 
   <div class="row col-sm-12">
     <!-- <b>Found {{filteredItems.length}} entries</b> -->
@@ -39,19 +35,22 @@
           <td></td>
         </tr>
       </tbody>
-      <tfoot>
+      <!-- <tfoot>
         <td colspan="2">
            <pagination total-items="editproduct.variants.length" ng-model="currentPage" class="pull-right"></pagination>
         </td>
-      </tfoot>
+      </tfoot> -->
     </table>
   </div>
 
-  <div class="row ">
-    <div class="col-sm-4 ">
+  <div class="row paginate1">
+    <div class="col-sm-6 ">
       <a class="btn btn-primary" href="#{{pageLocation}}#variant"  offset="55" du-smooth-scroll ng-click="assignvariant(newvariantform)">Assign New variant</a>
-      <!-- <button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button> -->
+     
     </div>
+     <div class="col-sm-6">
+        <pagination total-items="editproduct.variants.length" ng-model="currentPage" class="pull-right"></pagination>
+     </div>
   </div>
 
   <!-- On clicking assign new group button -->

@@ -109,19 +109,22 @@
                     </td>
                 </tr>
             </tbody>
-            <tfoot>
+            <!-- <tfoot>
                 <td colspan="10">
                     
                     <pagination total-items="editproduct.contractedProducts.length" ng-model="currentPage" class="pull-right"></pagination>
                 </td>
-            </tfoot>
+            </tfoot> -->
         </table>
     </div>
 
-    <div class="row ">
-        <div class="col-sm-4 m-b-20 ">
+    <div class="row paginate1">
+        <div class="col-sm-6 ">
             <a class="btn btn-primary" href="#{{pageLocation}}#assort"  offset="55" du-smooth-scroll ng-click="newcproduct()">New Contracted Product</a>
             <button class="btn btn-primary" ng-click="deletecproduct()">Delete Selected</button>
+        </div>
+        <div class="col-sm-6">
+             <pagination total-items="editproduct.contractedProducts.length" ng-model="currentPage" class="pull-right"></pagination>
         </div>
     </div>
 

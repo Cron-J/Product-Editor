@@ -369,4 +369,18 @@ a{
   left: -5%;
   right: -8%;
 }
+.pagination {
+  
+  margin: 0px 0;
+  
+}
+.paginate{
+    margin-top: 35px;
+}
+.paginate1 {
+  margin-top: 45px;
+}
+.variant-search{
+    margin: 20px 0px;
+}
 

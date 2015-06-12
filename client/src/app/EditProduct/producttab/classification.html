@@ -104,21 +104,23 @@
                                 
                             </tr>
                         </tbody>
-                        <tfoot>
+                        <!-- <tfoot>
                             <td colspan="6">
                                 <pagination total-items="editproduct.classificationGroupAssociations.length" ng-model="currentPage" class="pull-right"></pagination>
                             </td>
-                        </tfoot>
+                        </tfoot> -->
                     </table>
 
                 </div>
 
-                <div class="row ">
-                    <div class="col-sm-4 ">
-                        <!-- <button class="btn btn-primary" ng-click="assignGrp();move('classifi')">Assign New Group </button> -->
+                <div class="row paginate">
+                    <div class="col-sm-6 ">
                         <a class="btn btn-primary"ng-click="assignGrp()" href="#{{pageLocation}}#classifi" du-smooth-scroll>Assign New Group </a>
                         <button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button>
                         
+                    </div>
+                    <div class="col-sm-6">
+                          <pagination total-items="editproduct.classificationGroupAssociations.length" ng-model="currentPage" class="pull-right"></pagination>
                     </div>
                 </div>
 

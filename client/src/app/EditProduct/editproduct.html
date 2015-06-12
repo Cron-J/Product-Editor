@@ -4,7 +4,7 @@
     <span ng-show="previewvar">
 
     <div class="row col-sm-12" >
-        <div class="col-sm-7 m-b-20">
+        <div class="col-sm-7 row m-b-20">
             <h1>Product Editor</h1>
         </div>
     </div>
@@ -17,22 +17,27 @@
 
     <div class="row col-sm-12">
         <div class="col-sm-12 m-b-20">
-            
-            <h3> <img  style="width:50px;" ng-src="{{editproduct.documents[0].path}}"/> {{editproduct.mfgProductId}}</h3>
-            <div class="form-group">
-                <label for="inputEmail3" style="width:11%" class="row col-sm-1 control-label">Product ID : </label>
-                <div class="col-sm-10">
+            <div class="col-sm-1">
+             <img   class="pull-left col-sm-12" ng-src="{{editproduct.documents[0].path}}"/> 
+            </div>
+            <div class="col-sm-2">
+                {{editproduct.mfgProductId}}
+            </div>
+            <div class="col-sm-4">
+                <label for="inputEmail3"  class="col-sm-4 control-label">Product ID : </label>
+                <div class="col-sm-7">
                   <p>{{editproduct.productId}}</p>
                 </div>
             </div> 
-            <div class="form-group">
-                <label for="inputEmail3" class="row col-sm-1 control-label">Status : </label>
-                <div class="col-sm-10">
+            <div class="col-sm-3">
+                <label for="inputEmail3" class="col-sm-5 control-label">Status : </label>
+                <div class="col-sm-">
                   <p>{{editproduct.statusId}}</p>
                 </div>
             </div>    
-
+            <div class="col-sm-1">
             <button class="btn btn-primary pull-right" ng-click="showhidepreview()" >Preview</button>
+            </div>
         </div>
         <!-- <div class="col-sm-4">
         

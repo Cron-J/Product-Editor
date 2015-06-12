@@ -298,18 +298,21 @@
                     <td ng-click="editprelation(prdata)"><button class="btn btn-primary btn-xs">Edit</td>
                 </tr>
             </tbody>
-            <tfoot>
+            <!-- <tfoot>
                 <td colspan="14">
                     <pagination total-items="editproduct.productRelations.length" ng-model="currentPage" class="pull-right"></pagination>
                 </td>
-            </tfoot>
+            </tfoot> -->
         </table>
     </div>
 
-    <div class="row ">
-        <div class="col-sm-4 m-b-20 ">
+    <div class="row paginate1">
+        <div class="col-sm-6">
             <a class="btn btn-primary" href="#{{pageLocation}}#prerelate"  offset="55" du-smooth-scroll ng-click="newprelation()">New Product Relation</a>
             <button class="btn btn-primary" ng-click="deleteprelation()">Delete Selected</button>
+        </div>
+        <div class="col-sm-6">
+            <pagination total-items="editproduct.productRelations.length" ng-model="currentPage" class="pull-right"></pagination>
         </div>
     </div>
 

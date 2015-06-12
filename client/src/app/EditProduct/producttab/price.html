@@ -301,18 +301,21 @@
                     </td>
                 </tr>
             </tbody>
-            <tfoot>
+            <!-- <tfoot>
                 <td colspan="15">
                     <pagination total-items="editproduct.prices.length" ng-model="currentPage" class="pull-right"></pagination>
                 </td>
-            </tfoot>
+            </tfoot> -->
         </table>
     </div>
-    <div class="row ">
-        <div class="col-sm-4 m-b-20 ">
+    <div class="row paginate1">
+        <div class="col-sm-6">
             <a class="btn btn-primary" href="#{{pageLocation}}#price"  offset="55" du-smooth-scroll ng-click="newprice()">New Price</a>
             <button class="btn btn-primary" ng-click="deleteprice()">Delete Selected</button>
         </div>
+         <div class="col-sm-6">
+            <pagination total-items="editproduct.prices.length" ng-model="currentPage" class="pull-right"></pagination>
+         </div>
     </div>
 
     <form name="priceform" novalidate>
