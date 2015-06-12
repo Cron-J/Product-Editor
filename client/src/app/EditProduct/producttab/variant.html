@@ -49,14 +49,14 @@
 
   <div class="row ">
     <div class="col-sm-4 ">
-      <button class="btn btn-primary" ng-click="assignvariant(newvariantform)">Assign New variant</button>
+      <a class="btn btn-primary" href="#{{pageLocation}}#variant"  offset="55" du-smooth-scroll ng-click="assignvariant(newvariantform)">Assign New variant</a>
       <!-- <button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button> -->
     </div>
   </div>
 
   <!-- On clicking assign new group button -->
 <form name="newvariantform" novalidate>
-  <div class="row m-t-25" ng-show="showvar">
+  <div class="row m-t-25" ng-show="showvar" id="variant">
     
       <div class="col-sm-6">
         <div class="form-group">

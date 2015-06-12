@@ -120,14 +120,14 @@
 
     <div class="row ">
         <div class="col-sm-4 m-b-20 ">
-            <button class="btn btn-primary" ng-click="newcproduct()">New Contracted Product</button>
+            <a class="btn btn-primary" href="#{{pageLocation}}#assort"  offset="55" du-smooth-scroll ng-click="newcproduct()">New Contracted Product</a>
             <button class="btn btn-primary" ng-click="deletecproduct()">Delete Selected</button>
         </div>
     </div>
 
 
     <form name="assortform" novalidate>
-        <div class="row m-t-25 " ng-show="cproductvar">
+        <div class="row m-t-25 " ng-show="cproductvar" id="assort">
             <div class="col-sm-6">
                 <!-- <div class="form-group">
                                 <label class="col-sm-5 control-label"> Contract </label>

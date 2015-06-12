@@ -159,7 +159,7 @@
 
     <div class="row ">
         <div class="col-sm-4 m-b-20 ">
-            <button class="btn btn-primary" ng-click="createdoc();">New Document</button>
+            <a class="btn btn-primary" href="#{{pageLocation}}#docs"  offset="55" du-smooth-scroll ng-click="createdoc();">New Document</a>
             <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
         </div>
     </div>
@@ -168,12 +168,12 @@
     <!-- Display this section on clicking new button -->
 
 
-    <div class="row m-t-25 " ng-show="docvar">
+    <div class="row m-t-25 " ng-show="docvar" >
         <form name="docform" novalidate>
             <div class="col-sm-6">
-                <div class="form-group">
+                <div class="form-group" >
                     <label class="col-sm-3 control-label">Variant ID</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" id="docs">
                                     <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
                         <select class="form-control" name="" ng-model="doc.variantId" ng-options="item.value as item.label for item in hasVariantDocAssociation">
                             <option value="" style="display:none"></option>

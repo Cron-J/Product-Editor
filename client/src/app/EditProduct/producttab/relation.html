@@ -33,18 +33,18 @@
                             <span ng-show="sortType == 'descriptions' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </th>
-                    <th>
+                    <!-- <th>
                         <a ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
                             <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
-                    </th>
-                    <th>
+                    </th> -->
+                    <!-- <th>
                         <a ng-click="sortType = 'syncTypeId'; sortReverse = !sortReverse">Sync Type
                             <span ng-show="sortType == 'syncTypeId' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'syncTypeId' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
-                    </th>
+                    </th> -->
                     <th>
                         <a ng-click="sortType = 'seqNo'; sortReverse = !sortReverse">Seq No
                             <span ng-show="sortType == 'seqNo' && !sortReverse" class="fa fa-caret-down"></span>
@@ -84,7 +84,7 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.productId" style="height:22px;width:108px;">
+                              <input type="text" class="form-control" ng-model="search.productId" style="height:22px;width:90px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.productId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -95,7 +95,7 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.variantId" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.variantId" style="height:22px;width:90px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.variantId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -106,7 +106,7 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                                <select name="relation" class="form-control m-b" ng-model="search.typeId" style="height:22px;width:165px;padding:0px">
+                                <select name="relation" class="form-control m-b" ng-model="search.typeId" style="height:22px;width:160px;padding:0px">
                                     <option value="Beleuchtung_source">Beleuchtung (source)</option>
                                     <option value="Beleuchtung_target">Beleuchtung (target)</option>
                                     <option value="Elektro_source">Elektro (source)</option>
@@ -169,7 +169,7 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.productId" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.productId" style="height:22px;width:90px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.productId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -181,7 +181,7 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.Description" style="height:22px;width:140px;">
+                              <input type="text" class="form-control" ng-model="search.Description" style="height:22px;width:130px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.Description=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -189,27 +189,25 @@
                        <!--  </div> --><!-- /.col-lg-6 -->
                     </td>
 
-                    <td>
-                       <!--  <div class="col-lg-6"> -->
+                    <!-- <td>
+                      
                             <div class="input-group">
                               <input type="text" class="form-control" ng-model="search.statusId" style="height:22px;width:70px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.statusId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
-                            </div><!-- /input-group -->
-                        <!-- </div> --><!-- /.col-lg-6 -->
-                    </td>
+                            </div>
+                    </td> -->
 
-                    <td>
-                        <!-- <div class="col-lg-6"> -->
+                    <!-- <td>
+                       
                             <div class="input-group">
                               <input type="text" class="form-control" ng-model="search.syncTypeId" style="height:22px;width:52px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.syncTypeId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
-                            </div><!-- /input-group -->
-                        <!-- </div> --><!-- /.col-lg-6 -->
-                    </td>
+                            </div>
+                    </td> -->
 
                     <td>
                         <!-- <div class="col-lg-6"> -->
@@ -225,7 +223,7 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.quantity" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.quantity" style="height:22px;width:60px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.quantity=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -291,8 +289,8 @@
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.typeId}}</td>
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.relatedProductId}}</td>
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.Description}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.statusId}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.syncTypeId}}</td>
+                    <!-- <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.statusId}}</td>
+                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.syncTypeId}}</td> -->
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.seqNo}}</td>
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.quantity}}</td>
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.selectionGroupId}}</td>
@@ -311,13 +309,13 @@
 
     <div class="row ">
         <div class="col-sm-4 m-b-20 ">
-            <button class="btn btn-primary" ng-click="newprelation()">New Product Relation</button>
+            <a class="btn btn-primary" href="#{{pageLocation}}#prerelate"  offset="55" du-smooth-scroll ng-click="newprelation()">New Product Relation</a>
             <button class="btn btn-primary" ng-click="deleteprelation()">Delete Selected</button>
         </div>
     </div>
 
     <form name="relationform" novalidate>
-        <div class="row m-t-25 " ng-show="nproductvar">
+        <div class="row m-t-25 " ng-show="nproductvar" id="prerelate">
             <div class="col-sm-6">
 
                 <div class="form-group">
@@ -331,24 +329,15 @@
                             <option value="" style="display:none"></option>
                         </select>
                     </div>
-                    <!-- <div class="col-sm-1">
-                        <span class="ng-scope"> 
-                                        <script type="text/ng-template" id="myModalContent6.html">
-                                          <div ng-include="'app/EditProduct/variantmodal.html'"></div>
-                                        </script>
-                                        <button class="btn btn-primary btn-xs" ng-click="openVariant('lg','hasVariantProductRelation','prelation')">
-                                        <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div> -->
+                    
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="col-sm-4 control-label"> Product </label>
                     <div class="col-sm-4">
                         <input type="string" name="contract" class="form-control" ng-model="editproduct.productId" ng-disabled="true">
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label class="col-sm-4 control-label"> Related Product </label>

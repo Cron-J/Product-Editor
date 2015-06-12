@@ -85,7 +85,7 @@
                             </tr>
 
                             <!-- <tr ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict | filter:output[0]:strict"> -->
-                            <tr ng-repeat="tdata in  filtered = (editproduct.classificationGroupAssociations | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:output[0]:strict">
+                            <tr ng-repeat="tdata in  filtered = (editproduct.classificationGroupAssociations | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:output[0]:strict" >
                                 <td class="check-box">
                                     <input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked" ng-model="tdata.checked" ng-click="itemToRemove($index)"> 
                                 </td>
@@ -101,6 +101,7 @@
                                 <td>
                                     <button class="btn btn-primary btn-xs" ng-click="editGrp(tdata)">Edit</button>
                                 </td>
+                                
                             </tr>
                         </tbody>
                         <tfoot>
@@ -114,18 +115,20 @@
 
                 <div class="row ">
                     <div class="col-sm-4 ">
-                        <button class="btn btn-primary" ng-click="assignGrp()">Assign New Group </button>
+                        <!-- <button class="btn btn-primary" ng-click="assignGrp();move('classifi')">Assign New Group </button> -->
+                        <a class="btn btn-primary"ng-click="assignGrp()" href="#{{pageLocation}}#classifi" du-smooth-scroll>Assign New Group </a>
                         <button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button>
+                        
                     </div>
                 </div>
 
                 <!-- On clicking assign new group button -->
 
-                <div class="row m-t-25" ng-show="showvar">
-                    <form name="assignGrpForm" novalidate>
-                        <div class="col-sm-6">
+                <div class="row m-t-25" ng-show="showvar" >
+                    <form name="assignGrpForm" novalidate >
+                        <div class="col-sm-6" >
 
-                            <div class="form-group">
+                            <div class="form-group" id="classifi">
                                 <label class="col-sm-3 control-label">Variant ID</label>
                                 <div class="col-sm-3">
                                     <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
@@ -156,7 +159,7 @@
                                             </span>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <input type="text" class="form-control" name="" ng-model="description.descShort[0].description" ng-readonly="true" />
                                         </div>
 
@@ -185,8 +188,8 @@
                             </div>
                             
                             <div class="form-group" style="margin-bottom:16px;">
-                                <label class="col-sm-3 control-label">Classification Group*</label>
-                                <div class="col-sm-6">
+                                <label class="col-sm-3 control-label">Classification Group* </label>
+                                <div class="col-sm-9">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <input type="text" name="cgId" class="form-control" ng-model="createNew.classificationGroupId"  ng-readonly="true" required>
@@ -194,7 +197,7 @@
                                             <span ng-show="assignGrpForm.cgId.$error.required">Tell us your Classification Group</span>
                                             </span>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-5">
                                             <input type="text" class="form-control" name="" ng-model="classificationGroupDescription.descShort[0].description" ng-readonly="true" />
                                         </div>
                                         <div class="col-sm-1">
@@ -234,7 +237,7 @@
                             
 
                             <div class="col-sm-offset-3  col-sm-4">
-                                <button class="btn btn-primary" type="submit" ng-click="newClsfnidGrp(assignGrpForm,createNew)">Assign</button>
+                                <button class="btn btn-primary" type="submit" ng-click="newClsfnidGrp(assignGrpForm,createNew)">Save</button>
                                 <button class="btn btn-primary" ng-click="cancelGrp()">Cancel</button>
                             </div>
 
@@ -283,7 +286,7 @@
                                             </span>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <input type="text" class="form-control" name="" ng-model="description.descShort[0].description" ng-readonly="true" />
                                         </div>
 
@@ -313,7 +316,7 @@
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Classification Group*</label>
-                                <div class="col-sm-6">
+                                <div class="col-sm-9">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <input type="text" name="cgId" class="form-control" ng-model="editrow.classificationGroupId" ng-readonly="true" required>
@@ -322,7 +325,7 @@
                                             
                                             </span>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-5">
                                             <input type="text" class="form-control" name="" ng-model="classificationGroupDescription.descShort[0].description" ng-readonly="true" />
                                         </div>
                                         <div class="col-sm-1">
@@ -381,3 +384,4 @@
                     </div>
 
                 </div>
+

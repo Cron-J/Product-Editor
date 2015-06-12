@@ -19,6 +19,7 @@
     "angular-sanitize": "~1.2.x",
     "angular-ui-select": "~0.11.2",
     "angular-block-ui": "~0.2.0",
-    "angular-growl-v2": "~0.7.4"
+    "angular-growl-v2": "~0.7.4",
+    "angular-scroll": "~0.7.1"
   }
 }

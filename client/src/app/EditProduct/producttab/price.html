@@ -57,18 +57,18 @@
                             <span ng-show="sortType == 'validTo' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </th>
-                    <th>
+                    <!-- <th>
                         <a ng-click="sortType = 'statusId'; sortReverse = !sortReverse">Status
                             <span ng-show="sortType == 'statusId' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'statusId' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
-                    </th>
-                    <th>
+                    </th> -->
+                    <!-- <th>
                         <a ng-click="sortType = 'priceTypeId'; sortReverse = !sortReverse">Type
                             <span ng-show="sortType == 'priceTypeId' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'priceTypeId' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
-                    </th>
+                    </th> -->
                     <th>
                         <a ng-click="sortType = 'unitOfMeasureId'; sortReverse = !sortReverse">UoM
                             <span ng-show="sortType == 'unitOfMeasureId' && !sortReverse" class="fa fa-caret-down"></span>
@@ -108,7 +108,7 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.validFromQuantity" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.validFromQuantity" style="height:22px;width:60px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.validFromQuantity=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -158,7 +158,7 @@
                     <td>
                        <!--  <div class="col-lg-6"> -->
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.validFrom" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.validFrom" style="height:22px;width:69px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.validFrom=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
@@ -169,14 +169,14 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                              <input type="text" class="form-control" ng-model="search.validTo" style="height:22px;width:102px;">
+                              <input type="text" class="form-control" ng-model="search.validTo" style="height:22px;width:69px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.validTo=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
                             </div><!-- /input-group -->
                         <!-- </div> -->
-                    <td>
-                        <!-- <div class="col-lg-6"> -->
+                   <!--  <td>
+                        
                             <div class="input-group">
                                 <select  class="form-control m-b" ng-model="search.statusId" style="height:22px;width:102px;padding: 0px;">
                                     <option value="" ></option>
@@ -194,20 +194,19 @@
                                         <i class="glyphicon glyphicon-remove"></i>
                                     </button>
                                 </span>
-                            </div><!-- /input-group -->
-                        <!-- </div> -->
-                    </td>
+                            </div>
+                    </td> -->
 
-                    <td>
-                        <!-- <div class="col-lg-6"> -->
+                    <!-- <td>
+                       
                             <div class="input-group">
                               <input type="text" class="form-control" ng-model="search.type" style="height:22px;width:102px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.type=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
-                            <!-- </div> --><!-- /input-group -->
+                           
                         </div>
-                    </td>
+                    </td> -->
 
                     <td>
                        <!--  <div class="col-lg-6"> -->
@@ -290,10 +289,10 @@
                     <td>{{pdata.netPrice}}</td>
                     <td>{{pdata.priceUnit}}</td>
                     <td>{{pdata.currencyId}}</td>
-                    <td>{{pdata.validFrom | date:'mediumDate'}}</td>
-                    <td>{{pdata.validTo | date:'mediumDate'}}</td>
-                    <td>{{pdata.statusId}}</td>
-                    <td>{{pdata.priceTypeId}}</td>
+                    <td>{{pdata.validFrom | date:'MM.dd.yyyy'}}</td>
+                    <td>{{pdata.validTo | date:'MM.dd.yyyy'}}</td>
+                    <!-- <td>{{pdata.statusId}}</td>
+                    <td>{{pdata.priceTypeId}}</td> -->
                     <td>{{pdata.unitOfMeasureId}}</td>
 
 
@@ -311,7 +310,7 @@
     </div>
     <div class="row ">
         <div class="col-sm-4 m-b-20 ">
-            <button class="btn btn-primary" ng-click="newprice()">New Price</button>
+            <a class="btn btn-primary" href="#{{pageLocation}}#price"  offset="55" du-smooth-scroll ng-click="newprice()">New Price</a>
             <button class="btn btn-primary" ng-click="deleteprice()">Delete Selected</button>
         </div>
     </div>
@@ -321,7 +320,7 @@
 
             <div class="col-sm-6">
 
-                <div class="form-group">
+                <div class="form-group" id="price">
                     <label class="col-sm-3 control-label">Variant ID</label>
                     <div class="col-sm-3">
                                     <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->

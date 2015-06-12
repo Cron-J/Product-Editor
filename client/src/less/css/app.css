@@ -364,4 +364,9 @@ a{
 .grid {
   min-width: 1000px !important;
 }
+.grid-config{
+  position: absolute;
+  left: -5%;
+  right: -8%;
+}
 

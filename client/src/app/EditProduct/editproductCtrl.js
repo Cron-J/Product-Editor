@@ -1,9 +1,10 @@
 
-myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location', 'growl', '$modal', '$routeParams', '$filter','blockUI','$q','uiGridConstants','$timeout','$interval','getProductData',
-    function($scope, $rootScope, $http, $location, growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData) {
+myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location', 'growl', '$modal', '$routeParams', '$filter','blockUI','$q','uiGridConstants','$timeout','$interval','getProductData','$document','$window',
+    function($scope, $rootScope, $http, $location, growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData,$document,$window) {
         
        
         /*update or add product data*/
+        $scope.pageLocation = $location.path();
         $scope.variantAttrList=[];
         $scope.channelData=[];
         $scope.updateitem = function(editproduct,type,which) {
@@ -26,6 +27,21 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
 
                 })
         }
+        
+        
+        // $scope.move = function(id){
+        //     var duration = 1000;
+        //     var offset = -300;
+        //     var lef =$(".classifi").offset().left;
+        //     $scope.tops = $(".classifi").offset().top;
+           
+        //     //var someElement = angular.element(document.getElementById(id));
+            
+        //         //document.scrollTo(0,300);
+        //         //$window.scrollTo(0, 300)
+
+        // }
+         
 
         /*sub program of update or add product data in the case of ui-grid*/
         $scope.updategrid=function(type,which){

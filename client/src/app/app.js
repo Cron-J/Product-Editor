@@ -6,11 +6,12 @@ var myApp = angular
 		'ui.tree', 'ui.grid','ui.grid.moveColumns','ui.grid.edit', 'ui.grid.resizeColumns',
 		'ui.grid.grouping','ui.grid.infiniteScroll','ui.grid.selection','ui.grid.pinning',
 		'isteven-multi-select', 'xeditable','blockUI','daterangepicker','ui.bootstrap.carousel',
-		'isteven-multi-select','ui.select'])
+		'isteven-multi-select','ui.select','duScroll'])
 	.config(['$routeProvider', 'growlProvider', 'blockUIConfig', function($routeProvider, growlProvider, blockUIConfig) {
 		 growlProvider.onlyUniqueMessages(false);  
 		 growlProvider.globalReversedOrder(true);
 		 growlProvider.globalTimeToLive(3000);
+		 
 		//blockUIConfig.autoBlock = false;
 		$routeProvider
 			/** attribute section routes*/
