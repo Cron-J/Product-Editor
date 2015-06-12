@@ -57,12 +57,12 @@
                             <span ng-show="sortType == 'quantity' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </th>
-                    <th>
+                    <!-- <th>
                         <a ng-click="sortType = 'selectionGroupId'; sortReverse = !sortReverse">Selection Group Id
                             <span ng-show="sortType == 'selectionGroupId' && !sortReverse" class="fa fa-caret-down"></span>
                             <span ng-show="sortType == 'selectionGroupId' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
-                    </th>
+                    </th> -->
                     <th>
                         <a ng-click="sortType = 'isMandatory'; sortReverse = !sortReverse">Is Mandatory
                             <span ng-show="sortType == 'isMandatory' && !sortReverse" class="fa fa-caret-down"></span>
@@ -106,7 +106,7 @@
                     <td>
                         <!-- <div class="col-lg-6"> -->
                             <div class="input-group">
-                                <select name="relation" class="form-control m-b" ng-model="search.typeId" style="height:22px;width:160px;padding:0px">
+                                <select name="relation" class="form-control m-b" ng-model="search.typeId" style="height:22px;width:140px;padding:0px">
                                     <option value="Beleuchtung_source">Beleuchtung (source)</option>
                                     <option value="Beleuchtung_target">Beleuchtung (target)</option>
                                     <option value="Elektro_source">Elektro (source)</option>
@@ -231,16 +231,15 @@
                         <!-- </div> --><!-- /.col-lg-6 -->
                     </td>
 
-                    <td>
-                        <!-- <div class="col-lg-6"> -->
+                    <!-- <td>
+                        
                             <div class="input-group">
                               <input type="text" class="form-control" ng-model="search.selectionGroupId" style="height:22px;width:45px;padding: 0px;">
                               <span class="input-group-btn">
                                 <button class="btn btn-default btn-xs" ng-click="search.selectionGroupId=''" type="button"><i class="glyphicon glyphicon-remove"></i></button>
                               </span>
-                            </div><!-- /input-group -->
-                        <!-- </div> --><!-- /.col-lg-6 -->
-                    </td>
+                            </div>
+                    </td> -->
 
                     <td>
                         <!-- <div class="col-lg-6"> -->
@@ -293,7 +292,7 @@
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.syncTypeId}}</td> -->
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.seqNo}}</td>
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.quantity}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.selectionGroupId}}</td>
+                    <!-- <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.selectionGroupId}}</td> -->
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.isMandatory}}</td>
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.isDefaultSelected}}</td>
                     <td ng-click="editprelation(prdata)"><button class="btn btn-primary btn-xs">Edit</td>

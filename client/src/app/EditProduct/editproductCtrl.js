@@ -451,7 +451,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 $scope.gridApi = gridApi;
                 $interval( function() {
                     $scope.gridApi.core.handleWindowResize();
-                }, 10, 500);
+                }, 10, 100);
             }
         };
 
@@ -564,7 +564,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
           $scope.resizewindow=function(){
              $interval( function() {
                 $scope.gridApi.core.handleWindowResize();
-              }, 1000, 500);
+              }, 1000, 100);
           }
 
           $scope.onSelect=function(item,model,label,data,index){

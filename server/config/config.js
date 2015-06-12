@@ -2,7 +2,7 @@ module.exports = {
     server: {
         
             host: '0.0.0.0',
-            port: 8080
+            port: 9000
     },
     database: {
         db: 'mongodb://gaurav:cronj123@proximus.modulusmongo.net:27017/nax2asAq'
