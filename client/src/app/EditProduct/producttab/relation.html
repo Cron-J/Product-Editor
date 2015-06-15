@@ -283,19 +283,19 @@
                     <td class="check-box">
                         <input type="checkbox" value="{{prdata._id}}" ng-checked="prdata.checked" ng-model="prdata.checked">
                     </td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{editproduct.productId}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.variantId}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.typeId}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.relatedProductId}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.Description}}</td>
+                    <td>{{editproduct.productId}}</td>
+                    <td>{{prdata.variantId}}</td>
+                    <td>{{prdata.typeId}}</td>
+                    <td>{{prdata.relatedProductId}}</td>
+                    <td>{{prdata.Description}}</td>
                     <!-- <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.statusId}}</td>
                     <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.syncTypeId}}</td> -->
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.seqNo}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.quantity}}</td>
+                    <td>{{prdata.seqNo}}</td>
+                    <td>{{prdata.quantity}}</td>
                     <!-- <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.selectionGroupId}}</td> -->
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.isMandatory}}</td>
-                    <td ng-click="editprelation(prdata)" class="hoverptr">{{prdata.isDefaultSelected}}</td>
-                    <td ng-click="editprelation(prdata)"><button class="btn btn-primary btn-xs">Edit</td>
+                    <td>{{prdata.isMandatory}}</td>
+                    <td>{{prdata.isDefaultSelected}}</td>
+                    <td ><a class="btn btn-primary btn-xs" ng-click="editprelation(prdata)" href="#prerelate" du-smooth-scroll>Edit</a></td>
                 </tr>
             </tbody>
             <!-- <tfoot>
@@ -308,7 +308,7 @@
 
     <div class="row paginate1">
         <div class="col-sm-6">
-            <a class="btn btn-primary" href="#{{pageLocation}}#prerelate"  offset="55" du-smooth-scroll ng-click="newprelation()">New Product Relation</a>
+            <a class="btn btn-primary"  href="#prerelate" du-smooth-scroll  ng-click="newprelation()">New Product Relation</a>
             <button class="btn btn-primary" ng-click="deleteprelation()">Delete Selected</button>
         </div>
         <div class="col-sm-6">

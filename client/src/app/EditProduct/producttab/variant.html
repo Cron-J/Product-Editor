@@ -29,10 +29,12 @@
 
         <!-- <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in editproduct.variants | filter:searchvData | orderBy:sortType:sortReverse "> -->
 
-        <tr ng-click="editvariants(vdata)" class="hoverptr" ng-repeat="vdata in  filtered = (editproduct.variants | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse">
+        <tr ng-repeat="vdata in  filtered = (editproduct.variants | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse track by $index">
 
           <td>{{vdata.variantId}}</td>
-          <td></td>
+          <td>
+            <a class="btn btn-primary btn-xs" ng-click="editvariants(vdata)" href="#variantedit" du-smooth-scroll>Edit</a>
+          </td>
         </tr>
       </tbody>
       <!-- <tfoot>
@@ -45,7 +47,7 @@
 
   <div class="row paginate1">
     <div class="col-sm-6 ">
-      <a class="btn btn-primary" href="#{{pageLocation}}#variant"  offset="55" du-smooth-scroll ng-click="assignvariant(newvariantform)">Assign New variant</a>
+      <a class="btn btn-primary" href="#variant" du-smooth-scroll ng-click="assignvariant(newvariantform)">Assign New variant</a>
      
     </div>
      <div class="col-sm-6">
@@ -156,7 +158,7 @@
   <!-- On clicking row -->
 
 <form name="editvariantform" novalidate>
-  <div class="row m-t-25" ng-show="editvar">
+  <div class="row m-t-25" ng-show="editvar" id="variantedit">
     
       <div class="col-sm-6">
 

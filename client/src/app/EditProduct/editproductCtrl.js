@@ -1,6 +1,6 @@
 
-myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location', 'growl', '$modal', '$routeParams', '$filter','blockUI','$q','uiGridConstants','$timeout','$interval','getProductData','$document','$window',
-    function($scope, $rootScope, $http, $location, growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData,$document,$window) {
+myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location', 'growl', '$modal', '$routeParams', '$filter','blockUI','$q','uiGridConstants','$timeout','$interval','getProductData','$document','$window','$anchorScroll',
+    function($scope, $rootScope, $http, $location, growl, $modal, $routeParams, $filter,blockUI,$q,uiGridConstants,$timeout,$interval,getProductData,$document,$window,$anchorScroll) {
         
        
         /*update or add product data*/
@@ -29,18 +29,20 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         }
         
         
-        // $scope.move = function(id){
-        //     var duration = 1000;
-        //     var offset = -300;
-        //     var lef =$(".classifi").offset().left;
-        //     $scope.tops = $(".classifi").offset().top;
-           
-        //     //var someElement = angular.element(document.getElementById(id));
-            
-        //         //document.scrollTo(0,300);
-        //         //$window.scrollTo(0, 300)
+        $scope.move = function(id){
 
-        // }
+            //$('html, body').animate({ scrollTop:($("#classifi").offset().bottom)}, 500);
+            // var duration = 1000;
+            // var offset = -300;
+            // var lef =$(".classifi").offset().left;
+            // $scope.tops = $(".classifi").offset().top;
+           
+            //var someElement = angular.element(document.getElementById(id));
+            
+                //document.scrollTo(0,300);
+                //$window.scrollTo(0, 300)
+
+        }
          
 
         /*sub program of update or add product data in the case of ui-grid*/
@@ -154,8 +156,8 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
         $scope.editvar = false;
 
         $scope.editGrp = function(data) {
-            $scope.editrow = data;
             $scope.editvar = true;
+            $scope.editrow = data;
             $scope.showvar = false;
         }
 
@@ -188,6 +190,7 @@ myApp.controller('EditProductCtrl', ['$scope', '$rootScope','$http', '$location'
                 getProductData.updateProduct($scope.editproduct)
                 .then(function(data){
                     $scope.cesubmitted=false;
+                    $scope.editvar = false;
                    growl.success('You have successfully updated Group.');
                 })
                 .catch(function(error){
@@ -451,7 +454,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
                 $scope.gridApi = gridApi;
                 $interval( function() {
                     $scope.gridApi.core.handleWindowResize();
-                }, 100, 500);
+                }, 100, 100);
             }
         };
 
@@ -564,7 +567,7 @@ $scope.example4settings = {displayProp: 'channelId', idProp: 'channelId', extern
           $scope.resizewindow=function(){
              $interval( function() {
                 $scope.gridApi.core.handleWindowResize();
-              }, 100, 500);
+              }, 100, 100);
           }
 
           $scope.onSelect=function(item,model,label,data,index){
@@ -1957,3 +1960,25 @@ myApp.controller('SearchProductCtrl', function ($scope, $modalInstance, SearchPr
   };
   init();
 });
+
+
+
+// myApp.directive('scrollTo', function ($location, $anchorScroll,$timeout) {
+//   return function(scope, element, attrs) {
+
+//     element.bind('click', function(event) {
+//         event.stopPropagation();
+//         var off = scope.$on('$locationChangeStart', function(ev) {
+//             off();
+            
+//             ev.preventDefault();
+          
+//            // $anchorScroll();
+//         });
+//         var location = attrs.scrollTo;
+//         $location.hash(location);
+//         $anchorScroll();
+//     });
+
+//   };
+// });

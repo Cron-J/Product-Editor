@@ -279,7 +279,7 @@
 
                 
 
-                <tr ng-click="editprice(pdata)" ng-repeat="pdata in  filtered = (editproduct.prices | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:variantprice[0]:strict" class="hoverptr">
+                <tr ng-repeat="pdata in  filtered = (editproduct.prices | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:variantprice[0]:strict">
                     <td class="check-box">
                         <input type="checkbox" value="{{pdata._id}}" ng-checked="pdata.checked" ng-model="pdata.checked">
                     </td>
@@ -297,7 +297,7 @@
 
 
                     <td>
-                        <button class="btn btn-primary btn-xs">Edit</button>
+                        <a class="btn btn-primary btn-xs" ng-click="editprice(pdata)" href="#price"  du-smooth-scroll>Edit</a>
                     </td>
                 </tr>
             </tbody>
@@ -310,7 +310,7 @@
     </div>
     <div class="row paginate1">
         <div class="col-sm-6">
-            <a class="btn btn-primary" href="#{{pageLocation}}#price"  offset="55" du-smooth-scroll ng-click="newprice()">New Price</a>
+            <a class="btn btn-primary" href="#price"  du-smooth-scroll ng-click="newprice()">New Price</a>
             <button class="btn btn-primary" ng-click="deleteprice()">Delete Selected</button>
         </div>
          <div class="col-sm-6">
@@ -319,7 +319,7 @@
     </div>
 
     <form name="priceform" novalidate>
-        <div class="row m-t-25 " ng-show="pricevar">
+        <div class="row m-t-25 " ng-show="pricevar" id="price">
 
             <div class="col-sm-6">
 

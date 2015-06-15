@@ -99,13 +99,13 @@
                     <td>
                         <input type="checkbox" value="{{cprodata._id}}" ng-checked="cprodata.checked" ng-model="cprodata.checked">
                     </td>
-                    <td ng-click="editcproduct(cprodata)" class="hoverptr">{{cprodata.variantId}}</td>
+                    <td>{{cprodata.variantId}}</td>
                     <!-- <td >{{cprodata.contractId}}</td> -->
-                    <td ng-click="editcproduct(cprodata)" class="hoverptr">{{cprodata.extClassificationId}}</td>
-                    <td ng-click="editcproduct(cprodata)" class="hoverptr">{{cprodata.extClassificationGroupId}}</td>
-                    <td ng-click="editcproduct(cprodata)" class="hoverptr">{{cprodata.descShort}}</td>
+                    <td>{{cprodata.extClassificationId}}</td>
+                    <td>{{cprodata.extClassificationGroupId}}</td>
+                    <td>{{cprodata.descShort}}</td>
                     <td>
-                        <button class="btn btn-primary btn-xs" ng-click="editcproduct(cprodata)">Edit</button>
+                        <a class="btn btn-primary btn-xs" href="#assort"   du-smooth-scroll ng-click="editcproduct(cprodata)">Edit</a>
                     </td>
                 </tr>
             </tbody>
@@ -120,7 +120,7 @@
 
     <div class="row paginate1">
         <div class="col-sm-6 ">
-            <a class="btn btn-primary" href="#{{pageLocation}}#assort"  offset="55" du-smooth-scroll ng-click="newcproduct()">New Contracted Product</a>
+            <a class="btn btn-primary" href="#assort"   du-smooth-scroll ng-click="newcproduct()">New Contracted Product</a>
             <button class="btn btn-primary" ng-click="deletecproduct()">Delete Selected</button>
         </div>
         <div class="col-sm-6">

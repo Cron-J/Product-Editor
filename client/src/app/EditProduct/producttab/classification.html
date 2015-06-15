@@ -85,21 +85,22 @@
                             </tr>
 
                             <!-- <tr ng-repeat="tdata in editproduct.classificationGroupAssociations | orderBy:sortType:sortReverse  | filter:search:strict | filter:output[0]:strict"> -->
-                            <tr ng-repeat="tdata in  filtered = (editproduct.classificationGroupAssociations | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:output[0]:strict" >
+                            <tr ng-repeat="tdata in  filtered = (editproduct.classificationGroupAssociations | filter:search) | startFrom:(currentPage-1)*maxSize | limitTo:maxSize | orderBy:sortType:sortReverse   | filter:output[0]:strict">
                                 <td class="check-box">
                                     <input type="checkbox" value="{{tdata._id}}" ng-checked="tdata.checked" ng-model="tdata.checked" ng-click="itemToRemove($index)"> 
                                 </td>
 
-                                <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationId}}</td>
+                                <td>{{tdata.classificationId}}</td>
 
-                                <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.classificationGroupId}}</td>
+                                <td>{{tdata.classificationGroupId}}</td>
 
-                                <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.variantId}}</td>
+                                <td>{{tdata.variantId}}</td>
 
                                 <!-- <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.variantId}}</td> -->
-                                <td ng-click="editGrp(tdata)" class="hoverptr">{{tdata.orderNo}}</td>
+                                <td>{{tdata.orderNo}}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-xs" ng-click="editGrp(tdata)">Edit</button>
+                                    <a class="btn btn-primary btn-xs"  ng-click="editGrp(tdata)" href="#classifiedit"  du-smooth-scroll>Edit</a>
+
                                 </td>
                                 
                             </tr>
@@ -115,7 +116,7 @@
 
                 <div class="row paginate">
                     <div class="col-sm-6 ">
-                        <a class="btn btn-primary"ng-click="assignGrp()" href="#{{pageLocation}}#classifi" du-smooth-scroll>Assign New Group </a>
+                        <a class="btn btn-primary" ng-click="assignGrp()" href="#classifi" du-smooth-scroll>Assign New Group </a>
                         <button class="btn btn-primary" ng-click="deleteRow()">Delete Selected</button>
                         
                     </div>
@@ -126,11 +127,11 @@
 
                 <!-- On clicking assign new group button -->
 
-                <div class="row m-t-25" ng-show="showvar" >
+                <div class="row m-t-25" ng-show="showvar" id="classifi">
                     <form name="assignGrpForm" novalidate >
                         <div class="col-sm-6" >
 
-                            <div class="form-group" id="classifi">
+                            <div class="form-group" >
                                 <label class="col-sm-3 control-label">Variant ID</label>
                                 <div class="col-sm-3">
                                     <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
@@ -249,7 +250,7 @@
 
                 <!-- On clicking row -->
 
-                <div class="row m-t-25" ng-show="editvar">
+                <div class="row m-t-25" ng-show="editvar" id="classifiedit">
                     <form name="editGrpForm" novalidate>
                         <div class="col-sm-6">
 
@@ -386,4 +387,3 @@
                     </div>
 
                 </div>
-

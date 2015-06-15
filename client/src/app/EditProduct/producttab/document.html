@@ -136,14 +136,14 @@
                     <td class="check-box">
                         <input type="checkbox" value="{{ddata._id}}" ng-checked="ddata.checked" ng-model="ddata.checked">
                     </td>
-                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.path}}</td>
-                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.variantId}}</td>
-                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.documentViewTypeId}}</td>
-                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.languageId}}</td>
-                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.description}}</td>
-                    <td ng-click="editdoc(ddata)" class="hoverptr">{{ddata.orderNo}}</td>
+                    <td>{{ddata.path}}</td>
+                    <td>{{ddata.variantId}}</td>
+                    <td>{{ddata.documentViewTypeId}}</td>
+                    <td>{{ddata.languageId}}</td>
+                    <td>{{ddata.description}}</td>
+                    <td>{{ddata.orderNo}}</td>
                     <td>
-                        <button class="btn btn-primary btn-xs" ng-click="editdoc(ddata)">Edit</button>
+                        <button class="btn btn-primary btn-xs" href="#docs"    ng-click="editdoc(ddata)" du-smooth-scroll>Edit</button>
                     </td>
                 </tr>
             </tbody>
@@ -159,7 +159,7 @@
 
     <div class="row paginate">
         <div class="col-sm-6">
-            <a class="btn btn-primary" href="#{{pageLocation}}#docs"  offset="55" du-smooth-scroll ng-click="createdoc();">New Document</a>
+            <a class="btn btn-primary" href="#docs"   du-smooth-scroll ng-click="createdoc();">New Document</a>
             <button class="btn btn-primary" ng-click="deletedoc()">Delete Selected</button>
         </div>
         <div class="col-sm-6">
@@ -171,12 +171,12 @@
     <!-- Display this section on clicking new button -->
 
 
-    <div class="row m-t-25 " ng-show="docvar" >
+    <div class="row m-t-25 " ng-show="docvar" id="docs">
         <form name="docform" novalidate>
             <div class="col-sm-6">
                 <div class="form-group" >
                     <label class="col-sm-3 control-label">Variant ID</label>
-                    <div class="col-sm-3" id="docs">
+                    <div class="col-sm-3" >
                                     <!-- <input type="text" class="form-control" name="" ng-model="createNew.variantId" ng-readonly="true" /> -->
                         <select class="form-control" name="" ng-model="doc.variantId" ng-options="item.value as item.label for item in hasVariantDocAssociation">
                             <option value="" style="display:none"></option>
